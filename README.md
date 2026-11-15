@@ -1,124 +1,142 @@
-# Hwaruruk 🔥 · FIRMS 화재 달력 파이프라인
+# Hwaruruk 🔥 — Data Pipeline
 
-**웹앱:** [hwaruruk.unzipp.cloud](https://hwaruruk.unzipp.cloud/en) · **백엔드:** [NasaSpaceAppsSeoul_backend](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_backend) · **원자료:** [hwaruruk_inputs.zip](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/hwaruruk_inputs.zip) (205 MB)
+**Live web app:** [hwaruruk.unzipp.cloud](https://hwaruruk.unzipp.cloud/en)
+**Backend API:** [NasaSpaceAppsSeoul_backend](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_backend)
+**Raw data:** [hwaruruk_inputs.zip](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/hwaruruk_inputs.zip) (205 MB; NASA FIRMS through 2026-11-14 and official fire records)
 
-NASA Space Apps Challenge 2026. MODIS와 VIIRS 핫스팟을 NOAA-20 단위의 25년 시계열 하나로 이어, 여섯 지역(KOR, CAL, BC, GRC, CHL, NSW)의 화재 활동 달력을 만듭니다. 결과(`output/<지역>/`)는 백엔드 데이터 패키지로 들어갑니다.
+NASA Space Apps Challenge 2026 · #9 Harmonization of MODIS and VIIRS Hot Spots · Team JJYa (Seoul)
 
-경로와 인코딩은 모두 고정되어 있습니다. 저장소를 받고 원자료를 `inputs/`에 풀면 맥·윈도우·리눅스에서 같은 명령으로 돌아가고, 고칠 곳은 없습니다.
+## What it does
 
-## 1. 준비 (처음 한 번)
+Satellite fire records break in 2012. MODIS (1 km) hands over to VIIRS (375 m), and joined as-is the same fires look 2–3× more frequent. This pipeline turns 25 years of NASA FIRMS hotspots into one continuous monthly record on the scale of NOAA-20, the satellite flying today, and computes everything the web app needs to say whether a month is **normal or unusual** for any area.
 
-Python 3.12를 권합니다(`expected/`가 이 버전으로 만든 결과입니다).
+**Implemented**
 
-**맥·리눅스**
+- **Six regions on five continents:** South Korea (`KOR`), California (`CAL`), British Columbia (`BC`), Greece (`GRC`), Chile (`CHL`), New South Wales (`NSW`). 1,114 areas, monthly from 2001-01.
+- **One unit, fire grid-days:** a 0.01° cell (about 1 km) with at least one detection on one local day, day and night together. Counting cells instead of points keeps a sharper sensor from looking like more fire.
+- **Calibration chain to NOAA-20:** monthly ratios learned where satellites overlap, Terra → Terra+Aqua (2003–2011), MODIS → S-NPP (2012–2025, shrinkage 20; one fixed set or a ±2-year rolling set, whichever validates better per region) and S-NPP → NOAA-20 (2019–2025). NOAA-21 → NOAA-20 is learned too and kept on standby.
+- **Validation:** leave-one-year-out prediction, a 2012 break test, independent checks against six agencies’ official fire records, and detection rate by fire size.
+- **Per-area judgement:** “vs. normal” labels against 2001–2025, quality grades, typical fire season and peak month. Areas averaging under 11.1 grid-days a year borrow their parent region’s label instead of reporting noise.
+- **Output for the backend:** JSON and CSV files per region (`output/<region>/`), loaded by the backend services.
+- **Reproducible:** one command on Mac, Windows or Linux rebuilds every region and checks the result against stored baselines.
+
+## Results
+
+| Region | 2012 break, raw → harmonized (1.00 = none) | Leave-one-year-out monthly R² | Annual error | Official fires ≥ 100 ha seen within 2 days |
+|---|---|---|---|---|
+| South Korea | 2.61 → 0.99 | 0.92 | 15% | 91% |
+| California | 2.06 → 1.02 | 0.98 | 7% | 86% |
+| British Columbia | 2.38 → 1.00 | 0.96 | 9% | 93% |
+| Greece | 2.80 → 1.01 | 0.97 | 6% | 80% |
+| Chile | 2.73 → 1.02 | 0.88 | 11% | 94% |
+| New South Wales | 3.00 → 1.03 | 0.84 | 10% | 95% |
+
+Official records that never touch the satellites confirm the fix in South Korea (2.67 → 1.04), Chile (2.38 → 0.96) and NSW (2.92 → 1.05, by season). BC and Greece are inconclusive because their official records changed over time.
+
+### What the notebook shows (South Korea)
+
+![Harmonization overview for South Korea: raw versus harmonized annual fire grid-days, cross-validation scatter, monthly ratios and a 25-year calendar heatmap](docs/images/harmonization_overview_KOR.png)
+
+Top left: annual fire grid-days, raw (dashed) versus harmonized (orange), with the 2012 step removed. Top right: leave-one-year-out check (R² 0.923). Bottom left: monthly MODIS → S-NPP ratios, from 0.78 in July to 4.54 in December. Bottom right: the 25-year calendar. Figure labels are in Korean; every number is also in `output/KOR/meta.json`.
+
+The methodology page (`method_page.html`, English and Korean) explains each step with these numbers.
+
+## Run it
+
+**Requirements:** Python 3.12 (the baselines in `expected/` were made with it) and about 1 GB of disk for the raw data.
+
+1. **Set up Python.**
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 ```
 
-**윈도우 (PowerShell)**
+On Windows (PowerShell): `py -3.12 -m venv .venv; .\.venv\Scripts\Activate.ps1; pip install -r requirements.txt`
 
-```powershell
-py -3.12 -m venv .venv; .\.venv\Scripts\Activate.ps1; pip install -r requirements.txt
-```
+2. **Get the raw data.** Download [hwaruruk_inputs.zip](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/hwaruruk_inputs.zip) and unzip it **in the repository root**, which creates `inputs/`. On Windows, keep the repository in a short path such as `C:\hwaruruk\`.
 
-## 2. 원자료 받기
-
-원자료(zip 205 MB, 풀면 약 950 MB)는 용량 때문에 저장소에 넣지 않고 GitHub Release에 올려 두었습니다. Release의 [`hwaruruk_inputs.zip`](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/hwaruruk_inputs.zip)을 받아 **저장소 루트에서** 풀면 `inputs/` 폴더가 생깁니다.
-
-```
-inputs/
-  firms/<지역>/modis/    MODIS C6.1      fire_archive_*.csv, fire_nrt_*.csv
-  firms/<지역>/snpp/     VIIRS S-NPP     〃
-  firms/<지역>/noaa20/   VIIRS NOAA-20   〃
-  firms/<지역>/noaa21/   VIIRS NOAA-21   〃
-  official/<지역>/       공식 산불 기록 (외부 검증용)
-```
-
-폴더 이름은 노트북이 그대로 찾으므로 바꾸지 않습니다. 원자료를 다른 곳에 두려면 환경 변수 `BURNLINE_DATA`에 그 폴더를 지정합니다(안의 구조는 같아야 함).
-
-윈도우에서는 탐색기의 "압축 풀기"나 7-Zip으로 풀면 됩니다(한글 파일 이름은 UTF-8). 경로가 너무 길지 않게 `C:\hwaruruk\`처럼 짧은 곳에 저장소를 두는 것을 권합니다.
-
-## 3. 실행
-
-저장소 루트에서, 맥·윈도우 같은 명령입니다(맥·리눅스는 `python` 대신 `python3`도 됨).
+3. **Run all six regions and check the result.**
 
 ```bash
 python tools/run_all.py --check
 ```
 
-- 지역마다 `tools/make_notebook.py`로 노트북을 만들고 실행해 `output/<지역>/`를 씁니다.
-- 지역만 고르려면 `python tools/run_all.py GRC CHL`.
-- 지역당 1~3분, 여섯 지역 합쳐 10분 안팎 걸립니다(NSW·BC가 가장 김).
-- `--check`는 끝난 뒤 `output/<지역>/meta.json`을 `expected/<지역>/meta.json`과 비교합니다. 날짜(`generated`) 외에는 모두 `같음`이 나와야 합니다.
-- 실행된 노트북(`burnline_harmonization*.ipynb`)은 루트에 남아 그래프와 중간 표를 볼 수 있습니다. 노트북은 만들어지는 파일이라 커밋하지 않습니다.
+For each region it builds the notebook with `tools/make_notebook.py`, runs it, writes `output/<region>/`, then compares `output/<region>/meta.json` with `expected/<region>/meta.json`. Every region should report `같음` (identical). It takes 1–3 minutes per region; pick regions with `python tools/run_all.py GRC CHL`. The executed notebooks (`burnline_harmonization*.ipynb`) stay in the root with all figures and tables.
 
-## 4. 고칠 때
+### Environment variables
 
-| 고칠 것 | 방법 |
-|---|---|
-| 계산 방법 | `tools/make_notebook.py`를 고치고 `run_all.py`를 다시 돌림. 노트북을 직접 고치면 다음 실행 때 덮어써짐 |
-| 지역 설정 (기간, 경계 처리, 예시 달 등) | `tools/make_notebook.py`의 `CONFIGS` |
-| 화면용 이름 | `tools/transliterate.py`(음역 사전)를 고치고 `python tools/build_names.py` → `boundaries/<지역>/names-<지역>.csv`, ADM1 `name_ko`·`name_en` |
-| FIRMS 자료 새로 받기 | FIRMS Archive Download에서 같은 범위로 받은 zip을 `inputs/firms/<지역>/<센서>/`에 풀어 덮어씀 |
-| 공식 기록 다시 만들기 | `tools/data_prep/` (아래) |
+| Variable | Default | Purpose |
+|---|---|---|
+| `BURNLINE_DATA` | `inputs` | Raw data folder, if not `inputs/` in the repository root. The layout inside must stay the same |
+| `BURNLINE_COUNTRY` | `KOR` | Region of a notebook. `run_all.py` sets it for you |
 
-결과가 바뀌는 수정이면 `expected/<지역>/meta.json`도 새 결과로 바꿔서 같이 커밋합니다.
+No keys, passwords or accounts are needed: all inputs are public files.
 
-```bash
-python tools/check_expected.py
+### Raw data layout (`inputs/`)
+
+```
+inputs/
+  firms/<region>/modis/    MODIS C6.1      fire_archive_*.csv, fire_nrt_*.csv
+  firms/<region>/snpp/     VIIRS S-NPP
+  firms/<region>/noaa20/   VIIRS NOAA-20
+  firms/<region>/noaa21/   VIIRS NOAA-21
+  official/<region>/       official fire records (validation only)
 ```
 
-## 폴더 구성
+To refresh FIRMS data, download the same area from FIRMS Archive Download and unzip each file into `inputs/firms/<region>/<sensor>/`.
 
-| 경로 | 내용 |
+## Repository layout
+
+| Path | Contents |
 |---|---|
-| `tools/make_notebook.py` | 노트북 생성기 (계산 전체가 여기 있음) |
-| `tools/run_all.py` | 노트북 생성 + 실행 + 결과 비교 |
-| `tools/check_expected.py` | `output/`과 `expected/` 비교 |
-| `tools/build_names.py`, `tools/transliterate.py` | 화면용 한국어·영어 이름 |
-| `tools/data_prep/` | 공식 기록 CSV를 원본에서 만드는 스크립트 (다시 돌리는 데는 필요 없음) |
-| `tools/site_extract.py`, `tools/mockup_extract.py` | 샘플 사이트(`mockup/site/`)용 데이터 추출 |
-| `boundaries/<지역>/` | 행정 경계 (ADM1 상위, ADM2 하위, ADM2_simplified 지도용), `names-<지역>.csv` |
-| `expected/<지역>/meta.json` | 기준 결과 |
-| `method_page.html` | 방법론 페이지 |
-| `문서/` | 분석 보고서, 지표 기획안, 처리 단계 PDF |
-| `mockup/` | 샘플 사이트와 상세페이지 시안 |
+| `tools/make_notebook.py` | The whole calculation; it generates the notebook. Region settings live in `CONFIGS` |
+| `tools/run_all.py` | Build, run and check every region |
+| `tools/check_expected.py` | Compare `output/` with `expected/` |
+| `tools/build_names.py`, `tools/transliterate.py` | Korean and English area names (`boundaries/<region>/names-<region>.csv`) |
+| `tools/data_prep/` | Scripts that turned each agency’s download into `inputs/official/` (not needed to rerun) |
+| `tools/site_extract.py`, `tools/mockup_extract.py` | Sample data for the design mockups in `mockup/` |
+| `boundaries/<region>/` | Province and district boundaries (full and simplified) and display names |
+| `expected/<region>/meta.json` | Baseline results for `--check` |
+| `method_page.html` | Methodology page (English and Korean) |
+| `문서/` | Planning documents and analysis reports (Korean) |
 
-## 결과 파일 (`output/<지역>/`)
+When a change alters results on purpose, update `expected/<region>/meta.json` with the new output in the same commit.
 
-| 파일 | 내용 |
+### Output (`output/<region>/`)
+
+| File | Contents |
 |---|---|
-| `calendar.json` | 나라 전체 연·월 달력 (NOAA-20 단위 25년): 평년 대비 배수, 순위, FRP, 2×2 유형, 품질, `raw_before` |
-| `climatology.json` | 나라 전체 월별 평년 범위 (중앙값, 사분위, 최소, 최대) |
-| `calendar_by_province.json` | 상위 단위별 달력 |
-| `calendar_by_region.json` | 하위 구역별 달력 (`viirs` 블록은 2012~, NOAA-20 단위) |
-| `regions.geojson` | 하위 구역 경계 + 충분도, 위험 시기, 대체 지역, 이웃, 이름 |
-| `events.json`, `events_by_region.json` | 화재 묶음 |
-| `meta.json` | 보정 계수, 검증 오차, 경고 규칙, 외부 검증 (방법론 페이지용) |
-| `hotspots_clean.csv` | 정제된 핫스팟 (CSV 다운로드용) |
+| `calendar.json` | Whole-region monthly record: harmonized value, raw value (`raw_before`), rank, ratio to normal, quality |
+| `climatology.json` | Monthly normal and range |
+| `calendar_by_province.json`, `calendar_by_region.json` | The same per province and per district |
+| `regions.geojson` | District boundaries with data sufficiency, fire season, neighbors and names |
+| `events.json`, `events_by_region.json` | Detection clusters (fires grouped across days and borders) |
+| `meta.json` | Calibration ratios, validation, break tests, external validation |
+| `hotspots_clean.csv` | Cleaned detections |
 
-## 공식 기록 (`inputs/official/<지역>/`)
+The backend reads these files from its data package, [hwaruruk_backend_data.zip](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_backend/releases/latest/download/hwaruruk_backend_data.zip).
 
-| 지역 | 파일 | 출처 |
+## Limitations and unfinished work
+
+- **Activity, not area:** fire grid-days measure fire activity as satellites see it, not burned area or fire counts. Prescribed and agricultural burns are included (autumn burning in northern Greece, hazard-reduction burns in NSW).
+- **Before 2012:** values are estimates converted from MODIS, so districts are judged from 2012 onward.
+- **Data snapshot:** FIRMS data through 2026-11-14, rerun by hand. Daily automatic NRT updates are not built yet.
+- **NOAA-21:** learned from only two overlapping years, so it stays a standby link rather than a reference.
+- **Fire radiative power (FRP):** computed from MODIS only and not harmonized; the web app does not use it.
+- **Backend data package:** assembled from `output/`, `boundaries/` and the official records by hand; there is no packaging script in this repository yet.
+- **Notebook figures:** labels are in Korean. They need a Korean font (AppleGothic, Malgun Gothic, NanumGothic or Noto Sans CJK KR); without one the labels show as boxes, and the numbers are unaffected.
+
+## Data sources
+
+| Source | Used for | Link |
 |---|---|---|
-| KOR | `산불통계.xlsx`, `시도별_산불발생_현황_*.csv` | 산림청 산불 통계, KOSIS |
-| CAL | `cal_fire_perimeters_2001_2025.csv` | CAL FIRE FRAP California Fire Perimeters |
-| BC | `bc_fire_incidents_2001_2025.csv` | BC Wildfire Service (BC Data Catalogue `PROT_HISTORICAL_INCIDENTS_SP`) |
-| GRC | `grc_fire_service_2000_2024.csv` | 그리스 소방청 연도별 기록 → `tools/data_prep/build_grc.py` |
-| CHL | `chl_conaf_*.csv` 4개 | CONAF 통계 → `tools/data_prep/build_chl.py`, `build_chl_perfire.py` |
-| NSW | `nsw_npws_wildfires_2000_2026.csv` | NSW NPWS Fire History → `tools/data_prep/build_nsw.py` |
+| NASA FIRMS active fire: MODIS C6.1, VIIRS C2 (S-NPP, NOAA-20, NOAA-21) | All fire values | [FIRMS download](https://firms.modaps.eosdis.nasa.gov/download/) |
+| Korea Forest Service: per-fire records and yearly counts by province (2001–2025) | Korea validation | [National Wildfire Information System](https://fd.forest.go.kr/ffas/pubConn/movePage/sub3.do) · [Forestry Statistics Platform](https://kfss.forest.go.kr/stat/ptl/newStat/newStatDtl.do?evntUpperSeq=8&evntSeq=46) |
+| CAL FIRE FRAP California Fire Perimeters | California validation | [data.gov](https://catalog.data.gov/dataset/california-fire-perimeters-all) |
+| BC Wildfire Service historical incidents | BC validation | [BC Data Catalogue](https://catalogue.data.gov.bc.ca/dataset/fire-incident-locations-historical) |
+| Hellenic Fire Service forest fire records | Greece validation | [Internet Archive copy](https://web.archive.org/web/20260123051753/https://www.fireservice.gr/el/synola-dedomenon) · original xlsx in [this Release](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/greece_fire_service_2000-2024.zip) |
+| CONAF statistics and per-fire records | Chile validation | [CONAF](https://www.conaf.cl/centro-documentals/estadisticas-historicas/) · [doi:10.71578/UXAUN5](https://doi.org/10.71578/UXAUN5) (CC BY 4.0) |
+| NSW NPWS Fire History | NSW validation | [data.gov.au](https://www.data.gov.au/data/dataset/nsw-fire-history-wildfires-and-prescribed-burns-1e8b6) (CC BY) |
+| geoBoundaries (CC BY 3.0/4.0), BC Data Catalogue (OGL–BC) | Area boundaries | [geoBoundaries](https://www.geoboundaries.org/) |
 
-`tools/data_prep/`의 스크립트는 첫 인자로 원본 다운로드 폴더를 받아 `inputs/official/<지역>/`에 씁니다(NSW는 서버에서 직접 받음). 그리스 원본 xlsx 묶음은 Release의 [`greece_fire_service_2000-2024.zip`](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/greece_fire_service_2000-2024.zip)입니다.
-
-## 알아 둘 점
-
-- 남반구(CHL, NSW)는 공식 기록을 7월~다음 해 6월 시즌 단위로 비교합니다(`SEASON_START=7`). 월별 계산은 다른 지역과 같습니다.
-- 그래프의 한글 글꼴은 AppleGothic, Malgun Gothic, NanumGothic, Noto Sans CJK KR 중 있는 것을 씁니다. 없으면 그래프 글자만 네모로 나오고 숫자 결과에는 영향이 없습니다.
-- 줄 끝은 `.gitattributes`로 LF 고정입니다. 윈도우에서 커밋해도 CRLF가 섞이지 않습니다.
-
-## 출처
-
-- NASA FIRMS: MODIS Collection 6.1 (MCD14), VIIRS S-NPP (VNP14IMG), NOAA-20 (VJ114IMG), NOAA-21 (VJ214IMG) 375 m
-- geoBoundaries ADM1/ADM2 (CC BY 3.0), BC Data Catalogue regional districts (Open Government Licence – BC)
-- 공식 기록은 위 표의 각 기관
+AI tools: Claude was used for writing and reviewing code and documentation.
