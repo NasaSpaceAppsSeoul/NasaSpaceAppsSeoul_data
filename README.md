@@ -1,4 +1,6 @@
-# Burnline · FIRMS 화재 달력 파이프라인
+# Hwaruruk 🔥 · FIRMS 화재 달력 파이프라인
+
+**웹앱:** [hwaruruk.unzipp.cloud](https://hwaruruk.unzipp.cloud/en) · **백엔드:** [NasaSpaceAppsSeoul_backend](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_backend) · **원자료:** [hwaruruk_inputs.zip](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/hwaruruk_inputs.zip) (205 MB)
 
 NASA Space Apps Challenge 2026. MODIS와 VIIRS 핫스팟을 NOAA-20 단위의 25년 시계열 하나로 이어, 여섯 지역(KOR, CAL, BC, GRC, CHL, NSW)의 화재 활동 달력을 만듭니다. 결과(`output/<지역>/`)는 백엔드 데이터 패키지로 들어갑니다.
 
@@ -22,7 +24,7 @@ py -3.12 -m venv .venv; .\.venv\Scripts\Activate.ps1; pip install -r requirement
 
 ## 2. 원자료 받기
 
-원자료(zip 205 MB, 풀면 약 950 MB)는 용량 때문에 저장소에 넣지 않고 GitHub Release에 올려 두었습니다. Release의 `burnline_inputs.zip`을 받아 **저장소 루트에서** 풀면 `inputs/` 폴더가 생깁니다.
+원자료(zip 205 MB, 풀면 약 950 MB)는 용량 때문에 저장소에 넣지 않고 GitHub Release에 올려 두었습니다. Release의 [`hwaruruk_inputs.zip`](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/hwaruruk_inputs.zip)을 받아 **저장소 루트에서** 풀면 `inputs/` 폴더가 생깁니다.
 
 ```
 inputs/
@@ -35,7 +37,7 @@ inputs/
 
 폴더 이름은 노트북이 그대로 찾으므로 바꾸지 않습니다. 원자료를 다른 곳에 두려면 환경 변수 `BURNLINE_DATA`에 그 폴더를 지정합니다(안의 구조는 같아야 함).
 
-윈도우에서는 탐색기의 "압축 풀기"나 7-Zip으로 풀면 됩니다(한글 파일 이름은 UTF-8). 경로가 너무 길지 않게 `C:\burnline\`처럼 짧은 곳에 저장소를 두는 것을 권합니다.
+윈도우에서는 탐색기의 "압축 풀기"나 7-Zip으로 풀면 됩니다(한글 파일 이름은 UTF-8). 경로가 너무 길지 않게 `C:\hwaruruk\`처럼 짧은 곳에 저장소를 두는 것을 권합니다.
 
 ## 3. 실행
 
@@ -47,7 +49,7 @@ python tools/run_all.py --check
 
 - 지역마다 `tools/make_notebook.py`로 노트북을 만들고 실행해 `output/<지역>/`를 씁니다.
 - 지역만 고르려면 `python tools/run_all.py GRC CHL`.
-- 여섯 지역 합쳐 20~30분쯤 걸립니다(NSW·BC·CAL이 가장 김).
+- 지역당 1~3분, 여섯 지역 합쳐 10분 안팎 걸립니다(NSW·BC가 가장 김).
 - `--check`는 끝난 뒤 `output/<지역>/meta.json`을 `expected/<지역>/meta.json`과 비교합니다. 날짜(`generated`) 외에는 모두 `같음`이 나와야 합니다.
 - 실행된 노트북(`burnline_harmonization*.ipynb`)은 루트에 남아 그래프와 중간 표를 볼 수 있습니다. 노트북은 만들어지는 파일이라 커밋하지 않습니다.
 
@@ -107,7 +109,7 @@ python tools/check_expected.py
 | CHL | `chl_conaf_*.csv` 4개 | CONAF 통계 → `tools/data_prep/build_chl.py`, `build_chl_perfire.py` |
 | NSW | `nsw_npws_wildfires_2000_2026.csv` | NSW NPWS Fire History → `tools/data_prep/build_nsw.py` |
 
-`tools/data_prep/`의 스크립트는 첫 인자로 원본 다운로드 폴더를 받아 `inputs/official/<지역>/`에 씁니다(NSW는 서버에서 직접 받음). 그리스 원본 xlsx 묶음은 Release의 `greece_fire_service_2000-2024.zip`입니다.
+`tools/data_prep/`의 스크립트는 첫 인자로 원본 다운로드 폴더를 받아 `inputs/official/<지역>/`에 씁니다(NSW는 서버에서 직접 받음). 그리스 원본 xlsx 묶음은 Release의 [`greece_fire_service_2000-2024.zip`](https://github.com/NasaSpaceAppsSeoul/NasaSpaceAppsSeoul_data/releases/latest/download/greece_fire_service_2000-2024.zip)입니다.
 
 ## 알아 둘 점
 
