@@ -263,6 +263,14 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <tr><td class="hl">New South Wales</td><td>128 local councils + the unincorporated far west</td><td>NSW NPWS Fire History, 10,411 wildfires</td></tr>
         </table></div>
         <p class="sub" style="font-size:13px;color:var(--muted)"><sup>1</sup> Greece has 325 municipalities. The open boundary file has no separate Anogeia (Crete), so its area is counted in Mylopotamos. <sup>2</sup> Chile has 346 communes; the boundary file has no Antártica commune, which has no FIRMS data.</p>
+        <h3>Data period</h3>
+        <div class="tbl"><table>
+          <tr><th>Item</th><th>Period</th></tr>
+          <tr><td class="hl">FIRMS download</td><td>2001-01 to 2026-11-14, the same date for all six regions</td></tr>
+          <tr><td class="hl">Last detection in the files</td><td>NOAA-20 and NOAA-21: 2026-11-10 to 11-14, depending on region · S-NPP: 2026-10-31 to 11-03 (not used after 2018-03)</td></tr>
+          <tr><td class="hl">Normals, ranks, risk season</td><td>Complete years 2001–2025 (25 years), or 2012–2025 (14 years) for small areas</td></tr>
+          <tr><td class="hl">Current month</td><td>November 2026 is still in progress, so its value is low. It is marked as partial; its vs. normal label and rank use the days so far and change when the month ends</td></tr>
+        </table></div>
       </section>
 
       <section id="cell">
@@ -282,8 +290,8 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
         <ul class="why">
           <li><b>Cells, not points</b>VIIRS has finer pixels, so one fire produces many more points. Counting points would turn a sensor upgrade into "more fire".</li>
           <li><b>Once per day</b>Satellites pass a different number of times per day. Counting each cell once a day removes that from the number.</li>
-          <li><b>Day and night together</b>Many fires are seen only at night. In South Korea, 46% of VIIRS fire cells were night-only, and the 2019 Goseong fire had 0 day cells and 47 night cells. Daytime only would drop monthly R² there from 0.92 to 0.78.</li>
-          <li><b>One ratio for day and night</b>Day and night cells are counted together, then corrected with one ratio. That combined ratio is stable from year to year (South Korea: year-to-year CV 0.07–0.11, leave-one-year-out annual error 5–11%). A separate night-only ratio swings far too much (South Korea: about 102, ranging 46–423), so it is not used.</li>
+          <li><b>Day and night together</b>Many fires are seen only at night. In South Korea, about 30% of VIIRS fire cells are night-only, and S-NPP saw the April 2019 Goseong fire in 0 cells by day and 31 by night. Daytime only would drop monthly R² there from 0.92 to 0.78.</li>
+          <li><b>One ratio for day and night</b>Day and night cells are counted together, then corrected with one ratio. That combined ratio is far steadier from year to year (South Korea: CV 0.23; leave-one-year-out annual error 15%, 6–15% across the six regions). A separate night-only ratio swings far too much (South Korea: about 11, ranging 2.2–26, CV 0.64), so it is not used.</li>
           <li><b>Not fire counts</b>Satellites miss many small fires. Fire cells are what the satellite can honestly report.</li>
         </ul>
         <details><summary>Filters applied before counting</summary><div><div class="tbl"><table>
@@ -339,6 +347,15 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <tr><td class="hl">Low</td><td>Conversion error &gt; 30%</td></tr>
         </table></div>
         <p>If the month's normal is under 5 cells, the grade drops one step.</p>
+        <h3>Uncorrected values (raw_before)</h3>
+        <p>Every month also carries its <strong>uncorrected value</strong>: the original records joined as they are, with no ratio applied. It shows how large the correction is, and it is the "before" line in the 2012 break test.</p>
+        <div class="tbl"><table>
+          <tr><th>Period</th><th>Uncorrected value</th><th>vs. corrected value H</th></tr>
+          <tr><td class="hl">to 2012-01</td><td>MODIS fire cells as observed</td><td>Lower (e.g. South Korea 2005-04: 111 vs 189.8)</td></tr>
+          <tr><td class="hl">2012-02 – 2018-03</td><td>S-NPP fire cells as observed</td><td>Different by k_SN</td></tr>
+          <tr><td class="hl">2018-04 – now</td><td>NOAA-20 fire cells</td><td>Identical (e.g. South Korea 2025-03: 1,093)</td></tr>
+        </table></div>
+        <p>Districts and counties have it for every month, including before 2012 (raw MODIS), even where the corrected value starts in 2012. Provinces use the sum of their districts. API: <code>raw_before</code> on every month of /series.</p>
         <h3>Why this way</h3>
         <ul class="why">
           <li><b>Toward NOAA-20, not MODIS</b>The month people care about most, this month, stays an observation. Matching MODIS would mean correcting every new month toward a retiring sensor.</li>
@@ -355,7 +372,7 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <tr><td>One annual ratio</td><td>Seasonal ratios vary several-fold</td></tr>
           <tr><td>One global ratio for all regions</td><td>Ratios differ by region, from 1.26–2.31 in California to 0.78–4.54 in South Korea</td></tr>
           <tr><td>Average three satellites after 2018</td><td>NOAA-20 alone is simpler and keeps the reference fixed</td></tr>
-          <tr><td>Daytime only</td><td>Loses night-only fires (46% of VIIRS cells in South Korea)</td></tr>
+          <tr><td>Daytime only</td><td>Loses night-only fires (about 30% of VIIRS cells in South Korea)</td></tr>
         </table></div></div></details>
       </section>
 
@@ -472,6 +489,8 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
         <div class="tbl"><table>
           <tr><th>Indicator</th><th>How</th><th>Why</th></tr>
           <tr><td class="hl">Risk season</td><td>Add monthly shares from largest down until 50% is passed. South Korea Feb–Apr (64%), California Aug–Oct (60%), BC Jul–Aug (51%), Greece Aug–Oct (58%), Chile Mar–May (51%), NSW Apr–May, Aug–Sep and Dec (55%)</td><td>The data sets each region's season. It includes farm and prescribed burning, such as NSW's autumn and late-winter hazard-reduction burns</td></tr>
+          <tr><td class="hl">Peak month</td><td>The month with the largest sum of corrected fire cells over complete years 2001–2025. South Korea March, California August, BC August, Greece October, Chile April, NSW April. Districts use the same rule on their own series and reference period (25 or 14 years)</td><td>One month to name when people ask "when does it usually burn"</td></tr>
+          <tr><td class="hl">Season order</td><td>Months of a season are read from just after the longest gap, so a season that crosses the new year reads Nov–Dec–Jan, not Jan, Nov, Dec. Ties start nearest the season start (January; July in Chile and NSW)</td><td>Keeps winter and southern-hemisphere seasons in reading order</td></tr>
           <tr><td class="hl">Same-month rank</td><td>k-th of n same months (n = 25 or 14)</td><td>Works even when normal is 0</td></tr>
           <tr><td class="hl">× normal</td><td>This month ÷ normal, only areas with their own label</td><td>Small normals inflate ratios</td></tr>
           <tr><td class="hl">Year to date</td><td>Sum from the season start (January; July in Chile and NSW) to the month, ÷ the median of past years' sums over the same months</td><td>The whole year, not one month</td></tr>
@@ -520,6 +539,14 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <li><b>One config entry</b>Region code, folders, and an official fire record if one exists.</li>
           <li><b>Run the notebook</b>Coefficients, vs. normal labels, validation tests and API files are produced automatically.</li>
           <li><b>Load and serve</b>Register the region code. Every page works for it with no new code.</li>
+        </ol>
+        <h3>Reproducing the numbers</h3>
+        <p>Everything on this page comes from one pipeline repository (<code>data_jjya</code>). The same command runs on Mac, Windows and Linux, and checks the result against a stored baseline.</p>
+        <ol class="steps">
+          <li><b>Code</b>Clone the repository and install the pinned versions (Python 3.12, <code>requirements.txt</code>).</li>
+          <li><b>Raw data</b>Unzip the release file <code>burnline_inputs.zip</code> (FIRMS to 2026-11-14 and the official records) in the repository root.</li>
+          <li><b>Run</b><code>python tools/run_all.py --check</code> builds and runs the notebook for all six regions (a few minutes per region).</li>
+          <li><b>Compare</b>Each region's <code>meta.json</code> is compared with <code>expected/</code>. Everything except the run date should match.</li>
         </ol>
         <h3>Sources</h3>
         <ul class="why">
@@ -603,6 +630,14 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <tr><td class="hl">뉴사우스웨일스</td><td>지방정부 128 + 극서부 비법인 지역</td><td>NSW NPWS 화재 이력, 산불 10,411건</td></tr>
         </table></div>
         <p class="sub" style="font-size:13px;color:var(--muted)"><sup>1</sup> 그리스 시군은 325곳인데, 공개 경계 파일에 크레타의 Anogeia가 따로 없어 Mylopotamos에 합쳐 세요. <sup>2</sup> 칠레 시군은 346곳인데, 경계 파일에 남극 시군(Antártica)이 없어요. FIRMS 자료도 없는 곳이에요.</p>
+        <h3>데이터 기간</h3>
+        <div class="tbl"><table>
+          <tr><th>항목</th><th>기간</th></tr>
+          <tr><td class="hl">FIRMS 다운로드</td><td>2001-01부터 2026-11-14까지, 여섯 지역 모두 같은 날짜</td></tr>
+          <tr><td class="hl">파일 속 마지막 탐지</td><td>NOAA-20·NOAA-21: 지역에 따라 2026-11-10–11-14 · S-NPP: 2026-10-31–11-03 (2018-03 이후에는 쓰지 않음)</td></tr>
+          <tr><td class="hl">평년·순위·위험 시기</td><td>완전한 해 2001–2025(25년), 작은 구역은 2012–2025(14년)</td></tr>
+          <tr><td class="hl">이번 달</td><td>2026년 11월은 진행 중인 달이라 값이 작아요. 진행 중인 달로 표시하고, 평년 대비와 순위는 지금까지의 값으로 계산해서 달이 끝나면 바뀌어요</td></tr>
+        </table></div>
       </section>
 
       <section id="ko-cell">
@@ -622,8 +657,8 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
         <ul class="why">
           <li><b>점이 아니라 칸</b>VIIRS는 해상도가 높아 같은 불을 더 많은 점으로 찍어요. 점을 세면 센서가 좋아진 것이 "불이 늘었다"로 보여요.</li>
           <li><b>하루에 한 번</b>위성마다 하루에 지나가는 횟수가 달라요. 칸을 하루에 한 번만 세면 그 차이가 숫자에 섞이지 않아요.</li>
-          <li><b>낮과 밤을 함께</b>밤에만 잡히는 불이 많아요. 한국은 VIIRS 화재 칸의 46%가 밤에만 잡혔고, 2019년 고성 산불은 낮 0칸, 밤 47칸이었어요. 낮만 쓰면 한국의 월별 설명력(R²)이 0.92에서 0.78로 떨어져요.</li>
-          <li><b>낮·밤 합친 비율 하나</b>낮과 밤 칸을 합쳐 센 뒤 비율 하나로 보정해요. 합친 비율은 해마다 안정적이에요(한국: 해마다 변동 CV 0.07–0.11, 한 해씩 빼기 연간 오차 5–11%). 밤만 따로 구한 비율은 너무 크게 흔들려서(한국: 약 102, 46–423) 쓰지 않아요.</li>
+          <li><b>낮과 밤을 함께</b>밤에만 잡히는 불이 많아요. 한국은 VIIRS 화재 칸의 약 30%가 밤에만 잡혔고, 2019년 4월 고성 산불은 S-NPP 기준 낮 0칸, 밤 31칸이었어요. 낮만 쓰면 한국의 월별 설명력(R²)이 0.92에서 0.78로 떨어져요.</li>
+          <li><b>낮·밤 합친 비율 하나</b>낮과 밤 칸을 합쳐 센 뒤 비율 하나로 보정해요. 합친 비율이 해마다 훨씬 덜 흔들려요(한국: 해마다 변동 CV 0.23, 한 해씩 빼기 연간 오차 15%, 여섯 지역 6–15%). 밤만 따로 구한 비율은 너무 크게 흔들려서(한국: 약 11, 2.2–26, CV 0.64) 쓰지 않아요.</li>
           <li><b>산불 건수가 아님</b>위성은 작은 불을 많이 놓쳐요. 화재 칸은 위성이 정직하게 말할 수 있는 양이에요.</li>
         </ul>
         <details><summary>세기 전에 거르는 것</summary><div><div class="tbl"><table>
@@ -679,6 +714,15 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <tr><td class="hl">낮음</td><td>변환 오차 30% 초과</td></tr>
         </table></div>
         <p>그 달 평년이 5칸 미만이면 한 단계 낮춰요.</p>
+        <h3>보정 전 원값 (raw_before)</h3>
+        <p>모든 달에는 <strong>보정 전 원값</strong>도 붙어요. 비율을 곱하지 않고 원래 기록을 그대로 이은 값이에요. 보정이 얼마나 컸는지 보여 주고, 2012년 단절 검사의 "보정 전" 값이 이것이에요.</p>
+        <div class="tbl"><table>
+          <tr><th>기간</th><th>보정 전 원값</th><th>보정값 H와 비교</th></tr>
+          <tr><td class="hl">2012-01까지</td><td>MODIS 화재 칸 그대로</td><td>더 작아요 (예: 한국 2005-04 원값 111, 보정값 189.8)</td></tr>
+          <tr><td class="hl">2012-02 – 2018-03</td><td>S-NPP 화재 칸 그대로</td><td>k_SN만큼 달라요</td></tr>
+          <tr><td class="hl">2018-04 – 지금</td><td>NOAA-20 화재 칸</td><td>같아요 (예: 한국 2025-03 1,093)</td></tr>
+        </table></div>
+        <p>시·군·구와 카운티는 보정값이 2012년부터라도 원값은 2012년 전(MODIS 원값)까지 모든 달에 있어요. 시·도는 소속 시·군·구 원값의 합이에요. API: /series의 모든 달에 <code>raw_before</code>.</p>
         <h3>왜 이렇게 했나</h3>
         <ul class="why">
           <li><b>MODIS가 아니라 NOAA-20에 맞춤</b>가장 중요한 "이번 달"이 실측 그대로 남아요. MODIS에 맞추면 운영이 끝나가는 위성 쪽으로 새 달마다 보정을 해야 해요.</li>
@@ -695,7 +739,7 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <tr><td>연간 비율 하나</td><td>계절마다 비율이 몇 배씩 달라요</td></tr>
           <tr><td>모든 지역에 같은 비율</td><td>캘리포니아 1.26–2.31, 한국 0.78–4.54처럼 지역마다 달라요</td></tr>
           <tr><td>2018년 이후 위성 3대 평균</td><td>NOAA-20 하나가 더 단순하고 기준이 흔들리지 않아요</td></tr>
-          <tr><td>낮만 세기</td><td>밤에만 잡힌 불이 빠져요(한국 VIIRS 칸의 46%)</td></tr>
+          <tr><td>낮만 세기</td><td>밤에만 잡힌 불이 빠져요(한국 VIIRS 칸의 약 30%)</td></tr>
         </table></div></div></details>
       </section>
 
@@ -812,6 +856,8 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
         <div class="tbl"><table>
           <tr><th>지표</th><th>계산</th><th>이유</th></tr>
           <tr><td class="hl">위험 시기</td><td>월별 비중을 큰 달부터 더해 처음 50%를 넘는 달들. 한국 2–4월(64%), 캘리포니아 8–10월(60%), BC 7–8월(51%), 그리스 8–10월(58%), 칠레 3–5월(51%), NSW 4–5·8–9·12월(55%)</td><td>데이터가 지역마다 시기를 정해요. NSW의 가을·늦겨울 위험 감소 소각처럼 농업·계획 소각도 포함돼요</td></tr>
+          <tr><td class="hl">정점 달</td><td>완전한 해 2001–2025의 보정 화재 칸을 달별로 더해 가장 큰 달. 한국 3월, 캘리포니아 8월, BC 8월, 그리스 10월, 칠레 4월, NSW 4월. 시·군·구도 자기 시계열과 기준 기간(25년 또는 14년)에 같은 규칙</td><td>"보통 언제 많이 타나"에 달 하나로 답해요</td></tr>
+          <tr><td class="hl">시기 읽는 순서</td><td>가장 긴 빈 구간 바로 다음 달부터 읽어요. 해를 넘기는 시기는 1·11·12월이 아니라 11–12–1월로 읽혀요. 빈 구간 길이가 같으면 시즌 시작(1월, 칠레·NSW는 7월)에 가까운 쪽부터</td><td>겨울과 남반구 시즌을 순서대로 보여줘요</td></tr>
           <tr><td class="hl">같은 달 순위</td><td>같은 달 n번 중 k위 (n = 25 또는 14)</td><td>평년이 0인 달에도 쓸 수 있어요</td></tr>
           <tr><td class="hl">평년의 n배</td><td>이번 달 ÷ 평년, 자기 평년 대비가 있는 구역만</td><td>평년이 작으면 배수가 부풀어요</td></tr>
           <tr><td class="hl">올해 누적</td><td>시즌 시작(1월, 칠레·NSW는 7월)부터 그달까지의 합 ÷ 지난 해들의 같은 기간 누적 합의 중앙값</td><td>한 달이 아니라 올해 흐름</td></tr>
@@ -860,6 +906,14 @@ ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;mar
           <li><b>설정 한 줄</b>지역 코드, 폴더, 공식 산불 기록(있으면)</li>
           <li><b>노트북 실행</b>계수, 평년 대비, 검증 검사, API용 파일이 자동으로 나와요</li>
           <li><b>불러오기</b>지역 코드를 등록하면 모든 화면이 새 코드 없이 작동해요</li>
+        </ol>
+        <h3>숫자 재현하기</h3>
+        <p>이 페이지의 모든 숫자는 파이프라인 저장소(<code>data_jjya</code>) 하나에서 나와요. 맥·윈도우·리눅스에서 같은 명령으로 돌아가고, 저장된 기준 결과와 자동으로 비교해요.</p>
+        <ol class="steps">
+          <li><b>코드</b>저장소를 받아 고정된 버전을 설치해요 (Python 3.12, <code>requirements.txt</code>)</li>
+          <li><b>원자료</b>Release의 <code>burnline_inputs.zip</code>(FIRMS 2026-11-14까지 + 공식 기록)을 저장소 루트에 풀어요</li>
+          <li><b>실행</b><code>python tools/run_all.py --check</code>가 여섯 지역의 노트북을 만들고 돌려요 (지역당 몇 분)</li>
+          <li><b>비교</b>지역마다 <code>meta.json</code>을 <code>expected/</code>와 비교해요. 실행 날짜 말고는 모두 같아야 해요</li>
         </ol>
         <h3>출처</h3>
         <ul class="why">
