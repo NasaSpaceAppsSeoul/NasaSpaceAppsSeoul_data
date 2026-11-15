@@ -1,0 +1,4868 @@
+{
+  "country": "BC",
+  "bbox": null,
+  "generated": "2026-11-15",
+  "unit": "VIIRS NOAA-20 기준 화재 감지일 (0.01° 격자 × 일)",
+  "data_range": {
+    "modis": [
+      "2001-01-03",
+      "2026-11-13"
+    ],
+    "viirs_snpp": [
+      "2012-01-21",
+      "2026-11-02"
+    ],
+    "noaa20": [
+      "2018-04-02",
+      "2026-11-14"
+    ],
+    "noaa21": [
+      "2023-03-02",
+      "2026-11-14"
+    ]
+  },
+  "filters": [
+    {
+      "단계": "원자료",
+      "MODIS": 409439,
+      "VIIRS": 1467244,
+      "NOAA-20": 1101405,
+      "NOAA-21": 660236
+    },
+    {
+      "단계": "유형 필터 (아카이브 type 0만)",
+      "MODIS": 409080,
+      "VIIRS": 1458775,
+      "NOAA-20": 1094879,
+      "NOAA-21": 656686
+    },
+    {
+      "단계": "고정 열원 격자 마스크",
+      "MODIS": 406562,
+      "VIIRS": 1435767,
+      "NOAA-20": 1076081,
+      "NOAA-21": 645838
+    },
+    {
+      "단계": "낮은 신뢰도 제거",
+      "MODIS": 370416,
+      "VIIRS": 1376716,
+      "NOAA-20": 1035590,
+      "NOAA-21": 617978
+    },
+    {
+      "단계": "행정 경계 안",
+      "MODIS": 311475,
+      "VIIRS": 1085100,
+      "NOAA-20": 758348,
+      "NOAA-21": 349749
+    }
+  ],
+  "static_cells_masked": 643,
+  "nrt_proxy_validation": {
+    "NOAA-20": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.982,
+          "남김 비율 (정답)": 0.982,
+          "건수": 1013648
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.003,
+          "남김 비율 (정답)": 0.0,
+          "건수": 1976
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.413,
+          "남김 비율 (정답)": 0.0,
+          "건수": 4503
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.1,
+        "월별 |차이| 중앙값 %": 0.1,
+        "전체 합계 차이 %": 0.2
+      }
+    },
+    "S-NPP": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.984,
+          "남김 비율 (정답)": 0.984,
+          "건수": 1361265
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.001,
+          "남김 비율 (정답)": 0.0,
+          "건수": 2609
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.427,
+          "남김 비율 (정답)": 0.0,
+          "건수": 5797
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.1,
+        "월별 |차이| 중앙값 %": 0.1,
+        "전체 합계 차이 %": 0.2
+      }
+    },
+    "MODIS": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.995,
+          "남김 비율 (정답)": 0.995,
+          "건수": 371495
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.721,
+          "남김 비율 (정답)": 0.0,
+          "건수": 262
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.167,
+          "남김 비율 (정답)": 0.0,
+          "건수": 18
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.0,
+        "월별 |차이| 중앙값 %": 0.0,
+        "전체 합계 차이 %": 0.1
+      }
+    }
+  },
+  "calibration": {
+    "base": "NOAA-20",
+    "chain": "Terra → MODIS → S-NPP → NOAA-20 (NOAA-21 → NOAA-20 예비)",
+    "method": "B",
+    "k_by_month": {
+      "1": 2.835,
+      "2": 4.009,
+      "3": 4.24,
+      "4": 2.731,
+      "5": 1.943,
+      "6": 1.819,
+      "7": 1.809,
+      "8": 2.051,
+      "9": 2.155,
+      "10": 2.161,
+      "11": 2.759,
+      "12": 3.172
+    },
+    "ratio_by_year": {
+      "2012": 2.37,
+      "2013": 2.11,
+      "2014": 2.33,
+      "2015": 2.17,
+      "2016": 2.08,
+      "2017": 1.93,
+      "2018": 2.29,
+      "2019": 2.45,
+      "2020": 2.71,
+      "2021": 1.81,
+      "2022": 2.35,
+      "2023": 2.08,
+      "2024": 1.93,
+      "2025": 1.87
+    },
+    "overlap_years": [
+      2012,
+      2025
+    ],
+    "shrink": 20,
+    "window": 2,
+    "terra_to_modis": {
+      "k_by_month": {
+        "1": 2.156,
+        "2": 2.165,
+        "3": 1.882,
+        "4": 1.893,
+        "5": 2.084,
+        "6": 1.71,
+        "7": 1.579,
+        "8": 1.658,
+        "9": 1.808,
+        "10": 1.788,
+        "11": 1.905,
+        "12": 2.138
+      },
+      "validation": {
+        "years": [
+          2003,
+          2011
+        ],
+        "annual_mape_pct": 2.6,
+        "bias_pct": 0.1
+      },
+      "terra_share_by_year": {
+        "2003": 0.57,
+        "2004": 0.56,
+        "2005": 0.55,
+        "2006": 0.57,
+        "2007": 0.56,
+        "2008": 0.52,
+        "2009": 0.56,
+        "2010": 0.6,
+        "2011": 0.54,
+        "2012": 0.56,
+        "2013": 0.57,
+        "2014": 0.58,
+        "2015": 0.59,
+        "2016": 0.56,
+        "2017": 0.61,
+        "2018": 0.6,
+        "2019": 0.56,
+        "2020": 0.54,
+        "2021": 0.62,
+        "2022": 0.52,
+        "2023": 0.58,
+        "2024": 0.57,
+        "2025": 0.55
+      }
+    },
+    "snpp_to_noaa20": {
+      "k_by_month": {
+        "1": 1.039,
+        "2": 1.009,
+        "3": 1.01,
+        "4": 0.998,
+        "5": 0.985,
+        "6": 0.991,
+        "7": 0.996,
+        "8": 1.027,
+        "9": 1.006,
+        "10": 1.007,
+        "11": 1.038,
+        "12": 1.014
+      },
+      "validation": {
+        "years": [
+          2019,
+          2025
+        ],
+        "annual_mape_pct": 4.7,
+        "bias_pct": 0.9
+      },
+      "ratio_by_year": {
+        "2019": 0.99,
+        "2020": 0.97,
+        "2021": 0.98,
+        "2022": 0.93,
+        "2023": 1.04,
+        "2024": 0.88,
+        "2025": 0.97
+      }
+    },
+    "noaa21_to_noaa20": {
+      "k_by_month": {
+        "1": 1.035,
+        "2": 1.043,
+        "3": 0.986,
+        "4": 1.093,
+        "5": 0.913,
+        "6": 1.053,
+        "7": 1.028,
+        "8": 1.026,
+        "9": 1.053,
+        "10": 1.041,
+        "11": 1.043,
+        "12": 0.972
+      },
+      "validation": {
+        "years": [
+          2024,
+          2025
+        ],
+        "annual_mape_pct": 1.8,
+        "bias_pct": -1.7
+      }
+    }
+  },
+  "validation": {
+    "A": {
+      "monthly_r2": 0.972,
+      "monthly_mae": 163.9,
+      "annual_mape_pct": 8.8,
+      "bias_pct": 1.3
+    },
+    "B": {
+      "monthly_r2": 0.957,
+      "monthly_mae": 185.1,
+      "annual_mape_pct": 8.6,
+      "bias_pct": 1.5
+    }
+  },
+  "break_test": {
+    "이어 붙이기": {
+      "sensor_break_p": 0.0012,
+      "sensor_break": true,
+      "jump": 2.38,
+      "jump_ci95": [
+        2.3,
+        2.46
+      ],
+      "ratio_before_2012": 0.42,
+      "ratio_before_ci95": [
+        0.38,
+        0.45
+      ],
+      "ratio_after_2012": 0.99,
+      "ratio_ci95": [
+        0.96,
+        1.03
+      ]
+    },
+    "H 하모니제이션": {
+      "sensor_break_p": 0.4408,
+      "sensor_break": false,
+      "jump": 1.0,
+      "jump_ci95": [
+        0.97,
+        1.03
+      ],
+      "ratio_before_2012": 1.0,
+      "ratio_before_ci95": [
+        1.0,
+        1.0
+      ],
+      "ratio_after_2012": 1.0,
+      "ratio_ci95": [
+        0.97,
+        1.03
+      ]
+    }
+  },
+  "modis_only_change_point": {
+    "change_year": 2014,
+    "p_value": 0.3276
+  },
+  "grid_sensitivity": [
+    {
+      "격자(도)": 0.1,
+      "월별 R²": 0.979,
+      "연간 오차 %": 5.3,
+      "2025년 3월 배수": 0.57,
+      "2022년 3월 배수": 0.74
+    },
+    {
+      "격자(도)": 0.05,
+      "월별 R²": 0.982,
+      "연간 오차 %": 5.7,
+      "2025년 3월 배수": 0.55,
+      "2022년 3월 배수": 0.74
+    },
+    {
+      "격자(도)": 0.02,
+      "월별 R²": 0.98,
+      "연간 오차 %": 7.1,
+      "2025년 3월 배수": 0.52,
+      "2022년 3월 배수": 0.73
+    },
+    {
+      "격자(도)": 0.01,
+      "월별 R²": 0.957,
+      "연간 오차 %": 8.6,
+      "2025년 3월 배수": 0.5,
+      "2022년 3월 배수": 0.71
+    }
+  ],
+  "frp": {
+    "source": "보정된 MODIS+VIIRS",
+    "harmonized": true,
+    "validation": {
+      "monthly_r2": 0.987,
+      "monthly_mae": 21332.5,
+      "annual_mape_pct": 9.0,
+      "bias_pct": -0.1
+    },
+    "ratio_by_year": {
+      "2012": 0.63,
+      "2013": 0.58,
+      "2014": 0.49,
+      "2015": 0.52,
+      "2016": 0.53,
+      "2017": 0.49,
+      "2018": 0.49,
+      "2019": 0.71,
+      "2020": 0.81,
+      "2021": 0.44,
+      "2022": 0.49,
+      "2023": 0.44,
+      "2024": 0.42,
+      "2025": 0.4
+    },
+    "median_frp_per_detection_mw": {
+      "MODIS": 43.4,
+      "VIIRS": 4.18
+    }
+  },
+  "types": {
+    "threshold_pct": 0.9,
+    "labels": [
+      "많고 강함",
+      "작은 불이 많음",
+      "드물지만 강함",
+      "평년 수준"
+    ],
+    "counts": {
+      "상위 25% 기준": {
+        "많고 강함": 56,
+        "작은 불이 많음": 16,
+        "드물지만 강함": 16,
+        "평년 수준": 212
+      },
+      "상위 10% 기준": {
+        "많고 강함": 20,
+        "작은 불이 많음": 4,
+        "드물지만 강함": 4,
+        "평년 수준": 272
+      }
+    }
+  },
+  "quality": {
+    "rules": {
+      "높음": "NOAA-20 직접 관측, 또는 S-NPP→NOAA-20 변환 중 월별 오차 10% 이하",
+      "보통": "변환 오차 30% 이하, 또는 NOAA-20 NRT",
+      "낮음": "변환 오차 30% 초과"
+    },
+    "low_count": 5,
+    "month_error": {
+      "modis_snpp": {
+        "1": 0.171,
+        "2": 0.609,
+        "3": 0.273,
+        "4": 0.539,
+        "5": 0.254,
+        "6": 0.237,
+        "7": 0.203,
+        "8": 0.093,
+        "9": 0.21,
+        "10": 0.084,
+        "11": 0.138,
+        "12": 0.211
+      },
+      "snpp_noaa20": {
+        "1": 0.074,
+        "2": 0.062,
+        "3": 0.137,
+        "4": 0.05,
+        "5": 0.098,
+        "6": 0.127,
+        "7": 0.176,
+        "8": 0.042,
+        "9": 0.035,
+        "10": 0.026,
+        "11": 0.074,
+        "12": 0.03
+      },
+      "terra_modis": {
+        "1": 0.167,
+        "2": 0.248,
+        "3": 0.089,
+        "4": 0.113,
+        "5": 0.11,
+        "6": 0.083,
+        "7": 0.073,
+        "8": 0.035,
+        "9": 0.04,
+        "10": 0.034,
+        "11": 0.075,
+        "12": 0.085
+      }
+    }
+  },
+  "sources": [
+    "NASA FIRMS MODIS Collection 6.1 (MCD14)",
+    "NASA FIRMS VIIRS S-NPP 375 m (VNP14IMG)",
+    "NASA FIRMS VIIRS NOAA-20 375 m (VJ114IMG)",
+    "NASA FIRMS VIIRS NOAA-21 375 m (VJ214IMG)"
+  ],
+  "regions": {
+    "boundaries": "geoBoundaries KOR ADM2/ADM1 (CC BY 3.0)",
+    "n_regions": 28,
+    "err_max": 0.3,
+    "error": {
+      "national": 0.119,
+      "province": {
+        "British Columbia": 0.12
+      },
+      "district_median": 0.196
+    },
+    "snpp_noaa20_district_error": {
+      "median": 0.073,
+      "by_size": {
+        "[0.0, 10.0)": null,
+        "[10.0, 25.0)": null,
+        "[25.0, 50.0)": null,
+        "[50.0, 100.0)": null,
+        "[100.0, 200.0)": null,
+        "[200.0, inf)": 0.073
+      }
+    },
+    "district_error_by_size": [
+      {
+        "bin": "[0.0, 10.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[10.0, 25.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[25.0, 50.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[50.0, 100.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[100.0, 200.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[200.0, inf)",
+        "n": 28,
+        "median": 0.196
+      }
+    ],
+    "province_basis": {
+      "British Columbia": "보정 25년"
+    },
+    "district_basis": "VIIRS 2012~",
+    "longterm": {
+      "method": "시·군·구별 보정 계수 (시·도·1 쪽으로 당김)",
+      "shrink": [
+        10,
+        20
+      ],
+      "min_total": 200.0,
+      "error_by_size": {
+        "[0.0, 10.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[10.0, 25.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[25.0, 50.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[50.0, 100.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[100.0, 200.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[200.0, inf)": {
+          "14년 합계": 0.015,
+          "7년 합계": 0.102,
+          "한 해 값": 0.224
+        }
+      },
+      "fire_year_recall": 1.0,
+      "quality_counts": {
+        "높음": 28
+      },
+      "used": "25년 합계·연평균만",
+      "not_used": "7년(10년 단위) 비교, 불 난 해 수, 한 해·한 달 값 (오차 기준 미달)"
+    },
+    "sufficient_min_viirs_annual": 11.1,
+    "sufficiency_annual": "가장 많이 탄 한 해를 뺀 연평균",
+    "sufficiency_counts": {
+      "충분": 28
+    },
+    "province_sufficiency": {
+      "British Columbia": "충분"
+    },
+    "risk_share": 0.5,
+    "national_risk": {
+      "months": [
+        7,
+        8
+      ],
+      "share": 0.509,
+      "peak_month": 8,
+      "years": [
+        2001,
+        2025
+      ]
+    },
+    "adjacency_tol_deg": 0.002,
+    "alert_km": 50,
+    "alert_rules": {
+      "neighbor": "맞닿은 시·군·구에서 감지",
+      "distance": "지역 중심 50 km 안에서 감지",
+      "monthly": "맞닿은 '충분' 시·군·구의 이번 달 VIIRS 감지일이 같은 달 분포 상위 10% 초과"
+    },
+    "case_event": {
+      "window": [
+        "2023-08-14",
+        "2023-08-31"
+      ],
+      "regions": [
+        "Central Okanagan",
+        "North Okanagan",
+        "Okanagan-Similkameen",
+        "Thompson-Nicola",
+        "Columbia Shuswap"
+      ],
+      "lead": [
+        {
+          "지역": "British Columbia North Okanagan",
+          "자기 지역 첫 감지": null,
+          "맞닿은 지역 첫 감지": "08-14",
+          "앞선 일수(맞닿음)": NaN,
+          "50 km 안 첫 감지": "08-26",
+          "앞선 일수(50 km)": null
+        },
+        {
+          "지역": "British Columbia Okanagan-Similkameen",
+          "자기 지역 첫 감지": "08-14",
+          "맞닿은 지역 첫 감지": "08-14",
+          "앞선 일수(맞닿음)": 0.0,
+          "50 km 안 첫 감지": null,
+          "앞선 일수(50 km)": null
+        },
+        {
+          "지역": "British Columbia Thompson-Nicola",
+          "자기 지역 첫 감지": "08-14",
+          "맞닿은 지역 첫 감지": "08-14",
+          "앞선 일수(맞닿음)": 0.0,
+          "50 km 안 첫 감지": null,
+          "앞선 일수(50 km)": null
+        },
+        {
+          "지역": "British Columbia Columbia Shuswap",
+          "자기 지역 첫 감지": "08-14",
+          "맞닿은 지역 첫 감지": "08-14",
+          "앞선 일수(맞닿음)": 0.0,
+          "50 km 안 첫 감지": null,
+          "앞선 일수(50 km)": null
+        }
+      ]
+    }
+  },
+  "events": {
+    "sensor": "VIIRS NOAA-20",
+    "rule": {
+      "name": "B",
+      "distance_km": 3,
+      "gap_days": 2,
+      "big_event_cells": 10
+    },
+    "sensitivity": [
+      {
+        "규칙": "A 2 km·1일",
+        "묶음 수": 29399,
+        "1칸짜리 비율": 0.46,
+        "큰 묶음 (10칸+)": 2481
+      },
+      {
+        "규칙": "B 3 km·2일",
+        "묶음 수": 23457,
+        "1칸짜리 비율": 0.44,
+        "큰 묶음 (10칸+)": 2106
+      },
+      {
+        "규칙": "C 5 km·3일",
+        "묶음 수": 19787,
+        "1칸짜리 비율": 0.42,
+        "큰 묶음 (10칸+)": 2005
+      }
+    ],
+    "known_fires": {
+      "A": [
+        {
+          "화재": "Lytton 2021-06",
+          "근처 묶음 수": 13,
+          "주 묶음 비중": 0.73,
+          "기간": "06/29~07/07",
+          "화재 칸": 207,
+          "가장 넓은 날 칸": 83
+        },
+        {
+          "화재": "McDougall Creek 2023-08",
+          "근처 묶음 수": 6,
+          "주 묶음 비중": 0.71,
+          "기간": "08/16~08/22",
+          "화재 칸": 355,
+          "가장 넓은 날 칸": 151
+        },
+        {
+          "화재": "Donnie Creek 2023-05",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 0.99,
+          "기간": "05/12~05/21",
+          "화재 칸": 3690,
+          "가장 넓은 날 칸": 726
+        }
+      ],
+      "B": [
+        {
+          "화재": "Lytton 2021-06",
+          "근처 묶음 수": 6,
+          "주 묶음 비중": 0.98,
+          "기간": "06/29~07/31",
+          "화재 칸": 2143,
+          "가장 넓은 날 칸": 194
+        },
+        {
+          "화재": "McDougall Creek 2023-08",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "08/16~08/29",
+          "화재 칸": 571,
+          "가장 넓은 날 칸": 175
+        },
+        {
+          "화재": "Donnie Creek 2023-05",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "05/12~05/21",
+          "화재 칸": 3704,
+          "가장 넓은 날 칸": 727
+        }
+      ],
+      "C": [
+        {
+          "화재": "Lytton 2021-06",
+          "근처 묶음 수": 3,
+          "주 묶음 비중": 0.99,
+          "기간": "06/29~08/16",
+          "화재 칸": 2712,
+          "가장 넓은 날 칸": 194
+        },
+        {
+          "화재": "McDougall Creek 2023-08",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "08/16~08/29",
+          "화재 칸": 571,
+          "가장 넓은 날 칸": 175
+        },
+        {
+          "화재": "Donnie Creek 2023-05",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "05/12~05/21",
+          "화재 칸": 3705,
+          "가장 넓은 날 칸": 727
+        }
+      ]
+    },
+    "monthly_count_correlation": {
+      "A": {
+        "A": 1.0,
+        "B": 0.96,
+        "C": 0.92
+      },
+      "B": {
+        "A": 0.96,
+        "B": 1.0,
+        "C": 0.99
+      },
+      "C": {
+        "A": 0.92,
+        "B": 0.99,
+        "C": 1.0
+      }
+    },
+    "note": "묶음은 설명용. 보정·달력·순위에는 화재 칸 합계를 쓴다."
+  },
+  "external_validation": {
+    "source": "BC Wildfire Service 과거 산불 기록 (BC Data Catalogue, PROT_HISTORICAL_INCIDENTS_SP)",
+    "records": 42170,
+    "period": [
+      "2001-01-14",
+      "2026-03-31"
+    ],
+    "district_match_rate": 0.966,
+    "rank_correlation": {
+      "annual_vs_count": 0.58,
+      "annual_vs_area": 0.92,
+      "monthly_vs_count": 0.26,
+      "monthly_vs_area": 0.21,
+      "years": [
+        2012,
+        2025
+      ]
+    },
+    "detection_source": null,
+    "detection_period": [
+      "2018-04-01",
+      "2026-03-31"
+    ],
+    "detection_by_size": {
+      "0.1 ha 미만": {
+        "n": 6509,
+        "detected": 0.62,
+        "chance": 0.43
+      },
+      "0.1~1": {
+        "n": 2448,
+        "detected": 0.69,
+        "chance": 0.47
+      },
+      "1~10": {
+        "n": 1390,
+        "detected": 0.76,
+        "chance": 0.45
+      },
+      "10~100": {
+        "n": 738,
+        "detected": 0.9,
+        "chance": 0.48
+      },
+      "100 ha 이상": {
+        "n": 843,
+        "detected": 0.93,
+        "chance": 0.54
+      }
+    },
+    "big_fires_area_vs_cells_rho": 0.38,
+    "big_clusters_without_record": [
+      {
+        "start": "2018-11-05",
+        "end": "2018-11-08",
+        "cells": 11,
+        "regions": "British Columbia Capital"
+      },
+      {
+        "start": "2023-10-25",
+        "end": "2023-10-26",
+        "cells": 11,
+        "regions": "British Columbia Capital"
+      },
+      {
+        "start": "2019-10-25",
+        "end": "2019-10-26",
+        "cells": 13,
+        "regions": "British Columbia Capital"
+      },
+      {
+        "start": "2026-09-21",
+        "end": "2026-09-23",
+        "cells": 20,
+        "regions": "British Columbia Capital"
+      },
+      {
+        "start": "2022-11-01",
+        "end": "2022-11-02",
+        "cells": 12,
+        "regions": "British Columbia Capital"
+      },
+      {
+        "start": "2023-10-30",
+        "end": "2023-10-31",
+        "cells": 14,
+        "regions": "British Columbia Capital"
+      },
+      {
+        "start": "2022-11-08",
+        "end": "2022-11-09",
+        "cells": 11,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2026-10-28",
+        "end": "2026-10-28",
+        "cells": 11,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2023-10-26",
+        "end": "2023-10-28",
+        "cells": 23,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2025-10-29",
+        "end": "2025-10-29",
+        "cells": 10,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2025-10-19",
+        "end": "2025-10-22",
+        "cells": 12,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2023-10-25",
+        "end": "2023-10-31",
+        "cells": 11,
+        "regions": "British Columbia Alberni-Clayoquot"
+      },
+      {
+        "start": "2018-10-09",
+        "end": "2018-10-11",
+        "cells": 16,
+        "regions": "British Columbia Alberni-Clayoquot"
+      },
+      {
+        "start": "2024-10-08",
+        "end": "2024-10-10",
+        "cells": 19,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2018-10-03",
+        "end": "2018-10-06",
+        "cells": 12,
+        "regions": "British Columbia Cowichan Valley, British Columbia Alberni-Clayoquot"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-27",
+        "cells": 12,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2019-10-24",
+        "end": "2019-10-26",
+        "cells": 14,
+        "regions": "British Columbia Cowichan Valley"
+      },
+      {
+        "start": "2023-10-31",
+        "end": "2023-11-03",
+        "cells": 25,
+        "regions": "British Columbia Cowichan Valley, British Columbia Nanaimo"
+      },
+      {
+        "start": "2018-11-08",
+        "end": "2018-11-10",
+        "cells": 15,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-10-03",
+        "end": "2026-10-08",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-07-27",
+        "end": "2026-08-12",
+        "cells": 71,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-07-22",
+        "end": "2026-07-25",
+        "cells": 10,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-08-22",
+        "cells": 295,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 10,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2020-10-14",
+        "end": "2020-10-15",
+        "cells": 13,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2026-09-20",
+        "end": "2026-09-23",
+        "cells": 22,
+        "regions": "British Columbia Fraser Valley, British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 11,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2018-11-07",
+        "end": "2018-11-08",
+        "cells": 15,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-10-17",
+        "end": "2023-10-19",
+        "cells": 19,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 14,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2023-10-29",
+        "end": "2023-10-30",
+        "cells": 17,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2021-10-10",
+        "end": "2021-10-11",
+        "cells": 19,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2025-10-23",
+        "end": "2025-10-25",
+        "cells": 14,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-17",
+        "cells": 87,
+        "regions": "British Columbia Fraser Valley, British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-07-20",
+        "end": "2026-07-25",
+        "cells": 40,
+        "regions": "British Columbia Fraser Valley, British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-07-30",
+        "end": "2026-08-01",
+        "cells": 20,
+        "regions": "British Columbia Fraser Valley, British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2019-10-14",
+        "end": "2019-10-16",
+        "cells": 11,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-10-31",
+        "cells": 13,
+        "regions": "British Columbia Central Kootenay, British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2023-11-19",
+        "end": "2023-11-20",
+        "cells": 11,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-08",
+        "cells": 13,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2019-11-25",
+        "end": "2019-11-26",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-10-26",
+        "end": "2026-10-29",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2020-10-21",
+        "end": "2020-10-22",
+        "cells": 11,
+        "regions": "British Columbia Alberni-Clayoquot"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-29",
+        "cells": 12,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2022-11-05",
+        "end": "2022-11-05",
+        "cells": 11,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2023-10-28",
+        "end": "2023-10-29",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-11-02",
+        "end": "2023-11-03",
+        "cells": 12,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2022-11-27",
+        "end": "2022-11-27",
+        "cells": 10,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2026-10-31",
+        "end": "2026-11-03",
+        "cells": 12,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2018-10-30",
+        "end": "2018-10-30",
+        "cells": 13,
+        "regions": "British Columbia Okanagan-Similkameen, British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-28",
+        "cells": 26,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-07-21",
+        "end": "2026-08-01",
+        "cells": 44,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2022-11-17",
+        "end": "2022-11-18",
+        "cells": 11,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2024-10-22",
+        "end": "2024-10-23",
+        "cells": 10,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2024-11-05",
+        "end": "2024-11-07",
+        "cells": 21,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2024-11-03",
+        "end": "2024-11-05",
+        "cells": 15,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2022-11-14",
+        "end": "2022-11-16",
+        "cells": 12,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-12",
+        "cells": 18,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2022-11-15",
+        "end": "2022-11-16",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2018-11-05",
+        "end": "2018-11-08",
+        "cells": 11,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2023-10-17",
+        "end": "2023-10-19",
+        "cells": 17,
+        "regions": "British Columbia Kootenay Boundary, British Columbia Central Kootenay"
+      },
+      {
+        "start": "2023-09-15",
+        "end": "2023-09-19",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2021-11-07",
+        "end": "2021-11-10",
+        "cells": 16,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-10-23",
+        "end": "2023-10-24",
+        "cells": 13,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2020-11-06",
+        "end": "2020-11-07",
+        "cells": 14,
+        "regions": "British Columbia Nanaimo"
+      },
+      {
+        "start": "2021-09-07",
+        "end": "2021-09-10",
+        "cells": 14,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2023-11-16",
+        "end": "2023-11-17",
+        "cells": 13,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-11-08",
+        "end": "2023-11-09",
+        "cells": 13,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2024-11-06",
+        "end": "2024-11-07",
+        "cells": 13,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2023-10-30",
+        "end": "2023-10-31",
+        "cells": 11,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-27",
+        "cells": 10,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2020-11-19",
+        "end": "2020-11-21",
+        "cells": 12,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2024-10-24",
+        "end": "2024-10-29",
+        "cells": 18,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2019-10-06",
+        "end": "2019-10-06",
+        "cells": 12,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-11-12",
+        "end": "2026-11-14",
+        "cells": 10,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2025-11-04",
+        "end": "2025-11-06",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2025-09-23",
+        "end": "2025-09-27",
+        "cells": 11,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2019-10-23",
+        "end": "2019-10-23",
+        "cells": 16,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-08-27",
+        "end": "2026-08-29",
+        "cells": 12,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2025-11-24",
+        "end": "2025-11-25",
+        "cells": 14,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2021-09-07",
+        "end": "2021-09-10",
+        "cells": 13,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2019-11-04",
+        "end": "2019-11-05",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-02-14",
+        "end": "2023-02-16",
+        "cells": 14,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2025-10-30",
+        "end": "2025-11-02",
+        "cells": 12,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-10-31",
+        "cells": 15,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2025-10-29",
+        "end": "2025-10-31",
+        "cells": 12,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2021-11-06",
+        "end": "2021-11-10",
+        "cells": 17,
+        "regions": "British Columbia Okanagan-Similkameen, British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2026-09-19",
+        "end": "2026-09-23",
+        "cells": 18,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2023-10-27",
+        "end": "2023-10-28",
+        "cells": 14,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2023-10-28",
+        "end": "2023-10-29",
+        "cells": 10,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2018-10-26",
+        "end": "2018-10-28",
+        "cells": 12,
+        "regions": "British Columbia Alberni-Clayoquot"
+      },
+      {
+        "start": "2023-10-26",
+        "end": "2023-10-27",
+        "cells": 13,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2018-10-09",
+        "end": "2018-10-10",
+        "cells": 15,
+        "regions": "British Columbia Alberni-Clayoquot, British Columbia Comox Valley"
+      },
+      {
+        "start": "2019-10-24",
+        "end": "2019-10-27",
+        "cells": 11,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2018-10-09",
+        "end": "2018-10-11",
+        "cells": 14,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2022-11-08",
+        "end": "2022-11-09",
+        "cells": 10,
+        "regions": "British Columbia Alberni-Clayoquot"
+      },
+      {
+        "start": "2020-11-05",
+        "end": "2020-11-06",
+        "cells": 10,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-10-30",
+        "cells": 10,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2023-11-11",
+        "end": "2023-11-14",
+        "cells": 18,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2021-10-23",
+        "end": "2021-10-27",
+        "cells": 14,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2020-11-07",
+        "end": "2020-11-09",
+        "cells": 13,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-08-08",
+        "end": "2026-08-28",
+        "cells": 1045,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2018-11-04",
+        "end": "2018-11-07",
+        "cells": 10,
+        "regions": "British Columbia Comox Valley"
+      },
+      {
+        "start": "2023-11-16",
+        "end": "2023-11-18",
+        "cells": 14,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2018-11-17",
+        "end": "2018-11-22",
+        "cells": 19,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2021-11-16",
+        "end": "2021-11-17",
+        "cells": 11,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-09-06",
+        "end": "2021-09-10",
+        "cells": 15,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2024-11-07",
+        "end": "2024-11-07",
+        "cells": 13,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2020-10-31",
+        "end": "2020-11-02",
+        "cells": 13,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-07-19",
+        "end": "2026-07-23",
+        "cells": 22,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-08-08",
+        "cells": 87,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-09-06",
+        "end": "2021-09-10",
+        "cells": 12,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2025-10-28",
+        "end": "2025-10-30",
+        "cells": 12,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2023-11-14",
+        "end": "2023-11-16",
+        "cells": 18,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-11-08",
+        "end": "2021-11-10",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2023-11-16",
+        "end": "2023-11-17",
+        "cells": 11,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2018-04-26",
+        "end": "2018-04-27",
+        "cells": 14,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2020-11-06",
+        "end": "2020-11-07",
+        "cells": 10,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2024-11-12",
+        "end": "2024-11-12",
+        "cells": 12,
+        "regions": "British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-08-27",
+        "end": "2026-08-29",
+        "cells": 12,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-07-13",
+        "end": "2026-08-27",
+        "cells": 2169,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-09-20",
+        "end": "2026-09-23",
+        "cells": 16,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2023-11-14",
+        "end": "2023-11-16",
+        "cells": 13,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-07-26",
+        "end": "2026-08-11",
+        "cells": 93,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-07-26",
+        "end": "2026-08-01",
+        "cells": 30,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-08-02",
+        "end": "2026-08-04",
+        "cells": 30,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-07-18",
+        "end": "2026-07-23",
+        "cells": 43,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2018-11-06",
+        "end": "2018-11-07",
+        "cells": 15,
+        "regions": "British Columbia Comox Valley"
+      },
+      {
+        "start": "2021-08-12",
+        "end": "2021-08-15",
+        "cells": 10,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2023-08-16",
+        "end": "2023-08-18",
+        "cells": 10,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2018-10-27",
+        "end": "2018-10-27",
+        "cells": 11,
+        "regions": "British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2019-10-18",
+        "end": "2019-10-18",
+        "cells": 10,
+        "regions": "British Columbia Comox Valley"
+      },
+      {
+        "start": "2018-11-16",
+        "end": "2018-11-20",
+        "cells": 36,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-25",
+        "end": "2026-08-26",
+        "cells": 18,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2022-11-17",
+        "end": "2022-11-19",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola, British Columbia Okanagan-Similkameen"
+      },
+      {
+        "start": "2026-11-03",
+        "end": "2026-11-04",
+        "cells": 15,
+        "regions": "British Columbia North Okanagan, British Columbia Kootenay Boundary"
+      },
+      {
+        "start": "2026-08-05",
+        "end": "2026-08-27",
+        "cells": 171,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2023-11-14",
+        "end": "2023-11-18",
+        "cells": 12,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2023-11-10",
+        "end": "2023-11-14",
+        "cells": 18,
+        "regions": "British Columbia Central Okanagan"
+      },
+      {
+        "start": "2020-10-21",
+        "end": "2020-10-22",
+        "cells": 13,
+        "regions": "British Columbia Strathcona"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-21",
+        "cells": 15,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-08",
+        "cells": 10,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2018-10-11",
+        "end": "2018-10-13",
+        "cells": 21,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-26",
+        "end": "2026-08-11",
+        "cells": 49,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-09-17",
+        "end": "2026-09-22",
+        "cells": 15,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2026-08-16",
+        "end": "2026-08-21",
+        "cells": 12,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-07-03",
+        "end": "2026-07-17",
+        "cells": 432,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-20",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-21",
+        "end": "2026-07-24",
+        "cells": 11,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2022-11-28",
+        "end": "2022-11-28",
+        "cells": 14,
+        "regions": "British Columbia Strathcona"
+      },
+      {
+        "start": "2020-10-31",
+        "end": "2020-11-01",
+        "cells": 15,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2025-10-21",
+        "end": "2025-10-23",
+        "cells": 13,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-08-20",
+        "end": "2026-08-22",
+        "cells": 14,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-06",
+        "end": "2026-08-11",
+        "cells": 16,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-29",
+        "end": "2026-08-01",
+        "cells": 32,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2023-09-14",
+        "end": "2023-09-17",
+        "cells": 10,
+        "regions": "British Columbia Sunshine Coast"
+      },
+      {
+        "start": "2026-11-02",
+        "end": "2026-11-02",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-08-26",
+        "end": "2026-08-28",
+        "cells": 13,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-26",
+        "end": "2026-08-12",
+        "cells": 153,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-20",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2018-10-29",
+        "end": "2018-10-30",
+        "cells": 13,
+        "regions": "British Columbia Central Okanagan"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-21",
+        "cells": 10,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2022-11-26",
+        "end": "2022-11-26",
+        "cells": 15,
+        "regions": "British Columbia Central Okanagan"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-20",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan, British Columbia Central Kootenay"
+      },
+      {
+        "start": "2018-10-12",
+        "end": "2018-10-15",
+        "cells": 22,
+        "regions": "British Columbia Central Okanagan"
+      },
+      {
+        "start": "2023-09-02",
+        "end": "2023-09-10",
+        "cells": 17,
+        "regions": "British Columbia Central Okanagan"
+      },
+      {
+        "start": "2026-07-13",
+        "end": "2026-07-16",
+        "cells": 13,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2026-08-24",
+        "end": "2026-08-26",
+        "cells": 11,
+        "regions": "British Columbia Mount Waddington"
+      },
+      {
+        "start": "2020-09-11",
+        "end": "2020-09-15",
+        "cells": 15,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-08-06",
+        "end": "2026-08-10",
+        "cells": 13,
+        "regions": "British Columbia Fraser Valley, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-02",
+        "end": "2026-08-10",
+        "cells": 107,
+        "regions": "British Columbia Central Okanagan"
+      },
+      {
+        "start": "2026-04-08",
+        "end": "2026-04-10",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-22",
+        "end": "2018-10-24",
+        "cells": 12,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-11-04",
+        "cells": 27,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-14",
+        "end": "2026-07-25",
+        "cells": 63,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2021-10-08",
+        "end": "2021-10-09",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-27",
+        "end": "2026-08-14",
+        "cells": 288,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2024-09-06",
+        "end": "2024-09-09",
+        "cells": 10,
+        "regions": "British Columbia Fraser Valley"
+      },
+      {
+        "start": "2026-08-17",
+        "end": "2026-08-21",
+        "cells": 49,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-15",
+        "end": "2026-08-27",
+        "cells": 75,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2024-11-06",
+        "end": "2024-11-07",
+        "cells": 11,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-11-04",
+        "cells": 11,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-08-18",
+        "end": "2026-08-26",
+        "cells": 21,
+        "regions": "British Columbia Strathcona"
+      },
+      {
+        "start": "2025-10-22",
+        "end": "2025-10-23",
+        "cells": 16,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-01-16",
+        "end": "2026-01-17",
+        "cells": 14,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2024-10-24",
+        "end": "2024-10-26",
+        "cells": 15,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-01-28",
+        "end": "2026-01-28",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2019-10-29",
+        "end": "2019-11-01",
+        "cells": 18,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-06-20",
+        "end": "2026-06-22",
+        "cells": 23,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-11",
+        "cells": 15,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-07-29",
+        "end": "2026-08-01",
+        "cells": 32,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-22",
+        "cells": 20,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-07-20",
+        "end": "2026-07-25",
+        "cells": 113,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2023-10-26",
+        "end": "2023-10-31",
+        "cells": 13,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 13,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2018-11-09",
+        "end": "2018-11-10",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-10",
+        "end": "2018-10-12",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2023-10-25",
+        "end": "2023-10-26",
+        "cells": 10,
+        "regions": "British Columbia Mount Waddington"
+      },
+      {
+        "start": "2018-11-18",
+        "end": "2018-11-19",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-04",
+        "end": "2018-10-06",
+        "cells": 16,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-11-15",
+        "end": "2018-11-20",
+        "cells": 20,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2023-11-10",
+        "end": "2023-11-10",
+        "cells": 13,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-08-01",
+        "end": "2026-08-07",
+        "cells": 72,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2021-10-18",
+        "end": "2021-10-20",
+        "cells": 11,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-08",
+        "cells": 17,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2019-11-19",
+        "end": "2019-11-25",
+        "cells": 21,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-10-31",
+        "end": "2026-11-01",
+        "cells": 26,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-08-12",
+        "cells": 57,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-10-19",
+        "end": "2026-10-19",
+        "cells": 10,
+        "regions": "British Columbia Mount Waddington"
+      },
+      {
+        "start": "2026-07-26",
+        "end": "2026-08-09",
+        "cells": 58,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-08-15",
+        "end": "2026-08-28",
+        "cells": 26,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-10-31",
+        "cells": 11,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2023-09-15",
+        "end": "2023-09-17",
+        "cells": 13,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2023-10-25",
+        "end": "2023-10-25",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-10-31",
+        "cells": 19,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-08-22",
+        "cells": 125,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-08-14",
+        "end": "2026-08-18",
+        "cells": 15,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2020-11-06",
+        "end": "2020-11-09",
+        "cells": 16,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2020-10-20",
+        "end": "2020-10-22",
+        "cells": 17,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-26",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-11-04",
+        "cells": 26,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-20",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-08-22",
+        "cells": 262,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-08-14",
+        "end": "2026-08-21",
+        "cells": 37,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2023-09-08",
+        "end": "2023-09-10",
+        "cells": 10,
+        "regions": "British Columbia qathet"
+      },
+      {
+        "start": "2018-11-14",
+        "end": "2018-11-19",
+        "cells": 19,
+        "regions": "British Columbia Mount Waddington"
+      },
+      {
+        "start": "2026-07-29",
+        "end": "2026-08-08",
+        "cells": 27,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2019-10-28",
+        "end": "2019-10-29",
+        "cells": 12,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-28",
+        "cells": 12,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2024-09-06",
+        "end": "2024-09-10",
+        "cells": 12,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-09",
+        "cells": 11,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2021-08-18",
+        "end": "2021-08-21",
+        "cells": 15,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2021-11-08",
+        "end": "2021-11-09",
+        "cells": 13,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2021-09-02",
+        "end": "2021-09-07",
+        "cells": 16,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-23",
+        "end": "2026-07-25",
+        "cells": 29,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2022-09-20",
+        "end": "2022-09-25",
+        "cells": 10,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2023-09-15",
+        "end": "2023-09-17",
+        "cells": 38,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2023-11-03",
+        "end": "2023-11-05",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2020-10-14",
+        "end": "2020-10-16",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-11-02",
+        "end": "2026-11-04",
+        "cells": 16,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2020-11-06",
+        "end": "2020-11-09",
+        "cells": 10,
+        "regions": "British Columbia North Okanagan"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-08-09",
+        "cells": 36,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-10-04",
+        "end": "2018-10-06",
+        "cells": 11,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-10-31",
+        "cells": 15,
+        "regions": "British Columbia East Kootenay"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-22",
+        "cells": 61,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-08-05",
+        "end": "2026-08-09",
+        "cells": 13,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2026-08-12",
+        "end": "2026-08-22",
+        "cells": 29,
+        "regions": "British Columbia Central Kootenay"
+      },
+      {
+        "start": "2023-09-15",
+        "end": "2023-09-16",
+        "cells": 21,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-10-20",
+        "end": "2026-10-22",
+        "cells": 11,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2020-09-07",
+        "end": "2020-09-13",
+        "cells": 35,
+        "regions": "British Columbia Strathcona"
+      },
+      {
+        "start": "2018-10-19",
+        "end": "2018-10-22",
+        "cells": 15,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2018-10-29",
+        "end": "2018-10-30",
+        "cells": 18,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-17",
+        "end": "2026-08-22",
+        "cells": 24,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-10-20",
+        "end": "2026-10-23",
+        "cells": 10,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2019-10-23",
+        "end": "2019-10-23",
+        "cells": 11,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2023-10-25",
+        "end": "2023-10-26",
+        "cells": 15,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2024-01-03",
+        "end": "2024-01-04",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-17",
+        "end": "2026-08-22",
+        "cells": 5819,
+        "regions": "British Columbia Thompson-Nicola, British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2018-11-16",
+        "end": "2018-11-21",
+        "cells": 12,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2018-10-06",
+        "end": "2018-10-06",
+        "cells": 12,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-10-22",
+        "end": "2018-10-23",
+        "cells": 12,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2018-10-06",
+        "end": "2018-10-06",
+        "cells": 21,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-10-03",
+        "end": "2026-10-05",
+        "cells": 19,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-08-13",
+        "end": "2026-08-19",
+        "cells": 15,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-11-04",
+        "cells": 33,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2019-10-29",
+        "end": "2019-10-30",
+        "cells": 12,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-20",
+        "end": "2026-08-22",
+        "cells": 15,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-12",
+        "end": "2026-08-22",
+        "cells": 51,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-07-21",
+        "end": "2026-08-10",
+        "cells": 1023,
+        "regions": "British Columbia Cariboo, British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-11-04",
+        "cells": 19,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-22",
+        "cells": 21,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-13",
+        "cells": 197,
+        "regions": "British Columbia Squamish-Lillooet, British Columbia Cariboo"
+      },
+      {
+        "start": "2019-11-05",
+        "end": "2019-11-06",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2019-10-23",
+        "end": "2019-10-23",
+        "cells": 18,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2024-11-20",
+        "end": "2024-11-22",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-14",
+        "end": "2026-08-22",
+        "cells": 2055,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-17",
+        "end": "2026-08-22",
+        "cells": 14,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-08-16",
+        "end": "2026-08-22",
+        "cells": 35,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-28",
+        "cells": 50,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-22",
+        "cells": 15,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2026-08-20",
+        "end": "2026-08-22",
+        "cells": 13,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2023-09-15",
+        "end": "2023-09-17",
+        "cells": 12,
+        "regions": "British Columbia Squamish-Lillooet"
+      },
+      {
+        "start": "2023-10-29",
+        "end": "2023-11-01",
+        "cells": 10,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-12-05",
+        "end": "2018-12-07",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-22",
+        "cells": 126,
+        "regions": "British Columbia Cariboo, British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2021-11-12",
+        "end": "2021-11-13",
+        "cells": 12,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-29",
+        "end": "2018-10-30",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-11-19",
+        "end": "2018-11-21",
+        "cells": 15,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-12-07",
+        "end": "2025-12-07",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-11-04",
+        "cells": 14,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-18",
+        "end": "2026-08-22",
+        "cells": 30,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-25",
+        "end": "2026-08-27",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-30",
+        "end": "2019-11-01",
+        "cells": 17,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-12-07",
+        "end": "2018-12-07",
+        "cells": 12,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-11-27",
+        "end": "2018-11-29",
+        "cells": 18,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-11-27",
+        "end": "2018-11-28",
+        "cells": 18,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-12",
+        "end": "2026-08-21",
+        "cells": 18,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2023-11-06",
+        "end": "2023-11-06",
+        "cells": 14,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2019-11-06",
+        "end": "2019-11-07",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-12",
+        "end": "2026-08-18",
+        "cells": 35,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-11-16",
+        "end": "2018-11-16",
+        "cells": 13,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-11-01",
+        "cells": 15,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-08-25",
+        "end": "2026-08-28",
+        "cells": 27,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-28",
+        "cells": 28,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-11-11",
+        "end": "2018-11-12",
+        "cells": 13,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-23",
+        "end": "2018-10-23",
+        "cells": 14,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 16,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-10-27",
+        "end": "2018-10-27",
+        "cells": 12,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-03",
+        "end": "2026-08-28",
+        "cells": 85,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-13",
+        "end": "2018-10-15",
+        "cells": 31,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-03",
+        "end": "2026-08-08",
+        "cells": 18,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-19",
+        "end": "2026-08-22",
+        "cells": 47,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2019-11-10",
+        "end": "2019-11-11",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-17",
+        "end": "2026-08-21",
+        "cells": 15,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-10-16",
+        "end": "2018-10-17",
+        "cells": 13,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2023-10-24",
+        "end": "2023-10-25",
+        "cells": 10,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-25",
+        "end": "2026-08-27",
+        "cells": 10,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-08-03",
+        "end": "2026-08-10",
+        "cells": 74,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2025-10-21",
+        "end": "2025-10-23",
+        "cells": 23,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-10-14",
+        "end": "2026-10-16",
+        "cells": 14,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-08-16",
+        "end": "2026-08-22",
+        "cells": 18,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2022-12-14",
+        "end": "2022-12-16",
+        "cells": 15,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-06",
+        "end": "2026-08-09",
+        "cells": 12,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 11,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-10-26",
+        "end": "2026-10-27",
+        "cells": 13,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-10",
+        "end": "2018-10-13",
+        "cells": 11,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2018-10-14",
+        "end": "2018-10-19",
+        "cells": 13,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2018-10-16",
+        "end": "2018-10-18",
+        "cells": 22,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2026-07-17",
+        "end": "2026-07-18",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-01-06",
+        "end": "2021-01-07",
+        "cells": 19,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-01-14",
+        "end": "2026-01-16",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-08-31",
+        "end": "2018-09-05",
+        "cells": 12,
+        "regions": "British Columbia Mount Waddington"
+      },
+      {
+        "start": "2023-03-21",
+        "end": "2023-03-23",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2024-01-29",
+        "end": "2024-01-30",
+        "cells": 15,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-08-27",
+        "end": "2018-09-05",
+        "cells": 34,
+        "regions": "British Columbia Mount Waddington"
+      },
+      {
+        "start": "2019-12-03",
+        "end": "2019-12-05",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2023-10-24",
+        "end": "2023-10-25",
+        "cells": 21,
+        "regions": "British Columbia Thompson-Nicola"
+      },
+      {
+        "start": "2026-07-23",
+        "end": "2026-07-26",
+        "cells": 115,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-10-19",
+        "end": "2026-10-23",
+        "cells": 14,
+        "regions": "British Columbia Columbia Shuswap"
+      },
+      {
+        "start": "2020-12-01",
+        "end": "2020-12-02",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-11-07",
+        "end": "2018-11-10",
+        "cells": 23,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-03-15",
+        "end": "2021-03-19",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2024-11-18",
+        "end": "2024-11-18",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2024-11-15",
+        "end": "2024-11-15",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-11-14",
+        "end": "2018-11-16",
+        "cells": 36,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-11-18",
+        "end": "2021-11-18",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-07-31",
+        "end": "2021-08-05",
+        "cells": 11,
+        "regions": "British Columbia Central Coast"
+      },
+      {
+        "start": "2020-12-01",
+        "end": "2020-12-03",
+        "cells": 21,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-01-15",
+        "end": "2026-01-17",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2020-12-01",
+        "end": "2020-12-04",
+        "cells": 17,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-06",
+        "end": "2026-08-10",
+        "cells": 88,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2022-03-01",
+        "end": "2022-03-09",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2020-12-01",
+        "end": "2020-12-04",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-28",
+        "end": "2019-10-30",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-11-17",
+        "end": "2025-11-19",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2024-10-28",
+        "end": "2024-10-29",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-11-19",
+        "end": "2019-11-20",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-27",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-11-02",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2024-02-12",
+        "end": "2024-02-13",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-20",
+        "end": "2026-08-27",
+        "cells": 71,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-11-20",
+        "end": "2018-11-24",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-11-02",
+        "end": "2021-11-04",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-07-18",
+        "end": "2026-07-25",
+        "cells": 134,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-05",
+        "end": "2026-08-10",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2022-11-13",
+        "end": "2022-11-14",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-11-19",
+        "end": "2025-11-20",
+        "cells": 23,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-11-16",
+        "end": "2021-11-18",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2021-03-11",
+        "end": "2021-03-19",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-08-16",
+        "end": "2026-08-26",
+        "cells": 61,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2020-03-06",
+        "end": "2020-03-11",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-11-18",
+        "end": "2018-11-19",
+        "cells": 15,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-10-23",
+        "end": "2025-10-23",
+        "cells": 13,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-08",
+        "end": "2019-10-11",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2020-10-30",
+        "end": "2020-10-30",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-11-02",
+        "end": "2025-11-04",
+        "cells": 15,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-09-07",
+        "end": "2018-09-08",
+        "cells": 24,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2023-12-01",
+        "end": "2023-12-02",
+        "cells": 18,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-08-31",
+        "end": "2018-09-05",
+        "cells": 11,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2024-10-29",
+        "end": "2024-10-29",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-11-19",
+        "end": "2019-11-20",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-11-29",
+        "end": "2018-12-02",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2018-08-10",
+        "end": "2018-08-11",
+        "cells": 14,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-03-20",
+        "end": "2019-03-22",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2023-10-08",
+        "end": "2023-10-10",
+        "cells": 16,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-07-18",
+        "end": "2026-07-25",
+        "cells": 61,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-10",
+        "cells": 14,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-27",
+        "end": "2019-10-30",
+        "cells": 10,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-11-26",
+        "end": "2025-11-27",
+        "cells": 12,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 17,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-06-01",
+        "end": "2026-06-02",
+        "cells": 33,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2025-11-21",
+        "end": "2025-11-21",
+        "cells": 14,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-10",
+        "cells": 15,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2026-07-23",
+        "end": "2026-07-24",
+        "cells": 52,
+        "regions": "British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-13",
+        "end": "2019-10-14",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2024-11-05",
+        "end": "2024-11-06",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako, British Columbia Cariboo"
+      },
+      {
+        "start": "2019-10-13",
+        "end": "2019-10-14",
+        "cells": 16,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-11-12",
+        "end": "2021-11-13",
+        "cells": 22,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-22",
+        "end": "2026-10-25",
+        "cells": 12,
+        "regions": "British Columbia North Coast"
+      },
+      {
+        "start": "2025-10-08",
+        "end": "2025-10-09",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-10",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-07",
+        "end": "2021-10-08",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-04",
+        "end": "2019-10-05",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-11-03",
+        "end": "2020-11-06",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-12-08",
+        "end": "2021-12-09",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-31",
+        "end": "2022-11-02",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-11-06",
+        "end": "2023-11-08",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-11-01",
+        "end": "2021-11-02",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-12",
+        "end": "2019-10-14",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-10-27",
+        "end": "2023-10-28",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-30",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-09-22",
+        "end": "2020-09-23",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2026-10-23",
+        "end": "2026-10-25",
+        "cells": 19,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2026-10-18",
+        "end": "2026-10-20",
+        "cells": 20,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2020-11-02",
+        "end": "2020-11-04",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-11-03",
+        "end": "2020-11-07",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-11-22",
+        "end": "2022-11-25",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-30",
+        "end": "2022-10-30",
+        "cells": 16,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2024-10-11",
+        "end": "2024-10-13",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-29",
+        "cells": 13,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2024-10-11",
+        "end": "2024-10-13",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-30",
+        "end": "2020-11-01",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-10-26",
+        "end": "2023-10-27",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-16",
+        "end": "2020-10-20",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-11-22",
+        "end": "2022-11-25",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-29",
+        "end": "2022-11-02",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-11-03",
+        "end": "2020-11-03",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2024-10-21",
+        "end": "2024-10-27",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-10",
+        "end": "2020-10-11",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-30",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-08",
+        "end": "2019-10-11",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-11-11",
+        "end": "2025-11-12",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-30",
+        "end": "2019-10-31",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-11-22",
+        "end": "2021-11-22",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-30",
+        "cells": 36,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-20",
+        "end": "2026-10-21",
+        "cells": 26,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2026-10-31",
+        "end": "2026-11-01",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2018-10-30",
+        "end": "2018-10-31",
+        "cells": 23,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-08-26",
+        "end": "2026-08-29",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-28",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-09-29",
+        "end": "2021-09-30",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-11-02",
+        "end": "2022-11-02",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2026-10-30",
+        "end": "2026-10-31",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-11-28",
+        "end": "2018-11-30",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-11-01",
+        "end": "2025-11-02",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-05",
+        "end": "2019-10-05",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-03-09",
+        "end": "2021-03-10",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-11-03",
+        "end": "2020-11-07",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-26",
+        "end": "2021-10-27",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2023-11-13",
+        "end": "2023-11-14",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-11-04",
+        "end": "2020-11-06",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-11-15",
+        "end": "2019-11-18",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-19",
+        "end": "2019-10-22",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-13",
+        "end": "2021-10-13",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-29",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-03-25",
+        "end": "2019-03-29",
+        "cells": 10,
+        "regions": "British Columbia North Coast"
+      },
+      {
+        "start": "2023-10-19",
+        "end": "2023-10-21",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-05",
+        "end": "2019-10-05",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-08",
+        "end": "2019-10-11",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-05",
+        "end": "2019-10-07",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-10",
+        "end": "2026-10-11",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-11-01",
+        "cells": 29,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-08",
+        "end": "2019-10-10",
+        "cells": 26,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2024-10-08",
+        "end": "2024-10-10",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-10",
+        "end": "2020-10-11",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-10-20",
+        "end": "2023-10-21",
+        "cells": 17,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2020-11-03",
+        "end": "2020-11-07",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-09",
+        "end": "2021-10-10",
+        "cells": 33,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-20",
+        "end": "2019-09-21",
+        "cells": 16,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2018-11-29",
+        "end": "2018-12-02",
+        "cells": 17,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-08",
+        "end": "2019-10-10",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-09-26",
+        "end": "2019-09-27",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-08",
+        "end": "2021-10-09",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-10",
+        "end": "2021-10-11",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 15,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-29",
+        "end": "2021-10-30",
+        "cells": 13,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-10-30",
+        "end": "2025-11-01",
+        "cells": 14,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-30",
+        "end": "2021-10-30",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-11-01",
+        "end": "2025-11-02",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-10",
+        "cells": 19,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-28",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-04",
+        "end": "2020-10-06",
+        "cells": 35,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-10",
+        "end": "2026-10-11",
+        "cells": 21,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-20",
+        "end": "2019-09-21",
+        "cells": 23,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-31",
+        "end": "2021-11-01",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2018-11-06",
+        "end": "2018-11-10",
+        "cells": 18,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2024-10-08",
+        "end": "2024-10-11",
+        "cells": 25,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-11-04",
+        "end": "2020-11-07",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-11",
+        "end": "2019-10-11",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-29",
+        "cells": 15,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-19",
+        "end": "2021-10-20",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-13",
+        "end": "2021-10-14",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-29",
+        "end": "2021-11-01",
+        "cells": 14,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-29",
+        "cells": 15,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-29",
+        "end": "2021-10-30",
+        "cells": 13,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2018-08-20",
+        "end": "2018-08-22",
+        "cells": 11,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-31",
+        "cells": 34,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 26,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-16",
+        "end": "2019-10-19",
+        "cells": 29,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-10",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-11-22",
+        "end": "2023-11-23",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2024-10-24",
+        "end": "2024-10-25",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-11-10",
+        "end": "2025-11-11",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-28",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-26",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-06",
+        "end": "2021-10-07",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2023-11-28",
+        "end": "2023-11-29",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-29",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-11-06",
+        "end": "2018-11-07",
+        "cells": 20,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2026-10-25",
+        "end": "2026-10-26",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2024-11-01",
+        "end": "2024-11-02",
+        "cells": 12,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2024-01-25",
+        "end": "2024-01-26",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2026-10-25",
+        "end": "2026-10-25",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-29",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-28",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2022-11-13",
+        "end": "2022-11-14",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-01-11",
+        "end": "2022-01-15",
+        "cells": 18,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-11-18",
+        "end": "2022-11-19",
+        "cells": 16,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2019-09-18",
+        "end": "2019-09-21",
+        "cells": 13,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-10-30",
+        "end": "2025-10-30",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-11-08",
+        "end": "2018-11-11",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2020-10-20",
+        "end": "2020-10-23",
+        "cells": 20,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-05",
+        "end": "2019-10-05",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-29",
+        "end": "2019-10-01",
+        "cells": 37,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-01-21",
+        "end": "2023-01-22",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-11-01",
+        "end": "2022-11-02",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-11-03",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-12",
+        "end": "2019-10-13",
+        "cells": 25,
+        "regions": "British Columbia Fraser-Fort George, British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-29",
+        "end": "2026-10-30",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-29",
+        "end": "2019-10-29",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2022-10-31",
+        "end": "2022-11-02",
+        "cells": 24,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-17",
+        "end": "2026-10-18",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2025-01-21",
+        "end": "2025-01-24",
+        "cells": 38,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-10-29",
+        "end": "2022-10-30",
+        "cells": 13,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2021-10-10",
+        "end": "2021-10-13",
+        "cells": 18,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-20",
+        "end": "2021-10-21",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-10-21",
+        "end": "2019-10-23",
+        "cells": 10,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2024-10-08",
+        "end": "2024-10-10",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-27",
+        "end": "2019-10-29",
+        "cells": 12,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2021-11-01",
+        "end": "2021-11-02",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-01-25",
+        "end": "2020-01-28",
+        "cells": 24,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2020-09-22",
+        "end": "2020-09-24",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-08",
+        "end": "2020-10-08",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-29",
+        "cells": 16,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-20",
+        "end": "2021-10-21",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-29",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-12-08",
+        "end": "2018-12-12",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-26",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-11",
+        "end": "2021-10-13",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-10-31",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-11",
+        "end": "2021-10-13",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-19",
+        "end": "2020-10-20",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-31",
+        "end": "2021-11-02",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-10",
+        "end": "2026-10-11",
+        "cells": 13,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-10-09",
+        "end": "2019-10-11",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-08",
+        "cells": 17,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-10",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-05",
+        "end": "2020-10-06",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2024-10-10",
+        "end": "2024-10-12",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-01-20",
+        "end": "2026-01-20",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-11-01",
+        "end": "2021-11-02",
+        "cells": 17,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-10-27",
+        "end": "2018-10-27",
+        "cells": 11,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2020-10-24",
+        "end": "2020-10-24",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-11-07",
+        "end": "2018-11-10",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-10-30",
+        "end": "2022-10-31",
+        "cells": 15,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-24",
+        "end": "2026-10-26",
+        "cells": 11,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2019-09-28",
+        "end": "2019-09-29",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2023-10-11",
+        "end": "2023-10-12",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-07",
+        "end": "2019-10-10",
+        "cells": 10,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-11-02",
+        "end": "2022-11-04",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-10-05",
+        "end": "2020-10-07",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-27",
+        "end": "2019-09-29",
+        "cells": 20,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-22",
+        "end": "2026-10-25",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-23",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-12-17",
+        "end": "2018-12-19",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2019-11-19",
+        "end": "2019-11-22",
+        "cells": 16,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2020-10-11",
+        "end": "2020-10-12",
+        "cells": 25,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-10-31",
+        "end": "2025-11-02",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2022-11-19",
+        "end": "2022-11-23",
+        "cells": 21,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2025-11-19",
+        "end": "2025-11-22",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-11-08",
+        "end": "2021-11-12",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-09-20",
+        "end": "2023-09-23",
+        "cells": 17,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-10-31",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-07",
+        "end": "2021-10-07",
+        "cells": 13,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2020-09-21",
+        "end": "2020-09-24",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-09-29",
+        "end": "2019-09-29",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2025-11-20",
+        "end": "2025-11-23",
+        "cells": 15,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2026-01-14",
+        "end": "2026-01-15",
+        "cells": 13,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-02-07",
+        "end": "2023-02-10",
+        "cells": 15,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-12-08",
+        "end": "2022-12-09",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-01-13",
+        "end": "2021-01-15",
+        "cells": 20,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2026-10-19",
+        "end": "2026-10-19",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2026-10-28",
+        "end": "2026-10-31",
+        "cells": 16,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-11-15",
+        "end": "2019-11-16",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-10-12",
+        "end": "2023-10-13",
+        "cells": 26,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2020-10-28",
+        "end": "2020-10-29",
+        "cells": 14,
+        "regions": "British Columbia Fraser-Fort George"
+      },
+      {
+        "start": "2025-10-30",
+        "end": "2025-10-30",
+        "cells": 12,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2021-10-31",
+        "end": "2021-11-01",
+        "cells": 14,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2021-10-02",
+        "end": "2021-10-07",
+        "cells": 10,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-10-29",
+        "end": "2019-11-02",
+        "cells": 17,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-10-28",
+        "end": "2021-10-31",
+        "cells": 13,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-09-29",
+        "end": "2019-09-29",
+        "cells": 11,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2018-10-31",
+        "end": "2018-10-31",
+        "cells": 14,
+        "regions": "British Columbia Bulkley-Nechako"
+      },
+      {
+        "start": "2019-12-04",
+        "end": "2019-12-05",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2025-10-08",
+        "end": "2025-10-10",
+        "cells": 15,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2021-01-14",
+        "end": "2021-01-18",
+        "cells": 35,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-10-13",
+        "end": "2023-10-13",
+        "cells": 12,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2020-10-28",
+        "end": "2020-10-29",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-14",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-11-17",
+        "end": "2021-11-21",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2025-11-21",
+        "end": "2025-11-25",
+        "cells": 24,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2019-11-15",
+        "end": "2019-11-19",
+        "cells": 23,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-09-09",
+        "end": "2023-09-12",
+        "cells": 11,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2022-08-21",
+        "end": "2022-08-27",
+        "cells": 41,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-12-26",
+        "end": "2023-12-29",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-11-25",
+        "end": "2021-11-26",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-01-16",
+        "end": "2021-01-18",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-11-21",
+        "end": "2022-11-22",
+        "cells": 37,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2026-02-12",
+        "end": "2026-02-14",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2018-10-16",
+        "end": "2018-10-23",
+        "cells": 27,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2024-01-27",
+        "end": "2024-01-28",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2024-11-01",
+        "end": "2024-11-05",
+        "cells": 19,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2024-01-25",
+        "end": "2024-01-28",
+        "cells": 17,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2018-12-06",
+        "end": "2018-12-12",
+        "cells": 14,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-12-08",
+        "end": "2022-12-09",
+        "cells": 10,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2025-10-08",
+        "end": "2025-10-12",
+        "cells": 42,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-10-26",
+        "end": "2019-10-27",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2022-01-11",
+        "end": "2022-01-12",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2018-11-06",
+        "end": "2018-11-07",
+        "cells": 14,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2024-02-15",
+        "end": "2024-02-19",
+        "cells": 17,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2020-01-29",
+        "end": "2020-01-31",
+        "cells": 29,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2024-10-05",
+        "end": "2024-10-09",
+        "cells": 19,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2021-10-17",
+        "end": "2021-10-22",
+        "cells": 13,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2025-10-09",
+        "end": "2025-10-11",
+        "cells": 13,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2021-09-02",
+        "end": "2021-09-06",
+        "cells": 13,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2026-05-03",
+        "end": "2026-05-03",
+        "cells": 30,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-07-28",
+        "end": "2023-07-30",
+        "cells": 13,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2019-10-29",
+        "end": "2019-10-31",
+        "cells": 12,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-07-28",
+        "end": "2023-07-30",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-05-26",
+        "end": "2023-05-27",
+        "cells": 33,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2023-05-26",
+        "end": "2023-05-27",
+        "cells": 17,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2018-11-24",
+        "end": "2018-11-27",
+        "cells": 15,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2018-08-21",
+        "end": "2018-08-24",
+        "cells": 13,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2026-06-01",
+        "end": "2026-06-03",
+        "cells": 19,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2018-08-18",
+        "end": "2018-08-23",
+        "cells": 270,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2019-12-02",
+        "end": "2019-12-03",
+        "cells": 11,
+        "regions": "British Columbia Peace River"
+      },
+      {
+        "start": "2024-03-14",
+        "end": "2024-03-19",
+        "cells": 23,
+        "regions": "British Columbia Kitimat-Stikine"
+      },
+      {
+        "start": "2018-08-26",
+        "end": "2018-08-27",
+        "cells": 15,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2025-05-13",
+        "end": "2025-05-14",
+        "cells": 10,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-09-09",
+        "end": "2023-09-10",
+        "cells": 11,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2025-05-14",
+        "end": "2025-05-18",
+        "cells": 14,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2025-06-29",
+        "end": "2025-07-04",
+        "cells": 10,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-09-08",
+        "end": "2023-09-10",
+        "cells": 32,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-09-08",
+        "end": "2023-09-10",
+        "cells": 13,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2019-08-04",
+        "end": "2019-08-13",
+        "cells": 56,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-09-08",
+        "end": "2023-09-11",
+        "cells": 11,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-09-07",
+        "end": "2023-09-11",
+        "cells": 18,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2026-07-14",
+        "end": "2026-07-18",
+        "cells": 13,
+        "regions": "British Columbia Stikine Region"
+      },
+      {
+        "start": "2023-09-07",
+        "end": "2023-09-12",
+        "cells": 23,
+        "regions": "British Columbia Stikine Region"
+      }
+    ],
+    "note": "위성은 농경지 소각 등 산불 통계 밖의 불도 잡고, 1 ha 미만 산불은 대부분 못 잡는다.",
+    "annual_records": {
+      "source": "BC Wildfire Service 과거 산불 기록 (BC Data Catalogue, PROT_HISTORICAL_INCIDENTS_SP)",
+      "years": [
+        2001,
+        2025
+      ],
+      "season_start_month": 1,
+      "independent_break_test": {
+        "화재 칸 (보정) / 공식 건수": {
+          "ratio_before_2012": 7.6791,
+          "ratio_after_2012": 16.4079,
+          "after_over_before": 2.14,
+          "pettitt_p": 0.0229,
+          "change_year": 2014
+        },
+        "화재 칸 (보정) / 공식 면적 ha": {
+          "ratio_before_2012": 0.3431,
+          "ratio_after_2012": 0.138,
+          "after_over_before": 0.4,
+          "pettitt_p": 0.0429,
+          "change_year": 2014
+        },
+        "원값 이어 붙이기 / 공식 건수": {
+          "ratio_before_2012": 3.2706,
+          "ratio_after_2012": 16.3109,
+          "after_over_before": 4.99,
+          "pettitt_p": 0.0003,
+          "change_year": 2014
+        },
+        "원값 이어 붙이기 / 공식 면적 ha": {
+          "ratio_before_2012": 0.1377,
+          "ratio_after_2012": 0.1369,
+          "after_over_before": 0.99,
+          "pettitt_p": 0.6283,
+          "change_year": 2021
+        }
+      },
+      "rank_correlation": {
+        "2001~2011": {
+          "vs_count": 0.53,
+          "vs_area": 0.92
+        },
+        "2012~2025": {
+          "vs_count": 0.58,
+          "vs_area": 0.92
+        },
+        "2001~2025": {
+          "vs_count": 0.47,
+          "vs_area": 0.91
+        }
+      }
+    }
+  }
+}

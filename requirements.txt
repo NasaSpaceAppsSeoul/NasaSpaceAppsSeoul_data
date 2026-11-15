@@ -1,0 +1,9 @@
+# Python 3.12에서 이 버전으로 돌린 결과가 expected/ 입니다.
+pandas==2.2.2
+numpy==1.26.4
+scipy==1.13.1
+matplotlib==3.9.2
+openpyxl==3.1.5
+nbformat==5.10.4
+nbclient==0.8.0
+ipykernel==6.28.0

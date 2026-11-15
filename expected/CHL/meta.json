@@ -1,0 +1,4466 @@
+{
+  "country": "CHL",
+  "bbox": null,
+  "generated": "2026-11-15",
+  "unit": "VIIRS NOAA-20 기준 화재 감지일 (0.01° 격자 × 일)",
+  "data_range": {
+    "modis": [
+      "2001-01-05",
+      "2026-11-13"
+    ],
+    "viirs_snpp": [
+      "2012-01-20",
+      "2026-11-01"
+    ],
+    "noaa20": [
+      "2018-04-01",
+      "2026-11-14"
+    ],
+    "noaa21": [
+      "2023-02-28",
+      "2026-11-14"
+    ]
+  },
+  "filters": [
+    {
+      "단계": "원자료",
+      "MODIS": 195382,
+      "VIIRS": 441077,
+      "NOAA-20": 239207,
+      "NOAA-21": 84547
+    },
+    {
+      "단계": "유형 필터 (아카이브 type 0만)",
+      "MODIS": 145768,
+      "VIIRS": 359856,
+      "NOAA-20": 199629,
+      "NOAA-21": 72234
+    },
+    {
+      "단계": "고정 열원 격자 마스크",
+      "MODIS": 141816,
+      "VIIRS": 347929,
+      "NOAA-20": 192630,
+      "NOAA-21": 69179
+    },
+    {
+      "단계": "낮은 신뢰도 제거",
+      "MODIS": 135739,
+      "VIIRS": 315159,
+      "NOAA-20": 169988,
+      "NOAA-21": 58989
+    }
+  ],
+  "static_cells_masked": 640,
+  "nrt_proxy_validation": {
+    "NOAA-20": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.969,
+          "남김 비율 (정답)": 0.969,
+          "건수": 173428
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.0,
+          "남김 비율 (정답)": 0.0,
+          "건수": 34559
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.321,
+          "남김 비율 (정답)": 0.0,
+          "건수": 480
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.0,
+        "월별 |차이| 중앙값 %": 0.0,
+        "전체 합계 차이 %": 0.1
+      }
+    },
+    "S-NPP": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.969,
+          "남김 비율 (정답)": 0.969,
+          "건수": 323523
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.0,
+          "남김 비율 (정답)": 0.0,
+          "건수": 69423
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.262,
+          "남김 비율 (정답)": 0.0,
+          "건수": 1003
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.0,
+        "월별 |차이| 중앙값 %": 0.0,
+        "전체 합계 차이 %": 0.1
+      }
+    },
+    "MODIS": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.978,
+          "남김 비율 (정답)": 0.978,
+          "건수": 138610
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.029,
+          "남김 비율 (정답)": 0.0,
+          "건수": 37334
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.538,
+          "남김 비율 (정답)": 0.0,
+          "건수": 91
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 1.0,
+        "월별 |차이| 중앙값 %": 1.0,
+        "전체 합계 차이 %": 0.9
+      }
+    }
+  },
+  "calibration": {
+    "base": "NOAA-20",
+    "chain": "Terra → MODIS → S-NPP → NOAA-20 (NOAA-21 → NOAA-20 예비)",
+    "method": "A",
+    "k_by_month": {
+      "1": 1.505,
+      "2": 1.727,
+      "3": 2.047,
+      "4": 2.335,
+      "5": 2.272,
+      "6": 3.046,
+      "7": 3.271,
+      "8": 3.141,
+      "9": 3.061,
+      "10": 3.764,
+      "11": 3.377,
+      "12": 2.447
+    },
+    "ratio_by_year": {
+      "2012": 1.96,
+      "2013": 2.53,
+      "2014": 2.28,
+      "2015": 2.3,
+      "2016": 2.44,
+      "2017": 1.63,
+      "2018": 2.44,
+      "2019": 2.23,
+      "2020": 2.21,
+      "2021": 2.35,
+      "2022": 2.55,
+      "2023": 1.74,
+      "2024": 2.46,
+      "2025": 2.56
+    },
+    "overlap_years": [
+      2012,
+      2025
+    ],
+    "shrink": 20,
+    "window": 2,
+    "terra_to_modis": {
+      "k_by_month": {
+        "1": 2.502,
+        "2": 3.172,
+        "3": 4.949,
+        "4": 4.754,
+        "5": 4.351,
+        "6": 4.041,
+        "7": 5.078,
+        "8": 5.857,
+        "9": 3.463,
+        "10": 2.628,
+        "11": 2.523,
+        "12": 2.965
+      },
+      "validation": {
+        "years": [
+          2003,
+          2011
+        ],
+        "annual_mape_pct": 11.4,
+        "bias_pct": 0.9
+      },
+      "terra_share_by_year": {
+        "2003": 0.28,
+        "2004": 0.22,
+        "2005": 0.29,
+        "2006": 0.25,
+        "2007": 0.26,
+        "2008": 0.27,
+        "2009": 0.28,
+        "2010": 0.21,
+        "2011": 0.23,
+        "2012": 0.24,
+        "2013": 0.2,
+        "2014": 0.29,
+        "2015": 0.28,
+        "2016": 0.26,
+        "2017": 0.39,
+        "2018": 0.23,
+        "2019": 0.29,
+        "2020": 0.36,
+        "2021": 0.31,
+        "2022": 0.35,
+        "2023": 0.45,
+        "2024": 0.28,
+        "2025": 0.24
+      }
+    },
+    "snpp_to_noaa20": {
+      "k_by_month": {
+        "1": 0.955,
+        "2": 0.944,
+        "3": 0.987,
+        "4": 1.0,
+        "5": 1.012,
+        "6": 1.006,
+        "7": 1.181,
+        "8": 1.092,
+        "9": 1.104,
+        "10": 0.972,
+        "11": 0.994,
+        "12": 0.973
+      },
+      "validation": {
+        "years": [
+          2019,
+          2025
+        ],
+        "annual_mape_pct": 1.8,
+        "bias_pct": 0.1
+      },
+      "ratio_by_year": {
+        "2019": 0.99,
+        "2020": 0.99,
+        "2021": 0.98,
+        "2022": 1.03,
+        "2023": 1.06,
+        "2024": 0.98,
+        "2025": 1.01
+      }
+    },
+    "noaa21_to_noaa20": {
+      "k_by_month": {
+        "1": 1.008,
+        "2": 0.961,
+        "3": 1.046,
+        "4": 1.118,
+        "5": 1.018,
+        "6": 0.992,
+        "7": 0.978,
+        "8": 0.965,
+        "9": 1.061,
+        "10": 1.086,
+        "11": 1.026,
+        "12": 0.992
+      },
+      "validation": {
+        "years": [
+          2024,
+          2025
+        ],
+        "annual_mape_pct": 7.4,
+        "bias_pct": -0.7
+      }
+    }
+  },
+  "validation": {
+    "A": {
+      "monthly_r2": 0.902,
+      "monthly_mae": 84.9,
+      "annual_mape_pct": 9.1,
+      "bias_pct": -2.5
+    },
+    "B": {
+      "monthly_r2": 0.875,
+      "monthly_mae": 89.4,
+      "annual_mape_pct": 10.5,
+      "bias_pct": -5.4
+    }
+  },
+  "break_test": {
+    "이어 붙이기": {
+      "sensor_break_p": 0.0003,
+      "sensor_break": true,
+      "jump": 2.73,
+      "jump_ci95": [
+        2.65,
+        2.84
+      ],
+      "ratio_before_2012": 0.37,
+      "ratio_before_ci95": [
+        0.3,
+        0.44
+      ],
+      "ratio_after_2012": 1.02,
+      "ratio_ci95": [
+        0.99,
+        1.06
+      ]
+    },
+    "H 하모니제이션": {
+      "sensor_break_p": 1.0,
+      "sensor_break": false,
+      "jump": 1.02,
+      "jump_ci95": [
+        0.99,
+        1.06
+      ],
+      "ratio_before_2012": 1.0,
+      "ratio_before_ci95": [
+        1.0,
+        1.0
+      ],
+      "ratio_after_2012": 1.02,
+      "ratio_ci95": [
+        0.99,
+        1.06
+      ]
+    }
+  },
+  "modis_only_change_point": {
+    "change_year": 2004,
+    "p_value": 0.4838
+  },
+  "grid_sensitivity": [
+    {
+      "격자(도)": 0.1,
+      "월별 R²": 0.904,
+      "연간 오차 %": 7.4,
+      "2025년 3월 배수": 0.53,
+      "2022년 3월 배수": 0.84
+    },
+    {
+      "격자(도)": 0.05,
+      "월별 R²": 0.885,
+      "연간 오차 %": 7.9,
+      "2025년 3월 배수": 0.6,
+      "2022년 3월 배수": 0.88
+    },
+    {
+      "격자(도)": 0.02,
+      "월별 R²": 0.864,
+      "연간 오차 %": 9.2,
+      "2025년 3월 배수": 0.73,
+      "2022년 3월 배수": 0.94
+    },
+    {
+      "격자(도)": 0.01,
+      "월별 R²": 0.875,
+      "연간 오차 %": 10.5,
+      "2025년 3월 배수": 0.89,
+      "2022년 3월 배수": 1.0
+    }
+  ],
+  "frp": {
+    "source": "MODIS 단독",
+    "harmonized": false,
+    "validation": {
+      "monthly_r2": 0.861,
+      "monthly_mae": 13674.9,
+      "annual_mape_pct": 18.5,
+      "bias_pct": -13.2
+    },
+    "ratio_by_year": {
+      "2012": 0.45,
+      "2013": 0.94,
+      "2014": 0.74,
+      "2015": 0.76,
+      "2016": 0.85,
+      "2017": 0.42,
+      "2018": 0.92,
+      "2019": 0.68,
+      "2020": 0.75,
+      "2021": 0.75,
+      "2022": 0.81,
+      "2023": 0.5,
+      "2024": 0.78,
+      "2025": 0.74
+    },
+    "median_frp_per_detection_mw": {
+      "MODIS": 25.6,
+      "VIIRS": 5.82
+    }
+  },
+  "types": {
+    "threshold_pct": 0.9,
+    "labels": [
+      "많고 강함",
+      "작은 불이 많음",
+      "드물지만 강함",
+      "평년 수준"
+    ],
+    "counts": {
+      "상위 25% 기준": {
+        "많고 강함": 50,
+        "작은 불이 많음": 22,
+        "드물지만 강함": 22,
+        "평년 수준": 206
+      },
+      "상위 10% 기준": {
+        "많고 강함": 13,
+        "작은 불이 많음": 11,
+        "드물지만 강함": 11,
+        "평년 수준": 265
+      }
+    }
+  },
+  "quality": {
+    "rules": {
+      "높음": "NOAA-20 직접 관측, 또는 S-NPP→NOAA-20 변환 중 월별 오차 10% 이하",
+      "보통": "변환 오차 30% 이하, 또는 NOAA-20 NRT",
+      "낮음": "변환 오차 30% 초과"
+    },
+    "low_count": 5,
+    "month_error": {
+      "modis_snpp": {
+        "1": 0.593,
+        "2": 0.307,
+        "3": 0.059,
+        "4": 0.065,
+        "5": 0.111,
+        "6": 0.148,
+        "7": 0.122,
+        "8": 0.172,
+        "9": 0.147,
+        "10": 0.111,
+        "11": 0.126,
+        "12": 0.265
+      },
+      "snpp_noaa20": {
+        "1": 0.052,
+        "2": 0.037,
+        "3": 0.053,
+        "4": 0.011,
+        "5": 0.03,
+        "6": 0.051,
+        "7": 0.323,
+        "8": 0.131,
+        "9": 0.035,
+        "10": 0.012,
+        "11": 0.092,
+        "12": 0.065
+      },
+      "terra_modis": {
+        "1": 0.136,
+        "2": 0.154,
+        "3": 0.201,
+        "4": 0.297,
+        "5": 0.104,
+        "6": 0.207,
+        "7": 0.32,
+        "8": 0.082,
+        "9": 0.171,
+        "10": 0.123,
+        "11": 0.167,
+        "12": 0.275
+      }
+    }
+  },
+  "sources": [
+    "NASA FIRMS MODIS Collection 6.1 (MCD14)",
+    "NASA FIRMS VIIRS S-NPP 375 m (VNP14IMG)",
+    "NASA FIRMS VIIRS NOAA-20 375 m (VJ114IMG)",
+    "NASA FIRMS VIIRS NOAA-21 375 m (VJ214IMG)"
+  ],
+  "regions": {
+    "boundaries": "geoBoundaries KOR ADM2/ADM1 (CC BY 3.0)",
+    "n_regions": 345,
+    "err_max": 0.3,
+    "error": {
+      "national": 0.101,
+      "province": {
+        "Región Metropolitana de Santiago": 0.311,
+        "Región de Antofagasta": 5.438,
+        "Región de Arica y Parinacota": 0.916,
+        "Región de Atacama": 0.425,
+        "Región de Aysén del Gral.Ibañez del Campo": 0.488,
+        "Región de Coquimbo": 0.527,
+        "Región de La Araucanía": 0.103,
+        "Región de Los Lagos": 0.446,
+        "Región de Los Ríos": 0.265,
+        "Región de Magallanes y Antártica Chilena": 2.292,
+        "Región de Tarapacá": 0.66,
+        "Región de Valparaíso": 0.209,
+        "Región de Ñuble": 0.12,
+        "Región del Bío-Bío": 0.128,
+        "Región del Libertador Bernardo O'Higgins": 0.202,
+        "Región del Maule": 0.175
+      },
+      "district_median": 0.542
+    },
+    "snpp_noaa20_district_error": {
+      "median": 0.262,
+      "by_size": {
+        "[0.0, 10.0)": 1.0,
+        "[10.0, 25.0)": 1.009,
+        "[25.0, 50.0)": 0.724,
+        "[50.0, 100.0)": 0.533,
+        "[100.0, 200.0)": 0.407,
+        "[200.0, inf)": 0.185
+      }
+    },
+    "district_error_by_size": [
+      {
+        "bin": "[0.0, 10.0)",
+        "n": 25,
+        "median": 1.594
+      },
+      {
+        "bin": "[10.0, 25.0)",
+        "n": 14,
+        "median": 4.192
+      },
+      {
+        "bin": "[25.0, 50.0)",
+        "n": 18,
+        "median": 1.661
+      },
+      {
+        "bin": "[50.0, 100.0)",
+        "n": 24,
+        "median": 1.228
+      },
+      {
+        "bin": "[100.0, 200.0)",
+        "n": 41,
+        "median": 1.112
+      },
+      {
+        "bin": "[200.0, inf)",
+        "n": 223,
+        "median": 0.384
+      }
+    ],
+    "province_basis": {
+      "Región Metropolitana de Santiago": "VIIRS 2012~",
+      "Región de Antofagasta": "VIIRS 2012~",
+      "Región de Arica y Parinacota": "VIIRS 2012~",
+      "Región de Atacama": "VIIRS 2012~",
+      "Región de Aysén del Gral.Ibañez del Campo": "VIIRS 2012~",
+      "Región de Coquimbo": "VIIRS 2012~",
+      "Región de La Araucanía": "보정 25년",
+      "Región de Los Lagos": "VIIRS 2012~",
+      "Región de Los Ríos": "보정 25년",
+      "Región de Magallanes y Antártica Chilena": "VIIRS 2012~",
+      "Región de Tarapacá": "VIIRS 2012~",
+      "Región de Valparaíso": "보정 25년",
+      "Región de Ñuble": "보정 25년",
+      "Región del Bío-Bío": "보정 25년",
+      "Región del Libertador Bernardo O'Higgins": "보정 25년",
+      "Región del Maule": "보정 25년"
+    },
+    "district_basis": "VIIRS 2012~",
+    "longterm": {
+      "method": "시·군·구별 보정 계수 (시·도·1 쪽으로 당김)",
+      "shrink": [
+        10,
+        20
+      ],
+      "min_total": 50.0,
+      "error_by_size": {
+        "[0.0, 10.0)": {
+          "14년 합계": 1.0,
+          "7년 합계": 1.0,
+          "한 해 값": 1.0
+        },
+        "[10.0, 25.0)": {
+          "14년 합계": 1.0,
+          "7년 합계": 1.0,
+          "한 해 값": 1.0
+        },
+        "[25.0, 50.0)": {
+          "14년 합계": 0.377,
+          "7년 합계": 0.7,
+          "한 해 값": 1.102
+        },
+        "[50.0, 100.0)": {
+          "14년 합계": 0.245,
+          "7년 합계": 0.546,
+          "한 해 값": 1.0
+        },
+        "[100.0, 200.0)": {
+          "14년 합계": 0.067,
+          "7년 합계": 0.244,
+          "한 해 값": 0.799
+        },
+        "[200.0, inf)": {
+          "14년 합계": 0.025,
+          "7년 합계": 0.125,
+          "한 해 값": 0.382
+        }
+      },
+      "fire_year_recall": 0.86,
+      "quality_counts": {
+        "높음": 292,
+        "낮음": 53
+      },
+      "used": "25년 합계·연평균만",
+      "not_used": "7년(10년 단위) 비교, 불 난 해 수, 한 해·한 달 값 (오차 기준 미달)"
+    },
+    "sufficient_min_viirs_annual": 11.1,
+    "sufficiency_annual": "가장 많이 탄 한 해를 뺀 연평균",
+    "sufficiency_counts": {
+      "충분": 186,
+      "부족": 155,
+      "감지 없음": 4
+    },
+    "province_sufficiency": {
+      "Región Metropolitana de Santiago": "충분",
+      "Región de Antofagasta": "충분",
+      "Región de Arica y Parinacota": "충분",
+      "Región de Atacama": "충분",
+      "Región de Aysén del Gral.Ibañez del Campo": "충분",
+      "Región de Coquimbo": "충분",
+      "Región de La Araucanía": "충분",
+      "Región de Los Lagos": "충분",
+      "Región de Los Ríos": "충분",
+      "Región de Magallanes y Antártica Chilena": "충분",
+      "Región de Tarapacá": "충분",
+      "Región de Valparaíso": "충분",
+      "Región de Ñuble": "충분",
+      "Región del Bío-Bío": "충분",
+      "Región del Libertador Bernardo O'Higgins": "충분",
+      "Región del Maule": "충분"
+    },
+    "risk_share": 0.5,
+    "national_risk": {
+      "months": [
+        3,
+        4,
+        5
+      ],
+      "share": 0.508,
+      "peak_month": 4,
+      "years": [
+        2001,
+        2025
+      ]
+    },
+    "adjacency_tol_deg": 0.002,
+    "alert_km": 50,
+    "alert_rules": {
+      "neighbor": "맞닿은 시·군·구에서 감지",
+      "distance": "지역 중심 50 km 안에서 감지",
+      "monthly": "맞닿은 '충분' 시·군·구의 이번 달 VIIRS 감지일이 같은 달 분포 상위 10% 초과"
+    },
+    "case_event": {
+      "window": [
+        "2023-02-01",
+        "2023-02-20"
+      ],
+      "regions": [
+        "Nacimiento",
+        "Santa Juana",
+        "Negrete",
+        "Florida",
+        "Galvarino"
+      ],
+      "lead": [
+        {
+          "지역": "Región del Bío-Bío Santa Juana",
+          "자기 지역 첫 감지": "02-03",
+          "맞닿은 지역 첫 감지": "02-01",
+          "앞선 일수(맞닿음)": 2,
+          "50 km 안 첫 감지": "02-01",
+          "앞선 일수(50 km)": 2
+        },
+        {
+          "지역": "Región del Bío-Bío Negrete",
+          "자기 지역 첫 감지": "02-03",
+          "맞닿은 지역 첫 감지": "02-01",
+          "앞선 일수(맞닿음)": 2,
+          "50 km 안 첫 감지": "02-01",
+          "앞선 일수(50 km)": 2
+        },
+        {
+          "지역": "Región del Bío-Bío Florida",
+          "자기 지역 첫 감지": "02-02",
+          "맞닿은 지역 첫 감지": "02-02",
+          "앞선 일수(맞닿음)": 0,
+          "50 km 안 첫 감지": "02-01",
+          "앞선 일수(50 km)": 1
+        },
+        {
+          "지역": "Región de La Araucanía Galvarino",
+          "자기 지역 첫 감지": "02-03",
+          "맞닿은 지역 첫 감지": "02-01",
+          "앞선 일수(맞닿음)": 2,
+          "50 km 안 첫 감지": "02-01",
+          "앞선 일수(50 km)": 2
+        }
+      ]
+    }
+  },
+  "events": {
+    "sensor": "VIIRS NOAA-20",
+    "rule": {
+      "name": "B",
+      "distance_km": 3,
+      "gap_days": 2,
+      "big_event_cells": 10
+    },
+    "sensitivity": [
+      {
+        "규칙": "A 2 km·1일",
+        "묶음 수": 45270,
+        "1칸짜리 비율": 0.68,
+        "큰 묶음 (10칸+)": 723
+      },
+      {
+        "규칙": "B 3 km·2일",
+        "묶음 수": 40386,
+        "1칸짜리 비율": 0.66,
+        "큰 묶음 (10칸+)": 868
+      },
+      {
+        "규칙": "C 5 km·3일",
+        "묶음 수": 34231,
+        "1칸짜리 비율": 0.63,
+        "큰 묶음 (10칸+)": 988
+      }
+    ],
+    "known_fires": {
+      "A": [
+        {
+          "화재": "Santa Ana (Nacimiento) 2023-02",
+          "근처 묶음 수": 20,
+          "주 묶음 비중": 0.94,
+          "기간": "02/03~02/16",
+          "화재 칸": 2061,
+          "가장 넓은 날 칸": 593
+        },
+        {
+          "화재": "El Cortijo (Florida) 2023-02",
+          "근처 묶음 수": 24,
+          "주 묶음 비중": 0.36,
+          "기간": "02/02~02/11",
+          "화재 칸": 623,
+          "가장 넓은 날 칸": 134
+        },
+        {
+          "화재": "Las Tablas (Valparaíso) 2024-02",
+          "근처 묶음 수": 6,
+          "주 묶음 비중": 0.81,
+          "기간": "02/02~02/03",
+          "화재 칸": 117,
+          "가장 넓은 날 칸": 96
+        },
+        {
+          "화재": "Colonia Sur (Cochrane) 2019-02",
+          "근처 묶음 수": 3,
+          "주 묶음 비중": 1.0,
+          "기간": "02/05~02/18",
+          "화재 칸": 452,
+          "가장 넓은 날 칸": 60
+        }
+      ],
+      "B": [
+        {
+          "화재": "Santa Ana (Nacimiento) 2023-02",
+          "근처 묶음 수": 10,
+          "주 묶음 비중": 0.95,
+          "기간": "02/03~02/17",
+          "화재 칸": 2087,
+          "가장 넓은 날 칸": 602
+        },
+        {
+          "화재": "El Cortijo (Florida) 2023-02",
+          "근처 묶음 수": 11,
+          "주 묶음 비중": 0.42,
+          "기간": "02/02~02/15",
+          "화재 칸": 678,
+          "가장 넓은 날 칸": 243
+        },
+        {
+          "화재": "Las Tablas (Valparaíso) 2024-02",
+          "근처 묶음 수": 6,
+          "주 묶음 비중": 0.81,
+          "기간": "02/02~02/03",
+          "화재 칸": 117,
+          "가장 넓은 날 칸": 96
+        },
+        {
+          "화재": "Colonia Sur (Cochrane) 2019-02",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 1.0,
+          "기간": "02/05~02/18",
+          "화재 칸": 463,
+          "가장 넓은 날 칸": 60
+        }
+      ],
+      "C": [
+        {
+          "화재": "Santa Ana (Nacimiento) 2023-02",
+          "근처 묶음 수": 5,
+          "주 묶음 비중": 0.95,
+          "기간": "02/02~02/20",
+          "화재 칸": 2105,
+          "가장 넓은 날 칸": 604
+        },
+        {
+          "화재": "El Cortijo (Florida) 2023-02",
+          "근처 묶음 수": 6,
+          "주 묶음 비중": 0.45,
+          "기간": "02/02~02/11",
+          "화재 칸": 819,
+          "가장 넓은 날 칸": 209
+        },
+        {
+          "화재": "Las Tablas (Valparaíso) 2024-02",
+          "근처 묶음 수": 4,
+          "주 묶음 비중": 0.81,
+          "기간": "02/02~02/03",
+          "화재 칸": 117,
+          "가장 넓은 날 칸": 96
+        },
+        {
+          "화재": "Colonia Sur (Cochrane) 2019-02",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "02/05~02/18",
+          "화재 칸": 464,
+          "가장 넓은 날 칸": 60
+        }
+      ]
+    },
+    "monthly_count_correlation": {
+      "A": {
+        "A": 1.0,
+        "B": 0.99,
+        "C": 0.94
+      },
+      "B": {
+        "A": 0.99,
+        "B": 1.0,
+        "C": 0.98
+      },
+      "C": {
+        "A": 0.94,
+        "B": 0.98,
+        "C": 1.0
+      }
+    },
+    "note": "묶음은 설명용. 보정·달력·순위에는 화재 칸 합계를 쓴다."
+  },
+  "external_validation": {
+    "source": "CONAF 대형 산불 (200 ha 이상, 1985~2024)",
+    "records": 1400,
+    "period": [
+      "2001-01-10",
+      "2024-03-19"
+    ],
+    "district_match_rate": 1.0,
+    "rank_correlation": {
+      "annual_vs_count": 0.71,
+      "annual_vs_area": 0.6,
+      "monthly_vs_count": 0.4,
+      "monthly_vs_area": 0.41,
+      "years": [
+        2012,
+        2025
+      ]
+    },
+    "detection_source": "CONAF 개별 산불 기록 (모든 크기, 2002~05·2018~20 시즌, doi:10.71578/UXAUN5)",
+    "detection_period": [
+      "2018-07-10",
+      "2020-06-21"
+    ],
+    "detection_by_size": {
+      "0.1 ha 미만": {
+        "n": 4826,
+        "detected": 0.23,
+        "chance": 0.18
+      },
+      "0.1~1": {
+        "n": 5665,
+        "detected": 0.3,
+        "chance": 0.22
+      },
+      "1~10": {
+        "n": 3604,
+        "detected": 0.48,
+        "chance": 0.28
+      },
+      "10~100": {
+        "n": 984,
+        "detected": 0.74,
+        "chance": 0.35
+      },
+      "100 ha 이상": {
+        "n": 264,
+        "detected": 0.94,
+        "chance": 0.35
+      }
+    },
+    "big_fires_area_vs_cells_rho": 0.46,
+    "big_clusters_without_record": [
+      {
+        "start": "2023-01-28",
+        "end": "2023-01-28",
+        "cells": 13,
+        "regions": "Región de Antofagasta María Elena"
+      },
+      {
+        "start": "2024-10-22",
+        "end": "2024-10-22",
+        "cells": 11,
+        "regions": "Región de Antofagasta María Elena"
+      },
+      {
+        "start": "2022-02-10",
+        "end": "2022-02-10",
+        "cells": 10,
+        "regions": "Región de Antofagasta María Elena"
+      },
+      {
+        "start": "2025-03-03",
+        "end": "2025-03-03",
+        "cells": 17,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2026-02-09",
+        "end": "2026-02-09",
+        "cells": 16,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2022-10-12",
+        "end": "2022-10-13",
+        "cells": 12,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2023-10-21",
+        "end": "2023-10-21",
+        "cells": 10,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2026-01-24",
+        "end": "2026-01-24",
+        "cells": 11,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2026-03-01",
+        "end": "2026-03-01",
+        "cells": 10,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2026-03-06",
+        "end": "2026-03-06",
+        "cells": 11,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2026-10-11",
+        "end": "2026-10-11",
+        "cells": 13,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2023-11-01",
+        "end": "2023-11-01",
+        "cells": 10,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2026-02-18",
+        "end": "2026-02-18",
+        "cells": 10,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2025-10-24",
+        "end": "2025-10-25",
+        "cells": 14,
+        "regions": "Región de Antofagasta Antofagasta"
+      },
+      {
+        "start": "2024-01-20",
+        "end": "2024-01-20",
+        "cells": 13,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2023-01-17",
+        "end": "2023-01-17",
+        "cells": 11,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2023-11-06",
+        "end": "2023-11-06",
+        "cells": 12,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2022-11-03",
+        "end": "2022-11-03",
+        "cells": 13,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2024-11-12",
+        "end": "2024-11-12",
+        "cells": 14,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2025-01-10",
+        "end": "2025-01-10",
+        "cells": 12,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2025-10-30",
+        "end": "2025-10-30",
+        "cells": 11,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2025-11-15",
+        "end": "2025-11-15",
+        "cells": 11,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2023-11-22",
+        "end": "2023-11-22",
+        "cells": 10,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2024-11-28",
+        "end": "2024-11-28",
+        "cells": 12,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2026-01-13",
+        "end": "2026-01-13",
+        "cells": 15,
+        "regions": "Región de Atacama Copiapó"
+      },
+      {
+        "start": "2026-02-03",
+        "end": "2026-02-03",
+        "cells": 11,
+        "regions": "Región de Atacama Tierra Amarilla"
+      },
+      {
+        "start": "2020-04-25",
+        "end": "2020-05-06",
+        "cells": 11,
+        "regions": "Región de Coquimbo La Serena"
+      },
+      {
+        "start": "2026-06-30",
+        "end": "2026-06-30",
+        "cells": 10,
+        "regions": "Región de Coquimbo Los Vilos"
+      },
+      {
+        "start": "2026-01-17",
+        "end": "2026-01-20",
+        "cells": 31,
+        "regions": "Región Metropolitana de Santiago Tiltil"
+      },
+      {
+        "start": "2021-03-22",
+        "end": "2021-03-24",
+        "cells": 17,
+        "regions": "Región de Valparaíso Valparaíso"
+      },
+      {
+        "start": "2024-12-26",
+        "end": "2024-12-26",
+        "cells": 10,
+        "regions": "Región Metropolitana de Santiago Tiltil"
+      },
+      {
+        "start": "2025-12-29",
+        "end": "2025-12-31",
+        "cells": 18,
+        "regions": "Región Metropolitana de Santiago Las Condes"
+      },
+      {
+        "start": "2025-05-05",
+        "end": "2025-05-06",
+        "cells": 16,
+        "regions": "Región Metropolitana de Santiago María Pinto, Región Metropolitana de Santiago Melipilla"
+      },
+      {
+        "start": "2024-12-21",
+        "end": "2024-12-22",
+        "cells": 11,
+        "regions": "Región de Valparaíso San Antonio, Región de Valparaíso Cartagena"
+      },
+      {
+        "start": "2025-12-16",
+        "end": "2025-12-16",
+        "cells": 32,
+        "regions": "Región Metropolitana de Santiago San Pedro, Región de Valparaíso San Antonio"
+      },
+      {
+        "start": "2020-10-09",
+        "end": "2020-10-10",
+        "cells": 10,
+        "regions": "Región Metropolitana de Santiago San Pedro"
+      },
+      {
+        "start": "2024-11-08",
+        "end": "2024-11-09",
+        "cells": 10,
+        "regions": "Región Metropolitana de Santiago San Pedro"
+      },
+      {
+        "start": "2024-12-19",
+        "end": "2024-12-20",
+        "cells": 10,
+        "regions": "Región del Libertador Bernardo O'Higgins Litueche, Región del Libertador Bernardo O'Higgins Las Cabras"
+      },
+      {
+        "start": "2025-12-15",
+        "end": "2025-12-16",
+        "cells": 12,
+        "regions": "Región del Libertador Bernardo O'Higgins Pichilemu"
+      },
+      {
+        "start": "2019-07-01",
+        "end": "2019-07-05",
+        "cells": 11,
+        "regions": "Región del Libertador Bernardo O'Higgins Pichilemu"
+      },
+      {
+        "start": "2025-01-20",
+        "end": "2025-01-21",
+        "cells": 11,
+        "regions": "Región del Libertador Bernardo O'Higgins Malloa"
+      },
+      {
+        "start": "2021-07-07",
+        "end": "2021-07-10",
+        "cells": 10,
+        "regions": "Región del Libertador Bernardo O'Higgins Paredones"
+      },
+      {
+        "start": "2021-05-24",
+        "end": "2021-05-27",
+        "cells": 11,
+        "regions": "Región del Libertador Bernardo O'Higgins Paredones"
+      },
+      {
+        "start": "2018-05-22",
+        "end": "2018-05-25",
+        "cells": 29,
+        "regions": "Región del Libertador Bernardo O'Higgins Chépica, Región del Libertador Bernardo O'Higgins Nancagua"
+      },
+      {
+        "start": "2026-02-14",
+        "end": "2026-02-16",
+        "cells": 13,
+        "regions": "Región del Maule Vichuquén"
+      },
+      {
+        "start": "2026-05-08",
+        "end": "2026-05-11",
+        "cells": 12,
+        "regions": "Región del Maule Vichuquén"
+      },
+      {
+        "start": "2018-04-29",
+        "end": "2018-05-01",
+        "cells": 11,
+        "regions": "Región del Maule Vichuquén, Región del Maule Hualañé"
+      },
+      {
+        "start": "2020-09-02",
+        "end": "2020-09-03",
+        "cells": 13,
+        "regions": "Región del Maule Vichuquén"
+      },
+      {
+        "start": "2026-05-13",
+        "end": "2026-05-18",
+        "cells": 19,
+        "regions": "Región del Maule Licantén"
+      },
+      {
+        "start": "2025-05-23",
+        "end": "2025-05-25",
+        "cells": 12,
+        "regions": "Región del Maule Hualañé"
+      },
+      {
+        "start": "2025-05-27",
+        "end": "2025-06-01",
+        "cells": 20,
+        "regions": "Región del Maule Licantén"
+      },
+      {
+        "start": "2025-05-27",
+        "end": "2025-05-30",
+        "cells": 10,
+        "regions": "Región del Maule Hualañé"
+      },
+      {
+        "start": "2022-05-30",
+        "end": "2022-06-01",
+        "cells": 16,
+        "regions": "Región del Maule Curepto, Región del Maule Licantén"
+      },
+      {
+        "start": "2021-05-26",
+        "end": "2021-05-27",
+        "cells": 13,
+        "regions": "Región del Maule Curepto"
+      },
+      {
+        "start": "2026-02-25",
+        "end": "2026-02-28",
+        "cells": 15,
+        "regions": "Región del Maule Curepto, Región del Maule Pencahue"
+      },
+      {
+        "start": "2021-05-11",
+        "end": "2021-05-14",
+        "cells": 11,
+        "regions": "Región del Maule Curepto"
+      },
+      {
+        "start": "2025-05-19",
+        "end": "2025-05-24",
+        "cells": 20,
+        "regions": "Región del Maule Curepto"
+      },
+      {
+        "start": "2023-01-13",
+        "end": "2023-01-16",
+        "cells": 16,
+        "regions": "Región del Maule Curicó"
+      },
+      {
+        "start": "2023-06-14",
+        "end": "2023-06-16",
+        "cells": 14,
+        "regions": "Región del Maule Curepto"
+      },
+      {
+        "start": "2025-05-26",
+        "end": "2025-05-30",
+        "cells": 26,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2024-05-14",
+        "end": "2024-05-17",
+        "cells": 14,
+        "regions": "Región del Maule Pencahue"
+      },
+      {
+        "start": "2021-08-10",
+        "end": "2021-08-12",
+        "cells": 10,
+        "regions": "Región del Maule Pencahue"
+      },
+      {
+        "start": "2021-07-29",
+        "end": "2021-08-04",
+        "cells": 18,
+        "regions": "Región del Maule Pencahue, Región del Maule Curepto"
+      },
+      {
+        "start": "2020-04-06",
+        "end": "2020-04-08",
+        "cells": 16,
+        "regions": "Región del Maule Molina, Región del Maule Curicó"
+      },
+      {
+        "start": "2026-08-17",
+        "end": "2026-08-22",
+        "cells": 12,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2018-05-30",
+        "end": "2018-06-02",
+        "cells": 16,
+        "regions": "Región del Maule Pencahue"
+      },
+      {
+        "start": "2023-06-13",
+        "end": "2023-06-17",
+        "cells": 23,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2018-05-22",
+        "end": "2018-05-25",
+        "cells": 13,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2020-08-12",
+        "end": "2020-08-13",
+        "cells": 13,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2018-05-08",
+        "end": "2018-05-12",
+        "cells": 14,
+        "regions": "Región del Maule Pencahue"
+      },
+      {
+        "start": "2018-06-15",
+        "end": "2018-06-18",
+        "cells": 13,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2024-05-12",
+        "end": "2024-05-15",
+        "cells": 14,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2018-05-23",
+        "end": "2018-05-25",
+        "cells": 10,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2026-05-23",
+        "end": "2026-05-27",
+        "cells": 10,
+        "regions": "Región del Maule San Clemente"
+      },
+      {
+        "start": "2024-05-17",
+        "end": "2024-05-19",
+        "cells": 10,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2018-05-19",
+        "end": "2018-05-19",
+        "cells": 14,
+        "regions": "Región del Maule Constitución, Región del Maule Empedrado"
+      },
+      {
+        "start": "2025-12-24",
+        "end": "2025-12-25",
+        "cells": 18,
+        "regions": "Región del Maule Maule"
+      },
+      {
+        "start": "2024-05-13",
+        "end": "2024-05-17",
+        "cells": 15,
+        "regions": "Región del Maule San Clemente"
+      },
+      {
+        "start": "2021-05-24",
+        "end": "2021-05-26",
+        "cells": 12,
+        "regions": "Región del Maule Empedrado"
+      },
+      {
+        "start": "2018-06-06",
+        "end": "2018-06-07",
+        "cells": 16,
+        "regions": "Región del Maule Constitución"
+      },
+      {
+        "start": "2022-10-31",
+        "end": "2022-11-02",
+        "cells": 12,
+        "regions": "Región del Maule San Clemente"
+      },
+      {
+        "start": "2018-06-19",
+        "end": "2018-06-22",
+        "cells": 15,
+        "regions": "Región del Maule Constitución, Región del Maule Chanco"
+      },
+      {
+        "start": "2018-05-18",
+        "end": "2018-05-18",
+        "cells": 10,
+        "regions": "Región del Maule Empedrado, Región del Maule Chanco"
+      },
+      {
+        "start": "2024-05-14",
+        "end": "2024-05-18",
+        "cells": 11,
+        "regions": "Región del Maule Yerbas Buenas"
+      },
+      {
+        "start": "2025-01-24",
+        "end": "2025-01-27",
+        "cells": 70,
+        "regions": "Región del Maule San Javier"
+      },
+      {
+        "start": "2018-05-22",
+        "end": "2018-05-25",
+        "cells": 13,
+        "regions": "Región del Maule Empedrado"
+      },
+      {
+        "start": "2022-05-31",
+        "end": "2022-06-01",
+        "cells": 10,
+        "regions": "Región del Maule San Javier"
+      },
+      {
+        "start": "2026-05-13",
+        "end": "2026-05-19",
+        "cells": 18,
+        "regions": "Región del Maule Chanco"
+      },
+      {
+        "start": "2025-05-23",
+        "end": "2025-05-27",
+        "cells": 12,
+        "regions": "Región del Maule Chanco"
+      },
+      {
+        "start": "2025-05-30",
+        "end": "2025-06-01",
+        "cells": 13,
+        "regions": "Región del Maule Chanco"
+      },
+      {
+        "start": "2025-05-21",
+        "end": "2025-05-25",
+        "cells": 16,
+        "regions": "Región del Maule Chanco"
+      },
+      {
+        "start": "2022-05-17",
+        "end": "2022-05-21",
+        "cells": 11,
+        "regions": "Región del Maule Chanco"
+      },
+      {
+        "start": "2018-05-17",
+        "end": "2018-05-18",
+        "cells": 11,
+        "regions": "Región del Maule San Javier, Región del Maule Retiro, Región del Maule Longaví"
+      },
+      {
+        "start": "2020-06-04",
+        "end": "2020-06-05",
+        "cells": 10,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2020-05-30",
+        "end": "2020-06-01",
+        "cells": 13,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2023-06-14",
+        "end": "2023-06-17",
+        "cells": 11,
+        "regions": "Región del Maule Linares"
+      },
+      {
+        "start": "2023-06-15",
+        "end": "2023-06-17",
+        "cells": 10,
+        "regions": "Región del Maule Pelluhue"
+      },
+      {
+        "start": "2025-06-13",
+        "end": "2025-06-14",
+        "cells": 11,
+        "regions": "Región del Maule Pelluhue"
+      },
+      {
+        "start": "2025-06-27",
+        "end": "2025-07-01",
+        "cells": 12,
+        "regions": "Región del Maule Pelluhue"
+      },
+      {
+        "start": "2026-06-22",
+        "end": "2026-06-26",
+        "cells": 21,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-17",
+        "cells": 11,
+        "regions": "Región del Maule Pelluhue"
+      },
+      {
+        "start": "2026-05-12",
+        "end": "2026-05-14",
+        "cells": 11,
+        "regions": "Región del Maule Retiro"
+      },
+      {
+        "start": "2021-04-07",
+        "end": "2021-04-18",
+        "cells": 12,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2020-12-26",
+        "end": "2020-12-29",
+        "cells": 10,
+        "regions": "Región del Maule Colbún"
+      },
+      {
+        "start": "2023-06-12",
+        "end": "2023-06-13",
+        "cells": 15,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2025-05-27",
+        "end": "2025-05-31",
+        "cells": 22,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2024-05-17",
+        "end": "2024-05-18",
+        "cells": 12,
+        "regions": "Región del Maule Pelluhue"
+      },
+      {
+        "start": "2018-06-04",
+        "end": "2018-06-05",
+        "cells": 10,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2026-02-08",
+        "end": "2026-02-27",
+        "cells": 123,
+        "regions": "Región del Maule Linares"
+      },
+      {
+        "start": "2024-05-18",
+        "end": "2024-05-19",
+        "cells": 12,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2025-06-05",
+        "end": "2025-06-07",
+        "cells": 11,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2025-05-12",
+        "end": "2025-05-16",
+        "cells": 11,
+        "regions": "Región de Ñuble Cobquecura"
+      },
+      {
+        "start": "2018-05-31",
+        "end": "2018-06-04",
+        "cells": 10,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2024-12-24",
+        "end": "2024-12-25",
+        "cells": 16,
+        "regions": "Región del Maule Cauquenes"
+      },
+      {
+        "start": "2025-07-15",
+        "end": "2025-07-17",
+        "cells": 10,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2023-02-02",
+        "end": "2023-02-08",
+        "cells": 176,
+        "regions": "Región de Ñuble Quirihue, Región de Ñuble Cobquecura"
+      },
+      {
+        "start": "2024-05-18",
+        "end": "2024-05-19",
+        "cells": 12,
+        "regions": "Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2026-06-14",
+        "end": "2026-06-19",
+        "cells": 15,
+        "regions": "Región de Ñuble Cobquecura"
+      },
+      {
+        "start": "2023-02-03",
+        "end": "2023-02-24",
+        "cells": 270,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2019-05-10",
+        "end": "2019-05-15",
+        "cells": 31,
+        "regions": "Región de Ñuble Quirihue, Región del Maule Cauquenes"
+      },
+      {
+        "start": "2018-04-13",
+        "end": "2018-04-15",
+        "cells": 13,
+        "regions": "Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2025-06-08",
+        "end": "2025-06-14",
+        "cells": 22,
+        "regions": "Región de Ñuble Cobquecura, Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2023-10-13",
+        "end": "2023-10-19",
+        "cells": 13,
+        "regions": "Región del Maule Parral"
+      },
+      {
+        "start": "2025-06-09",
+        "end": "2025-06-11",
+        "cells": 18,
+        "regions": "Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2018-05-09",
+        "end": "2018-05-12",
+        "cells": 11,
+        "regions": "Región de Ñuble Cobquecura, Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2018-05-23",
+        "end": "2018-05-25",
+        "cells": 10,
+        "regions": "Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2026-05-25",
+        "end": "2026-05-26",
+        "cells": 11,
+        "regions": "Región de Ñuble Quirihue, Región de Ñuble Ninhue"
+      },
+      {
+        "start": "2025-05-12",
+        "end": "2025-05-16",
+        "cells": 18,
+        "regions": "Región de Ñuble Cobquecura"
+      },
+      {
+        "start": "2026-05-18",
+        "end": "2026-05-20",
+        "cells": 11,
+        "regions": "Región del Maule Parral"
+      },
+      {
+        "start": "2019-03-20",
+        "end": "2019-04-03",
+        "cells": 34,
+        "regions": "Región del Maule Longaví"
+      },
+      {
+        "start": "2019-03-12",
+        "end": "2019-03-18",
+        "cells": 16,
+        "regions": "Región del Maule Parral"
+      },
+      {
+        "start": "2019-02-27",
+        "end": "2019-03-02",
+        "cells": 17,
+        "regions": "Región del Maule Parral"
+      },
+      {
+        "start": "2022-06-10",
+        "end": "2022-06-13",
+        "cells": 16,
+        "regions": "Región de Ñuble Cobquecura, Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2018-06-04",
+        "end": "2018-06-05",
+        "cells": 13,
+        "regions": "Región de Ñuble Treguaco, Región de Ñuble Cobquecura"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-19",
+        "cells": 10,
+        "regions": "Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2020-05-13",
+        "end": "2020-05-18",
+        "cells": 12,
+        "regions": "Región de Ñuble Ñiquén, Región de Ñuble San Carlos"
+      },
+      {
+        "start": "2024-05-02",
+        "end": "2024-05-03",
+        "cells": 12,
+        "regions": "Región de Ñuble Ninhue"
+      },
+      {
+        "start": "2025-06-28",
+        "end": "2025-07-05",
+        "cells": 12,
+        "regions": "Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2026-02-07",
+        "end": "2026-03-02",
+        "cells": 185,
+        "regions": "Región del Maule Parral, Región de Ñuble San Fabián"
+      },
+      {
+        "start": "2026-05-13",
+        "end": "2026-05-18",
+        "cells": 35,
+        "regions": "Región de Ñuble San Fabián, Región del Maule Parral"
+      },
+      {
+        "start": "2025-05-13",
+        "end": "2025-05-16",
+        "cells": 18,
+        "regions": "Región de Ñuble Ñiquén"
+      },
+      {
+        "start": "2026-05-09",
+        "end": "2026-05-14",
+        "cells": 17,
+        "regions": "Región de Ñuble Treguaco, Región de Ñuble Quirihue"
+      },
+      {
+        "start": "2025-06-29",
+        "end": "2025-07-01",
+        "cells": 11,
+        "regions": "Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2018-04-13",
+        "end": "2018-04-15",
+        "cells": 10,
+        "regions": "Región de Ñuble San Carlos, Región de Ñuble Ñiquén, Región de Ñuble San Fabián"
+      },
+      {
+        "start": "2019-04-10",
+        "end": "2019-04-12",
+        "cells": 10,
+        "regions": "Región de Ñuble San Carlos, Región de Ñuble Ñiquén"
+      },
+      {
+        "start": "2026-03-28",
+        "end": "2026-04-02",
+        "cells": 14,
+        "regions": "Región de Ñuble San Carlos"
+      },
+      {
+        "start": "2021-04-26",
+        "end": "2021-04-29",
+        "cells": 15,
+        "regions": "Región de Ñuble San Carlos"
+      },
+      {
+        "start": "2023-06-12",
+        "end": "2023-06-13",
+        "cells": 10,
+        "regions": "Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2020-04-30",
+        "end": "2020-05-02",
+        "cells": 11,
+        "regions": "Región de Ñuble San Carlos, Región de Ñuble Chillán"
+      },
+      {
+        "start": "2018-09-06",
+        "end": "2018-09-08",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Tomé"
+      },
+      {
+        "start": "2026-03-05",
+        "end": "2026-03-14",
+        "cells": 38,
+        "regions": "Región del Maule Parral"
+      },
+      {
+        "start": "2026-05-14",
+        "end": "2026-05-21",
+        "cells": 14,
+        "regions": "Región de Ñuble Coelemu, Región del Bío-Bío Tomé"
+      },
+      {
+        "start": "2020-06-03",
+        "end": "2020-06-05",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Tomé, Región de Ñuble Coelemu"
+      },
+      {
+        "start": "2026-02-22",
+        "end": "2026-02-23",
+        "cells": 13,
+        "regions": "Región de Ñuble San Nicolás"
+      },
+      {
+        "start": "2022-06-09",
+        "end": "2022-06-11",
+        "cells": 14,
+        "regions": "Región de Ñuble Portezuelo"
+      },
+      {
+        "start": "2020-05-22",
+        "end": "2020-05-27",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Tomé"
+      },
+      {
+        "start": "2022-05-29",
+        "end": "2022-06-01",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Tomé, Región de Ñuble Coelemu"
+      },
+      {
+        "start": "2023-02-08",
+        "end": "2023-02-11",
+        "cells": 12,
+        "regions": "Región de Ñuble San Fabián"
+      },
+      {
+        "start": "2024-05-27",
+        "end": "2024-05-28",
+        "cells": 12,
+        "regions": "Región de Ñuble San Nicolás"
+      },
+      {
+        "start": "2019-05-12",
+        "end": "2019-05-15",
+        "cells": 10,
+        "regions": "Región de Ñuble Portezuelo"
+      },
+      {
+        "start": "2021-09-20",
+        "end": "2021-09-22",
+        "cells": 11,
+        "regions": "Región de Ñuble San Nicolás"
+      },
+      {
+        "start": "2026-01-14",
+        "end": "2026-01-20",
+        "cells": 119,
+        "regions": "Región de Ñuble Ranquil, Región de Ñuble Portezuelo, Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2024-07-29",
+        "end": "2024-07-30",
+        "cells": 23,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble San Fabián"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-18",
+        "cells": 11,
+        "regions": "Región de Ñuble Coelemu"
+      },
+      {
+        "start": "2019-05-10",
+        "end": "2019-05-12",
+        "cells": 11,
+        "regions": "Región de Ñuble Portezuelo, Región de Ñuble Treguaco"
+      },
+      {
+        "start": "2025-06-07",
+        "end": "2025-06-10",
+        "cells": 19,
+        "regions": "Región de Ñuble Coelemu, Región de Ñuble Ranquil"
+      },
+      {
+        "start": "2019-04-10",
+        "end": "2019-04-14",
+        "cells": 20,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Pinto, Región de Ñuble Chillán"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-04-11",
+        "cells": 435,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pinto, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2023-04-19",
+        "end": "2023-04-20",
+        "cells": 11,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2023-04-20",
+        "end": "2023-04-20",
+        "cells": 14,
+        "regions": "Región de Ñuble San Fabián"
+      },
+      {
+        "start": "2024-04-05",
+        "end": "2024-04-12",
+        "cells": 26,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Pinto, Región de Ñuble Chillán"
+      },
+      {
+        "start": "2025-04-08",
+        "end": "2025-04-12",
+        "cells": 16,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Chillán"
+      },
+      {
+        "start": "2019-04-15",
+        "end": "2019-04-21",
+        "cells": 36,
+        "regions": "Región de Ñuble San Fabián"
+      },
+      {
+        "start": "2019-05-11",
+        "end": "2019-05-14",
+        "cells": 10,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2025-05-27",
+        "end": "2025-05-31",
+        "cells": 11,
+        "regions": "Región de Ñuble Portezuelo"
+      },
+      {
+        "start": "2019-05-18",
+        "end": "2019-05-20",
+        "cells": 15,
+        "regions": "Región de Ñuble Portezuelo"
+      },
+      {
+        "start": "2026-03-31",
+        "end": "2026-04-09",
+        "cells": 31,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Pinto"
+      },
+      {
+        "start": "2020-04-30",
+        "end": "2020-05-01",
+        "cells": 10,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2023-04-15",
+        "end": "2023-04-24",
+        "cells": 19,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2021-04-13",
+        "end": "2021-04-17",
+        "cells": 10,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Chillán"
+      },
+      {
+        "start": "2018-04-14",
+        "end": "2018-04-21",
+        "cells": 15,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2026-04-13",
+        "end": "2026-04-15",
+        "cells": 16,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2021-04-12",
+        "end": "2021-04-15",
+        "cells": 10,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2019-05-10",
+        "end": "2019-05-15",
+        "cells": 14,
+        "regions": "Región de Ñuble Ranquil"
+      },
+      {
+        "start": "2026-01-18",
+        "end": "2026-01-22",
+        "cells": 337,
+        "regions": "Región del Bío-Bío Concepción, Región del Bío-Bío Penco, Región del Bío-Bío Tomé"
+      },
+      {
+        "start": "2025-06-04",
+        "end": "2025-06-06",
+        "cells": 17,
+        "regions": "Región de Ñuble Ranquil"
+      },
+      {
+        "start": "2024-05-25",
+        "end": "2024-05-28",
+        "cells": 10,
+        "regions": "Región de Ñuble Ranquil, Región del Bío-Bío Florida"
+      },
+      {
+        "start": "2023-04-15",
+        "end": "2023-04-26",
+        "cells": 27,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Pinto"
+      },
+      {
+        "start": "2021-04-11",
+        "end": "2021-04-16",
+        "cells": 16,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Pinto"
+      },
+      {
+        "start": "2026-03-30",
+        "end": "2026-04-02",
+        "cells": 10,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2025-04-08",
+        "end": "2025-04-09",
+        "cells": 46,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble San Ignacio, Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2025-02-07",
+        "end": "2025-02-10",
+        "cells": 23,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2018-04-12",
+        "end": "2018-04-14",
+        "cells": 17,
+        "regions": "Región de Ñuble Chillán Viejo"
+      },
+      {
+        "start": "2024-05-13",
+        "end": "2024-05-18",
+        "cells": 10,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble Chillán"
+      },
+      {
+        "start": "2021-03-28",
+        "end": "2021-04-04",
+        "cells": 52,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2020-04-30",
+        "end": "2020-05-01",
+        "cells": 11,
+        "regions": "Región de Ñuble Pinto"
+      },
+      {
+        "start": "2024-04-05",
+        "end": "2024-04-12",
+        "cells": 49,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2018-04-02",
+        "end": "2018-04-03",
+        "cells": 12,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2026-01-18",
+        "end": "2026-01-22",
+        "cells": 103,
+        "regions": "Región del Bío-Bío Florida, Región de Ñuble Quillón"
+      },
+      {
+        "start": "2021-05-11",
+        "end": "2021-05-18",
+        "cells": 14,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2023-05-18",
+        "end": "2023-05-20",
+        "cells": 11,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2023-04-14",
+        "end": "2023-04-16",
+        "cells": 23,
+        "regions": "Región de Ñuble Pinto"
+      },
+      {
+        "start": "2019-04-03",
+        "end": "2019-04-11",
+        "cells": 30,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2022-04-13",
+        "end": "2022-04-20",
+        "cells": 85,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pinto, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2025-06-05",
+        "end": "2025-06-08",
+        "cells": 15,
+        "regions": "Región de Ñuble Quillón"
+      },
+      {
+        "start": "2026-01-17",
+        "end": "2026-01-20",
+        "cells": 50,
+        "regions": "Región de Ñuble Bulnes, Región de Ñuble Quillón"
+      },
+      {
+        "start": "2024-09-10",
+        "end": "2024-09-12",
+        "cells": 20,
+        "regions": "Región del Bío-Bío Florida, Región del Bío-Bío Concepción"
+      },
+      {
+        "start": "2023-04-15",
+        "end": "2023-04-26",
+        "cells": 125,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble San Ignacio, Región de Ñuble Pinto"
+      },
+      {
+        "start": "2018-04-13",
+        "end": "2018-04-17",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Florida"
+      },
+      {
+        "start": "2019-04-08",
+        "end": "2019-04-11",
+        "cells": 14,
+        "regions": "Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2025-02-14",
+        "end": "2025-03-01",
+        "cells": 139,
+        "regions": "Región de Ñuble Coihueco, Región de Ñuble Pinto"
+      },
+      {
+        "start": "2023-05-09",
+        "end": "2023-05-13",
+        "cells": 17,
+        "regions": "Región de Ñuble San Ignacio, Región de Ñuble El Carmen, Región de Ñuble Bulnes"
+      },
+      {
+        "start": "2019-04-29",
+        "end": "2019-05-01",
+        "cells": 15,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2019-04-25",
+        "end": "2019-04-27",
+        "cells": 10,
+        "regions": "Región de Ñuble San Ignacio, Región de Ñuble Bulnes"
+      },
+      {
+        "start": "2025-04-02",
+        "end": "2025-04-09",
+        "cells": 155,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2019-05-11",
+        "end": "2019-05-14",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Florida"
+      },
+      {
+        "start": "2021-07-10",
+        "end": "2021-07-20",
+        "cells": 11,
+        "regions": "Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2019-04-05",
+        "end": "2019-04-12",
+        "cells": 103,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2019-04-25",
+        "end": "2019-05-01",
+        "cells": 10,
+        "regions": "Región de Ñuble Bulnes"
+      },
+      {
+        "start": "2026-10-24",
+        "end": "2026-11-14",
+        "cells": 49,
+        "regions": "Región de Ñuble Pinto, Región de Ñuble Coihueco"
+      },
+      {
+        "start": "2020-06-05",
+        "end": "2020-06-06",
+        "cells": 11,
+        "regions": "Región de Ñuble El Carmen"
+      },
+      {
+        "start": "2020-04-14",
+        "end": "2020-04-17",
+        "cells": 61,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2021-03-29",
+        "end": "2021-03-31",
+        "cells": 10,
+        "regions": "Región de Ñuble El Carmen"
+      },
+      {
+        "start": "2024-03-30",
+        "end": "2024-04-01",
+        "cells": 17,
+        "regions": "Región de Ñuble El Carmen"
+      },
+      {
+        "start": "2018-04-02",
+        "end": "2018-04-04",
+        "cells": 33,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2022-05-02",
+        "end": "2022-05-07",
+        "cells": 14,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble San Ignacio"
+      },
+      {
+        "start": "2021-03-29",
+        "end": "2021-04-04",
+        "cells": 55,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2021-04-15",
+        "end": "2021-04-20",
+        "cells": 18,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2022-04-14",
+        "end": "2022-04-20",
+        "cells": 19,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2024-04-06",
+        "end": "2024-04-11",
+        "cells": 11,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2021-03-23",
+        "end": "2021-03-29",
+        "cells": 20,
+        "regions": "Región de Ñuble El Carmen"
+      },
+      {
+        "start": "2022-04-14",
+        "end": "2022-04-18",
+        "cells": 13,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2026-04-06",
+        "end": "2026-04-10",
+        "cells": 14,
+        "regions": "Región de Ñuble El Carmen"
+      },
+      {
+        "start": "2025-05-27",
+        "end": "2025-06-01",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Yumbel"
+      },
+      {
+        "start": "2022-05-03",
+        "end": "2022-05-08",
+        "cells": 16,
+        "regions": "Región de Ñuble El Carmen"
+      },
+      {
+        "start": "2021-04-01",
+        "end": "2021-04-04",
+        "cells": 15,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2018-04-16",
+        "end": "2018-04-19",
+        "cells": 10,
+        "regions": "Región de Ñuble El Carmen, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2023-02-17",
+        "end": "2023-02-24",
+        "cells": 232,
+        "regions": "Región del Bío-Bío Coronel, Región del Bío-Bío Lota, Región del Bío-Bío San Pedro de la Paz"
+      },
+      {
+        "start": "2019-04-02",
+        "end": "2019-04-15",
+        "cells": 82,
+        "regions": "Región de Ñuble Pemuco, Región de Ñuble Yungay"
+      },
+      {
+        "start": "2021-03-17",
+        "end": "2021-03-27",
+        "cells": 33,
+        "regions": "Región de Ñuble Yungay, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-25",
+        "cells": 19,
+        "regions": "Región del Bío-Bío Hualqui, Región del Bío-Bío Coronel"
+      },
+      {
+        "start": "2022-03-14",
+        "end": "2022-03-17",
+        "cells": 85,
+        "regions": "Región del Bío-Bío Yumbel"
+      },
+      {
+        "start": "2021-05-10",
+        "end": "2021-05-12",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Hualqui"
+      },
+      {
+        "start": "2026-05-12",
+        "end": "2026-05-16",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Yumbel"
+      },
+      {
+        "start": "2025-10-16",
+        "end": "2025-10-18",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Hualqui"
+      },
+      {
+        "start": "2025-04-03",
+        "end": "2025-04-09",
+        "cells": 66,
+        "regions": "Región de Ñuble Yungay, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-04-04",
+        "cells": 85,
+        "regions": "Región de Ñuble Yungay, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2024-03-26",
+        "end": "2024-04-01",
+        "cells": 45,
+        "regions": "Región de Ñuble Yungay, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2026-04-28",
+        "end": "2026-04-30",
+        "cells": 16,
+        "regions": "Región del Bío-Bío Yumbel"
+      },
+      {
+        "start": "2020-08-17",
+        "end": "2020-08-22",
+        "cells": 11,
+        "regions": "Región de Ñuble Yungay, Región de Ñuble Pemuco"
+      },
+      {
+        "start": "2022-04-06",
+        "end": "2022-04-08",
+        "cells": 13,
+        "regions": "Región de Ñuble Yungay"
+      },
+      {
+        "start": "2020-04-08",
+        "end": "2020-04-13",
+        "cells": 57,
+        "regions": "Región de Ñuble Yungay"
+      },
+      {
+        "start": "2024-05-23",
+        "end": "2024-05-26",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Yumbel"
+      },
+      {
+        "start": "2022-04-06",
+        "end": "2022-04-08",
+        "cells": 22,
+        "regions": "Región de Ñuble Yungay"
+      },
+      {
+        "start": "2025-03-24",
+        "end": "2025-03-25",
+        "cells": 49,
+        "regions": "Región del Bío-Bío Hualqui"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-28",
+        "cells": 10,
+        "regions": "Región de Ñuble Yungay"
+      },
+      {
+        "start": "2024-03-26",
+        "end": "2024-03-28",
+        "cells": 15,
+        "regions": "Región de Ñuble Yungay"
+      },
+      {
+        "start": "2024-03-26",
+        "end": "2024-03-27",
+        "cells": 11,
+        "regions": "Región de Ñuble Yungay"
+      },
+      {
+        "start": "2025-05-12",
+        "end": "2025-05-16",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Santa Juana, Región del Bío-Bío Lota"
+      },
+      {
+        "start": "2026-04-15",
+        "end": "2026-04-15",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2025-05-05",
+        "end": "2025-05-05",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Yumbel"
+      },
+      {
+        "start": "2021-04-13",
+        "end": "2021-04-19",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2022-04-30",
+        "end": "2022-05-07",
+        "cells": 52,
+        "regions": "Región del Bío-Bío Tucapel, Región del Bío-Bío Quilleco"
+      },
+      {
+        "start": "2020-04-21",
+        "end": "2020-04-22",
+        "cells": 23,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2025-04-08",
+        "end": "2025-04-09",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2019-03-29",
+        "end": "2019-03-31",
+        "cells": 18,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2026-01-17",
+        "end": "2026-01-20",
+        "cells": 103,
+        "regions": "Región del Bío-Bío Laja, Región del Bío-Bío Los Angeles"
+      },
+      {
+        "start": "2021-05-13",
+        "end": "2021-05-20",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Arauco"
+      },
+      {
+        "start": "2026-04-07",
+        "end": "2026-04-10",
+        "cells": 21,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2021-04-01",
+        "end": "2021-04-04",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2021-04-11",
+        "end": "2021-04-15",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Tucapel"
+      },
+      {
+        "start": "2026-04-23",
+        "end": "2026-04-25",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Arauco"
+      },
+      {
+        "start": "2020-03-02",
+        "end": "2020-03-08",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Arauco"
+      },
+      {
+        "start": "2020-04-06",
+        "end": "2020-04-07",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Arauco"
+      },
+      {
+        "start": "2020-02-19",
+        "end": "2020-02-27",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Arauco"
+      },
+      {
+        "start": "2025-03-22",
+        "end": "2025-03-26",
+        "cells": 41,
+        "regions": "Región del Bío-Bío Santa Juana, Región del Bío-Bío Nacimiento"
+      },
+      {
+        "start": "2025-05-12",
+        "end": "2025-05-15",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Curanilahue"
+      },
+      {
+        "start": "2019-03-29",
+        "end": "2019-03-30",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Quilleco"
+      },
+      {
+        "start": "2026-05-20",
+        "end": "2026-05-22",
+        "cells": 15,
+        "regions": "Región del Bío-Bío Antuco"
+      },
+      {
+        "start": "2020-02-27",
+        "end": "2020-03-05",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Quilleco"
+      },
+      {
+        "start": "2023-05-16",
+        "end": "2023-05-20",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Quilleco"
+      },
+      {
+        "start": "2020-02-19",
+        "end": "2020-02-20",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Los Angeles"
+      },
+      {
+        "start": "2022-05-28",
+        "end": "2022-05-30",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Curanilahue"
+      },
+      {
+        "start": "2023-05-17",
+        "end": "2023-05-19",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Curanilahue"
+      },
+      {
+        "start": "2026-01-17",
+        "end": "2026-01-18",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Nacimiento"
+      },
+      {
+        "start": "2026-04-25",
+        "end": "2026-04-27",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Lebu, Región del Bío-Bío Curanilahue"
+      },
+      {
+        "start": "2020-04-01",
+        "end": "2020-04-06",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Antuco"
+      },
+      {
+        "start": "2026-01-19",
+        "end": "2026-01-21",
+        "cells": 19,
+        "regions": "Región del Bío-Bío Los Angeles, Región del Bío-Bío Nacimiento"
+      },
+      {
+        "start": "2026-04-01",
+        "end": "2026-04-02",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Quilleco"
+      },
+      {
+        "start": "2025-05-28",
+        "end": "2025-05-31",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Curanilahue"
+      },
+      {
+        "start": "2022-04-13",
+        "end": "2022-04-18",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Antuco"
+      },
+      {
+        "start": "2026-05-15",
+        "end": "2026-05-19",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Nacimiento"
+      },
+      {
+        "start": "2026-01-18",
+        "end": "2026-01-21",
+        "cells": 16,
+        "regions": "Región del Bío-Bío Los Angeles"
+      },
+      {
+        "start": "2018-04-16",
+        "end": "2018-04-25",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2025-06-07",
+        "end": "2025-06-10",
+        "cells": 15,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2023-05-11",
+        "end": "2023-05-12",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-18",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Los Alamos"
+      },
+      {
+        "start": "2026-06-15",
+        "end": "2026-06-18",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2023-05-05",
+        "end": "2023-05-13",
+        "cells": 16,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-01-18",
+        "end": "2026-01-29",
+        "cells": 16,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2022-04-06",
+        "end": "2022-04-08",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2026-05-19",
+        "end": "2026-05-23",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2020-05-27",
+        "end": "2020-05-30",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2024-12-21",
+        "end": "2024-12-22",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Los Alamos"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-04-02",
+        "cells": 51,
+        "regions": "Región del Bío-Bío Mulchén, Región del Bío-Bío Quilaco"
+      },
+      {
+        "start": "2025-04-25",
+        "end": "2025-04-27",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2025-02-07",
+        "end": "2025-02-08",
+        "cells": 20,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2023-02-18",
+        "end": "2023-02-25",
+        "cells": 33,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2019-03-29",
+        "end": "2019-03-30",
+        "cells": 17,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2021-06-18",
+        "end": "2021-06-19",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2019-03-29",
+        "end": "2019-03-30",
+        "cells": 45,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2025-05-30",
+        "end": "2025-06-01",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Quilaco"
+      },
+      {
+        "start": "2026-04-13",
+        "end": "2026-04-16",
+        "cells": 10,
+        "regions": "Región de La Araucanía Renaico, Región de La Araucanía Angol"
+      },
+      {
+        "start": "2019-04-09",
+        "end": "2019-04-11",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2019-05-20",
+        "end": "2019-05-23",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Quilaco"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-23",
+        "cells": 25,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2022-04-05",
+        "end": "2022-04-08",
+        "cells": 18,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2025-04-25",
+        "end": "2025-04-27",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2018-04-16",
+        "end": "2018-04-21",
+        "cells": 23,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2019-05-08",
+        "end": "2019-05-15",
+        "cells": 25,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-04-23",
+        "end": "2026-04-25",
+        "cells": 11,
+        "regions": "Región de La Araucanía Renaico"
+      },
+      {
+        "start": "2025-03-24",
+        "end": "2025-03-25",
+        "cells": 24,
+        "regions": "Región del Bío-Bío Santa Bárbara"
+      },
+      {
+        "start": "2025-04-03",
+        "end": "2025-04-07",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2021-03-17",
+        "end": "2021-03-19",
+        "cells": 23,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-03-29",
+        "end": "2026-04-02",
+        "cells": 18,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-29",
+        "cells": 47,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-08-18",
+        "end": "2026-08-22",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2022-11-23",
+        "end": "2022-11-26",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2021-12-16",
+        "end": "2021-12-18",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2023-04-15",
+        "end": "2023-04-17",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2023-05-08",
+        "end": "2023-05-13",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2021-04-17",
+        "end": "2021-04-19",
+        "cells": 23,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2026-04-07",
+        "end": "2026-04-12",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-04-21",
+        "end": "2026-04-25",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2025-02-09",
+        "end": "2025-02-10",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2020-03-17",
+        "end": "2020-03-23",
+        "cells": 22,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2020-04-03",
+        "end": "2020-04-11",
+        "cells": 21,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2026-04-23",
+        "end": "2026-04-25",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2023-04-13",
+        "end": "2023-04-16",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2025-05-29",
+        "end": "2025-05-31",
+        "cells": 15,
+        "regions": "Región de La Araucanía Angol"
+      },
+      {
+        "start": "2022-05-02",
+        "end": "2022-05-07",
+        "cells": 15,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2022-02-09",
+        "end": "2022-02-14",
+        "cells": 21,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2024-05-26",
+        "end": "2024-05-28",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2021-05-10",
+        "end": "2021-05-12",
+        "cells": 12,
+        "regions": "Región de La Araucanía Angol"
+      },
+      {
+        "start": "2021-01-15",
+        "end": "2021-01-18",
+        "cells": 15,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2019-01-29",
+        "end": "2019-02-04",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-01-17",
+        "end": "2026-01-19",
+        "cells": 23,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-05-10",
+        "end": "2025-05-15",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2020-04-06",
+        "end": "2020-04-11",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2022-05-03",
+        "end": "2022-05-08",
+        "cells": 37,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2024-05-15",
+        "end": "2024-05-19",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2022-02-28",
+        "end": "2022-03-02",
+        "cells": 11,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2021-12-04",
+        "end": "2021-12-05",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2026-04-20",
+        "end": "2026-04-23",
+        "cells": 27,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2024-03-06",
+        "end": "2024-03-06",
+        "cells": 13,
+        "regions": "Región de La Araucanía Los Sauces, Región de La Araucanía Angol"
+      },
+      {
+        "start": "2021-05-06",
+        "end": "2021-05-15",
+        "cells": 23,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2020-04-03",
+        "end": "2020-04-06",
+        "cells": 13,
+        "regions": "Región de La Araucanía Collipulli, Región de La Araucanía Angol"
+      },
+      {
+        "start": "2025-02-10",
+        "end": "2025-02-12",
+        "cells": 18,
+        "regions": "Región de La Araucanía Angol"
+      },
+      {
+        "start": "2018-04-02",
+        "end": "2018-04-04",
+        "cells": 11,
+        "regions": "Región de La Araucanía Angol"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-18",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2022-03-12",
+        "end": "2022-03-16",
+        "cells": 16,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-01-20",
+        "end": "2025-01-21",
+        "cells": 15,
+        "regions": "Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2020-04-04",
+        "end": "2020-04-10",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Contulmo"
+      },
+      {
+        "start": "2020-01-15",
+        "end": "2020-01-17",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2023-03-30",
+        "end": "2023-04-04",
+        "cells": 16,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2026-01-18",
+        "end": "2026-01-21",
+        "cells": 51,
+        "regions": "Región de La Araucanía Angol, Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2019-02-03",
+        "end": "2019-02-06",
+        "cells": 20,
+        "regions": "Región de La Araucanía Angol"
+      },
+      {
+        "start": "2023-01-07",
+        "end": "2023-01-11",
+        "cells": 13,
+        "regions": "Región de La Araucanía Los Sauces, Región de La Araucanía Angol"
+      },
+      {
+        "start": "2025-02-06",
+        "end": "2025-02-12",
+        "cells": 36,
+        "regions": "Región de La Araucanía Collipulli, Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2020-02-20",
+        "end": "2020-02-26",
+        "cells": 34,
+        "regions": "Región del Bío-Bío Cañete, Región del Bío-Bío Contulmo"
+      },
+      {
+        "start": "2026-05-12",
+        "end": "2026-05-14",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2025-06-05",
+        "end": "2025-06-10",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2026-04-08",
+        "end": "2026-04-10",
+        "cells": 10,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2020-03-24",
+        "end": "2020-03-26",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Contulmo"
+      },
+      {
+        "start": "2025-04-08",
+        "end": "2025-04-09",
+        "cells": 10,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2020-03-31",
+        "end": "2020-04-08",
+        "cells": 16,
+        "regions": "Región del Bío-Bío Contulmo"
+      },
+      {
+        "start": "2021-12-21",
+        "end": "2021-12-26",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Contulmo"
+      },
+      {
+        "start": "2023-02-17",
+        "end": "2023-02-24",
+        "cells": 19,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2022-03-15",
+        "end": "2022-03-22",
+        "cells": 10,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-19",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2025-05-30",
+        "end": "2025-05-31",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Mulchén"
+      },
+      {
+        "start": "2022-03-15",
+        "end": "2022-03-18",
+        "cells": 11,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2018-10-03",
+        "end": "2018-10-05",
+        "cells": 10,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2026-03-06",
+        "end": "2026-03-11",
+        "cells": 12,
+        "regions": "Región de La Araucanía Los Sauces, Región de La Araucanía Angol"
+      },
+      {
+        "start": "2026-05-07",
+        "end": "2026-05-13",
+        "cells": 10,
+        "regions": "Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-27",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2023-03-21",
+        "end": "2023-03-25",
+        "cells": 12,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2020-03-30",
+        "end": "2020-04-07",
+        "cells": 12,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-02-03",
+        "end": "2025-02-04",
+        "cells": 16,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2026-05-17",
+        "end": "2026-05-21",
+        "cells": 18,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2021-04-05",
+        "end": "2021-04-18",
+        "cells": 16,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2020-03-14",
+        "end": "2020-03-18",
+        "cells": 27,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2025-02-07",
+        "end": "2025-02-08",
+        "cells": 22,
+        "regions": "Región de La Araucanía Purén, Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2025-02-22",
+        "end": "2025-02-24",
+        "cells": 14,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2020-01-16",
+        "end": "2020-01-21",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2025-11-15",
+        "end": "2025-11-19",
+        "cells": 15,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2021-03-25",
+        "end": "2021-03-30",
+        "cells": 10,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2020-01-31",
+        "end": "2020-02-03",
+        "cells": 26,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2023-01-17",
+        "end": "2023-01-23",
+        "cells": 14,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2026-04-07",
+        "end": "2026-04-10",
+        "cells": 12,
+        "regions": "Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2024-01-17",
+        "end": "2024-01-21",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Cañete"
+      },
+      {
+        "start": "2025-11-22",
+        "end": "2025-11-24",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Alto Biobío"
+      },
+      {
+        "start": "2023-10-24",
+        "end": "2023-10-27",
+        "cells": 16,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-03-24",
+        "end": "2025-03-26",
+        "cells": 17,
+        "regions": "Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2023-03-04",
+        "end": "2023-03-07",
+        "cells": 21,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-27",
+        "cells": 50,
+        "regions": "Región de La Araucanía Ercilla, Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2024-02-19",
+        "end": "2024-02-20",
+        "cells": 10,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2020-06-03",
+        "end": "2020-06-07",
+        "cells": 11,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Los Sauces"
+      },
+      {
+        "start": "2026-01-18",
+        "end": "2026-01-21",
+        "cells": 19,
+        "regions": "Región de La Araucanía Purén, Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2023-04-26",
+        "end": "2023-04-26",
+        "cells": 15,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2024-10-09",
+        "end": "2024-10-10",
+        "cells": 10,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2024-04-10",
+        "end": "2024-04-14",
+        "cells": 20,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2023-11-02",
+        "end": "2023-11-04",
+        "cells": 13,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-10-25",
+        "end": "2025-10-29",
+        "cells": 11,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-03-05",
+        "end": "2025-03-06",
+        "cells": 14,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2023-03-21",
+        "end": "2023-03-27",
+        "cells": 16,
+        "regions": "Región de La Araucanía Collipulli"
+      },
+      {
+        "start": "2025-11-08",
+        "end": "2025-11-13",
+        "cells": 12,
+        "regions": "Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2021-01-25",
+        "end": "2021-01-27",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Contulmo"
+      },
+      {
+        "start": "2019-03-23",
+        "end": "2019-03-25",
+        "cells": 12,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Ercilla"
+      },
+      {
+        "start": "2025-04-08",
+        "end": "2025-04-09",
+        "cells": 19,
+        "regions": "Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2021-04-03",
+        "end": "2021-04-04",
+        "cells": 10,
+        "regions": "Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2026-03-27",
+        "end": "2026-04-03",
+        "cells": 10,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2025-01-25",
+        "end": "2025-02-07",
+        "cells": 26,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2021-03-17",
+        "end": "2021-03-21",
+        "cells": 20,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2022-02-04",
+        "end": "2022-02-12",
+        "cells": 27,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2024-01-30",
+        "end": "2024-02-03",
+        "cells": 27,
+        "regions": "Región de La Araucanía Lonquimay"
+      },
+      {
+        "start": "2025-03-22",
+        "end": "2025-03-24",
+        "cells": 10,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-11",
+        "cells": 33,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2025-04-05",
+        "end": "2025-04-09",
+        "cells": 38,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2022-12-30",
+        "end": "2023-01-02",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-11",
+        "cells": 23,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2023-03-22",
+        "end": "2023-03-26",
+        "cells": 22,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2023-03-20",
+        "end": "2023-03-27",
+        "cells": 68,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2021-03-07",
+        "end": "2021-03-09",
+        "cells": 10,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2021-04-24",
+        "end": "2021-04-25",
+        "cells": 11,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-04-21",
+        "end": "2026-04-25",
+        "cells": 11,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-11",
+        "cells": 12,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2024-03-26",
+        "end": "2024-03-29",
+        "cells": 11,
+        "regions": "Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2025-03-22",
+        "end": "2025-03-27",
+        "cells": 255,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Victoria, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2024-03-27",
+        "end": "2024-03-31",
+        "cells": 11,
+        "regions": "Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2025-03-22",
+        "end": "2025-03-27",
+        "cells": 33,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2022-03-31",
+        "end": "2022-04-01",
+        "cells": 12,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-04-04",
+        "cells": 223,
+        "regions": "Región de La Araucanía Perquenco, Región de La Araucanía Victoria, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2018-04-18",
+        "end": "2018-04-26",
+        "cells": 12,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-27",
+        "cells": 20,
+        "regions": "Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2019-11-17",
+        "end": "2019-11-21",
+        "cells": 12,
+        "regions": "Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2025-02-06",
+        "end": "2025-02-14",
+        "cells": 108,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2019-01-03",
+        "end": "2019-01-05",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2025-02-23",
+        "end": "2025-02-26",
+        "cells": 25,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2025-03-17",
+        "end": "2025-03-22",
+        "cells": 12,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2022-03-31",
+        "end": "2022-04-01",
+        "cells": 12,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2025-02-24",
+        "end": "2025-02-27",
+        "cells": 21,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2021-04-01",
+        "end": "2021-04-04",
+        "cells": 15,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-13",
+        "cells": 20,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-04-06",
+        "end": "2026-04-10",
+        "cells": 10,
+        "regions": "Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2025-03-22",
+        "end": "2025-03-24",
+        "cells": 55,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2025-04-05",
+        "end": "2025-04-09",
+        "cells": 105,
+        "regions": "Región de La Araucanía Perquenco, Región de La Araucanía Lautaro, Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2023-03-22",
+        "end": "2023-03-24",
+        "cells": 19,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2018-04-02",
+        "end": "2018-04-03",
+        "cells": 13,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2025-02-07",
+        "end": "2025-02-12",
+        "cells": 138,
+        "regions": "Región de La Araucanía Galvarino, Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2019-01-25",
+        "end": "2019-01-28",
+        "cells": 13,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2023-03-21",
+        "end": "2023-03-24",
+        "cells": 23,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2022-03-31",
+        "end": "2022-04-01",
+        "cells": 10,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2019-03-29",
+        "end": "2019-03-30",
+        "cells": 18,
+        "regions": "Región de La Araucanía Perquenco, Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2023-03-29",
+        "end": "2023-04-01",
+        "cells": 19,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Perquenco, Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2020-03-03",
+        "end": "2020-03-06",
+        "cells": 10,
+        "regions": "Región del Bío-Bío Tirúa, Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2022-12-29",
+        "end": "2022-12-31",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2020-02-24",
+        "end": "2020-03-01",
+        "cells": 14,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2021-03-22",
+        "end": "2021-03-23",
+        "cells": 13,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2025-04-05",
+        "end": "2025-04-08",
+        "cells": 13,
+        "regions": "Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2020-03-04",
+        "end": "2020-03-06",
+        "cells": 11,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-29",
+        "cells": 35,
+        "regions": "Región de La Araucanía Traiguén, Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2023-03-29",
+        "end": "2023-04-03",
+        "cells": 16,
+        "regions": "Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2026-05-13",
+        "end": "2026-05-14",
+        "cells": 14,
+        "regions": "Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2026-04-04",
+        "end": "2026-04-07",
+        "cells": 27,
+        "regions": "Región de La Araucanía Lumaco"
+      },
+      {
+        "start": "2022-03-29",
+        "end": "2022-04-01",
+        "cells": 24,
+        "regions": "Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2021-03-12",
+        "end": "2021-03-14",
+        "cells": 10,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Curacautín"
+      },
+      {
+        "start": "2022-03-30",
+        "end": "2022-04-01",
+        "cells": 15,
+        "regions": "Región de La Araucanía Victoria, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-26",
+        "cells": 22,
+        "regions": "Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2019-11-15",
+        "end": "2019-11-21",
+        "cells": 13,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2021-01-20",
+        "end": "2021-01-23",
+        "cells": 12,
+        "regions": "Región del Bío-Bío Tirúa"
+      },
+      {
+        "start": "2019-03-21",
+        "end": "2019-03-26",
+        "cells": 10,
+        "regions": "Región de La Araucanía Curacautín, Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2025-04-05",
+        "end": "2025-04-09",
+        "cells": 22,
+        "regions": "Región de La Araucanía Curacautín, Región de La Araucanía Victoria, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2023-03-30",
+        "end": "2023-04-01",
+        "cells": 10,
+        "regions": "Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2022-03-15",
+        "end": "2022-03-18",
+        "cells": 17,
+        "regions": "Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2021-03-21",
+        "end": "2021-03-23",
+        "cells": 11,
+        "regions": "Región de La Araucanía Perquenco, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-25",
+        "cells": 18,
+        "regions": "Región de La Araucanía Traiguén"
+      },
+      {
+        "start": "2023-03-20",
+        "end": "2023-03-23",
+        "cells": 11,
+        "regions": "Región de La Araucanía Curacautín"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-04-02",
+        "cells": 67,
+        "regions": "Región de La Araucanía Curacautín, Región de La Araucanía Lautaro, Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2020-04-06",
+        "end": "2020-04-07",
+        "cells": 15,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2025-02-25",
+        "end": "2025-02-26",
+        "cells": 12,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-28",
+        "cells": 10,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2023-03-29",
+        "end": "2023-04-02",
+        "cells": 14,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2023-03-27",
+        "end": "2023-03-30",
+        "cells": 15,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2022-03-15",
+        "end": "2022-03-18",
+        "cells": 10,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2026-04-09",
+        "end": "2026-04-10",
+        "cells": 12,
+        "regions": "Región de La Araucanía Galvarino"
+      },
+      {
+        "start": "2023-03-23",
+        "end": "2023-03-25",
+        "cells": 12,
+        "regions": "Región de La Araucanía Curacautín"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-29",
+        "cells": 58,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Victoria"
+      },
+      {
+        "start": "2026-04-02",
+        "end": "2026-04-04",
+        "cells": 11,
+        "regions": "Región de La Araucanía Perquenco, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2021-03-17",
+        "end": "2021-03-18",
+        "cells": 14,
+        "regions": "Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2025-03-23",
+        "end": "2025-03-24",
+        "cells": 10,
+        "regions": "Región de La Araucanía Curacautín, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2023-03-22",
+        "end": "2023-03-27",
+        "cells": 29,
+        "regions": "Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2024-03-26",
+        "end": "2024-03-28",
+        "cells": 14,
+        "regions": "Región de La Araucanía Perquenco, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2019-04-10",
+        "end": "2019-04-11",
+        "cells": 10,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2023-03-23",
+        "end": "2023-04-01",
+        "cells": 37,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2025-04-07",
+        "end": "2025-04-09",
+        "cells": 17,
+        "regions": "Región de La Araucanía Curacautín, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2019-03-29",
+        "end": "2019-04-02",
+        "cells": 14,
+        "regions": "Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2026-06-07",
+        "end": "2026-06-08",
+        "cells": 12,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2019-03-25",
+        "end": "2019-03-31",
+        "cells": 53,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2020-04-11",
+        "end": "2020-04-13",
+        "cells": 16,
+        "regions": "Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2024-03-04",
+        "end": "2024-03-08",
+        "cells": 15,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2025-04-05",
+        "end": "2025-04-09",
+        "cells": 23,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2021-01-08",
+        "end": "2021-01-09",
+        "cells": 14,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2025-04-05",
+        "end": "2025-04-09",
+        "cells": 16,
+        "regions": "Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2020-04-10",
+        "end": "2020-04-14",
+        "cells": 16,
+        "regions": "Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2020-04-11",
+        "end": "2020-04-13",
+        "cells": 15,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Perquenco"
+      },
+      {
+        "start": "2021-01-17",
+        "end": "2021-01-20",
+        "cells": 12,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-29",
+        "cells": 32,
+        "regions": "Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2020-05-28",
+        "end": "2020-06-01",
+        "cells": 10,
+        "regions": "Región de La Araucanía Galvarino, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2020-01-02",
+        "end": "2020-01-07",
+        "cells": 15,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2021-03-21",
+        "end": "2021-03-25",
+        "cells": 12,
+        "regions": "Región de La Araucanía Lautaro, Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-30",
+        "cells": 59,
+        "regions": "Región de La Araucanía Vilcún, Región de La Araucanía Lautaro"
+      },
+      {
+        "start": "2020-04-11",
+        "end": "2020-04-13",
+        "cells": 21,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2026-01-19",
+        "end": "2026-01-20",
+        "cells": 13,
+        "regions": "Región de La Araucanía Temuco"
+      },
+      {
+        "start": "2023-03-22",
+        "end": "2023-03-27",
+        "cells": 51,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2025-03-21",
+        "end": "2025-03-23",
+        "cells": 24,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2022-03-30",
+        "end": "2022-04-01",
+        "cells": 12,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2026-01-19",
+        "end": "2026-01-20",
+        "cells": 12,
+        "regions": "Región de La Araucanía Cholchol, Región de La Araucanía Nueva Imperial"
+      },
+      {
+        "start": "2026-04-08",
+        "end": "2026-04-10",
+        "cells": 11,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2026-01-19",
+        "end": "2026-01-23",
+        "cells": 23,
+        "regions": "Región de La Araucanía Nueva Imperial, Región de La Araucanía Cholchol"
+      },
+      {
+        "start": "2022-03-30",
+        "end": "2022-04-01",
+        "cells": 12,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2022-03-30",
+        "end": "2022-04-01",
+        "cells": 11,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2026-03-30",
+        "end": "2026-04-01",
+        "cells": 11,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-29",
+        "cells": 12,
+        "regions": "Región de La Araucanía Nueva Imperial"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-28",
+        "cells": 10,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2023-03-22",
+        "end": "2023-03-24",
+        "cells": 22,
+        "regions": "Región de La Araucanía Vilcún, Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2023-04-05",
+        "end": "2023-04-10",
+        "cells": 46,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2024-03-27",
+        "end": "2024-04-01",
+        "cells": 11,
+        "regions": "Región de La Araucanía Temuco, Región de La Araucanía Nueva Imperial"
+      },
+      {
+        "start": "2025-04-07",
+        "end": "2025-04-08",
+        "cells": 11,
+        "regions": "Región de La Araucanía Nueva Imperial"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-30",
+        "cells": 24,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2025-02-25",
+        "end": "2025-02-27",
+        "cells": 11,
+        "regions": "Región de La Araucanía Carahue"
+      },
+      {
+        "start": "2022-02-22",
+        "end": "2022-02-23",
+        "cells": 18,
+        "regions": "Región de La Araucanía Melipeuco"
+      },
+      {
+        "start": "2025-03-21",
+        "end": "2025-03-22",
+        "cells": 18,
+        "regions": "Región de La Araucanía Vilcún"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-29",
+        "cells": 19,
+        "regions": "Región de La Araucanía Vilcún, Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-22",
+        "cells": 35,
+        "regions": "Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2020-03-22",
+        "end": "2020-03-26",
+        "cells": 17,
+        "regions": "Región de La Araucanía Nueva Imperial"
+      },
+      {
+        "start": "2023-03-20",
+        "end": "2023-03-27",
+        "cells": 51,
+        "regions": "Región de La Araucanía Cunco, Región de La Araucanía Padre Las Casas, Región de La Araucanía Freire"
+      },
+      {
+        "start": "2019-03-19",
+        "end": "2019-03-22",
+        "cells": 12,
+        "regions": "Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-30",
+        "cells": 19,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2024-03-14",
+        "end": "2024-03-17",
+        "cells": 26,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Padre Las Casas, Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2022-03-15",
+        "end": "2022-03-18",
+        "cells": 31,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Cunco, Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2021-03-16",
+        "end": "2021-03-19",
+        "cells": 12,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2025-03-21",
+        "end": "2025-03-24",
+        "cells": 76,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Padre Las Casas, Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2024-03-27",
+        "end": "2024-04-01",
+        "cells": 18,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Padre Las Casas"
+      },
+      {
+        "start": "2021-04-03",
+        "end": "2021-04-04",
+        "cells": 12,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2026-03-26",
+        "end": "2026-03-30",
+        "cells": 40,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2024-05-14",
+        "end": "2024-05-18",
+        "cells": 11,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2020-03-30",
+        "end": "2020-04-03",
+        "cells": 23,
+        "regions": "Región de La Araucanía Freire"
+      },
+      {
+        "start": "2025-04-07",
+        "end": "2025-04-09",
+        "cells": 30,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2024-04-11",
+        "end": "2024-04-13",
+        "cells": 21,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2026-04-03",
+        "end": "2026-04-10",
+        "cells": 11,
+        "regions": "Región de La Araucanía Teodoro Schmidt, Región de La Araucanía Freire"
+      },
+      {
+        "start": "2022-03-22",
+        "end": "2022-03-26",
+        "cells": 16,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2022-11-21",
+        "end": "2022-11-24",
+        "cells": 10,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2022-03-30",
+        "end": "2022-04-01",
+        "cells": 10,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2026-04-08",
+        "end": "2026-04-10",
+        "cells": 10,
+        "regions": "Región de La Araucanía Cunco, Región de La Araucanía Freire"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-28",
+        "cells": 16,
+        "regions": "Región de La Araucanía Cunco"
+      },
+      {
+        "start": "2025-04-07",
+        "end": "2025-04-09",
+        "cells": 32,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Villarrica"
+      },
+      {
+        "start": "2026-03-25",
+        "end": "2026-03-30",
+        "cells": 52,
+        "regions": "Región de La Araucanía Freire, Región de La Araucanía Pitrufquén, Región de La Araucanía Gorbea"
+      },
+      {
+        "start": "2022-03-31",
+        "end": "2022-04-01",
+        "cells": 12,
+        "regions": "Región de La Araucanía Freire"
+      },
+      {
+        "start": "2020-02-20",
+        "end": "2020-02-22",
+        "cells": 14,
+        "regions": "Región de La Araucanía Pitrufquén, Región de La Araucanía Gorbea"
+      },
+      {
+        "start": "2023-03-22",
+        "end": "2023-03-27",
+        "cells": 38,
+        "regions": "Región de La Araucanía Gorbea, Región de La Araucanía Pitrufquén"
+      },
+      {
+        "start": "2025-03-21",
+        "end": "2025-03-23",
+        "cells": 15,
+        "regions": "Región de La Araucanía Gorbea"
+      },
+      {
+        "start": "2026-04-08",
+        "end": "2026-04-10",
+        "cells": 14,
+        "regions": "Región de La Araucanía Gorbea"
+      },
+      {
+        "start": "2025-04-08",
+        "end": "2025-04-09",
+        "cells": 11,
+        "regions": "Región de La Araucanía Pitrufquén"
+      },
+      {
+        "start": "2022-03-30",
+        "end": "2022-04-01",
+        "cells": 15,
+        "regions": "Región de La Araucanía Gorbea"
+      },
+      {
+        "start": "2025-04-07",
+        "end": "2025-04-09",
+        "cells": 10,
+        "regions": "Región de La Araucanía Pitrufquén, Región de La Araucanía Loncoche"
+      },
+      {
+        "start": "2020-01-29",
+        "end": "2020-01-31",
+        "cells": 11,
+        "regions": "Región de Los Ríos Mariquina"
+      },
+      {
+        "start": "2026-04-08",
+        "end": "2026-04-13",
+        "cells": 16,
+        "regions": "Región de Los Ríos Los Lagos, Región de Los Ríos Máfil"
+      },
+      {
+        "start": "2026-04-09",
+        "end": "2026-04-11",
+        "cells": 10,
+        "regions": "Región de Los Ríos Los Lagos"
+      },
+      {
+        "start": "2019-02-03",
+        "end": "2019-02-05",
+        "cells": 13,
+        "regions": "Región de Los Ríos La Unión"
+      },
+      {
+        "start": "2020-03-31",
+        "end": "2020-04-02",
+        "cells": 10,
+        "regions": "Región de Los Ríos La Unión"
+      },
+      {
+        "start": "2021-04-13",
+        "end": "2021-04-16",
+        "cells": 10,
+        "regions": "Región de Los Lagos San Pablo"
+      },
+      {
+        "start": "2024-04-11",
+        "end": "2024-04-18",
+        "cells": 12,
+        "regions": "Región de Los Lagos Los Muermos"
+      },
+      {
+        "start": "2024-10-22",
+        "end": "2024-10-25",
+        "cells": 16,
+        "regions": "Región de Aysén del Gral.Ibañez del Campo Lago Verde"
+      }
+    ],
+    "note": "위성은 농경지 소각 등 산불 통계 밖의 불도 잡고, 1 ha 미만 산불은 대부분 못 잡는다.",
+    "annual_records": {
+      "source": "CONAF 시즌별 전국 산불 건수·면적 (모든 크기)",
+      "years": [
+        2001,
+        2023
+      ],
+      "season_start_month": 7,
+      "independent_break_test": {
+        "화재 칸 (보정) / 공식 건수": {
+          "ratio_before_2012": 1.8528,
+          "ratio_after_2012": 1.7831,
+          "after_over_before": 0.96,
+          "pettitt_p": 0.6732,
+          "change_year": 2017
+        },
+        "화재 칸 (보정) / 공식 면적 ha": {
+          "ratio_before_2012": 0.2428,
+          "ratio_after_2012": 0.1657,
+          "after_over_before": 0.68,
+          "pettitt_p": 0.1726,
+          "change_year": 2013
+        },
+        "원값 이어 붙이기 / 공식 건수": {
+          "ratio_before_2012": 0.7535,
+          "ratio_after_2012": 1.7899,
+          "after_over_before": 2.38,
+          "pettitt_p": 0.0007,
+          "change_year": 2011
+        },
+        "원값 이어 붙이기 / 공식 면적 ha": {
+          "ratio_before_2012": 0.1001,
+          "ratio_after_2012": 0.1656,
+          "after_over_before": 1.65,
+          "pettitt_p": 0.4079,
+          "change_year": 2012
+        }
+      },
+      "rank_correlation": {
+        "2001~2010": {
+          "vs_count": -0.14,
+          "vs_area": -0.13
+        },
+        "2012~2023": {
+          "vs_count": 0.15,
+          "vs_area": 0.88
+        },
+        "2001~2023": {
+          "vs_count": 0.01,
+          "vs_area": 0.46
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Burnline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+/* Layout: 홍보용 한 페이지. 어두운 첫 화면(검색) → 왜 → 보정 전·후 → 방법 → 신뢰 → 지역 → 출처 */
+.hero { background: var(--night); color: var(--night-ink); padding: 72px 0 64px; position: relative; overflow: hidden; }
+.hero .wrap { position: relative; display: grid; gap: 22px; }
+.hero .eyebrow { font-size: 13px; color: var(--night-muted); letter-spacing: .04em; }
+.hero h1 { font-size: clamp(30px, 5.2vw, 52px); line-height: 1.15; margin: 0; letter-spacing: -0.02em; max-width: 16ch; text-wrap: balance; }
+.hero h1 em { font-style: normal; color: #FB923C; }
+.hero p.lead { font-size: 17px; color: var(--night-muted); margin: 0; max-width: 46ch; }
+.search { display: flex; gap: 8px; max-width: 560px; background: #fff; border-radius: 10px; padding: 6px; }
+.search input { flex: 1; min-width: 0; font: inherit; font-size: 16px; border: 0; padding: 8px 10px; color: #161B1F; background: transparent; }
+.search input:focus { outline: none; }
+.search button { font: inherit; font-weight: 600; font-size: 15px; border: 0; border-radius: 7px; background: #C2410C; color: #fff; padding: 0 18px; cursor: pointer; }
+.countries { display: flex; flex-wrap: wrap; gap: 8px; }
+.countries a, .countries span { font-size: 14px; border: 1px solid #2F4440; border-radius: 999px; padding: 6px 14px; text-decoration: none; color: var(--night-ink); }
+.countries span { color: var(--night-muted); border-style: dashed; }
+.countries button { font: inherit; font-size: 14px; cursor: pointer; border: 1px solid #2F4440; border-radius: 999px; padding: 6px 14px; background: none; color: var(--night-muted); }
+.countries button b { color: #5E716D; margin-right: 4px; }
+.countries button[aria-pressed="true"] { color: var(--night-ink); border-color: var(--night-ink); }
+.countries button[aria-pressed="true"] b { color: #FB923C; }
+.countries button:focus-visible { outline: 2px solid #FB923C; outline-offset: 2px; }
+.countries a b { color: #FB923C; margin-right: 4px; }
+.strips { position: absolute; inset: auto 0 0 auto; width: min(46vw, 520px); opacity: .9; pointer-events: none; }
+@media (max-width: 860px) { .strips { position: static; width: 100%; opacity: 1; } }
+.hint { font-size: 12.5px; color: var(--night-muted); margin: 0; }
+
+section.blk { padding: 56px 0 8px; }
+section.blk .wrap { display: grid; gap: 20px; }
+.kicker { font-size: 13px; color: var(--ember); font-weight: 600; letter-spacing: .03em; }
+.blk h2.big { font-size: clamp(22px, 3.2vw, 30px); line-height: 1.3; letter-spacing: -0.01em; max-width: 26ch; text-wrap: balance; }
+.blk p.body { margin: 0; max-width: 62ch; color: var(--muted); font-size: 15.5px; }
+.ctabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+.ctabs button { font: inherit; font-size: 14px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 14px; }
+.ctabs button[aria-selected="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); font-weight: 600; }
+.ctabs button:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stat .v { font-family: var(--f-num); font-size: clamp(28px, 4vw, 40px); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; }
+.stat .v small { font-size: .45em; color: var(--muted); margin-left: 4px; font-family: var(--f-ui); }
+.stat .k { font-size: 14px; margin-top: 6px; }
+.stat .s { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.split .card { display: grid; gap: 8px; }
+.split h3 { margin: 0; font-size: 15px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.proof { display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 14px; }
+.proof b { font-family: var(--f-num); font-weight: 500; font-size: 18px; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: s; }
+.step { display: grid; gap: 8px; align-content: start; }
+.step .n { font-family: var(--f-num); color: var(--ember); font-size: 13px; }
+.step h3 { margin: 0; font-size: 16px; }
+.step p { margin: 0; font-size: 14px; color: var(--muted); }
+.cellgrid { display: grid; grid-template-columns: repeat(8, 14px); gap: 3px; }
+.cellgrid i { width: 14px; height: 14px; background: var(--d0); border-radius: 2px; }
+.cellgrid i.on { background: var(--d3); }
+.det { display: grid; gap: 10px; }
+.regions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.region { display: grid; gap: 8px; align-content: start; text-decoration: none; }
+.region .flag { font-size: 12px; color: var(--muted); }
+.region h3 { margin: 0; font-size: 18px; }
+.region p { margin: 0; font-size: 14px; color: var(--muted); }
+.region.soon { border-style: dashed; background: transparent; }
+a.region:hover { border-color: var(--ink); }
+.cta { display: flex; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 760px) { .stats, .steps, .regions, .split { grid-template-columns: minmax(0, 1fr); } .hero { padding: 44px 0 36px; } }
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="index.html"><i></i>Burnline</a>
+  <nav class="nav"><a href="index.html" aria-current="page">소개</a><a href="dashboard.html">대시보드</a><a href="insight.html">월별 인사이트</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">NASA FIRMS 위성 화재 기록 · 2001년부터 지금까지</div>
+  <h1>우리 지역은 지금 <em>평소보다</em> 많이 타고 있을까?</h1>
+  <p class="lead">위성이 바뀌어도 끊기지 않는 25년 화재 달력. 시·군·구 단위로, 이번 달을 평년과 비교해 보여 드려요.</p>
+  <form class="search" id="search" role="search">
+    <input id="q" list="places" placeholder="시·군·구나 시·도 이름 (예: 의성군, 강원)" autocomplete="off" aria-label="지역 검색">
+    <datalist id="places"></datalist>
+    <button type="submit">보기</button>
+  </form>
+  <p class="hint" id="hint">대한민국 시·도 17곳, 시·군·구 228곳을 볼 수 있어요.</p>
+  <div class="countries">
+    <button type="button" data-c="KOR" aria-pressed="true"><b>●</b>대한민국</button>
+    <button type="button" data-c="CAL" aria-pressed="false"><b>●</b>미국 캘리포니아</button>
+    <button type="button" data-c="BC" aria-pressed="false"><b>●</b>캐나다 브리티시컬럼비아</button>
+  </div>
+  <svg class="strips" id="strips" aria-hidden="true"></svg>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="kicker">왜 화재 달력인가</div>
+  <h2 class="big">점 지도는 "어디서"를 알려 주지만, "평소보다 많은가"는 알려 주지 않아요.</h2>
+  <p class="body">산불 대응은 시기를 아는 데서 시작해요. 언제 많이 타는지, 올해가 예년과 다른지, 이웃 지역은 어떤지. 이런 질문에는 오래 이어진 기록과 지역 단위 비교가 필요해요.</p>
+  <div class="ctabs" id="ctabs" role="tablist" aria-label="지역">
+    <button type="button" role="tab" data-c="KOR">대한민국</button><button type="button" role="tab" data-c="CAL">미국 캘리포니아</button><button type="button" role="tab" data-c="BC">캐나다 브리티시컬럼비아</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <p class="note" id="stats-note">아래 보정 전·후 그래프와 검증 숫자도 고른 지역 기준으로 바뀌어요.</p>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="kicker">위성이 바뀌면 기록이 끊겨요</div>
+  <h2 class="big">2012년, 불이 갑자기 늘어난 게 아니라 위성이 바뀌었어요.</h2>
+  <p class="body">2012년부터 더 작은 불까지 보는 새 위성(VIIRS)이 들어왔어요. 기록을 그대로 이으면 그해부터 불이 두세 배 늘어난 것처럼 보여요. Burnline은 두 위성이 함께 본 14년을 써서 옛 기록을 새 위성 기준으로 옮겼어요.</p>
+  <div class="split">
+    <div class="card"><h3><span class="chip warn">보정 전</span>기록을 그대로 이으면</h3><svg id="ch-before" role="img" aria-label="보정 전 연간 화재 칸"></svg><p class="note" id="cap-before"></p></div>
+    <div class="card"><h3><span class="chip ok">보정 후</span>Burnline 화재 달력</h3><svg id="ch-after" role="img" aria-label="보정 후 연간 화재 칸"></svg><p class="note" id="cap-after"></p></div>
+  </div>
+  <div class="proof" id="proof"></div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="kicker">어떻게 만들었나</div>
+  <h2 class="big">세 단계로, 어느 위성 기록이든 같은 자로 잽니다.</h2>
+  <div class="steps">
+    <div class="card step"><span class="n">01</span><h3>화재 칸으로 셉니다</h3>
+      <div class="cellgrid" aria-hidden="true" id="cells"></div>
+      <p>약 1 km 칸에서 그날 불이 잡히면 1칸. 해상도가 다른 위성도 같은 뜻의 숫자가 돼요.</p></div>
+    <div class="card step"><span class="n">02</span><h3>한 위성 기준으로 맞춥니다</h3>
+      <p>MODIS(2001~), S-NPP(2012~)의 값을 지금 쓰는 NOAA-20 기준으로 옮겨요. 달마다 다른 보정 계수를 써요.</p>
+      <p class="num" style="color:var(--ink)">MODIS → S-NPP → NOAA-20</p></div>
+    <div class="card step"><span class="n">03</span><h3>모르는 건 모른다고 씁니다</h3>
+      <p>평소 불이 드문 지역은 자기 기록만으로 평년을 정하기 어려워요. 그런 곳은 시·도 기준으로 판단하고, 그렇다고 밝혀 둬요. 보정한 옛 값에는 품질 등급을 붙여요.</p>
+      <p><span class="chip warn">평소 불이 드문 지역</span> <span class="chip base">추정값 · 품질 낮음</span></p></div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="kicker">믿을 수 있나</div>
+  <h2 class="big" id="trust-h">산림청 공식 산불 기록과 하나하나 맞춰 봤어요.</h2>
+  <div class="split">
+    <div class="card det"><h3>산불 크기별로 위성이 잡은 비율</h3><svg id="ch-det" role="img" aria-label="산불 크기별 위성 감지율"></svg>
+      <p class="note" id="det-note">2018년 4월~2026년 산림청 기록 4,410건. 그날부터 2일 안에 같은 시·군·구에서 감지됐는지 봤어요. 회색 선은 날짜를 30일 옮겼을 때 우연히 맞는 비율이에요.</p></div>
+    <div class="card"><h3>한계도 같이 적어요</h3>
+      <p class="note" style="font-size:14px;color:var(--ink)">큰 산불은 거의 다 잡지만, 1 ha 미만 작은 불은 대부분 못 잡아요. 위성은 논밭 소각처럼 산불 통계 밖의 불도 잡아요. 그래서 Burnline의 숫자는 "산불 건수"가 아니라 "위성에 잡힌 불의 활동량"이에요.</p>
+      <p class="note">예측이나 실시간 경보는 하지 않아요. 지난 기록과 비교해 지금을 설명하는 도구예요.</p></div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="kicker">지역</div>
+  <h2 class="big">같은 방법을 성격이 다른 세 지역에 적용해요.</h2>
+  <div class="regions">
+    <a class="card region" href="insight.html#uiseong"><span class="flag">대한민국 · 시·군·구 228곳</span><h3>2025년 3월 의성</h3><p id="rg-kr">불이 드문 나라에서 가장 큰 산불. 같은 달 기록 중 1위였어요.</p><span class="note" style="color:var(--ember)">월별 인사이트 보기 →</span></a>
+    <a class="card region" href="dashboard.html?c=CAL#m=2020-09"><span class="flag">미국 · 캘리포니아 카운티 58곳</span><h3>2020년 9월 캘리포니아</h3><p>불이 많은 지역에서도 25년 9월 중 1위. 보정 전 2.5배였던 2012년 단절이 CAL FIRE 기록 대비 1.25배로 줄었어요.</p><span class="note" style="color:var(--ember)">대시보드 보기 →</span></a>
+    <a class="card region" href="dashboard.html?c=BC#m=2023-05"><span class="flag">캐나다 · 브리티시컬럼비아 지역구 28곳</span><h3>2023년 5월 BC</h3><p>여름 대형 산불 지역. 화재 칸의 연도 순위가 BC 산불청 피해면적과 2012년 전후 모두 0.92로 맞아요.</p><span class="note" style="color:var(--ember)">대시보드 보기 →</span></a>
+  </div>
+  <div class="cta"><a class="btn" href="dashboard.html">대시보드 열기</a><a class="btn ghost" href="insight.html">월별 인사이트 예시</a></div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div><b style="color:var(--ink)">Burnline</b> · NASA Space Apps Challenge 2026 · Harmonization of MODIS and VIIRS Hot Spots</div>
+  <div>자료: NASA FIRMS MODIS C6.1, VIIRS S-NPP·NOAA-20 375 m · 산림청 산불 통계 · KOSIS 시도별 산불발생 현황 · 경계 geoBoundaries (CC BY 3.0)</div>
+  <div>샘플 화면입니다. 숫자는 2026-11-08 처리 결과예요.</div>
+</div></footer>
+
+<script src="data.js"></script>
+<script src="landing.js"></script>
+<script>
+const D = window.BURN, LND = window.LANDING || { KOR: D.landing }, NS = "http://www.w3.org/2000/svg";
+let C = "KOR", L = LND.KOR;   // 숫자 카드·보정 전후·검증에 쓰는 지역 (탭으로 바꿈)
+const fmt = x => x == null ? "–" : Number(x).toLocaleString("ko-KR", { maximumFractionDigits: 1 });
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// 지역별 화면 문구
+const UI = {
+  KOR: { ph: "시·군·구나 시·도 이름 (예: 의성군, 강원)", ex: "시·군·구 이름(예: 의성군)이나 시·도 이름(예: 강원)으로" },
+  CAL: { ph: "카운티 이름 (예: Butte, Fresno)", ex: "카운티 이름(예: Butte)으로" },
+  BC: { ph: "지역구 이름 (예: Cariboo, Peace River)", ex: "지역구 이름(예: Cariboo)으로" }
+};
+const dashUrl = (c, h) => "dashboard.html" + (c === "KOR" ? "" : "?c=" + c) + (h ? "#" + h : "");
+
+// 검색: 세 지역 모두에서 찾고, 지금 고른 지역을 먼저
+const opts = Object.keys(D.prov).map(p => ({ c: "KOR", t: p + " 전체", h: "p=" + encodeURIComponent(p) }))
+  .concat(D.dist.map((d, i) => ({ c: "KOR", t: d.prov + " " + d.ko, h: "d=" + i, k: d.ko })))
+  .concat(...["CAL", "BC"].filter(c => LND[c]?.places).map(c => LND[c].places.map(([n, , i]) => ({ c, t: n, h: "d=" + i, k: n }))));
+const lc = x => x.toLowerCase();
+function fillPlaces() {
+  document.getElementById("places").innerHTML = [...opts.filter(o => o.c === C), ...opts.filter(o => o.c !== C)].map(o => `<option value="${o.t}">`).join("");
+}
+document.getElementById("search").onsubmit = e => {
+  e.preventDefault();
+  const q = document.getElementById("q").value.trim().replace(/\s+/g, " "), ql = lc(q);
+  if (!q) { location.href = dashUrl(C); return; }
+  const pool = [...opts.filter(o => o.c === C), ...opts.filter(o => o.c !== C)];
+  const hit = pool.find(o => lc(o.t) === ql) || pool.find(o => o.k && (lc(o.k) === ql || lc(o.t).endsWith(" " + ql))) || pool.find(o => lc(o.t).includes(ql));
+  if (hit) location.href = dashUrl(hit.c, hit.h);
+  else document.getElementById("hint").textContent = `"${q}"을(를) 찾지 못했어요. ${UI[C].ex} 검색해 보세요.`;
+};
+
+// 첫 화면 장식: 2001~2025 연간 화재 칸 막대 (보정 후, 고른 지역)
+function drawStrips() {
+  const v = L.after, W = 520, H = 120, bw = W / v.length, mx = Math.max(...v);
+  document.getElementById("strips").setAttribute("viewBox", `0 0 ${W} ${H + 16}`);
+  document.getElementById("strips").innerHTML = v.map((x, i) => {
+    const h = Math.max(2, x / mx * H), t = x / mx;
+    const c = t > .75 ? "#FED7AA" : t > .5 ? "#FB923C" : t > .3 ? "#C2410C" : "#7C2D12";
+    return `<rect x="${i * bw + 1}" y="${H - h}" width="${bw - 2}" height="${h}" rx="1" fill="${c}"/>`;
+  }).join("") + `<text x="0" y="${H + 13}" style="fill:#93A7A2;stroke:none">2001</text><text x="${W}" y="${H + 13}" text-anchor="end" style="fill:#93A7A2;stroke:none">2025</text>`;
+}
+
+// 숫자 카드 (고른 지역)
+function drawStats() {
+  const a = L.area, cs = L.case, lab = L.labels || { country: "대한민국", short: "전국", official: "산림청", lv2: "시·군·구" };
+  const rk = L.risk.months, rkName = rk.length > 2 && rk.every((x, k) => !k || x === rk[k - 1] + 1) ? `${rk[0]}~${rk[rk.length - 1]}월` : rk.join("·") + "월";
+  const y = cs.month.slice(0, 4), m = +cs.month.slice(5), where = C === "KOR" ? "전국" : lab.country;
+  document.getElementById("stats").innerHTML = [
+    [fmt(a.ha) + "<small>ha</small>", `${a.year}년 ${where} 산불 피해 면적`, `${a.record ? "2001년 이후 가장 넓어요" : ""} · ${a.source}`],
+    [fmt(cs.ratio) + "<small>배</small>", `${y}년 ${m}월 위성 화재 칸, ${m}월 평년 대비`, `${cs.n}년 중 ${cs.rank}위 · Burnline`],
+    [Math.round(L.risk.share * 100) + "<small>%</small>", `한 해 화재 활동 중 ${rkName} 비중`, "2001~2025년 · Burnline"]
+  ].map(([v, k, s]) => `<div class="card stat"><div class="v">${v}</div><div class="k">${k}</div><div class="s">${s}</div></div>`).join("");
+  document.getElementById("trust-h").textContent = `${lab.official} 공식 산불 기록과 하나하나 맞춰 봤어요.`;
+  document.getElementById("det-note").textContent = `2018년 4월~ ${lab.official} 기록 ${fmt(L.detect_n)}건. 그날부터 2일 안에 같은 ${lab.lv2}에서 감지됐는지 봤어요. 회색 선은 날짜를 30일 옮겼을 때 우연히 맞는 비율이에요.` +
+    (C === "KOR" ? "" : ` ${lab.lv2}가 넓어서 우연히 맞는 비율도 높아요. 두 막대의 차이로 읽어 주세요.`);
+  document.querySelectorAll("#ctabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.c === C));
+}
+
+// 보정 전·후: 같은 축, 2012년 선
+function bars(id, vals, hi) {
+  const W = 460, H = 190, pl = 34, pb = 20, n = vals.length, bw = (W - pl) / n, mx = Math.max(...L.before, ...L.after);
+  const y = v => H - pb - v / mx * (H - pb - 8), x0 = pl + (2012 - L.years[0]) * bw;
+  let s = `<line x1="${pl}" x2="${W}" y1="${H - pb}" y2="${H - pb}" stroke="${css("--line")}"/>`;
+  const st = (q => [1, 2, 5, 10].map(k => k * 10 ** Math.floor(Math.log10(q))).find(k => k >= q * 0.8))(mx / 3);
+  [0, st, st * 2, st * 3].filter(t => t <= mx * 1.05).forEach(t => s += `<line x1="${pl}" x2="${W}" y1="${y(t)}" y2="${y(t)}" stroke="${css("--faint")}"/><text x="${pl - 6}" y="${y(t) + 4}" text-anchor="end">${fmt(t)}</text>`);
+  vals.forEach((v, i) => { const yr = L.years[i]; s += `<rect x="${pl + i * bw + 1.5}" y="${y(v)}" width="${bw - 3}" height="${H - pb - y(v)}" rx="1.5" fill="${yr < 2012 ? css("--none") : hi}" opacity="${yr < 2012 ? .55 : 1}"><title>${yr}년 ${fmt(v)}칸</title></rect>`; });
+  s += `<line x1="${x0}" x2="${x0}" y1="6" y2="${H - pb}" stroke="${css("--ink")}" stroke-dasharray="3 3"/><text x="${x0 + 5}" y="16" style="fill:${css("--ink")}">2012 VIIRS 시작</text>`;
+  [2001, 2012, 2025].forEach(t => s += `<text x="${pl + (t - L.years[0] + .5) * bw}" y="${H - 5}" text-anchor="middle">${t}</text>`);
+  const el = document.getElementById(id); el.setAttribute("viewBox", `0 0 ${W} ${H}`); el.innerHTML = s;
+}
+const avg = (a, b) => { const v = L.years.map((y, i) => [y, i]).filter(([y]) => y >= a && y <= b).map(([, i]) => i); return [v.reduce((s, i) => s + L.before[i], 0) / v.length, v.reduce((s, i) => s + L.after[i], 0) / v.length]; };
+function drawSplit() {
+  bars("ch-before", L.before, css("--warn")); bars("ch-after", L.after, css("--ember"));
+  const [b1, a1] = avg(2001, 2011), [b2, a2] = avg(2012, 2025);
+  document.getElementById("cap-before").textContent = `연평균 2001~2011년 ${fmt(Math.round(b1))}칸 → 2012~2025년 ${fmt(Math.round(b2))}칸 (${(b2 / b1).toFixed(1)}배). 회색은 MODIS, 색은 S-NPP 원래 값.`;
+  document.getElementById("cap-after").textContent = `연평균 2001~2011년 ${fmt(Math.round(a1))}칸 → 2012~2025년 ${fmt(Math.round(a2))}칸. 2012년 이전 값은 NOAA-20 기준으로 옮긴 추정값이에요.`;
+  const k = L.kosis || {}, off = (L.labels || {}).official || "산림청", kc = k["화재 칸 (보정)"]?.after_over_before;
+  const unsure = kc != null && (kc < 0.75 || kc > 1.33);
+  document.getElementById("proof").innerHTML =
+    (k["원값 이어 붙이기"] ? `<span>${off} 공식 산불 건수 대비 비율의 2012년 전후 차이 <b>${k["원값 이어 붙이기"].after_over_before}배 → ${kc}배</b>${unsure ? ` <span class="note">공식 기록 자체가 그 무렵 크게 바뀌어(작은 불은 줄고 초대형 산불이 늘어남) 이 비교로는 판단하지 않아요</span>` : ""}</span>` : "") +
+    `<span>MODIS만 쓴 기록 대비 2012년 이후 수준 <b>${(L.jump["이어 붙이기"].ratio / L.jump["이어 붙이기"].before).toFixed(1)}배 → ${L.jump["H 하모니제이션"].ratio.toFixed(2)}배</b> <span class="note">보정 후 95% 범위 ${L.jump["H 하모니제이션"].ci[0]}~${L.jump["H 하모니제이션"].ci[1]}, 1이면 끊김 없음</span></span>`;
+}
+
+// 감지율
+function drawDet() {
+  const rows = Object.entries(L.detect), W = 460, rh = 30, pl = 92, H = rows.length * rh + 6;
+  let s = "";
+  rows.forEach(([k, v], i) => {
+    const y = i * rh + 4, w = (W - pl - 44) * v.detected, wc = (W - pl - 44) * v.chance;
+    s += `<text x="${pl - 8}" y="${y + 15}" text-anchor="end" style="font-family:var(--f-ui);font-size:12px">${k.replace(" 이상", "+").replace(" 미만", "−")}</text>`;
+    s += `<rect x="${pl}" y="${y + 3}" width="${W - pl - 44}" height="16" rx="2" fill="${css("--faint")}"/>`;
+    s += `<rect x="${pl}" y="${y + 3}" width="${Math.max(2, w)}" height="16" rx="2" fill="${css("--ember")}"/>`;
+    s += `<line x1="${pl + wc}" x2="${pl + wc}" y1="${y}" y2="${y + 22}" stroke="${css("--muted")}" stroke-width="2"/>`;
+    s += `<text x="${pl + w + 6}" y="${y + 15}" style="fill:${css("--ink")}">${Math.round(v.detected * 100)}%</text>`;
+  });
+  const el = document.getElementById("ch-det"); el.setAttribute("viewBox", `0 0 ${W} ${H}`); el.innerHTML = s;
+}
+document.getElementById("cells").innerHTML = Array.from({ length: 32 }, (_, i) => `<i class="${[9, 10, 17, 18, 19, 26].includes(i) ? "on" : ""}"></i>`).join("");
+function draw() { drawStrips(); drawStats(); drawSplit(); drawDet(); }
+// 지역 고르기: 첫 화면 버튼과 숫자 카드 탭이 같은 상태를 씀
+function setC(c) {
+  if (!LND[c]) return;
+  C = c; L = LND[c];
+  const lab = L.labels || { country: "대한민국", lv1: "시·도", lv2: "시·군·구", single: false };
+  document.getElementById("q").placeholder = UI[c].ph;
+  document.getElementById("hint").textContent = lab.single ? `${lab.country} ${lab.lv2} ${L.n_regions}곳을 볼 수 있어요.` : `${lab.country} ${lab.lv1} ${L.n_prov}곳, ${lab.lv2} ${L.n_regions}곳을 볼 수 있어요.`;
+  document.querySelectorAll(".countries button").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === c));
+  fillPlaces(); draw();
+}
+document.querySelectorAll("#ctabs button, .countries button").forEach(b => b.onclick = () => setC(b.dataset.c));
+setC("KOR");
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", draw);
+</script>
+</body>
+</html>

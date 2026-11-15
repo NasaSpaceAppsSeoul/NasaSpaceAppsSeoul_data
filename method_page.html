@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burnline · How it works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090a; --surface:#121214; --surface-2:#18181b; --line:#232327; --line-2:#2e2e33;
+  --text:#f1f0ec; --muted:#9b9a95; --faint:#64635f;
+  --accent:#f26a2b; --accent-soft:rgba(242,106,43,.14);
+  --chip-record:#f26a2b; --chip-above:#e8b33c; --chip-normal:#7d7c78; --chip-below:#5fae7a;
+  --raw:#6b6a66;
+  --sans:'IBM Plex Sans','IBM Plex Sans KR',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+[hidden]{display:none!important}
+:lang(ko) body,html:lang(ko){word-break:keep-all}
+html:lang(ko) .hero h1{max-width:11em;letter-spacing:-.03em}
+html:lang(ko) .eyebrow,html:lang(ko) h3,html:lang(ko) th{letter-spacing:.03em;font-family:var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(9,9,10,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:84px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:22px;text-decoration:none}
+.logo svg{width:26px;height:26px}
+.nav{display:flex;gap:4px;padding:5px;border:1px solid var(--line-2);border-radius:999px;background:var(--surface)}
+.nav a{padding:9px 20px;border-radius:999px;font-weight:500;font-size:15px;text-decoration:none;color:var(--text)}
+.nav a.on{background:var(--text);color:#0b0b0c}
+.lang{display:flex;gap:4px;padding:4px;border:1px solid var(--line-2);border-radius:12px}
+.lang button{border:0;background:none;color:var(--faint);font:500 13px var(--sans);padding:8px 11px;border-radius:8px;cursor:pointer}
+.lang button.on{background:var(--text);color:#0b0b0c}
+
+/* hero */
+.eyebrow{font:500 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.hero{padding:96px 0 56px}
+.hero h1{font-weight:500;font-size:clamp(44px,7vw,84px);line-height:1.02;letter-spacing:-.035em;margin:22px 0 26px;max-width:12ch}
+.hero p.lead{font-size:20px;color:#c9c8c3;max-width:40em;margin:0}
+.back{display:inline-flex;gap:8px;align-items:center;color:var(--muted);text-decoration:none;font-size:15px;margin-bottom:36px}
+.back:hover{color:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:56px}
+.stat{background:var(--surface);padding:26px 28px}
+.stat b{display:block;font:500 34px/1.1 var(--sans);letter-spacing:-.02em}
+.stat b em{font-style:normal;color:var(--accent)}
+.stat span{display:block;color:var(--muted);font-size:14.5px;margin-top:8px;line-height:1.5}
+
+/* layout */
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:72px;padding:40px 0 120px}
+.toc{position:sticky;top:116px;align-self:start}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.toc a{display:flex;gap:12px;padding:7px 0 7px 18px;margin-left:-1px;border-left:1px solid transparent;color:var(--faint);text-decoration:none;font-size:14.5px;transition:color .2s}
+.toc a i{font:normal 12px/1.9 var(--mono);color:var(--faint)}
+.toc a:hover{color:var(--text)}
+.toc a.on{color:var(--text);border-left-color:var(--accent)}
+.toc a.on i{color:var(--accent)}
+main section{padding:28px 0 64px;border-top:1px solid var(--line);scroll-margin-top:100px}
+main section:first-child{border-top:0;padding-top:0}
+.num{font:500 13px var(--mono);color:var(--accent);letter-spacing:.12em}
+h2{font-weight:500;font-size:clamp(28px,3.4vw,38px);line-height:1.15;letter-spacing:-.02em;margin:10px 0 14px}
+.one{font-size:20px;line-height:1.55;color:var(--text);margin:0 0 28px;max-width:36em}
+.one strong{color:var(--accent);font-weight:500}
+p{margin:0 0 16px;color:#cfcec9;max-width:40em}
+h3{font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:36px 0 14px}
+ul.why{list-style:none;padding:0;margin:0;display:grid;gap:12px;max-width:44em}
+ul.why li{padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-radius:12px;color:#cfcec9;font-size:16px}
+ul.why li b{color:var(--text);font-weight:500;display:block;margin-bottom:2px}
+.note{border-left:2px solid var(--accent);padding:4px 0 4px 18px;color:#cfcec9;margin:22px 0;max-width:42em;font-size:16px}
+code,.mono{font-family:var(--mono);font-size:.88em}
+.formula{font:400 16px/1.6 var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:18px 0;overflow-x:auto;color:var(--text)}
+.formula .k{color:var(--accent)}
+
+/* tables */
+.tbl{width:100%;overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td{color:#d6d5d0}
+td.hl{color:var(--text)}
+td .ok{color:var(--chip-below)} td .warn{color:var(--chip-above)}
+
+details{border:1px solid var(--line);border-radius:12px;margin:18px 0;background:var(--surface)}
+summary{cursor:pointer;padding:14px 20px;font-size:15px;color:var(--muted);list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";font-family:var(--mono)}
+details[open] summary::after{content:"−"}
+details>div{padding:0 20px 18px}
+details .tbl{border:0;margin:0}
+
+/* figures */
+figure{margin:28px 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 24px 18px}
+figure .ttl{font-size:17px;font-weight:500;margin:0 0 4px}
+figure .sub{font-size:14px;color:var(--muted);margin:0 0 16px}
+figcaption{font:400 12px var(--mono);color:var(--faint);margin-top:12px;letter-spacing:.02em}
+svg text{font-family:var(--sans)}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--muted);margin-bottom:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.legend i.hatch{background:repeating-linear-gradient(135deg,var(--accent) 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1px var(--accent)}
+.legend i.ln{height:3px;border-radius:2px;vertical-align:3px;width:18px}
+
+/* chain */
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative}
+.seg{border:1px solid var(--line-2);border-radius:12px;padding:16px;position:relative;background:var(--surface-2)}
+.seg:not(:last-child)::after{content:attr(data-k);position:absolute;right:-40px;top:calc(50% - 20px);width:40px;text-align:center;font:500 11px var(--mono);color:var(--accent)}
+.seg:not(:last-child)::before{content:"→";position:absolute;right:-40px;width:40px;text-align:center;top:calc(50% - 4px);color:var(--faint);font-size:15px}
+.seg .t{font:500 12.5px var(--mono);color:var(--muted)}
+.seg .s{font-weight:500;margin:6px 0 8px}
+.seg .f{font:400 13px/1.5 var(--mono);color:#cfcec9}
+.seg .q{font-size:12.5px;color:var(--faint);margin-top:10px}
+.seg.live{border-color:var(--accent);background:var(--accent-soft)}
+.seg.live .q{color:var(--accent)}
+.merge{margin-top:16px;border:1px dashed var(--line-2);border-radius:12px;padding:14px;text-align:center;font-weight:500}
+.merge span{color:var(--accent)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;font-size:14px;border:1px solid var(--line-2);background:var(--surface)}
+.chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+
+/* fire cell */
+.cells{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cells .cap{font-size:14px;color:var(--muted);margin-top:10px;text-align:center}
+.cells .cap b{color:var(--text);font-weight:500}
+
+/* borrow */
+.flow{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;margin:18px 0}
+.flow .box{flex:1 1 160px;border:1px solid var(--line-2);border-radius:12px;padding:14px 16px;background:var(--surface)}
+.flow .box b{display:block;font-weight:500}
+.flow .box span{font-size:13.5px;color:var(--muted)}
+.flow .ar{align-self:center;color:var(--faint);font-family:var(--mono)}
+
+.limits{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.limits div{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--surface);font-size:15px;color:#cfcec9}
+.limits b{display:block;color:var(--text);font-weight:500;margin-bottom:4px}
+
+.cta{display:flex;gap:28px;align-items:center;margin-top:40px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:22px;background:var(--text);color:#0b0b0c;border-radius:14px;padding:10px 10px 10px 26px;font-weight:600;font-size:18px;text-decoration:none}
+.btn i{width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,#c2603a,#7a3a24);display:grid;place-items:center}
+.link{color:#cfcec9;text-decoration:none;font-size:18px}
+footer{border-top:1px solid var(--line);padding:28px 0 48px;font:400 12px var(--mono);letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  .toc,main{min-width:0}
+  .toc{position:sticky;top:84px;z-index:10;background:var(--bg);margin:0 -32px 24px;padding:0 32px;border-bottom:1px solid var(--line);overflow-x:auto}
+  .toc ol{display:flex;border:0;white-space:nowrap}
+  .toc a{border-left:0;border-bottom:2px solid transparent;padding:12px 12px;margin:0}
+  .toc a.on{border-bottom-color:var(--accent)}
+  .chain{grid-template-columns:1fr 1fr;row-gap:28px}
+  .seg:nth-child(2)::after,.seg:nth-child(2)::before{display:none}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .toc{margin:0 -16px 20px;padding:0 16px;top:68px}
+  .bar{height:68px}
+  .nav a{padding:7px 12px;font-size:14px}
+  .logo span{display:none}
+  .hero{padding:48px 0 32px}
+  .stats{grid-template-columns:1fr}
+  .chain{grid-template-columns:1fr;gap:26px}
+  .seg::after,.seg::before{display:none}
+  .seg:not(:last-child)::after{display:block;content:"↓ " attr(data-k);right:auto;left:16px;top:auto;bottom:-22px;transform:none;width:auto;text-align:left}
+  .cells,.limits{grid-template-columns:1fr}
+  figure{padding:18px 14px 14px}
+  .one{font-size:18px}
+}
+
+/* region tabs */
+.fighead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.rtabs{display:flex;flex-wrap:wrap;gap:2px;padding:3px;border:1px solid var(--line-2);border-radius:10px;background:var(--bg)}
+.rtabs button{border:0;background:none;color:var(--muted);font:500 13px var(--sans);padding:6px 12px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.rtabs button.on{background:var(--surface-2);color:var(--text);box-shadow:inset 0 0 0 1px var(--line-2)}
+.rtabs button:hover{color:var(--text)}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+ol.steps li{counter-increment:s;border:1px solid var(--line);border-radius:12px;padding:14px 14px 16px;background:var(--surface);font-size:14px;color:var(--muted)}
+ol.steps li::before{content:"0" counter(s);display:block;font:500 12px var(--mono);color:var(--accent);margin-bottom:8px}
+ol.steps li b{display:block;color:var(--text);font-weight:500;font-size:15px;margin-bottom:4px}
+@media (max-width:960px){ol.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){ol.steps{grid-template-columns:1fr}.rtabs{width:100%}.rtabs button{flex:1}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#"><svg viewBox="0 0 26 26" fill="none"><rect x="13" y="2" width="15.5" height="15.5" transform="rotate(45 13 2)" stroke="#f26a2b" stroke-width="2"/><circle cx="13" cy="13" r="2.6" fill="#f26a2b"/></svg><span>Burnline</span></a>
+    <nav class="nav"><a class="on" href="#">About</a><a href="#">Dashboard</a></nav>
+    <div class="lang"><button class="on" data-set="en">EN</button><button data-set="ko">KR</button></div>
+  </div>
+</header>
+
+<div class="wrap" data-lang="en">
+  <div class="hero">
+    <a class="back" href="#">← Back to overview</a>
+    <div class="eyebrow">How it works</div>
+    <h1>One scale for 25&nbsp;years of fire.</h1>
+    <p class="lead">Satellites changed in 2012, and the new ones see far more fire. Burnline puts MODIS and VIIRS on one scale with a pipeline that runs the same way everywhere. It covers six regions on five continents today: South Korea, California, British Columbia, Greece, Chile and New South Wales. A new region needs only its boundaries and settings.</p>
+    <div class="stats">
+      <div class="stat"><b>≈ <em>1.00×</em></b><span>Jump at the 2012 sensor switch after harmonization: 0.99–1.03× in all six regions, down from 2.06–3.00×</span></div>
+      <div class="stat"><b>6 regions · <em>1,114</em> areas</b><span>One pipeline, every month since 2001, from whole regions down to districts, counties and municipalities</span></div>
+      <div class="stat"><b><em>80–95%</em></b><span>of official fires over 100 ha show up in the satellite record within 2 days, in all six regions</span></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc"><ol>
+      <li><a href="#question"><i>01</i>The question</a></li>
+      <li><a href="#data"><i>02</i>Data</a></li>
+      <li><a href="#cell"><i>03</i>Fire cells</a></li>
+      <li><a href="#harmonize"><i>04</i>Harmonization</a></li>
+      <li><a href="#validate"><i>05</i>Validation</a></li>
+      <li><a href="#chip"><i>06</i>vs. normal</a></li>
+      <li><a href="#sparse"><i>07</i>Sparse areas</a></li>
+      <li><a href="#indicators"><i>08</i>Other indicators</a></li>
+      <li><a href="#limits"><i>09</i>Reading the numbers</a></li>
+      <li><a href="#built"><i>10</i>Build &amp; grow</a></li>
+    </ol></aside>
+
+    <main>
+      <section id="question">
+        <div class="num">01</div>
+        <h2>The question we answer</h2>
+        <p class="one">Is this place burning <strong>more than usual</strong> this month? We answer with one label, <i>vs. normal</i>, measured against 25 years of satellite records.</p>
+        <ul class="why">
+          <li><b>What we do</b>Measure the fire seen from orbit every month since 2001 on one scale, and compare it with the same month in past years. The same rules run for every region.</li>
+          <li><b>What we don't do</b>We don't estimate fire counts or burned area. Each region's official records are shown alongside, with their source.</li>
+          <li><b>Why it's hard</b>When the sensors switched from MODIS to VIIRS in 2012, the same fires started showing up far more often. Joining the raw records makes the years after 2012 look 2.1–3.0× more fiery in every region we tested. That trend is false.</li>
+        </ul>
+      </section>
+
+      <section id="data">
+        <div class="num">02</div>
+        <h2>Data</h2>
+        <p class="one">NASA FIRMS active-fire detections are the measurement. Official wildfire records, where a region has them, are used only to <strong>check</strong> it.</p>
+        <figure>
+          <p class="ttl">Five satellites, chained into one record</p>
+          <p class="sub">The same for every region. Ratios are learned where satellites overlap, then used to join the record.</p>
+          <div class="legend"><span><i style="background:var(--text);opacity:.14"></i>Data available</span><span><i style="background:var(--accent)"></i>Monthly values taken from</span><span><i class="hatch"></i>Ratio learned on overlap</span></div>
+          <svg id="sats" viewBox="0 0 720 340" width="100%" role="img" aria-label="Satellite data periods, source periods and ratio learning windows"></svg>
+          <figcaption>NASA FIRMS · MODIS C6.1, VIIRS C2 · Standard product for history, NRT only for the latest months</figcaption>
+        </figure>
+        <h3>Why these sources</h3>
+        <ul class="why">
+          <li><b>FIRMS is global</b>It is the only public record that has watched the whole planet the same way for 25 years. Any region on Earth can run through the same pipeline.</li>
+          <li><b>NOAA-20 as the reference</b>It is flying now. New months enter the record as observed, with no correction.</li>
+          <li><b>Official records only for checking</b>Agencies count differently (CAL FIRE maps mostly large fires) and few publish monthly data. They validate the indicators but don't drive them, so a region without good records can still be added.</li>
+          <li><b>Open boundaries</b>geoBoundaries by default, or a finer official catalogue where it fits better (BC's 28 regional districts).</li>
+        </ul>
+        <div class="tbl"><table>
+          <tr><th>Region</th><th>Areas</th><th>Official record (validation)</th></tr>
+          <tr><td class="hl">South Korea</td><td>17 provinces · 229 districts</td><td>Korea Forest Service · KOSIS</td></tr>
+          <tr><td class="hl">California</td><td>58 counties</td><td>CAL FIRE FRAP perimeters, 8,686 fires</td></tr>
+          <tr><td class="hl">British Columbia</td><td>28 regional districts</td><td>BC Wildfire Service, 42,170 fires</td></tr>
+          <tr><td class="hl">Greece</td><td>13 regions + Mount Athos · 324 municipalities<sup>1</sup></td><td>Hellenic Fire Service, 251,076 fires (2000–2024)</td></tr>
+          <tr><td class="hl">Chile</td><td>16 regions · 345 communes<sup>2</sup></td><td>CONAF: seasonal counts by commune, 2,142 fires of 200 ha or more, and all 35,323 fires of five seasons (2002–05, 2018–20) for detection rates</td></tr>
+          <tr><td class="hl">New South Wales</td><td>128 local councils + the unincorporated far west</td><td>NSW NPWS Fire History, 10,411 wildfires</td></tr>
+        </table></div>
+        <p class="sub" style="font-size:13px;color:var(--muted)"><sup>1</sup> Greece has 325 municipalities. The open boundary file has no separate Anogeia (Crete), so its area is counted in Mylopotamos. <sup>2</sup> Chile has 346 communes; the boundary file has no Antártica commune, which has no FIRMS data.</p>
+      </section>
+
+      <section id="cell">
+        <div class="num">03</div>
+        <h2>Fire cells: what we count</h2>
+        <p class="one">A <strong>fire cell</strong> is one 0.01° square (about 1 km) on one local day. If a satellite sees fire there that day, it counts as 1.</p>
+        <figure>
+          <p class="ttl">Same fire, different pixels, same count</p>
+          <p class="sub">Illustration: VIIRS records many more points, but both collapse to the same cells</p>
+          <div class="cells">
+            <div><svg id="cellA" viewBox="0 0 240 240" width="100%"></svg><div class="cap">MODIS · <b>4 points → 3 cells</b></div></div>
+            <div><svg id="cellB" viewBox="0 0 240 240" width="100%"></svg><div class="cap">VIIRS · <b>19 points → 3 cells</b></div></div>
+          </div>
+          <figcaption>Illustrative, not real detections</figcaption>
+        </figure>
+        <h3>Why count cells</h3>
+        <ul class="why">
+          <li><b>Cells, not points</b>VIIRS has finer pixels, so one fire produces many more points. Counting points would turn a sensor upgrade into "more fire".</li>
+          <li><b>Once per day</b>Satellites pass a different number of times per day. Counting each cell once a day removes that from the number.</li>
+          <li><b>Day and night together</b>Many fires are seen only at night. In South Korea, 46% of VIIRS fire cells were night-only, and the 2019 Goseong fire had 0 day cells and 47 night cells. Daytime only would drop monthly R² there from 0.92 to 0.78.</li>
+          <li><b>One ratio for day and night</b>Day and night cells are counted together, then corrected with one ratio. That combined ratio is stable from year to year (South Korea: year-to-year CV 0.07–0.11, leave-one-year-out annual error 5–11%). A separate night-only ratio swings far too much (South Korea: about 102, ranging 46–423), so it is not used.</li>
+          <li><b>Not fire counts</b>Satellites miss many small fires. Fire cells are what the satellite can honestly report.</li>
+        </ul>
+        <details><summary>Filters applied before counting</summary><div><div class="tbl"><table>
+          <tr><th>Rule</th><th>Applied</th></tr>
+          <tr><td>Non-fire heat sources</td><td>Cells VIIRS ever flagged as static sources are masked (197–691 per region)</td></tr>
+          <tr><td>Confidence</td><td>MODIS ≥ 30, VIIRS nominal or high</td></tr>
+          <tr><td>Outside the region</td><td>California, BC and NSW (downloaded as a box) and Greece (whose country download includes fires across the border) are clipped to the region boundary. South Korea and Chile keep sea cells in the national total; only cells within about 3 km of an area are given to the nearest area. Chile's download holds just 42 detections across the border, left in.</td></tr>
+          <tr><td>Local day</td><td>Solar time from pixel longitude, so dates work in any time zone</td></tr>
+        </table></div></div></details>
+      </section>
+
+      <section id="harmonize">
+        <div class="num">04</div>
+        <h2>Putting sensors on one scale</h2>
+        <p class="one">Every value is expressed as what <strong>NOAA-20 would have counted</strong>. Pre-2012 MODIS values are raised month by month to meet it.</p>
+        <figure data-chart="ba">
+          <div class="fighead"><div><p class="ttl"></p><p class="sub"></p></div><div class="rtabs"></div></div>
+          <div class="legend"><span><i class="ln" style="background:var(--raw)"></i>Raw (MODIS → S-NPP joined)</span><span><i class="ln" style="background:var(--accent)"></i>Harmonized (NOAA-20 scale)</span></div>
+          <svg class="plot" viewBox="0 0 720 300" width="100%" role="img" aria-label="Annual fire cells before and after harmonization"></svg>
+          <figcaption>Annual fire cells 2001–2025 · notebook output (calendar.json, hotspots_clean.csv) · API /landing annual.before, annual.after</figcaption>
+        </figure>
+        <h3>The correction chain</h3>
+        <div class="chain">
+          <div class="seg" data-k="×k_T"><div class="t">2000-11 – 2002-06</div><div class="s">MODIS Terra</div><div class="f">Terra × k_T<br>× k_MS × k_SN</div><div class="q">Estimate · medium/low</div></div>
+          <div class="seg" data-k="×k_MS"><div class="t">2002-07 – 2012-01</div><div class="s">MODIS Terra+Aqua</div><div class="f">(Terra+Aqua)<br>× k_MS × k_SN</div><div class="q">Estimate · medium/low</div></div>
+          <div class="seg" data-k="×k_SN"><div class="t">2012-02 – 2018-03</div><div class="s">VIIRS S-NPP</div><div class="f">S-NPP × k_SN</div><div class="q">High / medium / low</div></div>
+          <div class="seg live"><div class="t">2018-04 – now</div><div class="s">VIIRS NOAA-20</div><div class="f">Observed as is<br>(NOAA-21 backup)</div><div class="q">High · NRT medium</div></div>
+        </div>
+        <div class="merge">One series: <span>NOAA-20 fire cells, 2001 to today</span></div>
+        <p>Each value H is the raw count of its period multiplied by the ratios that carry it forward to NOAA-20. For example, April 2005:</p>
+        <div class="formula">H(2005-04) = (Terra + Aqua) × k_MS(Apr) × k_SN(Apr)</div>
+        <h3>The ratios</h3>
+        <p>Each ratio compares two satellites over the years they flew together, separately for each calendar month (12 values per ratio, per region).</p>
+        <div class="tbl"><table>
+          <tr><th>Ratio</th><th>Definition</th><th>Learned on</th><th>Used for</th></tr>
+          <tr><td class="hl">k_T</td><td>(Terra + Aqua) ÷ Terra</td><td>2003–2011</td><td>2000-11 – 2002-06, before Aqua</td></tr>
+          <tr><td class="hl">k_MS</td><td>S-NPP ÷ (Terra + Aqua)</td><td>2012–2025</td><td>All months before 2012-02</td></tr>
+          <tr><td class="hl">k_SN</td><td>NOAA-20 ÷ S-NPP</td><td>2019–2025</td><td>All months before 2018-04</td></tr>
+          <tr><td class="hl">k_N21</td><td>NOAA-20 ÷ NOAA-21</td><td>2024–2025</td><td>Backup, if NOAA-20 data is missing</td></tr>
+        </table></div>
+        <div class="formula">k_MS(April) = <span class="k">Σ</span> S-NPP cells, all Aprils 2012–2025 ÷ <span class="k">Σ</span> Terra+Aqua cells, same Aprils</div>
+        <p>k_MS also draws on the neighbouring months and is shrunk toward the annual ratio (shrinkage 20), because some months have few fires. All ratios are learned for each region on its own data.</p>
+        <details><summary>South Korea k_MS by month</summary><div><div class="tbl"><table>
+          <tr><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr>
+          <tr><td>3.32</td><td>2.14</td><td>1.72</td><td>1.74</td><td>1.56</td><td>3.20</td><td>0.78</td><td>0.80</td><td>2.22</td><td>1.71</td><td>1.51</td><td>4.54</td></tr>
+        </table></div></div></details>
+        <h3>Quality grade on every month</h3>
+        <p>Every monthly value carries a grade, so estimated months are labelled as such on screen.</p>
+        <div class="tbl"><table>
+          <tr><th>Grade</th><th>Rule</th></tr>
+          <tr><td class="hl">High</td><td>Observed by NOAA-20, or converted from S-NPP with error ≤ 10%</td></tr>
+          <tr><td class="hl">Medium</td><td>Conversion error ≤ 30%, or near-real-time (NRT) data</td></tr>
+          <tr><td class="hl">Low</td><td>Conversion error &gt; 30%</td></tr>
+        </table></div>
+        <p>If the month's normal is under 5 cells, the grade drops one step.</p>
+        <h3>Why this way</h3>
+        <ul class="why">
+          <li><b>Toward NOAA-20, not MODIS</b>The month people care about most, this month, stays an observation. Matching MODIS would mean correcting every new month toward a retiring sensor.</li>
+          <li><b>Learned separately for each region</b>Fire types differ by place, so nothing learned in one region is assumed for another. k_MS ranges: South Korea 0.78–4.54, California 1.26–2.31, BC 1.81–4.24, Greece 1.54–4.88, Chile 1.50–3.76, NSW 1.91–3.34.</li>
+          <li><b>A ratio for each month</b>Within one region the ratio still swings by season (South Korea: 0.78 in July, 4.54 in December). A single ratio would distort the seasonal shape.</li>
+          <li><b>Ratio of sums</b>Add up years first, then divide. Averaging yearly ratios lets one quiet year (2 MODIS cells vs 10 VIIRS cells = "5×") swing the result.</li>
+          <li><b>Smoothing</b>Thin months borrow from the two neighbouring months and are pulled toward the annual ratio (shrinkage 20).</li>
+          <li><b>One set per region</b>Districts and counties are too small to learn their own ratios, so they use their region's set.</li>
+        </ul>
+        <details><summary>Alternatives we rejected</summary><div><div class="tbl"><table>
+          <tr><th>Alternative</th><th>Why not</th></tr>
+          <tr><td>Join raw records</td><td>A 2.1–3.0× step appears in 2012</td></tr>
+          <tr><td>Scale down to MODIS</td><td>Retiring sensor, and the newest month becomes an estimate</td></tr>
+          <tr><td>One annual ratio</td><td>Seasonal ratios vary several-fold</td></tr>
+          <tr><td>One global ratio for all regions</td><td>Ratios differ by region, from 1.26–2.31 in California to 0.78–4.54 in South Korea</td></tr>
+          <tr><td>Average three satellites after 2018</td><td>NOAA-20 alone is simpler and keeps the reference fixed</td></tr>
+          <tr><td>Daytime only</td><td>Loses night-only fires (46% of VIIRS cells in South Korea)</td></tr>
+        </table></div></div></details>
+      </section>
+
+      <section id="validate">
+        <div class="num">05</div>
+        <h2>How we know it works</h2>
+        <p class="one">After harmonization the 2012 jump disappears in all six regions. In three of them it disappears again when measured against <strong>official records</strong> the satellites never saw, and California shows no change point.</p>
+        <div class="tbl"><table>
+          <tr><th>Test</th><th>South Korea</th><th>California</th><th>BC</th><th>Greece</th><th>Chile</th><th>NSW</th></tr>
+          <tr><td>Satellite break (raw → harmonized)</td><td class="hl">2.61 → <span class="ok">0.99×</span></td><td class="hl">2.06 → <span class="ok">1.02×</span></td><td class="hl">2.38 → <span class="ok">1.00×</span></td><td class="hl">2.80 → <span class="ok">1.01×</span></td><td class="hl">2.73 → <span class="ok">1.02×</span></td><td class="hl">3.00 → <span class="ok">1.03×</span></td></tr>
+          <tr><td>Leave-one-year-out · monthly R² / annual error</td><td>0.92 / 15%</td><td>0.98 / 7%</td><td>0.96 / 9%</td><td>0.97 / 6%</td><td>0.88 / 11%</td><td>0.84 / 10%</td></tr>
+          <tr><td>S-NPP → NOAA-20 conversion · annual error</td><td>6%</td><td>5%</td><td>5%</td><td>5%</td><td>2%</td><td>2%</td></tr>
+          <tr><td>Terra-only period conversion · annual error</td><td>11%</td><td>5%</td><td>3%</td><td>9%</td><td>11%</td><td>23%</td></tr>
+          <tr><td>Break vs official fire counts</td><td class="hl">2.67 → <span class="ok">1.04×</span></td><td class="hl">2.54 → 1.25× <span class="mono" style="color:var(--muted)">no change point</span></td><td class="hl">4.99 → 2.14× <span class="warn">inconclusive</span></td><td class="hl">1.96 → 0.71× <span class="warn">inconclusive</span></td><td class="hl">2.38 → <span class="ok">0.96×</span> <span class="mono" style="color:var(--muted)">seasons</span></td><td class="hl">2.92 → <span class="ok">1.05×</span> <span class="mono" style="color:var(--muted)">seasons</span></td></tr>
+          <tr><td>Rank correlation with burned area · before / after 2012</td><td>0.66 / 0.54</td><td>0.98 / 0.93</td><td>0.92 / 0.92</td><td>0.58 / 0.42</td><td>−0.13 / 0.88</td><td>0.52 / 0.88</td></tr>
+        </table></div>
+        <ul class="why">
+          <li><b>Satellite break</b>Ratio of the level after 2012 to the level before, for the joined record. 1.00 means no step.</li>
+          <li><b>Leave one year out</b>Remove a year, relearn every ratio without it, predict the removed year, and compare with what was observed.</li>
+          <li><b>Official records</b>The same break test, but on satellite cells divided by each agency's annual fire count. The agencies never saw the satellites, so this checks the correction from outside.</li>
+          <li><b>Rank correlation</b>Do the years with more fire cells also have more burned area? Tested on the corrected years (2001–2011) and the observed years (2012–2025) separately, so a strong recent period cannot hide a weak early one.</li>
+        </ul>
+        <div class="note"><b>Why BC is "inconclusive".</b> Since about 2014, BC has had fewer small fires and many more megafires, so the official record itself changed. Dividing by counts gives 2.14×, by area 0.60×. BC's harmonization rests on the satellite break test and the rank correlation, which both hold.</div>
+        <div class="note"><b>Why Greece is "inconclusive".</b> The satellites saw less fire after 2012 while official counts stayed flat. Aqua MODIS alone, with no correction, shows the same fall. It comes from autumn crop-residue burning in the northern plains: October fire cells fell 75% while official October counts barely moved. Leave out September–November and the ratio is 0.93×. Greece's harmonization rests on the satellite break test (1.01×).</div>
+        <p>Chile and NSW are compared by fire season (July–June). Chile's official counts are CONAF's seasonal totals of fires of every size.</p>
+        <figure data-chart="det">
+          <div class="fighead"><div><p class="ttl"></p><p class="sub"></p></div><div class="rtabs"></div></div>
+          <div class="legend"><span><i style="background:var(--accent)"></i>Detected</span><span><i style="background:var(--faint);width:3px"></i>Chance level (dates shifted 30 days)</span></div>
+          <svg class="plot" viewBox="0 0 720 250" width="100%" role="img" aria-label="Detection rate by fire size"></svg>
+          <figcaption>Notebook output meta.external_validation.detection_by_size · API /landing detect_by_size · large areas raise the chance level, so read the gap</figcaption>
+        </figure>
+      </section>
+
+      <section id="chip">
+        <div class="num">06</div>
+        <h2>vs. normal</h2>
+        <p class="one">This month is compared with <strong>the same month</strong> in past years. The <i>vs. normal</i> label says whether it falls outside the usual range.</p>
+        <div class="chips">
+          <span class="chip" style="--c:var(--chip-record)">Highest on record</span>
+          <span class="chip" style="--c:var(--chip-above)">Above normal</span>
+          <span class="chip" style="--c:var(--chip-normal)">Normal</span>
+          <span class="chip" style="--c:var(--chip-below)">Below normal</span>
+        </div>
+        <figure data-chart="band">
+          <div class="fighead"><div><p class="ttl"></p><p class="sub"></p></div><div class="rtabs"></div></div>
+          <svg class="plot" viewBox="0 0 720 300" width="100%" role="img" aria-label="Same-month fire cells with the usual range"></svg>
+          <figcaption>calendar.json, climatology.json · a record month for each region (Greece: August 2007, not the larger farm-burning October 2001)</figcaption>
+        </figure>
+        <p>Rules are checked from the top and the first match wins: highest on record (this month &gt; 0 and 1st among the same months), above (over the upper edge), normal (inside the range), below (under the lower edge).</p>
+        <div class="formula">normal = median of the same month<br>upper = max(<span class="k">85th pct</span>, normal + 2√normal)<br>lower = min(<span class="k">15th pct</span>, normal − 2√normal)</div>
+        <h3>Why this rule</h3>
+        <ul class="why">
+          <li><b>Median, not mean</b>One extreme year drags the mean up. The median stays close to a typical year.</li>
+          <li><b>Same month only</b>Each region has its own season, and normal can differ nearly 20-fold between months (South Korea: 174 cells in March, 9 in July). Season has to come out of the comparison.</li>
+          <li><b>2√normal margin</b>Satellites pass a few times a day, so counts wobble by chance, about √λ for a month with λ cells. Smaller differences are not called "above".</li>
+          <li><b>Not the quartiles</b>S-NPP and NOAA-20 flew together in 2019–2025. Judging each month with each satellite alone, the quartile rule gave both the same label only 64% of the time. Ours agrees 81%.</li>
+        </ul>
+        <div class="tbl"><table>
+          <tr><th>National monthly vs. normal, South Korea</th><th>Quartiles 25–75%</th><th>15–85% + 2√normal</th></tr>
+          <tr><td>Two satellites agree (84 months)</td><td>64%</td><td class="hl">81%</td></tr>
+          <tr><td>"Above" months also top-25% in official counts</td><td>57%</td><td class="hl">69%</td></tr>
+          <tr><td>Top-25% official months caught</td><td class="hl">57%</td><td>51%</td></tr>
+        </table></div>
+        <div class="note">A short, intense fire is shown through the calendar's <i>largest day</i> and detection clusters, so the monthly label can stay steady and avoid false alarms.</div>
+        <h3>Supporting tags</h3>
+        <ul class="why">
+          <li><b>Whole region</b>"Estimate · quality medium/low" whenever the month's grade is not high.</li>
+          <li><b>Middle level</b>"Estimate" before 2018-04, and "Estimate · quality low" before 2012-02.</li>
+        </ul>
+        <h3>Reference period: 25 or 14 years</h3>
+        <p>Pre-2012 values are estimates. Errors cancel out for a whole region but not for small areas, so each unit is tested by leaving one year out. Only units with error ≤ 30% use all 25 years. The rest use 2012–2025, observed by VIIRS.</p>
+        <div class="tbl"><table>
+          <tr><th>Unit</th><th>South Korea</th><th>California</th><th>BC</th><th>Greece</th><th>Chile</th><th>NSW</th></tr>
+          <tr><td>Whole region</td><td class="hl">25 yrs</td><td class="hl">25 yrs</td><td class="hl">25 yrs</td><td class="hl">25 yrs</td><td class="hl">25 yrs</td><td class="hl">25 yrs</td></tr>
+          <tr><td>Middle level</td><td>Gyeonggi (16%), Gyeongbuk (18%), Chungnam (23%) → 25 yrs · other 14 provinces → 14 yrs</td><td>none</td><td>none</td><td>11 of 14 regions → 25 yrs</td><td>7 of 16 regions → 25 yrs</td><td>none</td></tr>
+          <tr><td>Smallest areas</td><td>229 districts · 14 yrs</td><td>58 counties · 14 yrs</td><td>28 districts · 14 yrs</td><td>324 municipalities + Mount Athos · 14 yrs</td><td>345 communes · 14 yrs</td><td>128 councils + far west · 14 yrs</td></tr>
+        </table></div>
+      </section>
+
+      <section id="sparse">
+        <div class="num">07</div>
+        <h2>Areas where fire is rare</h2>
+        <p class="one">Areas averaging under <strong>11.1 fire cells a year</strong> don't get their own vs. normal label. They borrow it from the level above.</p>
+        <div class="formula">√λ / λ ≤ 0.30 &nbsp;→&nbsp; λ ≥ 1 / 0.30² ≈ <span class="k">11.1</span></div>
+        <p>An area with λ cells a year wobbles by about √λ by chance. At 11.1 that wobble falls to 30%. If an area usually sees 3 cells a year, just 2 cells this month would read as "several times normal", which is chance dressed up as an alarm.</p>
+        <div class="flow">
+          <div class="box"><b>Area</b><span>Own label if ≥ 11.1 / yr</span></div><div class="ar">→</div>
+          <div class="box"><b>Its parent</b><span>Province or state, if the area is sparse</span></div><div class="ar">→</div>
+          <div class="box"><b>Nearest sufficient parent</b><span>If the parent is sparse too, stated on screen</span></div>
+        </div>
+        <div class="tbl"><table>
+          <tr><th>Status</th><th>Sufficient</th><th>Sparse</th><th>No detections</th></tr>
+          <tr><td>South Korea districts (229)</td><td>6</td><td>192</td><td>31</td></tr>
+          <tr><td>South Korea provinces (17)</td><td>9</td><td>8</td><td>0</td></tr>
+          <tr><td>California counties (58)</td><td>55</td><td>3</td><td>0</td></tr>
+          <tr><td>BC regional districts (28)</td><td>28</td><td>0</td><td>0</td></tr>
+          <tr><td>Greece municipalities + Mount Athos (325)</td><td>61</td><td>233</td><td>31</td></tr>
+          <tr><td>Chile communes (345)</td><td>186</td><td>155</td><td>4</td></tr>
+          <tr><td>NSW councils + far west (129)</td><td>95</td><td>25</td><td>9</td></tr>
+        </table></div>
+        <ul class="why">
+          <li><b>What is borrowed</b>The vs. normal label, the risk season and the seasonal comparison all come from the same parent, and the screen names it ("Gyeongbuk basis").</li>
+          <li><b>What stays local</b>The area's own fire cells, calendar, map, official records and neighbours are always its own.</li>
+          <li><b>No detections</b>Areas with no fire cells since 2012 point to their neighbours instead.</li>
+          <li><b>Regions with one parent</b>California, BC and NSW have no middle level, so sparse counties use the whole state or province (25-year basis).</li>
+        </ul>
+        <p>The rule decides by itself how much to say, so it works for fire-prone and fire-rare places alike. Each area's annual average leaves out its single biggest year, so one large fire cannot make an area look routinely fiery.</p>
+      </section>
+
+      <section id="indicators">
+        <div class="num">08</div>
+        <h2>Other indicators</h2>
+        <p class="one">Everything else is computed from the <strong>same harmonized series</strong> and the same reference periods, in every region.</p>
+        <div class="tbl"><table>
+          <tr><th>Indicator</th><th>How</th><th>Why</th></tr>
+          <tr><td class="hl">Risk season</td><td>Add monthly shares from largest down until 50% is passed. South Korea Feb–Apr (64%), California Aug–Oct (60%), BC Jul–Aug (51%), Greece Aug–Oct (58%), Chile Mar–May (51%), NSW Apr–May, Aug–Sep and Dec (55%)</td><td>The data sets each region's season. It includes farm and prescribed burning, such as NSW's autumn and late-winter hazard-reduction burns</td></tr>
+          <tr><td class="hl">Same-month rank</td><td>k-th of n same months (n = 25 or 14)</td><td>Works even when normal is 0</td></tr>
+          <tr><td class="hl">× normal</td><td>This month ÷ normal, only areas with their own label</td><td>Small normals inflate ratios</td></tr>
+          <tr><td class="hl">Year to date</td><td>Sum from the season start (January; July in Chile and NSW) to the month, ÷ the median of past years' sums over the same months</td><td>The whole year, not one month</td></tr>
+          <tr><td class="hl">Calendar colours</td><td>0 + 50/75/90th percentiles of the area's non-zero months</td><td>Fixed bins collapse into one colour somewhere</td></tr>
+          <tr><td class="hl">Detection clusters</td><td>Cells within 3 km and 2 days; 10+ cells = large</td><td>Shows one fire across days and borders</td></tr>
+          <tr><td class="hl">Largest day</td><td>Max daily fire cells in this area</td><td>Catches short fires the monthly label misses</td></tr>
+          <tr><td class="hl">First detection within 50 km</td><td>First day of the month with fire near the centroid</td><td>Fire approaching from neighbours</td></tr>
+          <tr><td class="hl">Recurrence grid</td><td>Years with fire per 0.02° cell, 2012–2025</td><td>One-off fires vs yearly burning</td></tr>
+          <tr><td class="hl">25-year total</td><td>2001–2025 sum and yearly mean. Pre-2012 years use area-level ratios shrunk toward the parent. Shown at 25+ cells, graded high (≥ 50), medium or low</td><td>Long sums average out monthly error</td></tr>
+          <tr><td class="hl">Map colours</td><td>Area fire cells that month. South Korea fixed 0 / 1–2 / 3–9 / 10–29 / 30+. Other regions use the 25/50/75th percentiles of non-zero area-months (e.g. CA 3·8·18, BC 2·8·47)</td><td>One scale inside a region, sized to that region</td></tr>
+          <tr><td class="hl">Detection points</td><td>Filtered raw detections from the satellite of that period. Over 4,000 in a month → an even sample of 4,000, with the full count shown</td><td>Shows where fire was, at any zoom</td></tr>
+          <tr><td class="hl">Point colours</td><td>Days since the month's first detection: day 0 / +1 / +2 / +3 or later</td><td>Shows how a fire spread</td></tr>
+          <tr><td class="hl">Neighbours</td><td>Areas sharing a border (tolerance 0.002°), across parent borders too</td><td>Context for sparse areas</td></tr>
+          <tr><td class="hl">Official records</td><td>Agency fires in the area that month, largest 15 by burned area</td><td>Ground truth beside the satellite view</td></tr>
+          <tr><td class="hl">Usual yearly fire</td><td>Mean VIIRS fire cells per year, leaving out the biggest year</td><td>How fire-prone the area is</td></tr>
+        </table></div>
+      </section>
+
+      <section id="limits">
+        <div class="num">09</div>
+        <h2>Reading the numbers</h2>
+        <p class="one">Fire cells measure <strong>fire the satellite saw</strong>: how widely and how long it burned, in a form that is comparable across 25 years.</p>
+        <div class="limits">
+          <div><b>Activity, not area or counts</b>Fire cells track fire activity. Burned area and fire counts come from each agency and are shown beside them.</div>
+          <div><b>Estimated months are labelled</b>Pre-2012 values carry an "estimate" tag and a quality grade, and small areas start in 2012.</div>
+          <div><b>Short fires have their own view</b>The calendar's largest day and detection clusters show intense, short events.</div>
+          <div><b>All satellite-seen fire</b>Farm, land-clearing and prescribed burns are included, as the satellites see them. In northern Greece's plains in autumn and in NSW's burn seasons, the label follows that burning.</div>
+        </div>
+      </section>
+
+      <section id="built">
+        <div class="num">10</div>
+        <h2>How it's built &amp; how it grows</h2>
+        <p class="one">Heavy computation runs once, offline, region by region. The API only serves <strong>precomputed values</strong>, so every insight answers in under a second.</p>
+        <div class="tbl"><table>
+          <tr><th>Layer</th><th>Tech</th><th>Why</th></tr>
+          <tr><td class="hl">Processing</td><td>Python · pandas, NumPy, SciPy</td><td>One notebook, one config entry per region</td></tr>
+          <tr><td class="hl">Storage</td><td>PostgreSQL + Flyway</td><td>Region × month × day queries, versioned schema</td></tr>
+          <tr><td class="hl">API</td><td>Spring Boot 3.5 · Java 21 · 4 services</td><td>Every endpoint takes a region code: /api/v1/{region}/…</td></tr>
+          <tr><td class="hl">Caching</td><td>ETag on data version · recent months 5 min, past 1 day</td><td>Past months never change; recent ones update with NRT</td></tr>
+        </table></div>
+        <h3>Adding a region</h3>
+        <ol class="steps">
+          <li><b>Boundaries</b>Open admin boundaries for the region and its sub-areas.</li>
+          <li><b>FIRMS archive</b>MODIS, S-NPP, NOAA-20 and NOAA-21 downloads for its bounding box.</li>
+          <li><b>One config entry</b>Region code, folders, and an official fire record if one exists.</li>
+          <li><b>Run the notebook</b>Coefficients, vs. normal labels, validation tests and API files are produced automatically.</li>
+          <li><b>Load and serve</b>Register the region code. Every page works for it with no new code.</li>
+        </ol>
+        <h3>Sources</h3>
+        <ul class="why">
+          <li><b>NASA FIRMS</b>MODIS C6.1 and VIIRS C2 (S-NPP, NOAA-20, NOAA-21) active fires</li>
+          <li><b>Official records</b>Korea Forest Service · KOSIS, CAL FIRE FRAP, BC Wildfire Service, Hellenic Fire Service, CONAF, NSW NPWS Fire History</li>
+          <li><b>Boundaries</b>geoBoundaries: Korea (CC BY 3.0), US Census Bureau (public domain), EuroGeographics (CC BY 4.0), BCN Chile (CC BY 3.0 IGO), ABS Australia (CC BY 4.0) · BC Data Catalogue (OGL–BC)</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="#">Explore dashboard <i><svg width="22" height="22" viewBox="0 0 26 26" fill="none"><rect x="13" y="2" width="15.5" height="15.5" transform="rotate(45 13 2)" stroke="#fff" stroke-opacity=".8" stroke-width="1.6"/></svg></i></a>
+          <a class="link" href="#">Back to top ↑</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="wrap" data-lang="ko" hidden>
+  <div class="hero">
+    <a class="back" href="#">← 소개로 돌아가기</a>
+    <div class="eyebrow">작동 방식</div>
+    <h1>25년의 불을 하나의 자로.</h1>
+    <p class="lead">2012년에 위성이 바뀌면서 같은 불도 훨씬 많이 잡히게 됐어요. Burnline은 MODIS와 VIIRS를 하나의 자로 맞추고, 어느 지역이든 같은 방식으로 계산해요. 지금은 다섯 대륙의 여섯 지역(한국, 캘리포니아, 브리티시컬럼비아, 그리스, 칠레, 뉴사우스웨일스)을 다루고, 새 지역은 경계와 설정만 있으면 추가할 수 있어요.</p>
+    <div class="stats">
+      <div class="stat"><b>≈ <em>1.00배</em></b><span>보정 후 2012년 센서 전환 단절: 여섯 지역 모두 0.99–1.03배 (보정 전 2.06–3.00배)</span></div>
+      <div class="stat"><b>6개 지역 · <em>1,114</em>곳</b><span>하나의 파이프라인으로 2001년부터 매달, 지역 전체부터 시·군·구, 카운티, 시군까지</span></div>
+      <div class="stat"><b><em>80–95%</em></b><span>여섯 지역 모두에서 100 ha 이상 공식 산불이 2일 안에 위성 기록에 잡힌 비율</span></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="toc"><ol>
+      <li><a href="#ko-question"><i>01</i>질문</a></li>
+      <li><a href="#ko-data"><i>02</i>데이터</a></li>
+      <li><a href="#ko-cell"><i>03</i>화재 칸</a></li>
+      <li><a href="#ko-harmonize"><i>04</i>센서 맞추기</a></li>
+      <li><a href="#ko-validate"><i>05</i>검증</a></li>
+      <li><a href="#ko-chip"><i>06</i>평년 대비</a></li>
+      <li><a href="#ko-sparse"><i>07</i>드문 지역</a></li>
+      <li><a href="#ko-indicators"><i>08</i>나머지 지표</a></li>
+      <li><a href="#ko-limits"><i>09</i>숫자 읽는 법</a></li>
+      <li><a href="#ko-built"><i>10</i>구조와 확장</a></li>
+    </ol></aside>
+
+    <main>
+      <section id="ko-question">
+        <div class="num">01</div>
+        <h2>우리가 답하는 질문</h2>
+        <p class="one">이곳은 이번 달 <strong>평소보다 많이</strong> 타고 있을까? 25년 위성 기록과 비교해 <i>평년 대비</i> 표시 하나로 답해요.</p>
+        <ul class="why">
+          <li><b>하는 것</b>2001년부터 달마다 위성이 본 불의 양을 같은 자로 재고, 과거 같은 달과 비교해요. 모든 지역에 같은 규칙을 써요.</li>
+          <li><b>하지 않는 것</b>산불 건수나 피해면적을 만들지 않아요. 각 지역의 공식 기록은 출처를 붙여 나란히 보여줘요.</li>
+          <li><b>왜 어려운가</b>2012년에 센서가 MODIS에서 VIIRS로 바뀌면서 같은 불도 훨씬 자주 잡히게 됐어요. 원래 값을 그대로 이으면 검사한 모든 지역에서 2012년 이후가 2.1–3.0배 더 타는 것처럼 보여요. 가짜 추세예요.</li>
+        </ul>
+      </section>
+
+      <section id="ko-data">
+        <div class="num">02</div>
+        <h2>데이터</h2>
+        <p class="one">NASA FIRMS 위성 탐지가 측정값이에요. 공식 산불 기록은 지역에 있을 때 그 값을 <strong>검증</strong>하는 데만 써요.</p>
+        <figure>
+          <p class="ttl">위성 5대를 하나의 기록으로 이어요</p>
+          <p class="sub">모든 지역이 같아요. 위성이 겹치는 기간에 비율을 배우고, 그 비율로 기록을 이어요.</p>
+          <div class="legend"><span><i style="background:var(--text);opacity:.14"></i>자료가 있는 기간</span><span><i style="background:var(--accent)"></i>월값을 가져오는 기간</span><span><i class="hatch"></i>겹치는 기간에 비율 학습</span></div>
+          <svg id="ko-sats" viewBox="0 0 720 340" width="100%" role="img" aria-label="위성 자료 기간, 값 출처 기간, 비율 학습 기간"></svg>
+          <figcaption>NASA FIRMS · MODIS C6.1, VIIRS C2 · 과거는 검수본(SP), 최근 달만 준실시간(NRT)</figcaption>
+        </figure>
+        <h3>왜 이 자료인가</h3>
+        <ul class="why">
+          <li><b>FIRMS는 전 지구 자료</b>25년 동안 지구 전체를 같은 방식으로 본 유일한 공개 기록이에요. 지구 어느 지역이든 같은 파이프라인으로 계산할 수 있어요.</li>
+          <li><b>NOAA-20을 기준으로</b>지금 운영 중인 위성이에요. 새 달 값이 보정 없이 실측 그대로 들어와요.</li>
+          <li><b>공식 기록은 검증에만</b>기관마다 세는 기준이 다르고(CAL FIRE는 큰 불 위주), 월 단위로 공개하는 곳도 드물어요. 지표를 만드는 데는 쓰지 않아서, 공식 기록이 부족한 지역도 추가할 수 있어요.</li>
+          <li><b>공개 경계</b>기본은 geoBoundaries이고, 더 맞는 공식 경계가 있으면 그것을 써요(BC 지역구 28곳).</li>
+        </ul>
+        <div class="tbl"><table>
+          <tr><th>지역</th><th>구역</th><th>공식 기록 (검증용)</th></tr>
+          <tr><td class="hl">한국</td><td>시·도 17 · 시·군·구 229</td><td>산림청 · KOSIS</td></tr>
+          <tr><td class="hl">캘리포니아</td><td>카운티 58</td><td>CAL FIRE FRAP 화재 경계 8,686건</td></tr>
+          <tr><td class="hl">브리티시컬럼비아</td><td>지역구 28</td><td>BC Wildfire Service 42,170건</td></tr>
+          <tr><td class="hl">그리스</td><td>주 13 + 아토스산 · 시군 324<sup>1</sup></td><td>그리스 소방청 251,076건 (2000–2024)</td></tr>
+          <tr><td class="hl">칠레</td><td>주 16 · 시군(comuna) 345<sup>2</sup></td><td>CONAF 시즌별 시군 건수, 200 ha 이상 산불 2,142건, 감지율용 모든 크기 산불 35,323건 (2002–05·2018–20 시즌)</td></tr>
+          <tr><td class="hl">뉴사우스웨일스</td><td>지방정부 128 + 극서부 비법인 지역</td><td>NSW NPWS 화재 이력, 산불 10,411건</td></tr>
+        </table></div>
+        <p class="sub" style="font-size:13px;color:var(--muted)"><sup>1</sup> 그리스 시군은 325곳인데, 공개 경계 파일에 크레타의 Anogeia가 따로 없어 Mylopotamos에 합쳐 세요. <sup>2</sup> 칠레 시군은 346곳인데, 경계 파일에 남극 시군(Antártica)이 없어요. FIRMS 자료도 없는 곳이에요.</p>
+      </section>
+
+      <section id="ko-cell">
+        <div class="num">03</div>
+        <h2>화재 칸: 무엇을 세나</h2>
+        <p class="one"><strong>화재 칸</strong>은 0.01° 칸(약 1 km) 하나 × 현지 하루예요. 그날 그 칸에서 위성이 불을 한 번이라도 보면 1로 세요.</p>
+        <figure>
+          <p class="ttl">같은 불, 다른 점, 같은 칸 수</p>
+          <p class="sub">예시: VIIRS는 점을 훨씬 많이 찍지만, 둘 다 같은 칸으로 모여요</p>
+          <div class="cells">
+            <div><svg id="ko-cellA" viewBox="0 0 240 240" width="100%"></svg><div class="cap">MODIS · <b>점 4개 → 3칸</b></div></div>
+            <div><svg id="ko-cellB" viewBox="0 0 240 240" width="100%"></svg><div class="cap">VIIRS · <b>점 19개 → 3칸</b></div></div>
+          </div>
+          <figcaption>설명용 예시이며 실제 탐지가 아니에요</figcaption>
+        </figure>
+        <h3>왜 칸을 세나</h3>
+        <ul class="why">
+          <li><b>점이 아니라 칸</b>VIIRS는 해상도가 높아 같은 불을 더 많은 점으로 찍어요. 점을 세면 센서가 좋아진 것이 "불이 늘었다"로 보여요.</li>
+          <li><b>하루에 한 번</b>위성마다 하루에 지나가는 횟수가 달라요. 칸을 하루에 한 번만 세면 그 차이가 숫자에 섞이지 않아요.</li>
+          <li><b>낮과 밤을 함께</b>밤에만 잡히는 불이 많아요. 한국은 VIIRS 화재 칸의 46%가 밤에만 잡혔고, 2019년 고성 산불은 낮 0칸, 밤 47칸이었어요. 낮만 쓰면 한국의 월별 설명력(R²)이 0.92에서 0.78로 떨어져요.</li>
+          <li><b>낮·밤 합친 비율 하나</b>낮과 밤 칸을 합쳐 센 뒤 비율 하나로 보정해요. 합친 비율은 해마다 안정적이에요(한국: 해마다 변동 CV 0.07–0.11, 한 해씩 빼기 연간 오차 5–11%). 밤만 따로 구한 비율은 너무 크게 흔들려서(한국: 약 102, 46–423) 쓰지 않아요.</li>
+          <li><b>산불 건수가 아님</b>위성은 작은 불을 많이 놓쳐요. 화재 칸은 위성이 정직하게 말할 수 있는 양이에요.</li>
+        </ul>
+        <details><summary>세기 전에 거르는 것</summary><div><div class="tbl"><table>
+          <tr><th>규칙</th><th>내용</th></tr>
+          <tr><td>불이 아닌 열원</td><td>VIIRS가 고정 열원으로 표시한 적 있는 칸 제외 (지역마다 197–691칸)</td></tr>
+          <tr><td>신뢰도</td><td>MODIS 30 이상, VIIRS nominal·high</td></tr>
+          <tr><td>지역 밖</td><td>사각형으로 받은 캘리포니아·BC·NSW와, 국가 다운로드에 국경 너머 불이 섞인 그리스는 지역 경계로 잘라내요. 한국과 칠레는 바다 칸을 나라 합계에 넣고, 구역에서 약 3 km 안의 칸만 가장 가까운 구역에 넣어요. 칠레 다운로드에 섞인 국경 너머 탐지는 42개뿐이라 그대로 뒀어요.</td></tr>
+          <tr><td>현지 날짜</td><td>픽셀 경도 기준 태양시라 어느 시간대에서도 맞아요</td></tr>
+        </table></div></div></details>
+      </section>
+
+      <section id="ko-harmonize">
+        <div class="num">04</div>
+        <h2>센서를 하나의 자로 맞추기</h2>
+        <p class="one">모든 값을 <strong>NOAA-20이 셌을 법한 양</strong>으로 바꿔요. 2012년 전 MODIS 값은 달별 비율로 올려서 이어 붙여요.</p>
+        <figure data-chart="ba">
+          <div class="fighead"><div><p class="ttl"></p><p class="sub"></p></div><div class="rtabs"></div></div>
+          <div class="legend"><span><i class="ln" style="background:var(--raw)"></i>보정 전 (MODIS → S-NPP 이어 붙이기)</span><span><i class="ln" style="background:var(--accent)"></i>보정 후 (NOAA-20 기준)</span></div>
+          <svg class="plot" viewBox="0 0 720 300" width="100%" role="img" aria-label="연간 화재 칸, 보정 전과 후"></svg>
+          <figcaption>연간 화재 칸 2001–2025 · 노트북 결과 (calendar.json, hotspots_clean.csv) · API /landing annual.before, annual.after</figcaption>
+        </figure>
+        <h3>보정 사슬</h3>
+        <div class="chain">
+          <div class="seg" data-k="×k_T"><div class="t">2000-11 – 2002-06</div><div class="s">MODIS Terra</div><div class="f">Terra × k_T<br>× k_MS × k_SN</div><div class="q">추정값 · 보통/낮음</div></div>
+          <div class="seg" data-k="×k_MS"><div class="t">2002-07 – 2012-01</div><div class="s">MODIS Terra+Aqua</div><div class="f">(Terra+Aqua)<br>× k_MS × k_SN</div><div class="q">추정값 · 보통/낮음</div></div>
+          <div class="seg" data-k="×k_SN"><div class="t">2012-02 – 2018-03</div><div class="s">VIIRS S-NPP</div><div class="f">S-NPP × k_SN</div><div class="q">높음 / 보통 / 낮음</div></div>
+          <div class="seg live"><div class="t">2018-04 – 지금</div><div class="s">VIIRS NOAA-20</div><div class="f">실측 그대로<br>(NOAA-21 예비)</div><div class="q">높음 · NRT는 보통</div></div>
+        </div>
+        <div class="merge">하나의 시계열: <span>NOAA-20 기준 화재 칸, 2001년부터 오늘까지</span></div>
+        <p>값 H는 그 시기의 원래 값에 NOAA-20까지 이어 주는 비율들을 곱한 것이에요. 예를 들어 2005년 4월은 이렇게 계산해요.</p>
+        <div class="formula">H(2005-04) = (Terra + Aqua) × k_MS(4월) × k_SN(4월)</div>
+        <h3>비율</h3>
+        <p>각 비율은 두 위성이 함께 돈 기간에 같은 달 값을 비교해 구해요. 달마다 따로 구해서 비율 하나에 12개 값이 있고, 지역마다 따로 학습해요.</p>
+        <div class="tbl"><table>
+          <tr><th>비율</th><th>뜻</th><th>학습 기간</th><th>쓰는 곳</th></tr>
+          <tr><td class="hl">k_T</td><td>(Terra + Aqua) ÷ Terra</td><td>2003–2011</td><td>Aqua가 없던 2000-11 – 2002-06</td></tr>
+          <tr><td class="hl">k_MS</td><td>S-NPP ÷ (Terra + Aqua)</td><td>2012–2025</td><td>2012-02 이전 모든 달</td></tr>
+          <tr><td class="hl">k_SN</td><td>NOAA-20 ÷ S-NPP</td><td>2019–2025</td><td>2018-04 이전 모든 달</td></tr>
+          <tr><td class="hl">k_N21</td><td>NOAA-20 ÷ NOAA-21</td><td>2024–2025</td><td>예비: NOAA-20 자료가 없을 때</td></tr>
+        </table></div>
+        <div class="formula">k_MS(4월) = 2012–2025 모든 4월 S-NPP 칸의 <span class="k">합</span> ÷ 같은 4월들 Terra+Aqua 칸의 <span class="k">합</span></div>
+        <p>불이 적은 달이 있어서 k_MS는 앞뒤 달을 같이 쓰고, 연간 비율 쪽으로 당겨요(수축 20). 모든 비율은 지역마다 그 지역 자료로 따로 학습해요.</p>
+        <details><summary>한국 k_MS 달별 값</summary><div><div class="tbl"><table>
+          <tr><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th><th>7월</th><th>8월</th><th>9월</th><th>10월</th><th>11월</th><th>12월</th></tr>
+          <tr><td>3.32</td><td>2.14</td><td>1.72</td><td>1.74</td><td>1.56</td><td>3.20</td><td>0.78</td><td>0.80</td><td>2.22</td><td>1.71</td><td>1.51</td><td>4.54</td></tr>
+        </table></div></div></details>
+        <h3>달마다 붙는 품질 등급</h3>
+        <p>모든 월값에 품질 등급이 붙어서, 추정한 달은 화면에 그렇다고 표시돼요.</p>
+        <div class="tbl"><table>
+          <tr><th>등급</th><th>규칙</th></tr>
+          <tr><td class="hl">높음</td><td>NOAA-20 직접 관측, 또는 S-NPP 변환 오차 10% 이하</td></tr>
+          <tr><td class="hl">보통</td><td>변환 오차 30% 이하, 또는 준실시간(NRT) 자료</td></tr>
+          <tr><td class="hl">낮음</td><td>변환 오차 30% 초과</td></tr>
+        </table></div>
+        <p>그 달 평년이 5칸 미만이면 한 단계 낮춰요.</p>
+        <h3>왜 이렇게 했나</h3>
+        <ul class="why">
+          <li><b>MODIS가 아니라 NOAA-20에 맞춤</b>가장 중요한 "이번 달"이 실측 그대로 남아요. MODIS에 맞추면 운영이 끝나가는 위성 쪽으로 새 달마다 보정을 해야 해요.</li>
+          <li><b>지역마다 따로 학습</b>불의 종류가 지역마다 달라서, 한 지역에서 배운 값을 다른 지역에 그대로 쓰지 않아요. k_MS 범위: 한국 0.78–4.54, 캘리포니아 1.26–2.31, BC 1.81–4.24, 그리스 1.54–4.88, 칠레 1.50–3.76, NSW 1.91–3.34.</li>
+          <li><b>달마다 다른 비율</b>한 지역 안에서도 계절에 따라 비율이 크게 달라요(한국 7월 0.78, 12월 4.54). 비율 하나로는 계절 모양이 뒤틀려요.</li>
+          <li><b>합의 비율</b>여러 해를 먼저 더한 뒤 나눠요. 해마다 비율을 평균내면 불이 적은 해 하나(MODIS 2칸, VIIRS 10칸 = "5배")가 결과를 크게 흔들어요.</li>
+          <li><b>안정화</b>표본이 적은 달은 앞뒤 달을 같이 쓰고 연간 비율 쪽으로 당겨요(수축 20).</li>
+          <li><b>지역 단위 계수</b>시·군·구나 카운티는 너무 작아 비율을 따로 배울 수 없어서, 속한 지역의 계수를 써요.</li>
+        </ul>
+        <details><summary>배제한 대안</summary><div><div class="tbl"><table>
+          <tr><th>대안</th><th>이유</th></tr>
+          <tr><td>원래 값 그대로 잇기</td><td>2012년에 2.1–3.0배 계단이 생겨요</td></tr>
+          <tr><td>MODIS 기준으로 내리기</td><td>운영이 끝나는 위성이고, 최근 달도 보정값이 돼요</td></tr>
+          <tr><td>연간 비율 하나</td><td>계절마다 비율이 몇 배씩 달라요</td></tr>
+          <tr><td>모든 지역에 같은 비율</td><td>캘리포니아 1.26–2.31, 한국 0.78–4.54처럼 지역마다 달라요</td></tr>
+          <tr><td>2018년 이후 위성 3대 평균</td><td>NOAA-20 하나가 더 단순하고 기준이 흔들리지 않아요</td></tr>
+          <tr><td>낮만 세기</td><td>밤에만 잡힌 불이 빠져요(한국 VIIRS 칸의 46%)</td></tr>
+        </table></div></div></details>
+      </section>
+
+      <section id="ko-validate">
+        <div class="num">05</div>
+        <h2>보정이 맞는지 어떻게 아나</h2>
+        <p class="one">보정 후 2012년 단절이 여섯 지역 모두 사라져요. 세 지역은 위성과 상관없는 <strong>공식 기록</strong>으로 재도 다시 사라지고, 캘리포니아는 변화점이 없어요.</p>
+        <div class="tbl"><table>
+          <tr><th>검사</th><th>한국</th><th>캘리포니아</th><th>BC</th><th>그리스</th><th>칠레</th><th>NSW</th></tr>
+          <tr><td>위성끼리 단절 (보정 전 → 후)</td><td class="hl">2.61 → <span class="ok">0.99배</span></td><td class="hl">2.06 → <span class="ok">1.02배</span></td><td class="hl">2.38 → <span class="ok">1.00배</span></td><td class="hl">2.80 → <span class="ok">1.01배</span></td><td class="hl">2.73 → <span class="ok">1.02배</span></td><td class="hl">3.00 → <span class="ok">1.03배</span></td></tr>
+          <tr><td>한 해씩 빼기 · 월 R² / 연 오차</td><td>0.92 / 15%</td><td>0.98 / 7%</td><td>0.96 / 9%</td><td>0.97 / 6%</td><td>0.88 / 11%</td><td>0.84 / 10%</td></tr>
+          <tr><td>S-NPP → NOAA-20 변환 · 연 오차</td><td>6%</td><td>5%</td><td>5%</td><td>5%</td><td>2%</td><td>2%</td></tr>
+          <tr><td>Terra만 있던 기간 변환 · 연 오차</td><td>11%</td><td>5%</td><td>3%</td><td>9%</td><td>11%</td><td>23%</td></tr>
+          <tr><td>공식 건수 대비 단절</td><td class="hl">2.67 → <span class="ok">1.04배</span></td><td class="hl">2.54 → 1.25배 <span class="mono" style="color:var(--muted)">변화점 없음</span></td><td class="hl">4.99 → 2.14배 <span class="warn">판단 보류</span></td><td class="hl">1.96 → 0.71배 <span class="warn">판단 보류</span></td><td class="hl">2.38 → <span class="ok">0.96배</span> <span class="mono" style="color:var(--muted)">시즌</span></td><td class="hl">2.92 → <span class="ok">1.05배</span> <span class="mono" style="color:var(--muted)">시즌</span></td></tr>
+          <tr><td>피해면적과 순위 상관 · 2012 전 / 후</td><td>0.66 / 0.54</td><td>0.98 / 0.93</td><td>0.92 / 0.92</td><td>0.58 / 0.42</td><td>−0.13 / 0.88</td><td>0.52 / 0.88</td></tr>
+        </table></div>
+        <ul class="why">
+          <li><b>위성끼리 단절</b>이어 붙인 기록에서 2012년 이후 수준 ÷ 이전 수준. 1.00이면 계단이 없다는 뜻이에요.</li>
+          <li><b>한 해씩 빼기</b>한 해를 빼고 모든 비율을 다시 학습한 뒤, 뺀 해를 예측해 실제 관측과 비교해요.</li>
+          <li><b>공식 기록</b>같은 단절 검사를 위성 칸 ÷ 기관의 연간 산불 건수로 해요. 기관 기록은 위성과 무관해서, 보정을 바깥에서 확인하는 셈이에요.</li>
+          <li><b>순위 상관</b>화재 칸이 많은 해가 피해면적도 큰 해인지 봐요. 보정한 과거(2001–2011)와 실측 구간(2012–2025)을 따로 검사해서, 잘 맞는 최근 구간이 과거 구간을 가리지 않게 해요.</li>
+        </ul>
+        <div class="note"><b>BC를 "판단 보류"로 둔 이유.</b> BC는 2014년 무렵부터 작은 불은 줄고 초대형 산불이 늘어, 공식 기록 자체가 바뀌었어요. 건수로 나누면 2.14배, 면적으로 나누면 0.60배예요. BC의 보정 근거는 위성끼리 단절 검사와 순위 상관이고, 둘 다 잘 맞아요.</div>
+        <div class="note"><b>그리스를 "판단 보류"로 둔 이유.</b> 2012년 이후 공식 건수는 그대로인데 위성이 본 불이 줄었어요. 보정을 거치지 않은 Aqua MODIS 한 위성으로 봐도 똑같이 줄어요. 원인은 북부 평야의 가을 작물 잔재 소각이에요. 10월 화재 칸이 75% 줄었지만 공식 10월 건수는 거의 그대로예요. 9–11월을 빼면 0.93배예요. 그리스의 보정 근거는 위성끼리 단절 검사(1.01배)예요.</div>
+        <p>칠레와 NSW는 산불 시즌(7월–다음 해 6월) 단위로 비교해요. 칠레 공식 건수는 CONAF의 모든 크기 산불 시즌 합계예요.</p>
+        <figure data-chart="det">
+          <div class="fighead"><div><p class="ttl"></p><p class="sub"></p></div><div class="rtabs"></div></div>
+          <div class="legend"><span><i style="background:var(--accent)"></i>감지율</span><span><i style="background:var(--faint);width:3px"></i>우연 기준 (날짜를 30일 옮겼을 때)</span></div>
+          <svg class="plot" viewBox="0 0 720 250" width="100%" role="img" aria-label="산불 크기별 감지율"></svg>
+          <figcaption>노트북 결과 meta.external_validation.detection_by_size · API /landing detect_by_size · 구역이 넓으면 우연 기준이 높아져서, 둘 사이 차이를 봐야 해요</figcaption>
+        </figure>
+      </section>
+
+      <section id="ko-chip">
+        <div class="num">06</div>
+        <h2>평년 대비</h2>
+        <p class="one">이번 달을 과거의 <strong>같은 달</strong>과 비교해요. 보통 범위를 벗어났는지를 <i>평년 대비</i> 표시 하나로 보여줘요.</p>
+        <div class="chips">
+          <span class="chip" style="--c:var(--chip-record)">이례적으로 많음 · 최고 기록</span>
+          <span class="chip" style="--c:var(--chip-above)">평년보다 많음</span>
+          <span class="chip" style="--c:var(--chip-normal)">평년 수준</span>
+          <span class="chip" style="--c:var(--chip-below)">평년보다 적음</span>
+        </div>
+        <figure data-chart="band">
+          <div class="fighead"><div><p class="ttl"></p><p class="sub"></p></div><div class="rtabs"></div></div>
+          <svg class="plot" viewBox="0 0 720 300" width="100%" role="img" aria-label="같은 달 화재 칸과 보통 범위"></svg>
+          <figcaption>calendar.json, climatology.json · 지역마다 기록적인 달 (그리스는 더 많았던 2001년 10월 농업 소각 대신 2007년 8월)</figcaption>
+        </figure>
+        <p>위에서부터 처음 맞는 표시 하나만 붙여요: 최고 기록(이번 달 0보다 크고 같은 달 중 1위), 많음(위 끝 초과), 평년 수준(범위 안), 적음(아래 끝 미만).</p>
+        <div class="formula">평년 = 같은 달의 중앙값<br>위 끝 = max(<span class="k">85 퍼센타일</span>, 평년 + 2√평년)<br>아래 끝 = min(<span class="k">15 퍼센타일</span>, 평년 − 2√평년)</div>
+        <h3>왜 이 규칙인가</h3>
+        <ul class="why">
+          <li><b>평균이 아니라 중앙값</b>아주 많이 탄 해 하나가 평균을 끌어올려요. 중앙값이 "보통 해"에 가까워요.</li>
+          <li><b>같은 달끼리</b>지역마다 불의 계절이 다르고, 달에 따라 평년이 20배 가까이 차이 나기도 해요(한국 3월 174칸, 7월 9칸). 계절을 빼고 비교해야 해요.</li>
+          <li><b>2√평년 여유</b>위성은 하루 몇 번만 지나가서 같은 불도 우연히 더 또는 덜 잡혀요. 평년 λ칸인 달은 약 √λ만큼 흔들리므로, 그보다 작은 차이는 "많다"고 하지 않아요.</li>
+          <li><b>사분위가 아닌 이유</b>2019–2025에는 S-NPP와 NOAA-20이 함께 돌았어요. 같은 달을 각 위성 값만으로 판정해 보면, 사분위 규칙은 64%만 같은 표시가 나왔어요. 지금 규칙은 81%예요.</li>
+        </ul>
+        <div class="tbl"><table>
+          <tr><th>한국 전국 월 평년 대비</th><th>사분위 25–75%</th><th>15–85% + 2√평년</th></tr>
+          <tr><td>두 위성 표시 일치 (84달)</td><td>64%</td><td class="hl">81%</td></tr>
+          <tr><td>"많음" 중 공식 건수도 상위 25%</td><td>57%</td><td class="hl">69%</td></tr>
+          <tr><td>공식 상위 25% 달을 잡은 비율</td><td class="hl">57%</td><td>51%</td></tr>
+        </table></div>
+        <div class="note">짧고 강한 불은 달력의 <i>가장 넓게 탄 날</i>과 감지 묶음으로 보여줘서, 월 표시는 흔들리지 않고 잘못된 경보를 줄여요.</div>
+        <h3>보조 표시</h3>
+        <ul class="why">
+          <li><b>지역 전체</b>그 달 품질이 높음이 아니면 "추정값 · 품질 보통/낮음"</li>
+          <li><b>중간 단위</b>2018-04 전은 "추정값", 2012-02 전은 "추정값 · 품질 낮음"</li>
+        </ul>
+        <h3>기준 기간: 25년 또는 14년</h3>
+        <p>2012년 전 값은 추정값이에요. 지역 전체에서는 오차가 상쇄되지만 작은 구역에서는 남아요. 그래서 단위마다 한 해씩 빼기 검사로 오차를 재고, 30% 이하인 곳만 25년을 써요. 나머지는 VIIRS가 직접 본 2012–2025를 써요.</p>
+        <div class="tbl"><table>
+          <tr><th>단위</th><th>한국</th><th>캘리포니아</th><th>BC</th><th>그리스</th><th>칠레</th><th>NSW</th></tr>
+          <tr><td>지역 전체</td><td class="hl">25년</td><td class="hl">25년</td><td class="hl">25년</td><td class="hl">25년</td><td class="hl">25년</td><td class="hl">25년</td></tr>
+          <tr><td>중간 단위</td><td>경기(16%), 경북(18%), 충남(23%) → 25년 · 나머지 14곳 → 14년</td><td>없음</td><td>없음</td><td>주 14곳 중 11곳 → 25년</td><td>주 16곳 중 7곳 → 25년</td><td>없음</td></tr>
+          <tr><td>가장 작은 구역</td><td>시·군·구 229 · 14년</td><td>카운티 58 · 14년</td><td>지역구 28 · 14년</td><td>시군 324 + 아토스산 · 14년</td><td>시군 345 · 14년</td><td>지방정부 128 + 극서부 · 14년</td></tr>
+        </table></div>
+      </section>
+
+      <section id="ko-sparse">
+        <div class="num">07</div>
+        <h2>불이 드문 구역</h2>
+        <p class="one">한 해 평균 <strong>11.1칸 미만</strong>인 구역은 자기 평년 대비를 내지 않고, 위 단계의 것을 빌려 써요.</p>
+        <div class="formula">√λ / λ ≤ 0.30 &nbsp;→&nbsp; λ ≥ 1 / 0.30² ≈ <span class="k">11.1</span></div>
+        <p>한 해 평균 λ칸인 구역은 해마다 약 √λ만큼 우연히 흔들려요. 11.1칸이면 그 흔들림이 30%로 줄어요. 1년에 3칸 잡히는 구역은 이번 달 2칸만 잡혀도 "평년의 몇 배"가 돼요. 우연을 경보처럼 보여주는 셈이에요.</p>
+        <div class="flow">
+          <div class="box"><b>구역</b><span>연 11.1칸 이상이면 자기 평년 대비</span></div><div class="ar">→</div>
+          <div class="box"><b>상위 단위</b><span>구역이 부족하면 시·도나 주</span></div><div class="ar">→</div>
+          <div class="box"><b>가장 가까운 충분한 상위 단위</b><span>상위 단위도 부족하면, 화면에 밝힘</span></div>
+        </div>
+        <div class="tbl"><table>
+          <tr><th>현황</th><th>충분</th><th>부족</th><th>감지 없음</th></tr>
+          <tr><td>한국 시·군·구 (229)</td><td>6</td><td>192</td><td>31</td></tr>
+          <tr><td>한국 시·도 (17)</td><td>9</td><td>8</td><td>0</td></tr>
+          <tr><td>캘리포니아 카운티 (58)</td><td>55</td><td>3</td><td>0</td></tr>
+          <tr><td>BC 지역구 (28)</td><td>28</td><td>0</td><td>0</td></tr>
+          <tr><td>그리스 시군 + 아토스산 (325)</td><td>61</td><td>233</td><td>31</td></tr>
+          <tr><td>칠레 시군 (345)</td><td>186</td><td>155</td><td>4</td></tr>
+          <tr><td>NSW 지방정부 + 극서부 (129)</td><td>95</td><td>25</td><td>9</td></tr>
+        </table></div>
+        <ul class="why">
+          <li><b>빌려 쓰는 것</b>평년 대비, 위험 시기, 계절 비교를 같은 상위 단위에서 가져오고, 화면에 출처를 밝혀요("경북 기준").</li>
+          <li><b>자기 것으로 남는 것</b>구역의 화재 칸, 달력, 지도, 공식 기록, 이웃은 항상 그 구역 값이에요.</li>
+          <li><b>감지 기록 없음</b>2012년 이후 화재 칸이 없는 구역은 맞닿은 지역을 보라고 안내해요.</li>
+          <li><b>상위 단위가 하나인 지역</b>캘리포니아·BC·NSW는 중간 단위가 없어서, 부족한 카운티는 주 전체(25년 기준)를 써요.</li>
+        </ul>
+        <p>규칙이 스스로 얼마나 말할지 정해서, 불이 잦은 곳과 드문 곳 모두에 같은 규칙을 쓸 수 있어요. 연평균은 가장 많이 탄 한 해를 빼고 구해요. 큰불 한 번으로 평소 불이 잦은 구역처럼 보이지 않게 하려고요.</p>
+      </section>
+
+      <section id="ko-indicators">
+        <div class="num">08</div>
+        <h2>나머지 지표</h2>
+        <p class="one">나머지는 모든 지역에서 <strong>같은 보정 시계열</strong>과 같은 기준 기간으로 계산해요.</p>
+        <div class="tbl"><table>
+          <tr><th>지표</th><th>계산</th><th>이유</th></tr>
+          <tr><td class="hl">위험 시기</td><td>월별 비중을 큰 달부터 더해 처음 50%를 넘는 달들. 한국 2–4월(64%), 캘리포니아 8–10월(60%), BC 7–8월(51%), 그리스 8–10월(58%), 칠레 3–5월(51%), NSW 4–5·8–9·12월(55%)</td><td>데이터가 지역마다 시기를 정해요. NSW의 가을·늦겨울 위험 감소 소각처럼 농업·계획 소각도 포함돼요</td></tr>
+          <tr><td class="hl">같은 달 순위</td><td>같은 달 n번 중 k위 (n = 25 또는 14)</td><td>평년이 0인 달에도 쓸 수 있어요</td></tr>
+          <tr><td class="hl">평년의 n배</td><td>이번 달 ÷ 평년, 자기 평년 대비가 있는 구역만</td><td>평년이 작으면 배수가 부풀어요</td></tr>
+          <tr><td class="hl">올해 누적</td><td>시즌 시작(1월, 칠레·NSW는 7월)부터 그달까지의 합 ÷ 지난 해들의 같은 기간 누적 합의 중앙값</td><td>한 달이 아니라 올해 흐름</td></tr>
+          <tr><td class="hl">달력 색</td><td>0 + 그 구역 0이 아닌 달의 50·75·90 퍼센타일</td><td>고정 구간이면 어딘가는 한 색으로 몰려요</td></tr>
+          <tr><td class="hl">감지 묶음</td><td>3 km·2일 안의 화재 칸을 한 묶음으로, 10칸 이상은 큰 묶음</td><td>날짜와 경계를 넘는 큰불을 한 덩어리로 보여줘요</td></tr>
+          <tr><td class="hl">가장 넓게 탄 날</td><td>이 구역 하루 화재 칸 최대</td><td>월 표시가 놓치는 짧은 불을 잡아요</td></tr>
+          <tr><td class="hl">50 km 안 첫 감지</td><td>중심점 50 km 안에서 그달 처음 잡힌 날</td><td>이웃에서 번져 오는 불</td></tr>
+          <tr><td class="hl">재발 격자</td><td>0.02° 칸별로 2012–2025에 불이 있던 해 수</td><td>한 번 탄 곳과 해마다 타는 곳을 구분해요</td></tr>
+          <tr><td class="hl">25년 합계</td><td>2001–2025 합과 연평균. 2012년 전은 구역별 비율(상위 단위 값 쪽으로 수축)로 환산. 25칸 이상만 표시, 품질 높음(50 이상)·보통·낮음</td><td>긴 합은 월 오차가 상쇄돼요</td></tr>
+          <tr><td class="hl">지도 색</td><td>그 달 구역 화재 칸. 한국은 고정 0 / 1–2 / 3–9 / 10–29 / 30+. 다른 지역은 0이 아닌 구역-달의 25·50·75 퍼센타일(예: 캘리포니아 3·8·18, BC 2·8·47)</td><td>지역 안에서는 같은 자, 지역 규모에 맞게</td></tr>
+          <tr><td class="hl">감지 점</td><td>그 시기 위성의 필터 통과 탐지. 한 달 4,000개 초과면 고르게 4,000개만 그리고 전체 개수 표시</td><td>어디서 탔는지 보여줘요</td></tr>
+          <tr><td class="hl">점 색</td><td>그달 첫 감지일부터 첫날 / +1일 / +2일 / +3일 이상</td><td>불이 번진 순서를 보여줘요</td></tr>
+          <tr><td class="hl">맞닿은 지역</td><td>경계를 맞댄 구역 전부(허용 0.002°), 다른 상위 단위 포함</td><td>드문 구역의 대안 정보</td></tr>
+          <tr><td class="hl">공식 기록 표</td><td>그달 그 구역 기관 산불 기록, 피해면적 큰 15건</td><td>위성 옆에 지상 기록</td></tr>
+          <tr><td class="hl">평소 연간 화재 칸</td><td>가장 많이 탄 해를 뺀 VIIRS 연평균</td><td>그 구역이 평소 얼마나 타는지</td></tr>
+        </table></div>
+      </section>
+
+      <section id="ko-limits">
+        <div class="num">09</div>
+        <h2>숫자 읽는 법</h2>
+        <p class="one">화재 칸은 <strong>위성이 본 불의 양</strong>이에요. 얼마나 넓게, 얼마나 오래 탔는지를 25년 동안 같은 자로 비교할 수 있게 만든 값이에요.</p>
+        <div class="limits">
+          <div><b>면적·건수가 아니라 활동량</b>화재 칸은 불의 활동량이에요. 피해면적과 건수는 각 기관 기록을 나란히 보여줘요.</div>
+          <div><b>추정한 달은 표시돼요</b>2012년 전 값에는 "추정값"과 품질 등급이 붙고, 작은 구역은 2012년부터 보여줘요.</div>
+          <div><b>짧은 불은 따로 보여줘요</b>달력의 가장 넓게 탄 날과 감지 묶음이 짧고 강한 불을 보여줘요.</div>
+          <div><b>위성이 본 모든 불</b>농업 소각, 개간 불, 계획 소각도 위성이 본 그대로 포함돼요. 그리스 북부 평야의 가을과 NSW의 소각 시기에는 평년 대비가 그 소각을 따라가요.</div>
+        </div>
+      </section>
+
+      <section id="ko-built">
+        <div class="num">10</div>
+        <h2>만든 방법과 확장</h2>
+        <p class="one">무거운 계산은 지역마다 미리 한 번 돌려요. API는 <strong>계산된 값</strong>만 돌려줘서 모든 인사이트가 1초 안에 응답해요.</p>
+        <div class="tbl"><table>
+          <tr><th>단계</th><th>기술</th><th>이유</th></tr>
+          <tr><td class="hl">자료 처리</td><td>Python · pandas, NumPy, SciPy</td><td>노트북 하나, 지역마다 설정 한 줄</td></tr>
+          <tr><td class="hl">저장</td><td>PostgreSQL + Flyway</td><td>지역 × 달 × 날짜 조회, 표 구조 버전 관리</td></tr>
+          <tr><td class="hl">API</td><td>Spring Boot 3.5 · Java 21 · 서비스 4개</td><td>모든 주소가 지역 코드를 받아요: /api/v1/{지역}/…</td></tr>
+          <tr><td class="hl">캐시</td><td>데이터 버전 ETag · 최근 달 5분, 지난 달 1일</td><td>지난 달은 바뀌지 않고, 최근 달은 NRT로 바뀌어요</td></tr>
+        </table></div>
+        <h3>새 지역 추가하기</h3>
+        <ol class="steps">
+          <li><b>경계</b>지역과 하위 구역의 공개 행정 경계</li>
+          <li><b>FIRMS 원자료</b>그 지역 범위의 MODIS, S-NPP, NOAA-20, NOAA-21 다운로드</li>
+          <li><b>설정 한 줄</b>지역 코드, 폴더, 공식 산불 기록(있으면)</li>
+          <li><b>노트북 실행</b>계수, 평년 대비, 검증 검사, API용 파일이 자동으로 나와요</li>
+          <li><b>불러오기</b>지역 코드를 등록하면 모든 화면이 새 코드 없이 작동해요</li>
+        </ol>
+        <h3>출처</h3>
+        <ul class="why">
+          <li><b>NASA FIRMS</b>MODIS C6.1, VIIRS C2 (S-NPP, NOAA-20, NOAA-21) 활성 화재</li>
+          <li><b>공식 기록</b>산림청 · KOSIS, CAL FIRE FRAP, BC Wildfire Service, 그리스 소방청, CONAF, NSW NPWS 화재 이력</li>
+          <li><b>경계</b>geoBoundaries: 한국 (CC BY 3.0), 미국 인구조사국 (퍼블릭 도메인), EuroGeographics (CC BY 4.0), 칠레 국회도서관 BCN (CC BY 3.0 IGO), 호주 통계청 ABS (CC BY 4.0) · BC Data Catalogue (OGL–BC)</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="#">대시보드 보기 <i><svg width="22" height="22" viewBox="0 0 26 26" fill="none"><rect x="13" y="2" width="15.5" height="15.5" transform="rotate(45 13 2)" stroke="#fff" stroke-opacity=".8" stroke-width="1.6"/></svg></i></a>
+          <a class="link" href="#">맨 위로 ↑</a>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<footer><div class="wrap">Burnline · NASA Space Apps Challenge 2026 · Data: NASA FIRMS</div></footer>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function el(svg,tag,attrs,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;svg.appendChild(e);return e;}
+const fmt=v=>Math.round(v).toLocaleString('en-US');
+function ticks(max,n=4){const raw=max/n,p=Math.pow(10,Math.floor(Math.log10(raw))),s=[1,2,2.5,5,10].map(m=>m*p).find(m=>m>=raw);return {step:s,top:Math.ceil(max/s)*s};}
+
+/* data per region (output/{KOR,CAL,BC}) */
+const R={
+  KOR:{before:[106,173,179,335,298,189,268,272,340,136,302,356,426,824,808,621,830,560,662,645,439,1122,523,278,1309],
+       after:[586.6,977,452.6,899.1,707.2,524,735.1,654.9,812.1,371.9,734,420.9,497.7,945.9,923.8,703.3,960.9,660.8,733,690,574,1289,545,352,1506],
+       det:[[2445,.05,.02],[1490,.09,.03],[364,.30,.03],[83,.61,.06],[35,.91,.03]],
+       month:3,mv:[266,429.2,138.9,136.5,227.6,222.8,127,184.4,177.3,40.7,273.1,58.7,140.3,236,327.3,174,201.2,100.1,139,163,89,555,155,55,1093],band:[95.6,174,294.8],peak:2025},
+  CAL:{before:[2662,5773,8237,4975,3992,8603,9349,16261,6155,2339,2988,11608,13194,11890,18035,11562,23768,24994,8641,63848,51371,9992,12999,12005,11431],
+       after:[10027.6,13349.7,16578.9,9944.1,7928.3,16263.1,18115.5,28657.6,11806.5,4555.7,5960.7,12539.7,13693.6,12332.1,18661.1,12142.7,24864.6,24970.8,8769,64825,52464,11185,13452,14760,11661],
+       det:[[58,.33,.28],[304,.41,.37],[1199,.62,.48],[1053,.68,.44],[637,.86,.45]],
+       month:9,mv:[1272.4,1533.8,2749,1023.8,1116.7,5778.6,2295.9,2066.5,1093.9,667.3,593.4,1208.9,2089.7,3348.4,2820.2,1921.1,5357.9,2647,1893,32941,12900,2175,2168,1830,1880],band:[1107.6,2066.5,4152.2],peak:2020},
+  BC:{before:[1316,2680,10035,6708,4148,4507,4953,4501,8338,12349,3403,7380,9910,22923,17340,9363,58014,72616,8477,5794,43154,12917,76656,15029,15336],
+       after:[5326.4,6682,23229.8,14885.6,9505,10228,10743.2,10388.4,19057.9,28331.4,8042.4,7616.1,10074.3,23319.4,17551.2,9478.9,58859.5,72717.8,8573,6002,44108,13845,73568,16984,15814],
+       det:[[6509,.62,.43],[2448,.69,.47],[1390,.76,.45],[738,.90,.48],[843,.93,.54]],
+       month:5,mv:[224.2,228,362.3,211.7,529.1,175.8,269.1,263.7,288.8,235,75.3,267,343.8,262.1,1442.3,1667.9,185.2,821,263,60,108,51,5772,179,254],band:[148.7,262.1,645.9],peak:2023},
+  GRC:{before:[1638, 725, 1359, 1826, 1523, 1186, 4874, 2298, 1407, 754, 2265, 4199, 3899, 2975, 3064, 3655, 2949, 1833, 2478, 2452, 3309, 2313, 3665, 2022, 1899],
+       after:[10323.5, 2342.0, 3672.1, 4957.7, 4316.9, 3172.2, 11642.9, 6218.0, 3513.3, 2005.8, 6126.0, 4460.2, 4129.8, 3163.1, 3281.4, 3902.5, 3170.4, 1978.3, 2617.0, 2580.0, 3606.0, 2506.0, 3706.0, 2284.0, 1928.0],
+       det:[[40012,0.12,0.06],[18416,0.18,0.08],[6009,0.29,0.1],[1032,0.49,0.1],[218,0.8,0.05]],
+       month:8,mv:[461.6, 348.3, 335.4, 393.5, 219.3, 554.8, 5091.9, 561.2, 1085.9, 367.7, 946.1, 944.3, 444.0, 371.2, 444.0, 509.6, 456.3, 72.0, 198.0, 131.0, 1892.0, 67.0, 1600.0, 328.0, 430.0],band:[210.8, 444.0, 1002.0],peak:2007},
+  CHL:{before:[834, 1203, 4083, 4786, 5197, 4204, 4704, 5328, 5403, 4629, 4363, 8934, 10682, 9942, 14334, 10226, 18091, 9983, 10186, 10905, 9777, 11290, 18873, 8608, 10541],
+       after:[7902.7, 7224.7, 9801.6, 10883.2, 12244.2, 9892.7, 11174.9, 12367.8, 12363.7, 11319.9, 10030.2, 9921.4, 10743.8, 9863.6, 14212.8, 10260.7, 17684.8, 9858.9, 10241.0, 10985.0, 9987.0, 10972.0, 17847.0, 8804.0, 10483.0],
+       det:[[4826,0.23,0.18],[5665,0.3,0.22],[3604,0.48,0.28],[984,0.74,0.35],[264,0.94,0.35]],detp:{ko:'2018–19·2019–20 시즌',en:'in the 2018–19 and 2019–20 seasons'},
+       month:2,mv:[258.6, 2477.1, 414.1, 626.0, 842.8, 233.1, 158.1, 1009.1, 487.4, 119.0, 621.1, 580.4, 330.3, 466.2, 2362.3, 773.0, 538.0, 683.3, 1830.0, 1704.0, 377.0, 2278.0, 9660.0, 828.0, 1209.0],band:[301.6, 626.0, 2009.2],peak:2023},
+  NSW:{before:[5323, 17435, 18628, 13625, 11398, 17174, 7531, 5324, 9534, 4572, 13438, 25696, 36772, 29131, 24197, 29137, 40938, 36726, 124922, 40002, 24027, 15432, 34768, 22514, 25897],
+       after:[39596.3, 69110.4, 48109.3, 36481.2, 30710.4, 45445.4, 21307.9, 14609.5, 25560.2, 11919.1, 35250.3, 26473.8, 37628.0, 29816.6, 24547.1, 29533.2, 41926.9, 36952.9, 128710.0, 41078.0, 24574.0, 16119.0, 34993.0, 22576.0, 26323.0],
+       det:[[441,0.47,0.32],[462,0.54,0.35],[576,0.71,0.43],[529,0.8,0.5],[659,0.95,0.59]],
+       month:12,mv:[9281.2, 4604.9, 370.1, 492.2, 805.2, 2199.1, 110.3, 381.9, 3327.2, 147.7, 55.1, 1268.3, 1240.5, 559.0, 810.2, 821.5, 940.9, 949.0, 50656.0, 233.0, 910.0, 513.0, 2990.0, 756.0, 1654.0],band:[315.3, 821.5, 3124.9],peak:2019}
+};
+const BINS=['< 0.1 ha','0.1–1 ha','1–10 ha','10–100 ha','≥ 100 ha'];
+const MON={en:['January','February','March','April','May','June','July','August','September','October','November','December'],ko:[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>m+'월')};
+const T={
+  en:{names:{KOR:'South Korea',CAL:'California',BC:'British Columbia',GRC:'Greece',CHL:'Chile',NSW:'New South Wales'},short:{KOR:'Korea',CAL:'California',BC:'BC',GRC:'Greece',CHL:'Chile',NSW:'NSW'},backup:'backup only',kT:'Terra+Aqua ÷ Terra',kMS:'S-NPP ÷ MODIS',kSN:'NOAA-20 ÷ S-NPP',kN21:'NOAA-20 ÷ NOAA-21',cells:'cells',chance:'chance',norec:'No public records for this size (official list covers fires of 200 ha or more)',
+      ba:['Before correction the record jumps in 2012. After, it runs on.',n=>`${n} · annual fire cells, 2001–2025`],
+      det:['Bigger fires are seen more often. Read the gap to the chance line',(n,d)=>`${n} · official fires ${d.detp?d.detp.en:'since 2018-04'} with a fire cell in the same area within 2 days`],
+      band:(n,m,y,x)=>[`${m} ${y} was ${x}× the usual ${m}, the highest in 25 years`,`${n} · every ${m} 2001–2025 · shaded band = usual range · dashed = normal (median)`],
+      top:(y,v,x)=>`${y} · ${v} cells · ${x}× normal`,hi:v=>`range top ${v}`,lo:v=>`bottom ${v}`,med:v=>`normal ${v}`},
+  ko:{names:{KOR:'한국',CAL:'캘리포니아',BC:'브리티시컬럼비아',GRC:'그리스',CHL:'칠레',NSW:'뉴사우스웨일스'},short:{KOR:'한국',CAL:'캘리포니아',BC:'BC',GRC:'그리스',CHL:'칠레',NSW:'NSW'},backup:'예비용',kT:'Terra+Aqua ÷ Terra',kMS:'S-NPP ÷ MODIS',kSN:'NOAA-20 ÷ S-NPP',kN21:'NOAA-20 ÷ NOAA-21',cells:'칸',chance:'우연',norec:'이 크기의 공개 기록 없음 (공식 목록은 200 ha 이상 산불만)',
+      ba:['보정 전에는 2012년에 계단이 생기고, 보정 후에는 이어져요',n=>`${n} · 연간 화재 칸, 2001–2025`],
+      det:['큰 불일수록 더 잘 잡혀요. 우연 기준선과의 차이를 보세요',(n,d)=>`${n} · ${d.detp?d.detp.ko:'2018-04 이후'} 공식 산불 중 2일 안에 같은 구역에서 화재 칸이 잡힌 비율`],
+      band:(n,m,y,x)=>[`${y}년 ${m}은 평년 ${m}의 ${x}배, 25년 중 가장 많았어요`,`${n} · 2001–2025 모든 ${m} · 음영 = 보통 범위 · 점선 = 평년(중앙값)`],
+      top:(y,v,x)=>`${y} · ${v}칸 · 평년의 ${x}배`,hi:v=>`범위 위 ${v}`,lo:v=>`아래 ${v}`,med:v=>`평년 ${v}`}
+};
+
+function drawSats(s,L,pid){
+  const x0=150,x1=704,NOW=2026.9,X=y=>x0+(y-2000)/(NOW-2000)*(x1-x0),acc=css('--accent');
+  const d=el(s,'defs',{}),pt=el(d,'pattern',{id:pid+'hatch',width:6,height:6,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+  el(pt,'rect',{width:6,height:6,fill:acc,opacity:.12});el(pt,'line',{x1:0,y1:0,x2:0,y2:6,stroke:acc,'stroke-width':2.2});
+  const top=8,bot=300;
+  [2000,2005,2010,2015,2020,2025].forEach(y=>{el(s,'line',{x1:X(y),x2:X(y),y1:top,y2:bot,stroke:css('--line')});el(s,'text',{x:X(y),y:bot+20,'text-anchor':'middle','font-size':12,fill:css('--faint')},y);});
+  // satellites: [name, sensor, data from, source from, source to]
+  const sats=[['Terra','MODIS',2000.83,2000.83,2012.08],['Aqua','MODIS',2002.5,2002.5,2012.08],['S-NPP','VIIRS',2012.05,2012.08,2018.25],['NOAA-20','VIIRS',2018.25,2018.25,NOW],['NOAA-21','VIIRS',2023.17,null,null]];
+  sats.forEach((r,i)=>{const y=top+8+i*30;
+    el(s,'text',{x:0,y:y+13,'font-size':13.5,fill:css('--text')},r[0]);
+    el(s,'text',{x:72,y:y+13,'font-size':11.5,fill:css('--faint'),'font-family':'IBM Plex Mono'},r[1]);
+    el(s,'rect',{x:X(r[2]),y:y,width:X(NOW)-X(r[2]),height:18,rx:4,fill:css('--text'),opacity:.12});
+    if(r[3]!=null)el(s,'rect',{x:X(r[3]),y:y,width:X(r[4])-X(r[3]),height:18,rx:4,fill:acc,opacity:i===2?.7:i<2?.5:1});
+    else el(s,'text',{x:X(NOW)-6,y:y+13,'text-anchor':'end','font-size':11.5,fill:css('--muted')},L.backup);
+  });
+  // learning windows
+  const ly=top+8+5*30+18;
+  el(s,'line',{x1:0,x2:x1,y1:ly-10,y2:ly-10,stroke:css('--line-2')});
+  const ks=[['k_T',L.kT,2003,2012],['k_MS',L.kMS,2012,2026],['k_SN',L.kSN,2019,2026],['k_N21',L.kN21,2024,2026]];
+  ks.forEach((k,i)=>{const y=ly+i*26;
+    el(s,'text',{x:0,y:y+12,'font-size':12.5,'font-weight':600,fill:acc,'font-family':'IBM Plex Mono'},k[0]);
+    el(s,'text',{x:52,y:y+12,'font-size':11.5,fill:css('--muted')},k[1]);
+    el(s,'rect',{x:X(k[2]),y:y,width:X(k[3])-X(k[2]),height:16,rx:3,fill:'url(#'+pid+'hatch)',stroke:acc,'stroke-width':1});
+    el(s,'text',{x:X(k[3])+8>x1-60?X(k[2])-8:X(k[3])+8,y:y+12,'text-anchor':X(k[3])+8>x1-60?'end':'start','font-size':11.5,fill:css('--faint')},k[2]+'–'+(k[3]-1));
+  });
+  el(s,'line',{x1:X(2012.08),x2:X(2012.08),y1:top,y2:bot,stroke:css('--text'),'stroke-dasharray':'3 4',opacity:.5});
+  el(s,'line',{x1:X(2018.25),x2:X(2018.25),y1:top,y2:top+8+5*30,stroke:css('--text'),'stroke-dasharray':'3 4',opacity:.3});
+}
+function drawCell(s,pts){
+  const n=6,c=40,lit=[[2,2],[2,3],[3,3]];
+  for(let i=0;i<n;i++)for(let j=0;j<n;j++){const on=lit.some(([a,b])=>a===i&&b===j);el(s,'rect',{x:j*c+1,y:i*c+1,width:c-2,height:c-2,rx:4,fill:on?css('--accent-soft'):'none',stroke:on?css('--accent'):css('--line-2'),'stroke-width':on?1.5:1});}
+  pts.forEach(([x,y,r])=>el(s,'circle',{cx:x,cy:y,r:r,fill:css('--accent'),opacity:.9}));
+}
+const PTS_A=[[96,98,9],[132,92,8],[150,130,9],[112,104,7]];
+const PTS_B=[[88,90,3],[95,104,3],[104,94,3],[112,110,3],[100,114,3],[90,116,3],[108,86,3],[126,92,3],[134,104,3],[146,96,3],[154,110,3],[130,114,3],[140,88,3],[132,132,3],[146,140,3],[156,128,3],[138,150,3],[150,154,3],[126,144,3]];
+
+const DRAW={
+  ba(s,d,L){
+    const yrs=[...Array(25)].map((_,i)=>2001+i),mx=Math.max(...d.before,...d.after),{step,top}=ticks(mx);
+    const x0=58,x1=636,yb=268,yt=18,X=y=>x0+(y-2001)/24*(x1-x0),Y=v=>yb-v/top*(yb-yt);
+    for(let t=0;t<=top;t+=step){el(s,'line',{x1:x0,x2:x1,y1:Y(t),y2:Y(t),stroke:css('--line')});el(s,'text',{x:x0-8,y:Y(t)+4,'text-anchor':'end','font-size':11.5,fill:css('--faint')},fmt(t));}
+    [2001,2005,2010,2015,2020,2025].forEach(y=>el(s,'text',{x:X(y),y:yb+22,'text-anchor':'middle','font-size':11.5,fill:css('--faint')},y));
+    el(s,'line',{x1:X(2011.5),x2:X(2011.5),y1:yt,y2:yb,stroke:css('--text'),'stroke-dasharray':'3 4',opacity:.45});
+    el(s,'text',{x:X(2011.5)+8,y:yt+12,'font-size':12,fill:css('--muted')},'2012 · MODIS → VIIRS');
+    const line=(v,c,w)=>{el(s,'path',{d:v.map((q,i)=>(i?'L':'M')+X(yrs[i])+' '+Y(q)).join(''),fill:'none',stroke:c,'stroke-width':w,'stroke-linejoin':'round'});v.forEach((q,i)=>{const p=el(s,'circle',{cx:X(yrs[i]),cy:Y(q),r:3,fill:c});el(p,'title',{},`${yrs[i]}: ${fmt(q)} ${L.cells}`);});};
+    line(d.before,css('--raw'),2);line(d.after,css('--accent'),2.5);
+    const a=d.after.at(-1),b=d.before.at(-1),gap=Math.abs(Y(a)-Y(b))<16?(Y(a)<Y(b)?-8:8):0;
+    el(s,'text',{x:X(2025)+10,y:Y(a)+4+gap,'font-size':12.5,'font-weight':600,fill:css('--text')},fmt(a));
+    el(s,'text',{x:X(2025)+10,y:Y(b)+4-gap,'font-size':12.5,fill:css('--muted')},fmt(b));
+    el(s,'text',{x:X(2001),y:yt+12,'font-size':12,fill:css('--muted')},`2001: ${fmt(d.before[0])} → ${fmt(d.after[0])}`);
+  },
+  det(s,d,L){
+    const bx=96,bw=480,X=p=>bx+p*bw;
+    d.det.forEach((r,i)=>{const y=12+i*44,[n,det,ch]=r;
+      el(s,'text',{x:bx-12,y:y+15,'text-anchor':'end','font-size':13.5,fill:css('--text')},BINS[i]);
+      el(s,'rect',{x:bx,y:y,width:bw,height:20,rx:4,fill:css('--surface-2')});
+      if(!n){el(s,'text',{x:bx+12,y:y+15,'font-size':12,fill:css('--faint')},L.norec);return;}
+      el(el(s,'rect',{x:bx,y:y,width:X(det)-bx,height:20,rx:4,fill:css('--accent'),opacity:.35+det*.65}),'title',{},`${BINS[i]}: ${Math.round(det*100)}% (${L.chance} ${Math.round(ch*100)}%, n=${fmt(n)})`);
+      el(s,'line',{x1:X(ch),x2:X(ch),y1:y-4,y2:y+24,stroke:css('--text'),'stroke-width':2,opacity:.6});
+      el(s,'text',{x:bx+bw+14,y:y+15,'font-size':14,'font-weight':600,fill:css('--text')},Math.round(det*100)+'%');
+      el(s,'text',{x:bx+bw+58,y:y+15,'font-size':12,fill:css('--faint')},'n='+fmt(n));
+    });
+    [0,.25,.5,.75,1].forEach(p=>el(s,'text',{x:X(p),y:240,'text-anchor':'middle','font-size':11.5,fill:css('--faint')},p*100+'%'));
+  },
+  band(s,d,L){
+    const v=d.mv,[lo,med,hi]=d.band,max=Math.max(...v),{step,top}=ticks(max);
+    const x0=58,x1=618,yb=262,yt=16,bw=(x1-x0)/25,Y=t=>yb-t/top*(yb-yt);
+    for(let t=0;t<=top;t+=step){el(s,'line',{x1:x0,x2:x1,y1:Y(t),y2:Y(t),stroke:css('--line')});el(s,'text',{x:x0-8,y:Y(t)+4,'text-anchor':'end','font-size':11.5,fill:css('--faint')},fmt(t));}
+    el(s,'rect',{x:x0,y:Y(hi),width:x1-x0,height:Math.max(2,Y(lo)-Y(hi)),fill:css('--text'),opacity:.08});
+    el(s,'line',{x1:x0,x2:x1,y1:Y(med),y2:Y(med),stroke:css('--text'),'stroke-dasharray':'4 4',opacity:.6});
+    v.forEach((t,i)=>{const yr=2001+i,c=t===max?css('--chip-record'):t>hi?css('--chip-above'):t<lo?css('--chip-below'):css('--chip-normal');
+      const r=el(s,'rect',{x:x0+i*bw+3,y:Y(t),width:bw-6,height:Math.max(1,yb-Y(t)),rx:2,fill:c,opacity:t===max?1:.85});el(r,'title',{},`${yr}: ${fmt(t)} ${L.cells}`);
+      if(yr%4===1)el(s,'text',{x:x0+i*bw+bw/2,y:yb+20,'text-anchor':'middle','font-size':11.5,fill:css('--faint')},yr);});
+    const pi=v.indexOf(max),px=x0+pi*bw+bw/2,x=(max/med).toFixed(1).replace(/\.0$/,'');
+    el(s,'text',{x:pi>12?px-bw/2-6:px+bw/2+6,y:Y(max)+12,'text-anchor':pi>12?'end':'start','font-size':12.5,'font-weight':600,fill:css('--text')},L.top(2001+pi,fmt(max),x));
+    // right-side labels, pushed apart when close
+    const lab=[[Y(hi),L.hi(fmt(hi)),css('--muted')],[Y(med),L.med(fmt(med)),css('--text')],[Y(lo),L.lo(fmt(lo)),css('--muted')]];
+    for(let i=1;i<3;i++)if(lab[i][0]-lab[i-1][0]<14)lab[i][0]=lab[i-1][0]+14;
+    lab.forEach(([y,t,c])=>el(s,'text',{x:x1+10,y:y+4,'font-size':11.5,fill:c},t));
+  }
+};
+
+/* region-switchable figures */
+function setupFigures(scope,lang){
+  const L=T[lang];
+  scope.querySelectorAll('figure[data-chart]').forEach(f=>{
+    const kind=f.dataset.chart,tabs=f.querySelector('.rtabs'),svg=f.querySelector('svg.plot');
+    Object.keys(R).forEach((k,i)=>{const b=document.createElement('button');b.textContent=L.short[k];b.dataset.r=k;if(!i)b.classList.add('on');tabs.appendChild(b);});
+    const render=k=>{
+      const d=R[k],n=L.names[k];svg.replaceChildren();DRAW[kind](svg,d,L);
+      let ttl,sub;
+      if(kind==='band'){const m=MON[lang][d.month-1],pk=Math.max(...d.mv);[ttl,sub]=L.band(n,m,d.peak,(pk/d.band[1]).toFixed(1).replace(/\.0$/,''));}
+      else{ttl=L[kind][0];sub=L[kind][1](n,d);}
+      f.querySelector('.ttl').textContent=ttl;f.querySelector('.sub').textContent=sub;
+      tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.r===k));
+    };
+    tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(b)render(b.dataset.r);});
+    render('KOR');
+  });
+}
+[['','en'],['ko-','ko']].forEach(([p,lang])=>{
+  const L=T[lang],scope=document.querySelector(`[data-lang="${lang}"]`);
+  drawSats(document.getElementById(p+'sats'),L,p||'en-');drawCell(document.getElementById(p+'cellA'),PTS_A);drawCell(document.getElementById(p+'cellB'),PTS_B);
+  setupFigures(scope,lang);
+});
+
+/* language toggle */
+const TITLES={en:'Burnline · How it works',ko:'Burnline · 작동 방식'};
+function setLang(lang){
+  document.documentElement.lang=lang;document.title=TITLES[lang];
+  document.querySelectorAll('[data-lang]').forEach(d=>d.hidden=d.dataset.lang!==lang);
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.set===lang));
+  try{localStorage.setItem('burnline-lang',lang);}catch(e){}
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.set)));
+let start=new URLSearchParams(location.search).get('lang');
+if(!start){try{start=localStorage.getItem('burnline-lang');}catch(e){}}
+if(start==='ko'||start==='en')setLang(start);
+
+/* toc highlight */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const scope=e.target.closest('[data-lang]');scope.querySelectorAll('.toc a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));const on=scope.querySelector('.toc a.on');if(on&&window.innerWidth<=960)on.scrollIntoView({block:'nearest',inline:'center'});}});},{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main section').forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>

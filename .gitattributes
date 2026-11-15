@@ -1,0 +1,10 @@
+# 줄 끝은 저장소에서 LF로 통일 (윈도우에서 CRLF가 섞여 diff가 전부 바뀌는 것 방지)
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary
+*.jpg binary
+*.zip binary
+*.xlsx binary
+*.xls binary
+*.pdf binary
+*.ipynb text eol=lf -diff

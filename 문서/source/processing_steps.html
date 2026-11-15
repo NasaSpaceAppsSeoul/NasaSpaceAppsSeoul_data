@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>FIRMS 데이터 처리 단계</title>
+<style>
+@page { size: A4; margin: 18mm 17mm; }
+:root { --ink:#141A22; --muted:#5A6573; --line:#D5DBE2; --ember:#C9420E; --soft:#F6E3D9; --bg2:#F3F5F7; }
+* { box-sizing: border-box; }
+body { font-family: "Apple SD Gothic Neo", "AppleGothic", sans-serif; color: var(--ink); font-size: 9.8pt; line-height: 1.65; margin: 0; }
+h1 { font-size: 21pt; margin: 0 0 4pt; letter-spacing: -0.02em; }
+h2 { font-size: 13pt; margin: 16pt 0 6pt; padding-top: 8pt; border-top: 1.5pt solid var(--ink); break-after: avoid; }
+h3 { font-size: 10.5pt; margin: 10pt 0 4pt; break-after: avoid; }
+p { margin: 0 0 6pt; }
+.meta { color: var(--muted); font-size: 9pt; margin-bottom: 12pt; }
+.lead { font-size: 10.8pt; margin: 8pt 0 10pt; }
+.key { background: var(--bg2); border-radius: 6pt; padding: 10pt 14pt; margin: 8pt 0 6pt; }
+.key ul { margin: 0; padding-left: 16pt; }
+.key li { margin: 3pt 0; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.7pt; break-inside: avoid; }
+tr { break-inside: avoid; }
+th, td { text-align: left; padding: 4pt 5pt; border-bottom: 0.6pt solid var(--line); vertical-align: top; }
+th { font-weight: 700; border-bottom: 1pt solid var(--ink); white-space: nowrap; }
+td.c, th.c { text-align: center; }
+tr.em td { background: var(--soft); }
+.small { font-size: 8.5pt; color: var(--muted); }
+.flow { display: flex; flex-wrap: wrap; gap: 5pt; margin: 8pt 0 10pt; }
+.flow div { flex: 1 0 17%; border: 1pt solid var(--line); border-radius: 6pt; padding: 7pt 8pt; font-size: 8.7pt; }
+.flow div b { display: block; font-size: 8pt; color: var(--ember); letter-spacing: 0.04em; margin-bottom: 2pt; }
+.keep { break-inside: avoid; }
+.f { font-family: "SF Mono", Menlo, monospace; font-size: 8.6pt; background: var(--bg2); padding: 6pt 10pt; border-radius: 4pt; margin: 4pt 0 8pt; white-space: pre-wrap; }
+.step { color: var(--ember); font-weight: 700; margin-right: 4pt; }
+.done { font-size: 8pt; color: var(--muted); font-weight: 400; margin-left: 6pt; }
+</style></head><body>
+<h1>FIRMS 한국 데이터 처리 단계</h1>
+<div class="meta">각 단계에서 무엇을 어떻게 계산했는지 · 데이터: NASA FIRMS MODIS C6.1, VIIRS S-NPP 375 m (2001-01 ~ 2026-10) · 노트북 burnline_harmonization.ipynb ①~⑮ · 2026-11-08 개정 (고정 열원 마스크를 날짜 기준으로)</div>
+
+<p class="lead">위성이 찍은 화재 점(핫스팟)을 청소하고, 다섯 위성(Terra, Aqua, S-NPP, NOAA-20, NOAA-21)을 <b>지금 관측 중인 VIIRS NOAA-20 단위</b>로 맞춘 뒤, 시·군·구별로 나눠 담고, 마지막으로 "이 숫자를 믿어도 되는지"를 판단하는 규칙을 붙였습니다.</p>
+
+<div class="key"><ul>
+<li><b>기준 단위는 VIIRS NOAA-20입니다.</b> MODIS와 S-NPP는 운영이 끝났으므로, 최근 값은 변환 없이 NOAA-20 원값을 쓰고 과거 위성 값을 거기에 맞춥니다.</li>
+<li><b>위성 사이 보정은 전국 데이터로 한 번만 합니다.</b> 핵심 고리(MODIS↔S-NPP) 교차검증 연간 오차는 약 15%, S-NPP↔NOAA-20은 약 6%입니다.</li>
+<li><b>시·군·구에서는 두 센서가 해마다 크게 어긋납니다</b> (오차 중앙값 94%). 보정 방식의 문제가 아니라 작은 지역의 불이 너무 적어서 생기는 한계라, <b>시·군·구 비교는 VIIRS 한 센서(2012년~)로</b> 합니다.</li>
+<li><b>자료가 부족한 지역은 숨기지 않고 표시</b>하고, 시·도(또는 가까운 시·도)와 가까운 화재 다발 지역을 대신 보여 줍니다.</li>
+<li><b>외부 검증(11/07):</b> 산림청 통계와 비교했습니다. <b>공식 산불 건수로 한 독립 단절 검정</b>에서 보정 전에는 2012년에 2.7배 점프(p=0.0004)가 있고, 보정 후에는 사라집니다(1.04배, p=0.68). 100 ha 이상 산불은 위성이 91% 잡습니다(10단계).</li>
+<li><b>개정(11/08):</b> 고정 열원 마스크 기준을 "점 3개 이상"에서 <b>"서로 다른 날 3일 이상"</b>으로 바꿨습니다. 하루짜리 산불이 공장으로 잘못 빠지던 일을 막기 위해서이고, 모든 숫자를 다시 계산했습니다(1단계).</li>
+<li><b>개정(11/09):</b> 날짜를 세계 표준시(UTC)에서 <b>현지 태양시(UTC + 경도 ÷ 15시간)</b>로 바꿨습니다. 한국 새벽 1~3시의 밤 관측이 전날로 들어가던 문제를 고쳤고(1단계), 모든 숫자를 다시 계산했습니다. 2012년 단절의 근거는 <b>수준 비율과 공식 산불 건수 검정</b>으로 정했습니다(3·10단계).</li>
+<li><b>개정(11/06):</b> ① 기준 단위를 MODIS에서 NOAA-20으로 바꾸고, Aqua가 없던 2001~2002년 7월(Terra 단독)도 보정했습니다(3단계). ② "자료 충분" 판정에서 <b>가장 많이 탄 한 해를 뺍니다</b>(6단계).</li>
+</ul></div>
+
+<div class="flow">
+<div><b>1</b>청소</div><div><b>2</b>단위 통일</div><div><b>3</b>센서 보정</div><div><b>4</b>지역 붙이기</div>
+<div><b>5</b>지역별 집계</div><div><b>6</b>신뢰 기준</div><div><b>7</b>대체 지역·위험 시기</div><div><b>8</b>인접 경고</div>
+<div><b>9</b>감지 묶음</div><div><b>10</b>외부 검증</div>
+</div>
+
+<div>
+<h2><span class="step">1</span>청소: 산불이 아닌 열원 제거<span class="done">노트북 ③</span></h2>
+<p><b>날짜 기준 (11/09):</b> FIRMS의 날짜·시각은 세계 표준시(UTC)입니다. 그대로 쓰면 한국 새벽 1~3시의 NOAA-20 밤 관측이 전날로 들어갑니다. 모든 감지의 날짜를 <b>현지 태양시(UTC + 경도 ÷ 15시간)</b>로 바꿔 씁니다. 시간대 표 없이 어느 나라에도 맞고, 한국에서는 한국 시간과 30분 안쪽 차이입니다. 월 합계는 거의 그대로이고(중앙값 1% 차이), 밤에 잡히고 다음 날 낮에 또 잡힌 같은 칸이 하루로 합쳐집니다.</p>
+<p>위성은 산불뿐 아니라 제철소, 화산, 바다 위 열원도 잡습니다. 세 가지 규칙으로 걸렀습니다.</p>
+<table>
+<tr><th>규칙</th><th>방법</th><th class="c">MODIS</th><th class="c">S-NPP</th><th class="c">NOAA-20</th><th class="c">NOAA-21</th></tr>
+<tr><td>원자료</td><td>내려받은 아카이브 + 최근 준실시간(NRT)</td><td class="c">21,838</td><td class="c">128,359</td><td class="c">75,929</td><td class="c">30,235</td></tr>
+<tr><td>유형 필터</td><td>아카이브의 <code>type</code>이 0(식생 화재)인 점만 남김. 2는 고정 열원, 3은 해상</td><td class="c">10,976</td><td class="c">25,360</td><td class="c">18,274</td><td class="c">8,504</td></tr>
+<tr><td>고정 열원 마스크</td><td>네 자료에서 type 2(고정 열원) 또는 type 3(항만·해상 열원)이 <b>서로 다른 날 3일 이상</b> 잡힌 약 2 km 격자(415칸)를 모아, 그 칸의 점은 type과 관계없이 모두 제외</td><td class="c">9,612</td><td class="c">16,632</td><td class="c">11,870</td><td class="c">5,272</td></tr>
+<tr><td>낮은 신뢰도 제거</td><td>MODIS 신뢰도 30 미만, VIIRS 신뢰도 l(low) 제외</td><td class="c">8,501</td><td class="c">15,115</td><td class="c">10,673</td><td class="c">4,822</td></tr>
+</table>
+<p class="small">고정 열원 마스크를 넣은 이유: 포항·당진 제철소 부근에서 VIIRS 점 수백 개가 type 0으로 분류되어 새어 들어왔습니다. 시·군·구로 나눴을 때 포항시가 전국 2위로 나와서 발견했습니다. <b>날짜로 세는 이유:</b> 위성은 큰 불 하나에 점을 여러 개 찍어, "점 3개" 기준으로는 하루짜리 산불도 공장으로 빠졌습니다(9칸, 봄 비율 93%). 실제로 바꾼 뒤 2019년 4월 고성 산불이 25칸에서 28칸으로 늘었습니다. 포항 같은 제철소 칸은 3,000일 넘게 잡혀 어느 기준으로도 빠집니다.</p>
+<h3>NRT(준실시간)에는 type 열이 없다: 아카이브의 type을 정답으로 검증</h3>
+<p>최근 몇 달의 NRT 자료에는 type 열이 없어 위치로 대신 거릅니다. type 2와 type 3 모두 "같은 격자에서 반복해서 잡힌다"는 점을 이용해 위 마스크로 거릅니다. 한국 자료의 type 3은 먼바다가 아니라 <b>항만·매립지의 산업 시설</b>(대부분 육지 경계 안)이라, 육지 경계로는 거를 수 없었습니다.</p>
+<p>이 대체 규칙을 type이 있는 아카이브에 똑같이 적용해, type으로 거른 결과(정답)와 비교했습니다.</p>
+<table>
+<tr><th>위성</th><th class="c">type 3을 거르는 비율</th><th class="c">월별 화재 칸 차이 (중앙값)</th><th class="c">전체 합계 차이</th></tr>
+<tr class="em"><td><b>NOAA-20 (기준)</b></td><td class="c">99.2%</td><td class="c">0.0%</td><td class="c">+0.7%</td></tr>
+<tr><td>S-NPP</td><td class="c">99.2%</td><td class="c">0.0%</td><td class="c">+0.7%</td></tr>
+<tr><td>MODIS</td><td class="c">79% (43건 중)</td><td class="c">5.2%</td><td class="c">+6.6%</td></tr>
+</table>
+<p class="small">이전에는 NRT의 type 3을 거르지 못해 2026년 8~10월 전국 값이 20~25% 부풀려져 있었습니다(예: 10월 99 → 76). 마지막 달의 "집계 중" 여부도 자료가 있는 마지막 날(NOAA-20 기준)로 판단하도록 고쳤습니다.</p>
+</div>
+
+<div class="keep">
+<h2><span class="step">2</span>단위 통일: 점 대신 "화재 감지일"<span class="done">노트북 ④, ⑥-2</span></h2>
+<p>VIIRS는 해상도가 높아(375 m) 같은 불도 MODIS(1 km)보다 점이 훨씬 많이 찍힙니다. 그래서 점 개수 대신 <b>약 1 km 격자 한 칸에서 불이 1번 이상 감지된 날의 수</b>를 셉니다.</p>
+<div class="f">격자 = (round(위도 / 0.01), round(경도 / 0.01))
+화재 감지일 = (격자, 날짜) 쌍의 개수   ← 같은 날 같은 칸의 중복은 1로, Terra·Aqua도 하나의 MODIS로</div>
+<p>격자 크기는 데이터로 골랐습니다. 격자가 크면 대형 산불이 몇 칸에 뭉쳐 작게 보입니다.</p>
+<table>
+<tr><th class="c">격자</th><th class="c">월별 R²</th><th class="c">연간 오차</th><th class="c">2025년 3월 평년 대비</th><th class="c">2022년 3월 평년 대비</th></tr>
+<tr><td class="c">0.1° (약 11 km)</td><td class="c">0.74</td><td class="c">16.3%</td><td class="c">2.3배</td><td class="c">1.4배</td></tr>
+<tr><td class="c">0.05°</td><td class="c">0.78</td><td class="c">15.8%</td><td class="c">3.3배</td><td class="c">1.6배</td></tr>
+<tr><td class="c">0.02°</td><td class="c">0.89</td><td class="c">14.4%</td><td class="c">6.1배</td><td class="c">2.7배</td></tr>
+<tr class="em"><td class="c"><b>0.01° (약 1 km, 선택)</b></td><td class="c">0.92</td><td class="c">14.9%</td><td class="c">8.6배</td><td class="c">4.0배</td></tr>
+</table>
+<p class="small">오차는 비슷하지만 0.01°에서 월별 R²가 가장 높고 대형 산불의 크기를 가장 덜 깎아 0.01°로 정했습니다. MODIS 픽셀 크기와도 같습니다.</p>
+</div>
+
+<div>
+<h2><span class="step">3</span>위성 보정: 모든 기록을 NOAA-20 단위로<span class="done">노트북 ⑤~⑦</span></h2>
+<p>위성마다 감지하는 양이 달라, 함께 관측한 기간으로 "몇 배 차이 나는지"를 잰 뒤 고리처럼 이어 붙입니다. 기준은 지금도 관측 중인 <b>NOAA-20</b>입니다.</p>
+<div class="f">Terra 단독 (~2002.07)
+  ─①→ MODIS (Terra+Aqua, ~2012.01)
+  ─②→ S-NPP (~2018.03)
+  ─③→ NOAA-20 (2018.04~, 기준)  ←④─ NOAA-21 (예비)</div>
+<table>
+<tr><th>고리</th><th>겹침 기간</th><th class="c">연간 오차</th><th class="c">편향</th><th>비고</th></tr>
+<tr><td>① Terra 단독 → MODIS</td><td>2003~2011</td><td class="c">11.2%</td><td class="c">+1.2%</td><td>Terra 혼자서는 합친 값의 35~51%. 해마다 뚜렷한 추세가 없어 그 시기 MODIS가 안정적이었다는 간접 근거</td></tr>
+<tr class="em"><td><b>② MODIS → S-NPP</b> (핵심)</td><td>2012~2025</td><td class="c">14.9%</td><td class="c">−1.1%</td><td>아래 계수와 검증</td></tr>
+<tr><td>③ S-NPP → NOAA-20</td><td>2019~2025</td><td class="c">6.2%</td><td class="c">+1.3%</td><td>같은 종류의 센서라 차이가 작음 (S-NPP가 NOAA-20의 0.76~0.97배)</td></tr>
+<tr><td>④ NOAA-21 → NOAA-20</td><td>2024~2025</td><td class="c">23.4%</td><td class="c">+22.6%</td><td>겹침 2년뿐이라 불안정. 예비로만 둠</td></tr>
+</table>
+<p>각 시기 값은 이렇게 계산합니다. 2018년 4월부터는 NOAA-20 원값이라 <b>변환 오차가 없습니다.</b></p>
+<div class="f">2018.04~        NOAA-20 원값
+2012.02~2018.03 S-NPP × k₃[월]
+2002.08~2012.01 MODIS × k₂[월] × k₃[월]
+~2002.07        Terra × k₁[월] × k₂[월] × k₃[월]</div>
+<h3>핵심 고리 ②: MODIS ↔ S-NPP</h3>
+<p>두 센서가 함께 관측한 2012~2025년을 이용해, S-NPP 감지일이 MODIS 감지일의 몇 배인지 <b>달마다</b> 계수를 구했습니다.</p>
+<div class="f">k[월] = (그 달 VIIRS 합 + 20 × K) / (그 달 MODIS 합 + 20)     K = 전체 기간 VIIRS 합 / MODIS 합
+2012년 이전 MODIS 값 × k[월] = S-NPP 단위   (2012년 이전에는 가장 이른 5년 창의 계수를 씀)</div>
+<ul>
+<li><b>20을 더하는 이유(당김):</b> 불이 적은 달은 계수가 우연히 튈 수 있어, 전체 계수 K 쪽으로 당깁니다.</li>
+<li><b>시간 가변(방법 B, 채택):</b> 계수를 그 해 앞뒤 2년(5년 창)으로만 계산합니다. VIIRS/MODIS 비율이 2012년 2.13에서 2024년 0.95까지 해마다 달라서입니다(MODIS 노후화 추정).</li>
+</ul>
+<table>
+<tr><th>월</th><th class="c">1</th><th class="c">2</th><th class="c">3</th><th class="c">4</th><th class="c">5</th><th class="c">6</th><th class="c">7</th><th class="c">8</th><th class="c">9</th><th class="c">10</th><th class="c">11</th><th class="c">12</th></tr>
+<tr><td>k (전체 기간)</td><td class="c">3.30</td><td class="c">2.14</td><td class="c">1.84</td><td class="c">1.75</td><td class="c">1.55</td><td class="c">3.20</td><td class="c">0.78</td><td class="c">0.79</td><td class="c">2.22</td><td class="c">1.72</td><td class="c">1.52</td><td class="c">4.64</td></tr>
+</table>
+<h3>검증: 한 해씩 빼고 맞혀 보기 (leave-one-year-out)</h3>
+<p>2012~2025년 중 한 해를 빼고 계수를 다시 구한 뒤, 그 해 VIIRS로 실제 MODIS 값을 맞혀 봤습니다. 정답을 알고 있으니 오차를 직접 잴 수 있습니다. 다른 고리(①③④)도 같은 방식으로 검증했습니다.</p>
+<table>
+<tr><th>방법</th><th class="c">월별 R²</th><th class="c">연간 오차</th><th class="c">편향</th></tr>
+<tr><td>A. 월별 고정 계수</td><td class="c">0.92</td><td class="c">20.5%</td><td class="c">0.0%</td></tr>
+<tr class="em"><td><b>B. 월별 + 시간 가변 (채택)</b></td><td class="c">0.92</td><td class="c">14.9%</td><td class="c">−1.1%</td></tr>
+</table>
+<h3>센서 단절 검정</h3>
+<p>각 시계열을 "MODIS만 쓴 시계열(NOAA-20 단위로 환산)"로 나눈 <b>수준 비율</b>을 2012년 전후로 비교합니다. 실제 화재 변화는 양쪽에 똑같이 들어 있으니, 2012년 뒤 비율이 1에서 벗어나면 센서 탓입니다. 95% 범위가 1을 포함하면 단절 없음으로 봅니다. 위성과 무관한 공식 산불 건수로 같은 검정을 다시 합니다(10단계).</p>
+<table>
+<tr><th>시계열</th><th class="c">MODIS 환산 대비: 2012년 전 → 후 [95% 범위]</th><th class="c">2012년 뒤 수준</th><th>판정</th></tr>
+<tr><td>위성 원값 그대로 이어 붙이기</td><td class="c">0.35배 → 0.92배 [0.86, 0.98]</td><td class="c">2.6배</td><td>센서 단절 있음</td></tr>
+<tr class="em"><td><b>보정 후</b></td><td class="c">1.00배 → 0.99배 [0.92, 1.05]</td><td class="c">0.99배</td><td>단절 없음 (범위가 1을 포함)</td></tr>
+</table>
+<p class="small">MODIS만 쓴 시계열(Terra 보정 포함) 자체에는 2014년 변화점(p=0.006)이 있습니다. 센서와 무관한 실제 변화 후보로 따로 보고합니다. FRP(불 세기)는 같은 방식의 보정이 실패해(연간 오차 24.3%, 편향 −38.1%) MODIS 단독으로 씁니다. MODIS가 끝난 뒤의 FRP는 아직 대안이 없습니다.</p>
+<h3>값마다 붙이는 품질 등급</h3>
+<table>
+<tr><th>등급</th><th>조건</th><th class="c">해당 달 수</th></tr>
+<tr class="em"><td><b>높음</b></td><td>NOAA-20 직접 관측(아카이브), 또는 S-NPP→NOAA-20 변환 중 그 달 오차 10% 이하</td><td class="c">108</td></tr>
+<tr><td><b>보통</b></td><td>변환 오차 30% 이하, 또는 NOAA-20 준실시간(NRT)</td><td class="c">56</td></tr>
+<tr><td><b>낮음</b></td><td>변환 오차 30% 초과</td><td class="c">146</td></tr>
+</table>
+<p class="small">여러 고리를 거친 값의 오차는 고리별 달 오차를 제곱해 더한 뒤 제곱근을 씁니다. 그래서 최근(NOAA-20)은 "높음"이 대부분이고, 2012년 이전(MODIS·Terra 변환)은 대부분 "낮음"입니다. 같은 달 평년이 5일 미만이면 한 단계 낮춥니다. 변환값에는 <code>값 × (1 ± 오차)</code> 범위를 붙입니다.</p>
+</div>
+
+<div class="keep">
+<h2><span class="step">4</span>지역 붙이기: 좌표 → 시·군·구<span class="done">노트북 ⑭</span></h2>
+<ul>
+<li><b>경계:</b> geoBoundaries 한국 시·군·구 228개, 시·도 17개 (CC BY 3.0, 영문 이름).</li>
+<li><b>판정:</b> 각 점이 어느 다각형 안에 있는지 계산(point-in-polygon, 섬·구멍 처리 포함).</li>
+<li><b>해안선 보정:</b> 경계가 단순화되어 바다로 살짝 벗어난 점은 가장 가까운 경계(약 3 km 이내)의 지역에 붙입니다. 그보다 멀면 바다로 보고 지역 없음 처리합니다.</li>
+<li><b>시·도 이름:</b> 시·군·구 안쪽에 촘촘히 찍은 점들이 가장 많이 속한 시·도로 정했습니다. 원본 시·도 경계가 일부 광역시와 맞지 않아, 확인된 오류 13곳(울진→경북, 달성→대구, 강화→인천, 광주 4개 구 등)은 직접 바로잡았습니다.</li>
+</ul>
+<p class="small">발표 전에는 통계청 SGIS 같은 공식 행정구역 파일로 바꾸는 것을 권장합니다. 한글 이름이 들어 있고 시·도 오류도 없습니다. 노트북은 경계 파일만 바꾸면 그대로 돌아갑니다.</p>
+</div>
+
+<div>
+<h2><span class="step">5</span>지역별 집계: 달력과 순위<span class="done">노트북 ⑭</span></h2>
+<ul>
+<li>지역마다 월별 화재 감지일을 셉니다. 같은 날 같은 칸의 중복은 지역 안에서도 1로 셉니다.</li>
+<li><b>3단계의 전국 계수(위성 사슬)를 그대로 적용</b>합니다. 작은 지역마다 계수를 따로 구하면 자료가 적어 오히려 불안정해집니다.</li>
+<li>같은 달끼리 비교해 평년(중앙값), 사분위 범위, 순위를 구합니다.</li>
+</ul>
+<div class="f">평년[지역, 월]   = 기준 연도들의 같은 달 값의 중앙값
+순위[지역, 연·월] = 같은 달 기준 연도 중 이 값보다 큰 해의 수 + 1
+평년 대비 차이   = 이번 값 − 평년     ← 평년이 0이어도 계산됨 (배수는 0으로 나눌 수 없음)</div>
+<p>2025년 3월 상위 시·군·구가 실제 산불 지역과 일치합니다(NOAA-20 감지일): 의성(438칸), 안동(239), 영덕(179), 청송(109), 영양(72), 산청(59), 울주(36), 하동(20). 모두 그 달 25년 중 1위입니다.</p>
+</div>
+
+<div>
+<h2><span class="step">6</span>신뢰 기준: 어느 단위까지 믿을 수 있나<span class="done">노트북 ⑮</span></h2>
+<p>3단계의 교차검증을 <b>지역 단위마다</b> 다시 했습니다. 지역별로 겹침 기간 동안 해마다 "보정한 VIIRS"와 "실제 MODIS"가 얼마나 어긋나는지 잽니다.</p>
+<div class="f">오차[지역] = Σ_연도 |보정한 VIIRS − MODIS| / Σ_연도 MODIS      (그 해는 계수 계산에서 뺌)</div>
+<table>
+<tr><th>단위</th><th class="c">오차</th><th>판정</th></tr>
+<tr class="em"><td>전국</td><td class="c">15.0%</td><td>25년 보정 시계열 사용</td></tr>
+<tr><td>시·도: 경기 · 경북 · 충남</td><td class="c">16% · 21% · 24%</td><td>25년 보정 시계열 사용</td></tr>
+<tr><td>시·도: 전북 · 충북 · 강원 · 경남 · 전남 등</td><td class="c">34% ~ 93%</td><td>VIIRS 단일 센서로 비교</td></tr>
+<tr><td>시·도: 인천 · 광주 (불이 적은 광역시)</td><td class="c">503% · 160%</td><td>VIIRS 단일 센서로 비교</td></tr>
+<tr><td>시·군·구 (228개)</td><td class="c">중앙값 94%</td><td>VIIRS로 비교 (NOAA-20 단위)</td></tr>
+</table>
+<table>
+<tr><th>시·군·구 25년 화재 칸 (NOAA-20 단위)</th><th class="c">지역 수</th><th class="c">MODIS↔S-NPP 오차</th><th class="c">S-NPP↔NOAA-20 오차</th></tr>
+<tr><td>10칸 미만</td><td class="c">75</td><td class="c">181%</td><td class="c">105%</td></tr>
+<tr><td>10~25칸</td><td class="c">19</td><td class="c">169%</td><td class="c">102%</td></tr>
+<tr><td>25~50칸</td><td class="c">21</td><td class="c">171%</td><td class="c">87%</td></tr>
+<tr><td>50~100칸</td><td class="c">52</td><td class="c">98%</td><td class="c">62%</td></tr>
+<tr><td>100~200칸</td><td class="c">42</td><td class="c">75%</td><td class="c">49%</td></tr>
+<tr><td>200칸 이상</td><td class="c">19</td><td class="c">65%</td><td class="c">31%</td></tr>
+</table>
+<p><b>왜 이렇게 큰가:</b> 시·도별 계수를 따로 구해 봐도 시·도 오차는 69%→52%로 조금 줄고, 시·군·구는 거의 그대로였습니다. 작은 지역은 1년에 불이 몇 건뿐이라 우연히 크게 흔들리고, 1 km MODIS는 VIIRS가 보는 작은 불을 자주 놓칩니다. 두 센서가 지역마다 <b>다른 불을 보는 것</b>이라 계수로는 고칠 수 없습니다. 같은 종류의 센서인 S-NPP와 NOAA-20조차 시·군·구에서는 해마다 중앙값 65% 어긋납니다. 위성이 지나가는 시각이 달라 작은 불을 잡고 놓치는 것이 우연에 좌우되기 때문입니다. 즉 작은 지역의 한 해 값에는 센서와 관계없이 큰 흔들림이 있습니다.</p>
+<p><b>그래서:</b> 오차 30% 이하인 단위(전국, 경기·경북·충남)만 25년 보정 시계열로 비교합니다. 나머지는 <b>VIIRS(2012~2025년, 14년, NOAA-20 단위)</b> 안에서 평년과 순위를 계산합니다. MODIS 변환이 없고, VIIRS 계열 위성은 계속 관측하므로 앞으로도 이어집니다. 위의 흔들림은 아래 "자료 충분" 기준으로 다룹니다.</p>
+<h3>자료 충분 여부</h3>
+<p>1년에 평균 λ일 불이 나는 지역은 해마다 우연히 약 √λ일 흔들립니다(포아송 분포). 흔들림이 30% 이하가 되려면:</p>
+<div class="f">√λ / λ ≤ 0.30   →   λ ≥ 1 / 0.30² ≈ 11.1일 (VIIRS 연평균 감지일)
+λ = 가장 많이 탄 한 해를 뺀 나머지 13년의 연평균   ← 11/06 개정</div>
+<p><b>한 해를 빼는 이유:</b> 단순 평균으로는 의성군이 연 33.9일로 "충분"이었지만, 대부분이 2025년 3월 산불 한 번이었습니다. 그 해를 빼면 연 2.6일로, 평소에는 불이 드문 지역입니다. 같은 이유로 안동·영덕·울진·나주·파주도 "부족"입니다. 큰 사건이 난 지역일수록 평소 기준선이 필요하므로, 평소 자료가 충분한지로 판정합니다.</p>
+<table>
+<tr><th>구분</th><th>조건</th><th class="c">시·군·구 수</th><th>화면 처리</th></tr>
+<tr class="em"><td><b>충분</b></td><td>가장 많이 탄 해를 뺀 연평균 11.1일 이상</td><td class="c">6</td><td>그 지역의 평년·순위·위험 시기를 그대로 표시</td></tr>
+<tr><td><b>부족</b></td><td>감지가 있었지만 위 기준 미만</td><td class="c">191</td><td>값은 보여 주되 "자료 부족" 표시 + 7단계의 대체 정보</td></tr>
+<tr><td><b>감지 없음</b></td><td>2012년 이후 0건</td><td class="c">31</td><td>"위성으로 잡힐 규모의 화재가 없던 지역" 안내 + 대체 정보</td></tr>
+</table>
+<p class="small">충분한 6곳: 연천(연 32.3칸), 제주시(29.2), 김제(20.9), 익산(16.1), 해남(12.9), 고성(강원, 12.3). 시·도는 17곳 중 9곳이 충분입니다(강원, 경기, 경남, 경북, 전남, 전북, 제주, 충남, 충북).</p>
+<h3>시·군·구 장기 지표: 2001~2011년은 25년 합계에만</h3>
+<p>한 해 값의 흔들림은 고칠 수 없지만, 지역마다 위성 비율이 다른 치우침은 <b>시·군·구별 보정 계수</b>로 줄일 수 있습니다(자료가 적으면 시·도 계수, 시·도는 1 쪽으로 당김). 2012~2025년의 MODIS로 VIIRS 값을 맞혀 보는 방식으로, 지표마다 2001~2011년 값을 믿을 수 있는지 검증했습니다.</p>
+<table>
+<tr><th>25년 화재 칸 규모</th><th class="c">14년 합계 오차</th><th class="c">7년 합계 오차</th><th class="c">한 해 값 오차</th></tr>
+<tr><td>200칸 이상</td><td class="c">5%</td><td class="c">37%</td><td class="c">65%</td></tr>
+<tr><td>100~200칸</td><td class="c">7%</td><td class="c">28%</td><td class="c">71%</td></tr>
+<tr><td>50~100칸</td><td class="c">13%</td><td class="c">37%</td><td class="c">100%</td></tr>
+<tr><td>25~50칸</td><td class="c">25%</td><td class="c">37%</td><td class="c">106%</td></tr>
+<tr><td>25칸 미만</td><td class="c">85~100%</td><td class="c">100%</td><td class="c">100%</td></tr>
+</table>
+<p>오차 30% 이하 기준을 통과한 <b>25년 합계·연평균만</b> 시·군·구 화면에 씁니다(품질 높음 113곳, 보통 22곳). 10년 단위 비교(7년 합계로 대신 검증), 25년 중 불 난 해 수(MODIS가 VIIRS로 불을 본 해의 절반만 잡음), 한 해·한 달 값은 기준 미달이라 시·군·구에서는 2012년 이후만 씁니다. 전국과 경기·경북·충남은 모든 지표를 2001년부터 씁니다.</p>
+</div>
+
+<div class="keep">
+<h2><span class="step">7</span>위험 시기와 대체 지역<span class="done">노트북 ⑮</span></h2>
+<h3>위험 시기</h3>
+<div class="f">월별 누적 감지일을 큰 달부터 더해, 전체의 50%를 처음 넘길 때까지 고른 달들 = 위험 시기</div>
+<ul>
+<li>"충분" 시·군·구는 자기 값으로 계산합니다. 예: 고성(강원) 4월, 연천 3·4월, 김제 3·6월.</li>
+<li>"부족"·"감지 없음"은 속한 시·도 값을 물려받습니다. 시·도도 부족하면(광역시 등) <b>중심이 가장 가까운 "충분" 시·도</b> 값을 씁니다. 어디서 물려받았는지(<code>risk_from</code>)를 함께 저장해 화면에 밝힙니다.</li>
+</ul>
+<h3>대체 지역</h3>
+<ul>
+<li>부족한 지역마다 <b>기준 시·도</b>(내 시·도, 또는 가까운 충분 시·도)를 연결합니다.</li>
+<li><b>60 km 안</b>에 "충분" 시·군·구가 있으면 함께 연결합니다(거리 km 포함). 그보다 멀면 비교 의미가 없어 넣지 않습니다.</li>
+<li>예: 대구 중구 → 감지 없음 · 대구는 부족 · 기준 시·도는 경북 · 위험 시기 3월(경북 기준) · 60 km 안 충분 지역 없음.</li>
+</ul>
+</div>
+
+<div class="keep">
+<h2><span class="step">8</span>인접 지역 경고<span class="done">노트북 ⑮</span></h2>
+<ul>
+<li><b>맞닿은 지역:</b> 두 시·군·구의 경계 꼭짓점이 약 200 m 안에 있으면 맞닿은 것으로 봅니다. 시·군·구당 이웃 수의 중앙값은 5개입니다. 이웃이 없는 곳은 다리로만 이어진 섬 6곳(울릉, 옹진, 거제, 남해, 완도, 진도)입니다.</li>
+<li><b>규칙 비교:</b> 2025년 3월 경북 산불을 일 단위로 펼쳐, 각 지역에 불이 닿기 며칠 전에 경고가 가능했는지 확인했습니다.</li>
+</ul>
+<table>
+<tr><th>지역</th><th class="c">자기 지역 첫 감지</th><th class="c">맞닿은 지역 첫 감지</th><th class="c">앞선 일수</th><th class="c">50 km 안 첫 감지</th><th class="c">앞선 일수</th></tr>
+<tr><td>의성 (발화)</td><td class="c">3월 22일</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td></tr>
+<tr><td>안동</td><td class="c">3월 25일</td><td class="c">3월 22일</td><td class="c">3일</td><td class="c">3월 22일</td><td class="c">3일</td></tr>
+<tr><td>청송</td><td class="c">3월 26일</td><td class="c">3월 22일</td><td class="c">4일</td><td class="c">3월 22일</td><td class="c">4일</td></tr>
+<tr><td>영양</td><td class="c">3월 26일</td><td class="c">3월 25일</td><td class="c">1일</td><td class="c">3월 23일</td><td class="c">3일</td></tr>
+<tr class="em"><td><b>영덕</b></td><td class="c">3월 26일</td><td class="c">3월 26일</td><td class="c"><b>0일</b></td><td class="c">3월 23일</td><td class="c"><b>3일</b></td></tr>
+</table>
+<p><b>결론:</b> 3월 25일 강풍으로 불이 하루 만에 영덕까지 번져서(위성에는 26일 새벽 관측부터 잡힘), 맞닿은 지역만 보는 규칙은 영덕에 미리 알려 주지 못했습니다. <b>거리 규칙(50 km)</b>은 4곳 모두 3~4일 앞서 알렸습니다. 다만 거리 규칙은 작은 불에도 자주 울릴 수 있어, 웹에서는 "50 km 안 감지" + "그 불이 이번 달 상위 10%인 지역에서 났는지"를 함께 보여 주는 방식을 권장합니다.</p>
+</div>
+
+<div class="keep">
+<h2><span class="step">9</span>감지 묶음: 화재 칸을 "불 하나"로 묶기<span class="done">노트북 ⑯</span></h2>
+<p>화재 칸 합계는 넓이와 기간이 섞인 양이라 설명하기 어렵습니다. 그래서 가까운 화재 칸끼리 묶어 "불 하나" 단위로도 보여 줍니다. 위성마다 묶음 모양이 달라질 수 있어 NOAA-20(2018년 4월~)만 씁니다.</p>
+<div class="f">두 화재 칸이 D km 안, 날짜 차이 G일 이하 → 같은 묶음 (이어진 것은 모두 하나로)</div>
+<p>묶는 기준을 우리가 정하므로, 세 기준으로 결과가 얼마나 흔들리는지 확인했습니다.</p>
+<table>
+<tr><th>기준</th><th class="c">묶음 수</th><th class="c">1칸짜리 비율</th><th class="c">큰 묶음 (10칸 이상)</th></tr>
+<tr><td>A: 2 km · 1일</td><td class="c">4,217</td><td class="c">90%</td><td class="c">30</td></tr>
+<tr class="em"><td><b>B: 3 km · 2일 (채택)</b></td><td class="c">4,121</td><td class="c">89%</td><td class="c">31</td></tr>
+<tr><td>C: 5 km · 3일</td><td class="c">3,975</td><td class="c">87%</td><td class="c">29</td></tr>
+</table>
+<p>월별 묶음 수는 기준 사이 상관이 0.99~1.00이라 <b>기준을 바꿔도 결론이 흔들리지 않습니다.</b> 알려진 대형 산불도 모두 하나의 묶음으로 잡힙니다.</p>
+<table>
+<tr><th>산불</th><th class="c">잡힌 기간</th><th class="c">화재 칸</th><th class="c">가장 넓게 탄 날</th></tr>
+<tr><td>2025년 3월 의성 → 안동·청송·영양·영덕</td><td class="c">3/22~3/29</td><td class="c">919</td><td class="c">551칸 (3/26)</td></tr>
+<tr><td>2022년 3월 울진 → 삼척</td><td class="c">3/04~3/12</td><td class="c">328</td><td class="c">89칸</td></tr>
+<tr><td>2019년 4월 고성 (4/4 저녁 발화, 위성은 4/5 새벽부터)</td><td class="c">4/05</td><td class="c">28</td><td class="c">28칸</td></tr>
+<tr><td>2019년 4월 강릉·동해 (같은 날, 60 km 떨어진 다른 불)</td><td class="c">4/05</td><td class="c">30</td><td class="c">30칸</td></tr>
+</table>
+<p class="small">묶음의 약 90%는 화재 칸 1개짜리 작은 소각입니다. 그래서 화면에는 묶음 수와 함께 <b>큰 묶음(10칸 이상) 수</b>와 <b>가장 큰 묶음</b>을 보여 줍니다. 지역 × 월마다 "불이 잡힌 날(얼마나 오래)", "가장 넓게 탄 날의 칸 수(얼마나 넓게)", "묶음 수"를 함께 냅니다. 보정·달력·순위에는 계속 화재 칸 합계를 씁니다.</p>
+</div>
+
+<div class="keep">
+<h2><span class="step">10</span>외부 검증: 산림청 산불 통계<span class="done">노트북 ⑰, ⑰-2</span></h2>
+<p>위성 결과를 위성과 무관한 자료로 확인했습니다. 산림청 산불 기록 7,628건(2011년 1월~2026년 11월: 발생일, 장소, 원인, 피해 면적)의 장소를 시·군·구에 맞추고(99.8% 매칭), 위성 결과와 비교했습니다.</p>
+<h3>위성이 산불을 얼마나 잡나</h3>
+<p>공식 산불이 난 시·군·구에서 그날부터 2일 안에 NOAA-20 감지가 있었는지 봤습니다. "우연"은 같은 지역의 30일 전·후 날짜로 같은 계산을 한 값입니다.</p>
+<table>
+<tr><th>산불 크기</th><th class="c">건수</th><th class="c">위성 감지율</th><th class="c">우연히 맞을 확률</th></tr>
+<tr class="em"><td><b>100 ha 이상</b></td><td class="c">35</td><td class="c"><b>91%</b></td><td class="c">4%</td></tr>
+<tr><td>10~100 ha</td><td class="c">83</td><td class="c">61%</td><td class="c">6%</td></tr>
+<tr><td>1~10 ha</td><td class="c">363</td><td class="c">30%</td><td class="c">3%</td></tr>
+<tr><td>0.1~1 ha</td><td class="c">1,488</td><td class="c">9%</td><td class="c">3%</td></tr>
+<tr><td>0.1 ha 미만</td><td class="c">2,441</td><td class="c">5%</td><td class="c">2%</td></tr>
+</table>
+<p>이 도구는 <b>위성으로 보일 만큼 큰 불의 활동</b>을 정확히 보여 주지만, 1 ha 미만 작은 산불의 건수를 대신하지는 못합니다. 공식 산불의 절반 이상이 0.1 ha 미만입니다. 이 한계를 화면에 그대로 적습니다.</p>
+<h3>큰 산불의 크기와 위성 큰 묶음</h3>
+<ul>
+<li><b>100 ha 이상 산불 33건:</b> 공식 면적과 위성 화재 칸 수의 순위 상관 0.75. 위성이 놓친 것은 3건(구름, 관측 시각 추정).</li>
+<li><b>위성 큰 묶음 33개 중 29개</b>가 같은 시·군·구, 같은 시기의 공식 기록과 맞습니다. 맞지 않는 4개는 모두 <b>연천(3개)과 강원 고성(1개)</b>, 즉 DMZ에 맞닿은 지역입니다. 산불 통계에 들어가지 않는 군사 지역 안의 불일 가능성이 큽니다.</li>
+</ul>
+<h3>연도·월 흐름</h3>
+<table>
+<tr><th>비교 (2012~2025)</th><th class="c">순위 상관</th></tr>
+<tr><td>연도별 화재 칸 vs 공식 건수 · 면적</td><td class="c">0.69 · 0.54</td></tr>
+<tr><td>월별 화재 칸 vs 공식 건수 · 면적</td><td class="c">0.66 · 0.58</td></tr>
+</table>
+<p>두 자료는 서로 다른 불을 셉니다. 위성은 산불 통계 밖의 농경지·목초지 소각도 잡고(제주: 공식 산불 15년간 6건, 위성 화재 칸 613개), 산불 통계는 위성이 못 보는 작은 산불을 셉니다. 그래서 상관이 1에 가깝지 않은 것이 정상이며, 이 차이가 곧 위성 자료만 줄 수 있는 정보입니다.</p>
+<h3>2001년부터: 시·도별 연간 통계로 한 독립 단절 검정</h3>
+<p>개별 기록은 2011년부터라, 2001~2010년은 국가통계포털(KOSIS)의 시·도별 연간 산불 건수·면적(산림청, 2001~2025)으로 확인했습니다. 공식 산불 건수는 위성 교체와 무관하므로, <b>"위성 값 ÷ 공식 건수" 비율이 2012년에 갑자기 바뀌면 그것은 위성 탓</b>입니다.</p>
+<table>
+<tr><th>시계열</th><th class="c">위성 ÷ 공식 건수: 2001~2011</th><th class="c">2012~2025</th><th class="c">후 ÷ 전</th><th class="c">단절 검정</th></tr>
+<tr><td>위성 원값 그대로 이어 붙이기</td><td class="c">0.57</td><td class="c">1.52</td><td class="c">2.67배</td><td class="c">p=0.0004, 변화점 2012년</td></tr>
+<tr class="em"><td><b>보정 후 (하모니제이션)</b></td><td class="c">1.56</td><td class="c">1.63</td><td class="c"><b>1.04배</b></td><td class="c"><b>p=0.68, 단절 없음</b></td></tr>
+</table>
+<p>3단계의 단절 검정은 위성끼리 비교한 것이고, 이 결과는 <b>위성과 무관한 공식 기록으로 같은 결론을 다시 확인</b>한 것입니다. 하모니제이션이 실제 화재 기록과 맞게 이어졌다는 가장 직접적인 근거입니다.</p>
+<table>
+<tr><th>순위 상관 (보정 화재 칸 vs 공식)</th><th class="c">2001~2011</th><th class="c">2012~2025</th></tr>
+<tr><td>전국 연도별: 건수 · 면적</td><td class="c">0.57 · 0.66</td><td class="c">0.69 · 0.54</td></tr>
+<tr><td>시·도 × 연도 (제주 제외): 건수 · 면적</td><td class="c">0.59 · 0.63</td><td class="c">0.78 · 0.70</td></tr>
+</table>
+<p class="small">2012년 이전의 시·도 상관이 조금 낮은 것은 MODIS가 VIIRS보다 작은 불을 덜 잡아 시·도 값이 더 흔들리기 때문입니다. 같은 MODIS 센서의 감지율을 2011~2025년 개별 기록으로 재 보면, 100 ha 이상 산불은 2011~2015년 80%, 2021년 이후 72%로 큰 불은 꾸준히 잡지만, 10~100 ha는 53%에서 34%로 떨어졌습니다. MODIS의 감지 능력이 시간이 갈수록 낮아졌다는 뜻이고, 2012년 이전 값에 가장 이른 시기(2012~2016년)의 계수를 쓴 근거입니다.</p>
+</div>
+
+<div class="keep">
+<h2>웹팀이 쓰는 파일 <span class="done">output/KOR/</span></h2>
+<table>
+<tr><th>파일</th><th>새로 들어간 항목</th><th>쓰는 곳</th></tr>
+<tr><td><code>regions.geojson</code></td><td><code>sufficiency</code>(충분/부족/감지 없음), <code>viirs_annual_fire_days</code>(가장 많이 탄 해 제외), <code>viirs_annual_all_years</code>, <code>longterm</code>(25년 합계·연평균·품질), <code>risk_months</code>·<code>risk_share</code>·<code>risk_from</code>, <code>fallback</code>(<code>ref_province</code>, <code>nearest_sufficient</code>), <code>neighbors</code></td><td>지도, 지역 선택 후 첫 화면 분기</td></tr>
+<tr><td><code>calendar_by_region.json</code></td><td>지역마다 <code>viirs</code> 블록: 월별 값, 평년, 사분위, 순위, 같은 달 기준 연도 수, 달마다 불이 난 해 수</td><td>시·군·구 달력, 순위, 평년 밴드</td></tr>
+<tr><td><code>calendar_by_province.json</code></td><td>시·도별 <code>basis</code>(보정 25년 / VIIRS 2012~), 오차, 평년, 순위, 배수, 위험 시기, 소속 시·군·구</td><td>대체 화면, 시·도 비교</td></tr>
+<tr><td><code>events.json</code>, <code>events_by_region.json</code></td><td>큰 감지 묶음 목록(시작·종료, 크기, 가장 넓은 날, 걸친 시·군·구), 시·군·구 × 월의 불이 잡힌 날·가장 넓게 탄 날·묶음 수</td><td>사건 목록, 상세페이지 요약</td></tr>
+<tr><td><code>meta.json</code> → <code>regions</code>, <code>events</code>, <code>external_validation</code></td><td>단위별 오차 표, 충분 기준, 경고 규칙, 묶음 민감도, 산림청 비교 결과</td><td>방법론 페이지</td></tr>
+</table>
+<div class="f">웹 분기 규칙
+if sufficiency == "충분":  그 지역의 viirs 달력·순위·위험 시기 표시
+else:                      값 + "자료 부족" 배지
+                           + fallback.ref_province 의 값과 위험 시기
+                           + fallback.nearest_sufficient 가 있으면 링크
+항상:                      neighbors 와 50 km 안 최근 감지를 경고 카드로</div>
+</div>
+
+<div class="keep">
+<h2>한계와 남은 일</h2>
+<ul>
+<li>시·군·구의 같은 달 비교·순위는 2012년 이후 14년만 씁니다. 2001~2011년은 검증을 통과한 25년 합계에만 씁니다. 전국과 경기·경북·충남은 모든 지표를 25년으로 씁니다.</li>
+<li>NRT 구간은 type 대신 격자 마스크로 거릅니다. 아카이브로 검증한 차이는 NOAA-20 기준 0.7%이지만, NRT 자체의 값은 나중에 아카이브로 바뀔 수 있습니다.</li>
+<li>2012년 이전 값은 여러 고리를 거쳐 대부분 품질 "낮음"입니다. 최근 값일수록 정확한 구조입니다.</li>
+<li>NOAA-21 고리는 겹침이 2년뿐이라 불안정합니다. NOAA-20이 멈추면 다시 검증해야 합니다.</li>
+<li>FRP는 MODIS 단독이라 MODIS 종료 뒤로는 이어지지 않습니다. VIIRS FRP로 잇는 방법(위성 안 백분위)을 검토 중입니다.</li>
+<li>"충분" 기준 11.1일은 포아송 근사로 정한 값입니다. 실제 화재는 한 해에 몰리는 경향이 있어 흔들림이 더 클 수 있습니다. 가장 많이 탄 해를 빼는 규칙이 이 문제를 일부 줄입니다.</li>
+<li>연천·파주(DMZ 인근)의 높은 값은 군사 지역 소각일 가능성이 있어 확인이 필요합니다. 연천은 "충분" 6곳 중 하나입니다.</li>
+<li>경계 파일을 공식 행정구역(SGIS)으로 바꾸면 이름 한글화와 시·도 오류가 함께 해결됩니다. 특히 지금 파일에는 <b>전남 영광군이 빠져 있어</b>(228개, 실제 229개) 영광 지역 감지가 주변 지역에 붙어 있을 수 있습니다.</li>
+<li>위성은 1 ha 미만 산불을 대부분 못 잡습니다(감지율 5~9%). 작은 산불 건수는 산림청 통계를 함께 보여 주는 방식이 좋습니다.</li>
+<li>인접 경고는 2025년 3월 한 사건으로만 확인했습니다. 다른 대형 산불(2022년 3월 울진, 2019년 4월 고성)로도 검증하면 좋습니다.</li>
+</ul>
+</div>
+</body></html>

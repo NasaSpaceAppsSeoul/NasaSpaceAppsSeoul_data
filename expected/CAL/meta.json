@@ -1,0 +1,3713 @@
+{
+  "country": "CAL",
+  "bbox": null,
+  "generated": "2026-11-15",
+  "unit": "VIIRS NOAA-20 기준 화재 감지일 (0.01° 격자 × 일)",
+  "data_range": {
+    "modis": [
+      "2001-01-01",
+      "2026-11-13"
+    ],
+    "viirs_snpp": [
+      "2012-01-20",
+      "2026-11-02"
+    ],
+    "noaa20": [
+      "2018-04-01",
+      "2026-11-14"
+    ],
+    "noaa21": [
+      "2023-03-01",
+      "2026-11-14"
+    ]
+  },
+  "filters": [
+    {
+      "단계": "원자료",
+      "MODIS": 323620,
+      "VIIRS": 1014881,
+      "NOAA-20": 726266,
+      "NOAA-21": 137203
+    },
+    {
+      "단계": "유형 필터 (아카이브 type 0만)",
+      "MODIS": 315914,
+      "VIIRS": 929888,
+      "NOAA-20": 671174,
+      "NOAA-21": 115931
+    },
+    {
+      "단계": "고정 열원 격자 마스크",
+      "MODIS": 313253,
+      "VIIRS": 911688,
+      "NOAA-20": 657556,
+      "NOAA-21": 110989
+    },
+    {
+      "단계": "낮은 신뢰도 제거",
+      "MODIS": 294152,
+      "VIIRS": 868975,
+      "NOAA-20": 626771,
+      "NOAA-21": 104188
+    },
+    {
+      "단계": "행정 경계 안",
+      "MODIS": 294144,
+      "VIIRS": 868954,
+      "NOAA-20": 626755,
+      "NOAA-21": 104183
+    }
+  ],
+  "static_cells_masked": 691,
+  "nrt_proxy_validation": {
+    "NOAA-20": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.983,
+          "남김 비율 (정답)": 0.983,
+          "건수": 629458
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.0,
+          "남김 비율 (정답)": 0.0,
+          "건수": 53771
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.506,
+          "남김 비율 (정답)": 0.0,
+          "건수": 791
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.1,
+        "월별 |차이| 중앙값 %": 0.1,
+        "전체 합계 차이 %": 0.1
+      }
+    },
+    "S-NPP": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.982,
+          "남김 비율 (정답)": 0.982,
+          "건수": 877748
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.0,
+          "남김 비율 (정답)": 0.0,
+          "건수": 83106
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.546,
+          "남김 비율 (정답)": 0.0,
+          "건수": 905
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.0,
+        "월별 |차이| 중앙값 %": 0.0,
+        "전체 합계 차이 %": 0.1
+      }
+    },
+    "MODIS": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.991,
+          "남김 비율 (정답)": 0.991,
+          "건수": 295565
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.415,
+          "남김 비율 (정답)": 0.0,
+          "건수": 7134
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.441,
+          "남김 비율 (정답)": 0.0,
+          "건수": 143
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 1.7,
+        "월별 |차이| 중앙값 %": 1.7,
+        "전체 합계 차이 %": 1.2
+      }
+    }
+  },
+  "calibration": {
+    "base": "NOAA-20",
+    "chain": "Terra → MODIS → S-NPP → NOAA-20 (NOAA-21 → NOAA-20 예비)",
+    "method": "A",
+    "k_by_month": {
+      "1": 2.052,
+      "2": 2.03,
+      "3": 2.034,
+      "4": 2.221,
+      "5": 2.22,
+      "6": 1.83,
+      "7": 1.256,
+      "8": 1.71,
+      "9": 1.866,
+      "10": 2.061,
+      "11": 2.031,
+      "12": 2.31
+    },
+    "ratio_by_year": {
+      "2012": 1.71,
+      "2013": 1.81,
+      "2014": 1.95,
+      "2015": 2.12,
+      "2016": 1.75,
+      "2017": 1.83,
+      "2018": 1.64,
+      "2019": 1.9,
+      "2020": 1.83,
+      "2021": 1.7,
+      "2022": 1.86,
+      "2023": 2.18,
+      "2024": 1.49,
+      "2025": 2.04
+    },
+    "overlap_years": [
+      2012,
+      2025
+    ],
+    "shrink": 20,
+    "window": 2,
+    "terra_to_modis": {
+      "k_by_month": {
+        "1": 2.679,
+        "2": 2.41,
+        "3": 1.911,
+        "4": 1.757,
+        "5": 1.806,
+        "6": 1.801,
+        "7": 1.816,
+        "8": 1.827,
+        "9": 1.814,
+        "10": 1.848,
+        "11": 2.289,
+        "12": 2.429
+      },
+      "validation": {
+        "years": [
+          2003,
+          2011
+        ],
+        "annual_mape_pct": 4.6,
+        "bias_pct": 1.0
+      },
+      "terra_share_by_year": {
+        "2003": 0.55,
+        "2004": 0.51,
+        "2005": 0.5,
+        "2006": 0.53,
+        "2007": 0.53,
+        "2008": 0.55,
+        "2009": 0.53,
+        "2010": 0.5,
+        "2011": 0.45,
+        "2012": 0.53,
+        "2013": 0.55,
+        "2014": 0.55,
+        "2015": 0.53,
+        "2016": 0.55,
+        "2017": 0.57,
+        "2018": 0.58,
+        "2019": 0.55,
+        "2020": 0.6,
+        "2021": 0.6,
+        "2022": 0.57,
+        "2023": 0.53,
+        "2024": 0.57,
+        "2025": 0.52
+      }
+    },
+    "snpp_to_noaa20": {
+      "k_by_month": {
+        "1": 1.038,
+        "2": 1.041,
+        "3": 0.998,
+        "4": 1.032,
+        "5": 1.015,
+        "6": 0.948,
+        "7": 1.276,
+        "8": 1.034,
+        "9": 1.016,
+        "10": 1.013,
+        "11": 1.057,
+        "12": 1.004
+      },
+      "validation": {
+        "years": [
+          2019,
+          2025
+        ],
+        "annual_mape_pct": 5.1,
+        "bias_pct": 0.5
+      },
+      "ratio_by_year": {
+        "2019": 0.99,
+        "2020": 0.98,
+        "2021": 0.98,
+        "2022": 0.89,
+        "2023": 0.97,
+        "2024": 0.81,
+        "2025": 0.98
+      }
+    },
+    "noaa21_to_noaa20": {
+      "k_by_month": {
+        "1": 1.016,
+        "2": 1.139,
+        "3": 1.014,
+        "4": 1.03,
+        "5": 1.014,
+        "6": 1.005,
+        "7": 1.021,
+        "8": 1.036,
+        "9": 1.04,
+        "10": 1.115,
+        "11": 0.974,
+        "12": 0.934
+      },
+      "validation": {
+        "years": [
+          2024,
+          2025
+        ],
+        "annual_mape_pct": 1.5,
+        "bias_pct": 0.2
+      }
+    }
+  },
+  "validation": {
+    "A": {
+      "monthly_r2": 0.977,
+      "monthly_mae": 134.2,
+      "annual_mape_pct": 6.8,
+      "bias_pct": -0.7
+    },
+    "B": {
+      "monthly_r2": 0.979,
+      "monthly_mae": 132.5,
+      "annual_mape_pct": 7.4,
+      "bias_pct": -1.5
+    }
+  },
+  "break_test": {
+    "이어 붙이기": {
+      "sensor_break_p": 0.0006,
+      "sensor_break": true,
+      "jump": 2.06,
+      "jump_ci95": [
+        1.97,
+        2.14
+      ],
+      "ratio_before_2012": 0.49,
+      "ratio_before_ci95": [
+        0.44,
+        0.53
+      ],
+      "ratio_after_2012": 1.0,
+      "ratio_ci95": [
+        0.96,
+        1.04
+      ]
+    },
+    "H 하모니제이션": {
+      "sensor_break_p": 0.295,
+      "sensor_break": false,
+      "jump": 1.02,
+      "jump_ci95": [
+        0.98,
+        1.06
+      ],
+      "ratio_before_2012": 1.0,
+      "ratio_before_ci95": [
+        1.0,
+        1.0
+      ],
+      "ratio_after_2012": 1.02,
+      "ratio_ci95": [
+        0.98,
+        1.06
+      ]
+    }
+  },
+  "modis_only_change_point": {
+    "change_year": 2015,
+    "p_value": 0.9156
+  },
+  "grid_sensitivity": [
+    {
+      "격자(도)": 0.1,
+      "월별 R²": 0.946,
+      "연간 오차 %": 7.3,
+      "2025년 3월 배수": 1.0,
+      "2022년 3월 배수": 1.9
+    },
+    {
+      "격자(도)": 0.05,
+      "월별 R²": 0.966,
+      "연간 오차 %": 6.8,
+      "2025년 3월 배수": 1.02,
+      "2022년 3월 배수": 1.96
+    },
+    {
+      "격자(도)": 0.02,
+      "월별 R²": 0.979,
+      "연간 오차 %": 7.2,
+      "2025년 3월 배수": 1.07,
+      "2022년 3월 배수": 2.08
+    },
+    {
+      "격자(도)": 0.01,
+      "월별 R²": 0.979,
+      "연간 오차 %": 7.4,
+      "2025년 3월 배수": 1.04,
+      "2022년 3월 배수": 2.08
+    }
+  ],
+  "frp": {
+    "source": "보정된 MODIS+VIIRS",
+    "harmonized": true,
+    "validation": {
+      "monthly_r2": 0.882,
+      "monthly_mae": 43933.1,
+      "annual_mape_pct": 11.5,
+      "bias_pct": -8.1
+    },
+    "ratio_by_year": {
+      "2012": 0.55,
+      "2013": 0.52,
+      "2014": 0.49,
+      "2015": 0.55,
+      "2016": 0.46,
+      "2017": 0.51,
+      "2018": 0.45,
+      "2019": 0.56,
+      "2020": 0.5,
+      "2021": 0.46,
+      "2022": 0.47,
+      "2023": 0.63,
+      "2024": 0.28,
+      "2025": 0.5
+    },
+    "median_frp_per_detection_mw": {
+      "MODIS": 36.8,
+      "VIIRS": 4.8
+    }
+  },
+  "types": {
+    "threshold_pct": 0.9,
+    "labels": [
+      "많고 강함",
+      "작은 불이 많음",
+      "드물지만 강함",
+      "평년 수준"
+    ],
+    "counts": {
+      "상위 25% 기준": {
+        "많고 강함": 52,
+        "작은 불이 많음": 20,
+        "드물지만 강함": 20,
+        "평년 수준": 208
+      },
+      "상위 10% 기준": {
+        "많고 강함": 17,
+        "작은 불이 많음": 7,
+        "드물지만 강함": 7,
+        "평년 수준": 269
+      }
+    }
+  },
+  "quality": {
+    "rules": {
+      "높음": "NOAA-20 직접 관측, 또는 S-NPP→NOAA-20 변환 중 월별 오차 10% 이하",
+      "보통": "변환 오차 30% 이하, 또는 NOAA-20 NRT",
+      "낮음": "변환 오차 30% 초과"
+    },
+    "low_count": 5,
+    "month_error": {
+      "modis_snpp": {
+        "1": 0.118,
+        "2": 0.132,
+        "3": 0.127,
+        "4": 0.075,
+        "5": 0.091,
+        "6": 0.17,
+        "7": 0.172,
+        "8": 0.103,
+        "9": 0.099,
+        "10": 0.144,
+        "11": 0.093,
+        "12": 0.382
+      },
+      "snpp_noaa20": {
+        "1": 0.033,
+        "2": 0.034,
+        "3": 0.039,
+        "4": 0.021,
+        "5": 0.061,
+        "6": 0.041,
+        "7": 0.31,
+        "8": 0.047,
+        "9": 0.017,
+        "10": 0.02,
+        "11": 0.007,
+        "12": 0.032
+      },
+      "terra_modis": {
+        "1": 0.204,
+        "2": 0.195,
+        "3": 0.138,
+        "4": 0.027,
+        "5": 0.067,
+        "6": 0.078,
+        "7": 0.042,
+        "8": 0.026,
+        "9": 0.052,
+        "10": 0.141,
+        "11": 0.109,
+        "12": 0.117
+      }
+    }
+  },
+  "sources": [
+    "NASA FIRMS MODIS Collection 6.1 (MCD14)",
+    "NASA FIRMS VIIRS S-NPP 375 m (VNP14IMG)",
+    "NASA FIRMS VIIRS NOAA-20 375 m (VJ114IMG)",
+    "NASA FIRMS VIIRS NOAA-21 375 m (VJ214IMG)"
+  ],
+  "regions": {
+    "boundaries": "geoBoundaries KOR ADM2/ADM1 (CC BY 3.0)",
+    "n_regions": 58,
+    "err_max": 0.3,
+    "error": {
+      "national": 0.053,
+      "province": {
+        "California": 0.048
+      },
+      "district_median": 0.199
+    },
+    "snpp_noaa20_district_error": {
+      "median": 0.085,
+      "by_size": {
+        "[0.0, 10.0)": 0.807,
+        "[10.0, 25.0)": null,
+        "[25.0, 50.0)": null,
+        "[50.0, 100.0)": null,
+        "[100.0, 200.0)": 0.101,
+        "[200.0, inf)": 0.077
+      }
+    },
+    "district_error_by_size": [
+      {
+        "bin": "[0.0, 10.0)",
+        "n": 1,
+        "median": null
+      },
+      {
+        "bin": "[10.0, 25.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[25.0, 50.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[50.0, 100.0)",
+        "n": 0,
+        "median": null
+      },
+      {
+        "bin": "[100.0, 200.0)",
+        "n": 1,
+        "median": 1.403
+      },
+      {
+        "bin": "[200.0, inf)",
+        "n": 56,
+        "median": 0.197
+      }
+    ],
+    "province_basis": {
+      "California": "보정 25년"
+    },
+    "district_basis": "VIIRS 2012~",
+    "longterm": {
+      "method": "시·군·구별 보정 계수 (시·도·1 쪽으로 당김)",
+      "shrink": [
+        10,
+        20
+      ],
+      "min_total": 200.0,
+      "error_by_size": {
+        "[0.0, 10.0)": {
+          "14년 합계": 1.0,
+          "7년 합계": 1.0,
+          "한 해 값": 1.0
+        },
+        "[10.0, 25.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[25.0, 50.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[50.0, 100.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[100.0, 200.0)": {
+          "14년 합계": null,
+          "7년 합계": null,
+          "한 해 값": null
+        },
+        "[200.0, inf)": {
+          "14년 합계": 0.013,
+          "7년 합계": 0.083,
+          "한 해 값": 0.204
+        }
+      },
+      "fire_year_recall": 1.0,
+      "quality_counts": {
+        "높음": 57,
+        "낮음": 1
+      },
+      "used": "25년 합계·연평균만",
+      "not_used": "7년(10년 단위) 비교, 불 난 해 수, 한 해·한 달 값 (오차 기준 미달)"
+    },
+    "sufficient_min_viirs_annual": 11.1,
+    "sufficiency_annual": "가장 많이 탄 한 해를 뺀 연평균",
+    "sufficiency_counts": {
+      "충분": 55,
+      "부족": 3
+    },
+    "province_sufficiency": {
+      "California": "충분"
+    },
+    "risk_share": 0.5,
+    "national_risk": {
+      "months": [
+        8,
+        9,
+        10
+      ],
+      "share": 0.596,
+      "peak_month": 8,
+      "years": [
+        2001,
+        2025
+      ]
+    },
+    "adjacency_tol_deg": 0.002,
+    "alert_km": 50,
+    "alert_rules": {
+      "neighbor": "맞닿은 시·군·구에서 감지",
+      "distance": "지역 중심 50 km 안에서 감지",
+      "monthly": "맞닿은 '충분' 시·군·구의 이번 달 VIIRS 감지일이 같은 달 분포 상위 10% 초과"
+    },
+    "case_event": {
+      "window": [
+        "2018-11-07",
+        "2018-11-30"
+      ],
+      "regions": [
+        "Butte",
+        "Plumas",
+        "Yuba",
+        "Tehama",
+        "Glenn"
+      ],
+      "lead": [
+        {
+          "지역": "California Plumas",
+          "자기 지역 첫 감지": "11-15",
+          "맞닿은 지역 첫 감지": "11-07",
+          "앞선 일수(맞닿음)": 8.0,
+          "50 km 안 첫 감지": "11-08",
+          "앞선 일수(50 km)": 7.0
+        },
+        {
+          "지역": "California Yuba",
+          "자기 지역 첫 감지": null,
+          "맞닿은 지역 첫 감지": "11-07",
+          "앞선 일수(맞닿음)": NaN,
+          "50 km 안 첫 감지": "11-07",
+          "앞선 일수(50 km)": NaN
+        },
+        {
+          "지역": "California Tehama",
+          "자기 지역 첫 감지": null,
+          "맞닿은 지역 첫 감지": "11-07",
+          "앞선 일수(맞닿음)": NaN,
+          "50 km 안 첫 감지": null,
+          "앞선 일수(50 km)": NaN
+        },
+        {
+          "지역": "California Glenn",
+          "자기 지역 첫 감지": "11-07",
+          "맞닿은 지역 첫 감지": "11-07",
+          "앞선 일수(맞닿음)": 0.0,
+          "50 km 안 첫 감지": "11-07",
+          "앞선 일수(50 km)": 0.0
+        }
+      ]
+    }
+  },
+  "events": {
+    "sensor": "VIIRS NOAA-20",
+    "rule": {
+      "name": "B",
+      "distance_km": 3,
+      "gap_days": 2,
+      "big_event_cells": 10
+    },
+    "sensitivity": [
+      {
+        "규칙": "A 2 km·1일",
+        "묶음 수": 37257,
+        "1칸짜리 비율": 0.67,
+        "큰 묶음 (10칸+)": 843
+      },
+      {
+        "규칙": "B 3 km·2일",
+        "묶음 수": 33723,
+        "1칸짜리 비율": 0.65,
+        "큰 묶음 (10칸+)": 806
+      },
+      {
+        "규칙": "C 5 km·3일",
+        "묶음 수": 29858,
+        "1칸짜리 비율": 0.62,
+        "큰 묶음 (10칸+)": 914
+      }
+    ],
+    "known_fires": {
+      "A": [
+        {
+          "화재": "Camp 2018-11",
+          "근처 묶음 수": 7,
+          "주 묶음 비중": 0.98,
+          "기간": "11/08~11/21",
+          "화재 칸": 1142,
+          "가장 넓은 날 칸": 303
+        },
+        {
+          "화재": "Dixie 2021-07",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 1.0,
+          "기간": "07/14~07/26",
+          "화재 칸": 2392,
+          "가장 넓은 날 칸": 497
+        },
+        {
+          "화재": "Creek 2020-09",
+          "근처 묶음 수": 12,
+          "주 묶음 비중": 0.98,
+          "기간": "09/05~11/07",
+          "화재 칸": 7198,
+          "가장 넓은 날 칸": 579
+        },
+        {
+          "화재": "Park 2024-07",
+          "근처 묶음 수": 6,
+          "주 묶음 비중": 0.99,
+          "기간": "07/24~08/02",
+          "화재 칸": 1969,
+          "가장 넓은 날 칸": 492
+        }
+      ],
+      "B": [
+        {
+          "화재": "Camp 2018-11",
+          "근처 묶음 수": 4,
+          "주 묶음 비중": 0.99,
+          "기간": "11/08~11/21",
+          "화재 칸": 1153,
+          "가장 넓은 날 칸": 309
+        },
+        {
+          "화재": "Dixie 2021-07",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "07/14~09/27",
+          "화재 칸": 13910,
+          "가장 넓은 날 칸": 650
+        },
+        {
+          "화재": "Creek 2020-09",
+          "근처 묶음 수": 5,
+          "주 묶음 비중": 0.99,
+          "기간": "09/05~11/07",
+          "화재 칸": 9900,
+          "가장 넓은 날 칸": 579
+        },
+        {
+          "화재": "Park 2024-07",
+          "근처 묶음 수": 4,
+          "주 묶음 비중": 1.0,
+          "기간": "07/24~08/12",
+          "화재 칸": 2400,
+          "가장 넓은 날 칸": 492
+        }
+      ],
+      "C": [
+        {
+          "화재": "Camp 2018-11",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 1.0,
+          "기간": "11/08~11/21",
+          "화재 칸": 1159,
+          "가장 넓은 날 칸": 314
+        },
+        {
+          "화재": "Dixie 2021-07",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "07/14~10/06",
+          "화재 칸": 14750,
+          "가장 넓은 날 칸": 652
+        },
+        {
+          "화재": "Creek 2020-09",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 0.99,
+          "기간": "09/05~11/07",
+          "화재 칸": 9938,
+          "가장 넓은 날 칸": 580
+        },
+        {
+          "화재": "Park 2024-07",
+          "근처 묶음 수": 3,
+          "주 묶음 비중": 1.0,
+          "기간": "07/24~08/12",
+          "화재 칸": 2402,
+          "가장 넓은 날 칸": 492
+        }
+      ]
+    },
+    "monthly_count_correlation": {
+      "A": {
+        "A": 1.0,
+        "B": 0.98,
+        "C": 0.95
+      },
+      "B": {
+        "A": 0.98,
+        "B": 1.0,
+        "C": 0.99
+      },
+      "C": {
+        "A": 0.95,
+        "B": 0.99,
+        "C": 1.0
+      }
+    },
+    "note": "묶음은 설명용. 보정·달력·순위에는 화재 칸 합계를 쓴다."
+  },
+  "external_validation": {
+    "source": "CAL FIRE FRAP 화재 경계 (California Fire Perimeters, 경계 중심점)",
+    "records": 8686,
+    "period": [
+      "2001-01-03",
+      "2025-12-24"
+    ],
+    "district_match_rate": 0.998,
+    "rank_correlation": {
+      "annual_vs_count": 0.4,
+      "annual_vs_area": 0.93,
+      "monthly_vs_count": 0.52,
+      "monthly_vs_area": 0.67,
+      "years": [
+        2012,
+        2025
+      ]
+    },
+    "detection_source": null,
+    "detection_period": [
+      "2018-04-10",
+      "2025-12-24"
+    ],
+    "detection_by_size": {
+      "0.1 ha 미만": {
+        "n": 58,
+        "detected": 0.33,
+        "chance": 0.28
+      },
+      "0.1~1": {
+        "n": 304,
+        "detected": 0.41,
+        "chance": 0.37
+      },
+      "1~10": {
+        "n": 1199,
+        "detected": 0.62,
+        "chance": 0.48
+      },
+      "10~100": {
+        "n": 1053,
+        "detected": 0.68,
+        "chance": 0.44
+      },
+      "100 ha 이상": {
+        "n": 637,
+        "detected": 0.86,
+        "chance": 0.45
+      }
+    },
+    "big_fires_area_vs_cells_rho": 0.58,
+    "big_clusters_without_record": [
+      {
+        "start": "2019-12-13",
+        "end": "2019-12-13",
+        "cells": 11,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2021-12-18",
+        "end": "2021-12-18",
+        "cells": 12,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2022-12-21",
+        "end": "2022-12-21",
+        "cells": 13,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2023-12-24",
+        "end": "2023-12-24",
+        "cells": 11,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2024-12-14",
+        "end": "2024-12-14",
+        "cells": 10,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2024-07-23",
+        "end": "2024-07-26",
+        "cells": 36,
+        "regions": "California Los Angeles"
+      },
+      {
+        "start": "2024-04-25",
+        "end": "2024-05-04",
+        "cells": 10,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2021-10-05",
+        "end": "2021-10-06",
+        "cells": 16,
+        "regions": "California Imperial"
+      },
+      {
+        "start": "2026-10-15",
+        "end": "2026-10-16",
+        "cells": 10,
+        "regions": "California San Diego"
+      },
+      {
+        "start": "2019-05-30",
+        "end": "2019-06-04",
+        "cells": 12,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2023-06-15",
+        "end": "2023-06-27",
+        "cells": 37,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2018-11-24",
+        "end": "2018-11-24",
+        "cells": 14,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2020-11-29",
+        "end": "2020-11-29",
+        "cells": 15,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2021-11-16",
+        "end": "2021-11-16",
+        "cells": 13,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2021-12-02",
+        "end": "2021-12-02",
+        "cells": 14,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2022-11-19",
+        "end": "2022-11-19",
+        "cells": 11,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2023-11-22",
+        "end": "2023-11-22",
+        "cells": 11,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2026-04-03",
+        "end": "2026-04-03",
+        "cells": 18,
+        "regions": "California Riverside"
+      },
+      {
+        "start": "2026-05-15",
+        "end": "2026-05-20",
+        "cells": 88,
+        "regions": "California Santa Barbara"
+      },
+      {
+        "start": "2020-09-25",
+        "end": "2020-10-03",
+        "cells": 18,
+        "regions": "California San Bernardino"
+      },
+      {
+        "start": "2024-09-28",
+        "end": "2024-10-05",
+        "cells": 64,
+        "regions": "California San Bernardino"
+      },
+      {
+        "start": "2024-09-25",
+        "end": "2024-09-29",
+        "cells": 16,
+        "regions": "California San Bernardino"
+      },
+      {
+        "start": "2026-05-18",
+        "end": "2026-05-20",
+        "cells": 11,
+        "regions": "California Ventura"
+      },
+      {
+        "start": "2024-10-18",
+        "end": "2024-10-24",
+        "cells": 29,
+        "regions": "California Los Angeles"
+      },
+      {
+        "start": "2026-07-10",
+        "end": "2026-07-11",
+        "cells": 17,
+        "regions": "California Los Angeles"
+      },
+      {
+        "start": "2022-03-14",
+        "end": "2022-03-15",
+        "cells": 10,
+        "regions": "California San Bernardino"
+      },
+      {
+        "start": "2022-10-10",
+        "end": "2022-10-13",
+        "cells": 17,
+        "regions": "California Santa Barbara"
+      },
+      {
+        "start": "2020-11-18",
+        "end": "2020-11-18",
+        "cells": 10,
+        "regions": "California Los Angeles"
+      },
+      {
+        "start": "2026-04-13",
+        "end": "2026-04-17",
+        "cells": 10,
+        "regions": "California Los Angeles"
+      },
+      {
+        "start": "2020-03-02",
+        "end": "2020-03-04",
+        "cells": 13,
+        "regions": "California Kern"
+      },
+      {
+        "start": "2020-04-20",
+        "end": "2020-04-25",
+        "cells": 10,
+        "regions": "California Kern"
+      },
+      {
+        "start": "2026-07-27",
+        "end": "2026-07-28",
+        "cells": 16,
+        "regions": "California Kern"
+      },
+      {
+        "start": "2018-11-18",
+        "end": "2018-11-18",
+        "cells": 21,
+        "regions": "California San Luis Obispo"
+      },
+      {
+        "start": "2021-11-26",
+        "end": "2021-11-26",
+        "cells": 20,
+        "regions": "California San Luis Obispo"
+      },
+      {
+        "start": "2020-11-23",
+        "end": "2020-11-23",
+        "cells": 23,
+        "regions": "California San Luis Obispo"
+      },
+      {
+        "start": "2026-06-18",
+        "end": "2026-06-19",
+        "cells": 20,
+        "regions": "California Kern"
+      },
+      {
+        "start": "2026-05-18",
+        "end": "2026-05-19",
+        "cells": 10,
+        "regions": "California Kern"
+      },
+      {
+        "start": "2024-05-17",
+        "end": "2024-05-20",
+        "cells": 11,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2026-08-26",
+        "end": "2026-09-10",
+        "cells": 246,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2026-05-26",
+        "end": "2026-05-27",
+        "cells": 13,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2025-05-25",
+        "end": "2025-05-25",
+        "cells": 16,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2019-03-22",
+        "end": "2019-04-03",
+        "cells": 30,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2019-09-26",
+        "end": "2019-09-27",
+        "cells": 12,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2024-10-28",
+        "end": "2024-10-28",
+        "cells": 10,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2026-05-30",
+        "end": "2026-05-31",
+        "cells": 11,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2022-05-31",
+        "end": "2022-06-02",
+        "cells": 14,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2026-08-11",
+        "end": "2026-08-12",
+        "cells": 12,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2023-10-24",
+        "end": "2023-10-28",
+        "cells": 10,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-08-19",
+        "end": "2020-08-23",
+        "cells": 94,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2023-10-10",
+        "end": "2023-10-15",
+        "cells": 23,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2019-08-21",
+        "end": "2019-08-28",
+        "cells": 12,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2026-03-04",
+        "end": "2026-03-11",
+        "cells": 17,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2025-10-08",
+        "end": "2025-10-10",
+        "cells": 12,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2026-08-09",
+        "end": "2026-08-31",
+        "cells": 309,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2019-09-23",
+        "end": "2019-09-27",
+        "cells": 11,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-09-19",
+        "end": "2020-09-30",
+        "cells": 25,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-10-25",
+        "end": "2020-11-07",
+        "cells": 17,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-10-02",
+        "end": "2020-10-10",
+        "cells": 13,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2022-09-15",
+        "end": "2022-09-20",
+        "cells": 33,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2022-09-23",
+        "end": "2022-10-01",
+        "cells": 26,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-10-01",
+        "end": "2020-11-07",
+        "cells": 197,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2026-10-08",
+        "end": "2026-10-09",
+        "cells": 12,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2024-08-12",
+        "end": "2024-09-15",
+        "cells": 527,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-11-16",
+        "end": "2020-12-08",
+        "cells": 32,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-08-31",
+        "end": "2020-10-16",
+        "cells": 321,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2018-11-02",
+        "end": "2018-11-21",
+        "cells": 81,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2021-10-13",
+        "end": "2021-10-19",
+        "cells": 20,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2019-11-15",
+        "end": "2019-11-19",
+        "cells": 57,
+        "regions": "California San Benito"
+      },
+      {
+        "start": "2024-11-23",
+        "end": "2024-11-24",
+        "cells": 15,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2023-10-30",
+        "end": "2023-11-05",
+        "cells": 13,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2021-10-11",
+        "end": "2021-10-19",
+        "cells": 17,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2023-08-28",
+        "end": "2023-09-01",
+        "cells": 11,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2022-06-09",
+        "end": "2022-06-17",
+        "cells": 24,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2019-07-08",
+        "end": "2019-07-15",
+        "cells": 16,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2019-10-02",
+        "end": "2019-10-08",
+        "cells": 17,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2022-09-26",
+        "end": "2022-09-30",
+        "cells": 15,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2026-09-22",
+        "end": "2026-09-24",
+        "cells": 11,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2024-10-22",
+        "end": "2024-10-25",
+        "cells": 11,
+        "regions": "California San Benito"
+      },
+      {
+        "start": "2022-10-19",
+        "end": "2022-10-20",
+        "cells": 24,
+        "regions": "California Monterey"
+      },
+      {
+        "start": "2018-10-23",
+        "end": "2018-10-26",
+        "cells": 24,
+        "regions": "California San Benito"
+      },
+      {
+        "start": "2022-09-27",
+        "end": "2022-09-28",
+        "cells": 17,
+        "regions": "California San Benito, California Monterey"
+      },
+      {
+        "start": "2023-01-24",
+        "end": "2023-02-04",
+        "cells": 10,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-03-24",
+        "end": "2023-04-03",
+        "cells": 19,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-11-01",
+        "end": "2023-11-05",
+        "cells": 14,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2022-02-17",
+        "end": "2022-02-21",
+        "cells": 24,
+        "regions": "California Tulare, California Fresno"
+      },
+      {
+        "start": "2026-01-28",
+        "end": "2026-02-02",
+        "cells": 12,
+        "regions": "California Fresno, California Tulare"
+      },
+      {
+        "start": "2020-08-26",
+        "end": "2020-09-09",
+        "cells": 50,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2023-10-29",
+        "end": "2023-11-05",
+        "cells": 16,
+        "regions": "California Tulare, California Fresno"
+      },
+      {
+        "start": "2020-10-14",
+        "end": "2020-10-22",
+        "cells": 36,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-09-12",
+        "end": "2020-09-17",
+        "cells": 18,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-09-24",
+        "end": "2020-10-06",
+        "cells": 15,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2024-06-23",
+        "end": "2024-07-01",
+        "cells": 27,
+        "regions": "California Tulare"
+      },
+      {
+        "start": "2020-10-25",
+        "end": "2020-11-06",
+        "cells": 26,
+        "regions": "California Tulare, California Fresno"
+      },
+      {
+        "start": "2026-10-17",
+        "end": "2026-10-21",
+        "cells": 24,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2025-10-23",
+        "end": "2025-11-08",
+        "cells": 42,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2025-11-03",
+        "end": "2025-11-04",
+        "cells": 16,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2024-11-08",
+        "end": "2024-11-11",
+        "cells": 45,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2024-09-26",
+        "end": "2024-10-28",
+        "cells": 304,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2024-10-31",
+        "end": "2024-11-13",
+        "cells": 102,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-10-26",
+        "end": "2023-10-31",
+        "cells": 10,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2026-07-21",
+        "end": "2026-07-24",
+        "cells": 30,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2026-11-12",
+        "end": "2026-11-14",
+        "cells": 18,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2019-09-16",
+        "end": "2019-09-20",
+        "cells": 31,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2026-07-25",
+        "end": "2026-07-25",
+        "cells": 11,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2019-09-08",
+        "end": "2019-09-12",
+        "cells": 75,
+        "regions": "California Inyo"
+      },
+      {
+        "start": "2026-10-26",
+        "end": "2026-10-28",
+        "cells": 15,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2026-11-07",
+        "end": "2026-11-12",
+        "cells": 16,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2020-02-25",
+        "end": "2020-02-29",
+        "cells": 20,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-11-08",
+        "end": "2023-11-15",
+        "cells": 23,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2022-01-24",
+        "end": "2022-02-05",
+        "cells": 25,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-12-07",
+        "end": "2023-12-09",
+        "cells": 17,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2025-04-12",
+        "end": "2025-04-15",
+        "cells": 17,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2020-01-30",
+        "end": "2020-02-08",
+        "cells": 16,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2021-01-30",
+        "end": "2021-02-06",
+        "cells": 11,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2023-11-28",
+        "end": "2023-12-02",
+        "cells": 16,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-02-15",
+        "end": "2023-02-21",
+        "cells": 33,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2025-10-31",
+        "end": "2025-11-07",
+        "cells": 10,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2023-11-08",
+        "end": "2023-11-11",
+        "cells": 14,
+        "regions": "California Fresno"
+      },
+      {
+        "start": "2026-11-03",
+        "end": "2026-11-05",
+        "cells": 27,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-14",
+        "cells": 16,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-16",
+        "cells": 11,
+        "regions": "California Merced"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-19",
+        "cells": 11,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2023-06-01",
+        "end": "2023-06-04",
+        "cells": 10,
+        "regions": "California Mariposa"
+      },
+      {
+        "start": "2024-11-21",
+        "end": "2024-11-22",
+        "cells": 19,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2021-10-11",
+        "end": "2021-10-19",
+        "cells": 11,
+        "regions": "California Stanislaus, California Merced"
+      },
+      {
+        "start": "2018-07-23",
+        "end": "2018-09-05",
+        "cells": 517,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-16",
+        "cells": 13,
+        "regions": "California Merced, California Stanislaus"
+      },
+      {
+        "start": "2022-02-02",
+        "end": "2022-02-03",
+        "cells": 10,
+        "regions": "California Stanislaus"
+      },
+      {
+        "start": "2026-09-15",
+        "end": "2026-10-11",
+        "cells": 437,
+        "regions": "California Mariposa"
+      },
+      {
+        "start": "2018-09-08",
+        "end": "2018-09-14",
+        "cells": 17,
+        "regions": "California Madera"
+      },
+      {
+        "start": "2023-04-01",
+        "end": "2023-04-06",
+        "cells": 12,
+        "regions": "California Stanislaus"
+      },
+      {
+        "start": "2022-10-11",
+        "end": "2022-10-17",
+        "cells": 10,
+        "regions": "California Mariposa"
+      },
+      {
+        "start": "2023-06-22",
+        "end": "2023-06-25",
+        "cells": 11,
+        "regions": "California Mono"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-19",
+        "cells": 11,
+        "regions": "California Mariposa, California Tuolumne"
+      },
+      {
+        "start": "2023-07-08",
+        "end": "2023-07-17",
+        "cells": 52,
+        "regions": "California Mariposa"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-24",
+        "cells": 20,
+        "regions": "California Mono"
+      },
+      {
+        "start": "2018-09-17",
+        "end": "2018-10-01",
+        "cells": 28,
+        "regions": "California Mariposa"
+      },
+      {
+        "start": "2019-08-02",
+        "end": "2019-09-03",
+        "cells": 161,
+        "regions": "California Mono"
+      },
+      {
+        "start": "2018-11-06",
+        "end": "2018-11-21",
+        "cells": 20,
+        "regions": "California Mariposa"
+      },
+      {
+        "start": "2023-02-11",
+        "end": "2023-02-13",
+        "cells": 12,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2020-08-16",
+        "end": "2020-08-19",
+        "cells": 21,
+        "regions": "California Contra Costa"
+      },
+      {
+        "start": "2021-02-04",
+        "end": "2021-02-05",
+        "cells": 10,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-07-26",
+        "end": "2023-07-30",
+        "cells": 12,
+        "regions": "California Mono"
+      },
+      {
+        "start": "2020-09-08",
+        "end": "2020-09-15",
+        "cells": 17,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2019-10-21",
+        "end": "2019-10-24",
+        "cells": 11,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2018-10-24",
+        "end": "2018-10-26",
+        "cells": 15,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2019-01-30",
+        "end": "2019-01-31",
+        "cells": 15,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2020-01-06",
+        "end": "2020-01-10",
+        "cells": 22,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2021-02-16",
+        "end": "2021-02-18",
+        "cells": 11,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2021-01-11",
+        "end": "2021-01-14",
+        "cells": 11,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2021-03-04",
+        "end": "2021-03-07",
+        "cells": 19,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2018-06-30",
+        "end": "2018-06-30",
+        "cells": 11,
+        "regions": "California Calaveras"
+      },
+      {
+        "start": "2020-01-22",
+        "end": "2020-01-25",
+        "cells": 13,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2019-09-04",
+        "end": "2019-09-10",
+        "cells": 15,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2020-09-06",
+        "end": "2020-09-08",
+        "cells": 10,
+        "regions": "California Marin"
+      },
+      {
+        "start": "2020-08-30",
+        "end": "2020-08-30",
+        "cells": 10,
+        "regions": "California Marin"
+      },
+      {
+        "start": "2023-06-29",
+        "end": "2023-07-10",
+        "cells": 58,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-09-19",
+        "end": "2023-09-29",
+        "cells": 116,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-05",
+        "end": "2023-10-25",
+        "cells": 301,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-29",
+        "end": "2023-11-05",
+        "cells": 69,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2021-08-02",
+        "end": "2021-08-05",
+        "cells": 15,
+        "regions": "California Contra Costa, California Sacramento"
+      },
+      {
+        "start": "2024-05-17",
+        "end": "2024-05-24",
+        "cells": 18,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2026-08-04",
+        "end": "2026-08-06",
+        "cells": 68,
+        "regions": "California Calaveras"
+      },
+      {
+        "start": "2019-10-27",
+        "end": "2019-10-29",
+        "cells": 18,
+        "regions": "California Solano"
+      },
+      {
+        "start": "2025-01-22",
+        "end": "2025-01-24",
+        "cells": 10,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-19",
+        "end": "2023-10-22",
+        "cells": 12,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-06-21",
+        "end": "2023-06-24",
+        "cells": 15,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2025-11-09",
+        "end": "2025-11-12",
+        "cells": 11,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-05-26",
+        "end": "2023-06-04",
+        "cells": 28,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2018-10-07",
+        "end": "2018-10-08",
+        "cells": 20,
+        "regions": "California Solano"
+      },
+      {
+        "start": "2021-10-27",
+        "end": "2021-10-29",
+        "cells": 14,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-14",
+        "end": "2023-10-22",
+        "cells": 77,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2022-05-13",
+        "end": "2022-05-20",
+        "cells": 27,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-30",
+        "end": "2023-11-05",
+        "cells": 26,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-04",
+        "end": "2023-10-09",
+        "cells": 10,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-15",
+        "end": "2023-10-20",
+        "cells": 11,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2018-10-22",
+        "end": "2018-10-26",
+        "cells": 13,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2024-10-30",
+        "end": "2024-11-11",
+        "cells": 53,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-10-03",
+        "end": "2023-10-09",
+        "cells": 35,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2023-08-01",
+        "end": "2023-08-06",
+        "cells": 13,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2020-02-24",
+        "end": "2020-02-28",
+        "cells": 10,
+        "regions": "California Sacramento"
+      },
+      {
+        "start": "2023-10-12",
+        "end": "2023-10-19",
+        "cells": 24,
+        "regions": "California Calaveras"
+      },
+      {
+        "start": "2025-10-30",
+        "end": "2025-11-04",
+        "cells": 17,
+        "regions": "California Calaveras"
+      },
+      {
+        "start": "2018-09-05",
+        "end": "2018-09-12",
+        "cells": 44,
+        "regions": "California Mono"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-11",
+        "cells": 12,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2018-09-17",
+        "end": "2018-09-26",
+        "cells": 17,
+        "regions": "California Tuolumne"
+      },
+      {
+        "start": "2020-02-24",
+        "end": "2020-02-29",
+        "cells": 10,
+        "regions": "California Napa"
+      },
+      {
+        "start": "2018-09-09",
+        "end": "2018-09-14",
+        "cells": 12,
+        "regions": "California Alpine"
+      },
+      {
+        "start": "2024-05-11",
+        "end": "2024-05-17",
+        "cells": 10,
+        "regions": "California Solano"
+      },
+      {
+        "start": "2023-02-27",
+        "end": "2023-03-04",
+        "cells": 12,
+        "regions": "California Napa, California Sonoma"
+      },
+      {
+        "start": "2023-11-23",
+        "end": "2023-11-28",
+        "cells": 10,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-11",
+        "cells": 55,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2025-02-25",
+        "end": "2025-03-03",
+        "cells": 10,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2022-01-11",
+        "end": "2022-01-14",
+        "cells": 13,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2023-02-13",
+        "end": "2023-02-22",
+        "cells": 19,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2023-03-25",
+        "end": "2023-03-27",
+        "cells": 12,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2023-12-04",
+        "end": "2023-12-06",
+        "cells": 13,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2023-04-10",
+        "end": "2023-04-15",
+        "cells": 12,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2025-01-22",
+        "end": "2025-01-29",
+        "cells": 10,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2021-08-08",
+        "end": "2021-08-13",
+        "cells": 10,
+        "regions": "California Alpine"
+      },
+      {
+        "start": "2026-02-04",
+        "end": "2026-02-06",
+        "cells": 14,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2025-11-21",
+        "end": "2025-11-28",
+        "cells": 10,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2020-12-30",
+        "end": "2021-01-05",
+        "cells": 17,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2018-09-11",
+        "end": "2018-09-19",
+        "cells": 11,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2018-12-07",
+        "end": "2018-12-09",
+        "cells": 16,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2026-09-09",
+        "end": "2026-09-09",
+        "cells": 10,
+        "regions": "California Placer"
+      },
+      {
+        "start": "2022-09-28",
+        "end": "2022-10-07",
+        "cells": 14,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2023-11-25",
+        "end": "2023-12-10",
+        "cells": 14,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2021-09-21",
+        "end": "2021-09-27",
+        "cells": 13,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2026-10-16",
+        "end": "2026-10-18",
+        "cells": 22,
+        "regions": "California Mendocino"
+      },
+      {
+        "start": "2018-12-06",
+        "end": "2018-12-08",
+        "cells": 15,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2020-02-12",
+        "end": "2020-02-15",
+        "cells": 15,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2022-10-10",
+        "end": "2022-10-20",
+        "cells": 15,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2018-12-08",
+        "end": "2018-12-15",
+        "cells": 30,
+        "regions": "California El Dorado"
+      },
+      {
+        "start": "2020-11-19",
+        "end": "2020-11-25",
+        "cells": 10,
+        "regions": "California Yolo"
+      },
+      {
+        "start": "2022-10-25",
+        "end": "2022-10-29",
+        "cells": 16,
+        "regions": "California Colusa, California Yolo"
+      },
+      {
+        "start": "2020-12-02",
+        "end": "2020-12-05",
+        "cells": 20,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2026-02-02",
+        "end": "2026-02-07",
+        "cells": 18,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2026-11-09",
+        "end": "2026-11-12",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2021-10-01",
+        "end": "2021-10-07",
+        "cells": 14,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2020-11-16",
+        "end": "2020-11-27",
+        "cells": 39,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2025-10-28",
+        "end": "2025-10-30",
+        "cells": 12,
+        "regions": "California Placer"
+      },
+      {
+        "start": "2023-05-30",
+        "end": "2023-06-02",
+        "cells": 11,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2024-09-16",
+        "end": "2024-09-22",
+        "cells": 11,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2022-09-23",
+        "end": "2022-09-30",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-09-30",
+        "end": "2024-10-06",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2023-10-02",
+        "end": "2023-10-07",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2023-11-15",
+        "end": "2023-11-22",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2021-03-25",
+        "end": "2021-04-01",
+        "cells": 13,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2020-05-30",
+        "end": "2020-06-04",
+        "cells": 12,
+        "regions": "California Sutter, California Yuba"
+      },
+      {
+        "start": "2019-10-31",
+        "end": "2019-11-05",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2023-10-24",
+        "end": "2023-11-03",
+        "cells": 30,
+        "regions": "California Placer"
+      },
+      {
+        "start": "2023-04-14",
+        "end": "2023-04-21",
+        "cells": 13,
+        "regions": "California Yuba, California Sutter"
+      },
+      {
+        "start": "2024-10-05",
+        "end": "2024-10-11",
+        "cells": 10,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2020-04-21",
+        "end": "2020-04-24",
+        "cells": 12,
+        "regions": "California Placer, California Yuba"
+      },
+      {
+        "start": "2024-09-26",
+        "end": "2024-10-01",
+        "cells": 10,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2020-02-18",
+        "end": "2020-02-23",
+        "cells": 20,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2023-10-17",
+        "end": "2023-10-22",
+        "cells": 13,
+        "regions": "California Placer"
+      },
+      {
+        "start": "2026-10-14",
+        "end": "2026-10-20",
+        "cells": 11,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-10-22",
+        "end": "2024-10-30",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2022-10-10",
+        "end": "2022-10-16",
+        "cells": 12,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2021-10-15",
+        "end": "2021-10-18",
+        "cells": 11,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-27",
+        "cells": 17,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-11-04",
+        "end": "2024-11-10",
+        "cells": 17,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2022-11-21",
+        "end": "2022-11-29",
+        "cells": 15,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2026-11-09",
+        "end": "2026-11-12",
+        "cells": 14,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2023-06-21",
+        "end": "2023-06-24",
+        "cells": 10,
+        "regions": "California Placer"
+      },
+      {
+        "start": "2026-10-28",
+        "end": "2026-11-06",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-04-23",
+        "end": "2024-04-29",
+        "cells": 17,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2023-11-27",
+        "end": "2023-11-30",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-11-14",
+        "end": "2024-11-18",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2022-01-26",
+        "end": "2022-02-03",
+        "cells": 15,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2024-10-11",
+        "end": "2024-10-16",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2020-03-12",
+        "end": "2020-03-13",
+        "cells": 11,
+        "regions": "California Mendocino, California Lake"
+      },
+      {
+        "start": "2021-07-12",
+        "end": "2021-07-18",
+        "cells": 13,
+        "regions": "California Mendocino"
+      },
+      {
+        "start": "2025-09-24",
+        "end": "2025-09-28",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2022-08-09",
+        "end": "2022-08-13",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2026-03-23",
+        "end": "2026-03-25",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-10-21",
+        "end": "2024-10-26",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2026-09-10",
+        "end": "2026-09-14",
+        "cells": 62,
+        "regions": "California Lake"
+      },
+      {
+        "start": "2020-02-26",
+        "end": "2020-02-29",
+        "cells": 12,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2022-05-24",
+        "end": "2022-05-26",
+        "cells": 12,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2021-03-01",
+        "end": "2021-03-05",
+        "cells": 35,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2022-02-04",
+        "end": "2022-02-06",
+        "cells": 11,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2025-03-10",
+        "end": "2025-03-11",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2024-03-18",
+        "end": "2024-03-21",
+        "cells": 11,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2023-04-18",
+        "end": "2023-04-21",
+        "cells": 12,
+        "regions": "California Yuba"
+      },
+      {
+        "start": "2026-06-22",
+        "end": "2026-06-25",
+        "cells": 10,
+        "regions": "California Sutter"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-14",
+        "cells": 10,
+        "regions": "California Colusa"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-29",
+        "cells": 13,
+        "regions": "California Mendocino"
+      },
+      {
+        "start": "2021-03-01",
+        "end": "2021-03-04",
+        "cells": 17,
+        "regions": "California Colusa, California Glenn"
+      },
+      {
+        "start": "2021-11-29",
+        "end": "2021-12-05",
+        "cells": 12,
+        "regions": "California Nevada"
+      },
+      {
+        "start": "2023-10-14",
+        "end": "2023-10-19",
+        "cells": 15,
+        "regions": "California Sierra, California Nevada"
+      },
+      {
+        "start": "2023-10-05",
+        "end": "2023-10-09",
+        "cells": 12,
+        "regions": "California Nevada, California Sierra"
+      },
+      {
+        "start": "2018-10-25",
+        "end": "2018-11-01",
+        "cells": 11,
+        "regions": "California Sierra"
+      },
+      {
+        "start": "2021-01-25",
+        "end": "2021-01-26",
+        "cells": 13,
+        "regions": "California Yuba"
+      },
+      {
+        "start": "2025-10-06",
+        "end": "2025-10-08",
+        "cells": 11,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2020-09-27",
+        "end": "2020-09-28",
+        "cells": 13,
+        "regions": "California Lake, California Mendocino"
+      },
+      {
+        "start": "2022-01-26",
+        "end": "2022-01-29",
+        "cells": 17,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2023-11-16",
+        "end": "2023-11-23",
+        "cells": 14,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2023-11-27",
+        "end": "2023-12-01",
+        "cells": 17,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2020-09-28",
+        "end": "2020-10-05",
+        "cells": 14,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2022-03-09",
+        "end": "2022-03-14",
+        "cells": 10,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2023-02-12",
+        "end": "2023-02-20",
+        "cells": 12,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2023-01-22",
+        "end": "2023-01-31",
+        "cells": 14,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2023-10-18",
+        "end": "2023-10-21",
+        "cells": 10,
+        "regions": "California Sierra"
+      },
+      {
+        "start": "2020-02-12",
+        "end": "2020-02-15",
+        "cells": 11,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-03-09",
+        "end": "2022-03-14",
+        "cells": 18,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2021-12-09",
+        "end": "2021-12-11",
+        "cells": 19,
+        "regions": "California Sierra"
+      },
+      {
+        "start": "2023-01-31",
+        "end": "2023-02-02",
+        "cells": 10,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2025-05-20",
+        "end": "2025-05-25",
+        "cells": 10,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2025-06-09",
+        "end": "2025-06-14",
+        "cells": 12,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2022-10-10",
+        "end": "2022-10-14",
+        "cells": 11,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-10-24",
+        "end": "2022-10-31",
+        "cells": 18,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2023-06-06",
+        "end": "2023-06-16",
+        "cells": 16,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2020-02-12",
+        "end": "2020-02-14",
+        "cells": 13,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-03-23",
+        "end": "2022-03-26",
+        "cells": 14,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-02-15",
+        "end": "2022-02-19",
+        "cells": 11,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-02-22",
+        "end": "2022-02-25",
+        "cells": 10,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-03-09",
+        "end": "2022-03-18",
+        "cells": 26,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-02-28",
+        "end": "2022-03-04",
+        "cells": 13,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2026-07-12",
+        "end": "2026-07-20",
+        "cells": 29,
+        "regions": "California Lassen, California Sierra, California Plumas"
+      },
+      {
+        "start": "2026-07-24",
+        "end": "2026-08-02",
+        "cells": 50,
+        "regions": "California Lassen, California Plumas, California Sierra"
+      },
+      {
+        "start": "2020-11-23",
+        "end": "2020-11-26",
+        "cells": 10,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2020-03-19",
+        "end": "2020-03-22",
+        "cells": 15,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2018-12-06",
+        "end": "2018-12-11",
+        "cells": 16,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2019-05-25",
+        "end": "2019-06-06",
+        "cells": 53,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2021-05-12",
+        "end": "2021-05-19",
+        "cells": 11,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2020-11-23",
+        "end": "2020-12-01",
+        "cells": 18,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2019-11-13",
+        "end": "2019-11-20",
+        "cells": 13,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2022-10-19",
+        "end": "2022-10-27",
+        "cells": 14,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2026-03-09",
+        "end": "2026-03-12",
+        "cells": 14,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2020-12-18",
+        "end": "2020-12-22",
+        "cells": 10,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2020-12-28",
+        "end": "2020-12-31",
+        "cells": 12,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2021-04-01",
+        "end": "2021-04-06",
+        "cells": 10,
+        "regions": "California Glenn"
+      },
+      {
+        "start": "2022-04-23",
+        "end": "2022-04-29",
+        "cells": 11,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2022-04-04",
+        "end": "2022-04-09",
+        "cells": 12,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2024-02-21",
+        "end": "2024-02-22",
+        "cells": 14,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2020-09-27",
+        "end": "2020-09-30",
+        "cells": 10,
+        "regions": "California Mendocino"
+      },
+      {
+        "start": "2021-04-02",
+        "end": "2021-04-17",
+        "cells": 26,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2025-01-27",
+        "end": "2025-01-30",
+        "cells": 12,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2026-02-03",
+        "end": "2026-02-04",
+        "cells": 20,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2023-05-06",
+        "end": "2023-05-12",
+        "cells": 14,
+        "regions": "California Butte"
+      },
+      {
+        "start": "2022-12-12",
+        "end": "2022-12-15",
+        "cells": 18,
+        "regions": "California Mendocino"
+      },
+      {
+        "start": "2024-01-09",
+        "end": "2024-01-09",
+        "cells": 11,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2022-12-12",
+        "end": "2022-12-14",
+        "cells": 13,
+        "regions": "California Mendocino"
+      },
+      {
+        "start": "2025-01-14",
+        "end": "2025-01-24",
+        "cells": 12,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2021-11-10",
+        "end": "2021-11-13",
+        "cells": 20,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2018-10-15",
+        "end": "2018-10-22",
+        "cells": 20,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2021-10-27",
+        "end": "2021-10-29",
+        "cells": 10,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2022-10-28",
+        "end": "2022-10-30",
+        "cells": 10,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2026-10-05",
+        "end": "2026-10-06",
+        "cells": 13,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2026-10-07",
+        "end": "2026-10-08",
+        "cells": 10,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2025-01-09",
+        "end": "2025-01-14",
+        "cells": 10,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2023-05-09",
+        "end": "2023-05-12",
+        "cells": 10,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2024-11-15",
+        "end": "2024-11-18",
+        "cells": 12,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2023-12-11",
+        "end": "2023-12-13",
+        "cells": 10,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2019-09-19",
+        "end": "2019-09-28",
+        "cells": 21,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2021-08-17",
+        "end": "2021-08-26",
+        "cells": 370,
+        "regions": "California Plumas, California Lassen"
+      },
+      {
+        "start": "2019-04-26",
+        "end": "2019-05-01",
+        "cells": 12,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2021-08-31",
+        "end": "2021-09-08",
+        "cells": 23,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2022-02-15",
+        "end": "2022-02-17",
+        "cells": 14,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-09",
+        "cells": 13,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2026-02-12",
+        "end": "2026-02-14",
+        "cells": 11,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2025-01-27",
+        "end": "2025-01-30",
+        "cells": 24,
+        "regions": "California Trinity, California Tehama"
+      },
+      {
+        "start": "2020-10-14",
+        "end": "2020-10-20",
+        "cells": 11,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2022-10-27",
+        "end": "2022-10-31",
+        "cells": 39,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2022-10-24",
+        "end": "2022-10-26",
+        "cells": 13,
+        "regions": "California Tehama"
+      },
+      {
+        "start": "2023-11-07",
+        "end": "2023-11-09",
+        "cells": 21,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2025-12-02",
+        "end": "2025-12-03",
+        "cells": 16,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2022-11-15",
+        "end": "2022-11-16",
+        "cells": 16,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2025-01-09",
+        "end": "2025-01-16",
+        "cells": 15,
+        "regions": "California Plumas"
+      },
+      {
+        "start": "2025-10-27",
+        "end": "2025-10-29",
+        "cells": 13,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-12",
+        "cells": 10,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2021-03-02",
+        "end": "2021-03-05",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2020-10-14",
+        "end": "2020-10-17",
+        "cells": 11,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2021-09-04",
+        "end": "2021-09-09",
+        "cells": 11,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2024-11-29",
+        "end": "2024-12-06",
+        "cells": 10,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2021-09-30",
+        "end": "2021-10-06",
+        "cells": 24,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2024-03-19",
+        "end": "2024-03-22",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2021-11-28",
+        "end": "2021-12-02",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2026-07-18",
+        "end": "2026-07-20",
+        "cells": 66,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-12",
+        "cells": 13,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2026-07-20",
+        "end": "2026-07-20",
+        "cells": 25,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2022-11-30",
+        "end": "2022-12-03",
+        "cells": 15,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2024-09-25",
+        "end": "2024-09-26",
+        "cells": 14,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2019-11-23",
+        "end": "2019-11-24",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2019-01-04",
+        "end": "2019-01-04",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2026-10-13",
+        "end": "2026-10-16",
+        "cells": 13,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2018-11-30",
+        "end": "2018-12-03",
+        "cells": 12,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2021-09-11",
+        "end": "2021-09-12",
+        "cells": 12,
+        "regions": "California Shasta, California Lassen"
+      },
+      {
+        "start": "2020-11-23",
+        "end": "2020-11-27",
+        "cells": 25,
+        "regions": "California Trinity, California Shasta"
+      },
+      {
+        "start": "2023-10-25",
+        "end": "2023-10-30",
+        "cells": 56,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2023-10-19",
+        "end": "2023-10-21",
+        "cells": 12,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2023-04-15",
+        "end": "2023-04-16",
+        "cells": 17,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2023-02-01",
+        "end": "2023-02-02",
+        "cells": 12,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2023-10-20",
+        "end": "2023-10-22",
+        "cells": 11,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2026-11-12",
+        "end": "2026-11-12",
+        "cells": 11,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2020-11-24",
+        "end": "2020-11-25",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2018-12-06",
+        "end": "2018-12-07",
+        "cells": 10,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2026-07-08",
+        "end": "2026-07-08",
+        "cells": 10,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2020-12-14",
+        "end": "2020-12-16",
+        "cells": 17,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2022-11-29",
+        "end": "2022-11-30",
+        "cells": 10,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2021-09-22",
+        "end": "2021-09-26",
+        "cells": 26,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2020-11-20",
+        "end": "2020-11-24",
+        "cells": 20,
+        "regions": "California Shasta"
+      },
+      {
+        "start": "2021-09-22",
+        "end": "2021-09-26",
+        "cells": 15,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2020-10-13",
+        "end": "2020-10-18",
+        "cells": 10,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2025-11-01",
+        "end": "2025-11-03",
+        "cells": 11,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2020-09-27",
+        "end": "2020-10-09",
+        "cells": 142,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2020-11-19",
+        "end": "2020-11-21",
+        "cells": 15,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2020-10-14",
+        "end": "2020-11-05",
+        "cells": 48,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2020-08-28",
+        "end": "2020-09-08",
+        "cells": 81,
+        "regions": "California Lassen"
+      },
+      {
+        "start": "2021-09-21",
+        "end": "2021-09-27",
+        "cells": 22,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2020-10-15",
+        "end": "2020-11-05",
+        "cells": 114,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-08-08",
+        "end": "2026-08-20",
+        "cells": 149,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2022-10-04",
+        "end": "2022-10-09",
+        "cells": 18,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2021-09-21",
+        "end": "2021-09-27",
+        "cells": 29,
+        "regions": "California Trinity"
+      },
+      {
+        "start": "2024-09-26",
+        "end": "2024-09-27",
+        "cells": 23,
+        "regions": "California Lassen, California Modoc"
+      },
+      {
+        "start": "2021-09-23",
+        "end": "2021-09-27",
+        "cells": 22,
+        "regions": "California Siskiyou, California Trinity"
+      },
+      {
+        "start": "2021-09-14",
+        "end": "2021-09-17",
+        "cells": 12,
+        "regions": "California Siskiyou, California Trinity"
+      },
+      {
+        "start": "2025-10-28",
+        "end": "2025-10-29",
+        "cells": 11,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2024-05-16",
+        "end": "2024-05-18",
+        "cells": 11,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2022-01-13",
+        "end": "2022-01-17",
+        "cells": 12,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2022-11-10",
+        "end": "2022-11-15",
+        "cells": 13,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-10-14",
+        "end": "2026-10-16",
+        "cells": 13,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2026-01-14",
+        "end": "2026-01-16",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-12",
+        "cells": 22,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-12",
+        "cells": 26,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2025-10-23",
+        "end": "2025-10-24",
+        "cells": 16,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-12-05",
+        "end": "2023-12-09",
+        "cells": 12,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-14",
+        "end": "2023-09-23",
+        "cells": 22,
+        "regions": "California Siskiyou, California Humboldt"
+      },
+      {
+        "start": "2023-09-06",
+        "end": "2023-09-23",
+        "cells": 212,
+        "regions": "California Siskiyou, California Humboldt"
+      },
+      {
+        "start": "2023-10-20",
+        "end": "2023-10-24",
+        "cells": 17,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2020-11-19",
+        "end": "2020-11-22",
+        "cells": 14,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2019-11-25",
+        "end": "2019-11-26",
+        "cells": 18,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-04",
+        "end": "2023-09-23",
+        "cells": 845,
+        "regions": "California Del Norte, California Siskiyou, California Humboldt"
+      },
+      {
+        "start": "2019-09-23",
+        "end": "2019-09-28",
+        "cells": 29,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-10-13",
+        "end": "2026-10-17",
+        "cells": 16,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2025-11-14",
+        "end": "2025-11-15",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2020-11-19",
+        "end": "2020-11-21",
+        "cells": 12,
+        "regions": "California Humboldt"
+      },
+      {
+        "start": "2019-10-17",
+        "end": "2019-10-19",
+        "cells": 12,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2019-10-22",
+        "end": "2019-10-29",
+        "cells": 22,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-10-14",
+        "end": "2026-10-16",
+        "cells": 14,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2021-09-24",
+        "end": "2021-09-26",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2022-01-20",
+        "end": "2022-01-23",
+        "cells": 11,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-11-17",
+        "end": "2023-11-17",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2021-09-21",
+        "end": "2021-09-26",
+        "cells": 52,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2021-02-04",
+        "end": "2021-02-05",
+        "cells": 11,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2021-08-13",
+        "end": "2021-08-13",
+        "cells": 21,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-10-14",
+        "end": "2026-10-18",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-10-03",
+        "end": "2023-10-08",
+        "cells": 42,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2025-12-17",
+        "end": "2025-12-17",
+        "cells": 12,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-11",
+        "cells": 20,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2022-01-12",
+        "end": "2022-01-14",
+        "cells": 11,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2023-11-08",
+        "end": "2023-11-09",
+        "cells": 17,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2022-01-12",
+        "end": "2022-01-14",
+        "cells": 15,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2023-10-15",
+        "end": "2023-10-22",
+        "cells": 41,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2025-05-21",
+        "end": "2025-05-22",
+        "cells": 10,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2026-10-03",
+        "end": "2026-10-04",
+        "cells": 16,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2021-09-22",
+        "end": "2021-09-27",
+        "cells": 14,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-08",
+        "end": "2023-09-17",
+        "cells": 49,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-01-14",
+        "end": "2026-01-16",
+        "cells": 21,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2021-11-10",
+        "end": "2021-11-13",
+        "cells": 22,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-05",
+        "end": "2023-09-22",
+        "cells": 138,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2022-02-16",
+        "end": "2022-02-19",
+        "cells": 14,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2023-12-04",
+        "end": "2023-12-06",
+        "cells": 11,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2026-11-10",
+        "end": "2026-11-11",
+        "cells": 15,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2021-12-10",
+        "end": "2021-12-10",
+        "cells": 22,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-13",
+        "end": "2023-09-22",
+        "cells": 79,
+        "regions": "California Del Norte"
+      },
+      {
+        "start": "2023-09-11",
+        "end": "2023-09-22",
+        "cells": 38,
+        "regions": "California Del Norte"
+      },
+      {
+        "start": "2023-09-14",
+        "end": "2023-09-23",
+        "cells": 38,
+        "regions": "California Del Norte"
+      },
+      {
+        "start": "2019-09-25",
+        "end": "2019-09-27",
+        "cells": 23,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2022-03-22",
+        "end": "2022-03-25",
+        "cells": 11,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2025-11-19",
+        "end": "2025-11-21",
+        "cells": 47,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2025-11-18",
+        "end": "2025-11-21",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-10",
+        "end": "2023-09-14",
+        "cells": 11,
+        "regions": "California Del Norte"
+      },
+      {
+        "start": "2024-12-03",
+        "end": "2024-12-05",
+        "cells": 17,
+        "regions": "California Modoc"
+      },
+      {
+        "start": "2025-01-14",
+        "end": "2025-01-17",
+        "cells": 11,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2019-04-17",
+        "end": "2019-04-18",
+        "cells": 11,
+        "regions": "California Modoc, California Siskiyou"
+      },
+      {
+        "start": "2025-09-25",
+        "end": "2025-09-26",
+        "cells": 13,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2025-11-12",
+        "end": "2025-11-14",
+        "cells": 10,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2020-10-01",
+        "end": "2020-10-09",
+        "cells": 16,
+        "regions": "California Del Norte"
+      },
+      {
+        "start": "2025-11-17",
+        "end": "2025-11-18",
+        "cells": 13,
+        "regions": "California Siskiyou"
+      },
+      {
+        "start": "2023-09-15",
+        "end": "2023-09-21",
+        "cells": 13,
+        "regions": "California Del Norte"
+      },
+      {
+        "start": "2020-10-25",
+        "end": "2020-11-01",
+        "cells": 12,
+        "regions": "California Siskiyou"
+      }
+    ],
+    "note": "위성은 농경지 소각 등 산불 통계 밖의 불도 잡고, 1 ha 미만 산불은 대부분 못 잡는다.",
+    "annual_records": {
+      "source": "CAL FIRE FRAP 화재 경계 (California Fire Perimeters, 경계 중심점)",
+      "years": [
+        2001,
+        2025
+      ],
+      "season_start_month": 1,
+      "independent_break_test": {
+        "화재 칸 (보정) / 공식 건수": {
+          "ratio_before_2012": 43.0744,
+          "ratio_after_2012": 53.7877,
+          "after_over_before": 1.25,
+          "pettitt_p": 1.0,
+          "change_year": 2022
+        },
+        "화재 칸 (보정) / 공식 면적 ha": {
+          "ratio_before_2012": 0.0688,
+          "ratio_after_2012": 0.0563,
+          "after_over_before": 0.82,
+          "pettitt_p": 1.0,
+          "change_year": 2012
+        },
+        "원값 이어 붙이기 / 공식 건수": {
+          "ratio_before_2012": 20.8902,
+          "ratio_after_2012": 52.9753,
+          "after_over_before": 2.54,
+          "pettitt_p": 0.0047,
+          "change_year": 2012
+        },
+        "원값 이어 붙이기 / 공식 면적 ha": {
+          "ratio_before_2012": 0.0328,
+          "ratio_after_2012": 0.0554,
+          "after_over_before": 1.69,
+          "pettitt_p": 0.0098,
+          "change_year": 2013
+        }
+      },
+      "rank_correlation": {
+        "2001~2011": {
+          "vs_count": 0.62,
+          "vs_area": 0.98
+        },
+        "2012~2025": {
+          "vs_count": 0.4,
+          "vs_area": 0.93
+        },
+        "2001~2025": {
+          "vs_count": 0.57,
+          "vs_area": 0.95
+        }
+      }
+    }
+  }
+}

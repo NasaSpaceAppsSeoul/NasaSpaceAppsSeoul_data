@@ -1,0 +1,1190 @@
+{
+  "country": "GRC",
+  "bbox": null,
+  "generated": "2026-11-15",
+  "unit": "VIIRS NOAA-20 기준 화재 감지일 (0.01° 격자 × 일)",
+  "data_range": {
+    "modis": [
+      "2001-02-05",
+      "2026-11-13"
+    ],
+    "viirs_snpp": [
+      "2012-01-20",
+      "2026-11-02"
+    ],
+    "noaa20": [
+      "2018-04-01",
+      "2026-11-13"
+    ],
+    "noaa21": [
+      "2023-03-05",
+      "2026-11-13"
+    ]
+  },
+  "filters": [
+    {
+      "단계": "원자료",
+      "MODIS": 47537,
+      "VIIRS": 94095,
+      "NOAA-20": 53395,
+      "NOAA-21": 22310
+    },
+    {
+      "단계": "유형 필터 (아카이브 type 0만)",
+      "MODIS": 45189,
+      "VIIRS": 78438,
+      "NOAA-20": 45774,
+      "NOAA-21": 19948
+    },
+    {
+      "단계": "고정 열원 격자 마스크",
+      "MODIS": 44369,
+      "VIIRS": 75305,
+      "NOAA-20": 43693,
+      "NOAA-21": 19006
+    },
+    {
+      "단계": "낮은 신뢰도 제거",
+      "MODIS": 42416,
+      "VIIRS": 70375,
+      "NOAA-20": 41169,
+      "NOAA-21": 17656
+    },
+    {
+      "단계": "행정 경계 안",
+      "MODIS": 42029,
+      "VIIRS": 69625,
+      "NOAA-20": 40764,
+      "NOAA-21": 17463
+    }
+  ],
+  "static_cells_masked": 197,
+  "nrt_proxy_validation": {
+    "NOAA-20": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.958,
+          "남김 비율 (정답)": 0.958,
+          "건수": 41410
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.0,
+          "남김 비율 (정답)": 0.0,
+          "건수": 6740
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.345,
+          "남김 비율 (정답)": 0.0,
+          "건수": 826
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.4,
+        "월별 |차이| 중앙값 %": 0.4,
+        "전체 합계 차이 %": 0.6
+      }
+    },
+    "S-NPP": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.962,
+          "남김 비율 (정답)": 0.962,
+          "건수": 71452
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.0,
+          "남김 비율 (정답)": 0.0,
+          "건수": 13741
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.258,
+          "남김 비율 (정답)": 0.0,
+          "건수": 1802
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 0.3,
+        "월별 |차이| 중앙값 %": 0.3,
+        "전체 합계 차이 %": 0.6
+      }
+    },
+    "MODIS": {
+      "by_type": {
+        "type 0": {
+          "남김 비율 (대체 규칙)": 0.983,
+          "남김 비율 (정답)": 0.983,
+          "건수": 42994
+        },
+        "type 2": {
+          "남김 비율 (대체 규칙)": 0.336,
+          "남김 비율 (정답)": 0.0,
+          "건수": 1570
+        },
+        "type 3": {
+          "남김 비율 (대체 규칙)": 0.565,
+          "남김 비율 (정답)": 0.0,
+          "건수": 660
+        }
+      },
+      "monthly": {
+        "월별 차이 중앙값 %": 1.2,
+        "월별 |차이| 중앙값 %": 1.2,
+        "전체 합계 차이 %": 2.2
+      }
+    }
+  },
+  "calibration": {
+    "base": "NOAA-20",
+    "chain": "Terra → MODIS → S-NPP → NOAA-20 (NOAA-21 → NOAA-20 예비)",
+    "method": "B",
+    "k_by_month": {
+      "1": 4.311,
+      "2": 2.846,
+      "3": 4.186,
+      "4": 4.261,
+      "5": 2.831,
+      "6": 2.057,
+      "7": 1.59,
+      "8": 1.539,
+      "9": 2.192,
+      "10": 2.58,
+      "11": 2.677,
+      "12": 4.88
+    },
+    "ratio_by_year": {
+      "2012": 2.37,
+      "2013": 2.51,
+      "2014": 2.57,
+      "2015": 2.79,
+      "2016": 2.63,
+      "2017": 2.43,
+      "2018": 2.66,
+      "2019": 2.9,
+      "2020": 2.55,
+      "2021": 1.82,
+      "2022": 2.49,
+      "2023": 1.51,
+      "2024": 2.02,
+      "2025": 1.96
+    },
+    "overlap_years": [
+      2012,
+      2025
+    ],
+    "shrink": 20,
+    "window": 2,
+    "terra_to_modis": {
+      "k_by_month": {
+        "1": 3.404,
+        "2": 3.012,
+        "3": 2.562,
+        "4": 2.004,
+        "5": 1.994,
+        "6": 1.92,
+        "7": 1.995,
+        "8": 1.819,
+        "9": 2.049,
+        "10": 2.375,
+        "11": 3.737,
+        "12": 2.928
+      },
+      "validation": {
+        "years": [
+          2003,
+          2011
+        ],
+        "annual_mape_pct": 9.1,
+        "bias_pct": 1.8
+      },
+      "terra_share_by_year": {
+        "2003": 0.46,
+        "2004": 0.44,
+        "2005": 0.41,
+        "2006": 0.35,
+        "2007": 0.55,
+        "2008": 0.42,
+        "2009": 0.44,
+        "2010": 0.49,
+        "2011": 0.4,
+        "2012": 0.47,
+        "2013": 0.46,
+        "2014": 0.46,
+        "2015": 0.41,
+        "2016": 0.45,
+        "2017": 0.47,
+        "2018": 0.42,
+        "2019": 0.35,
+        "2020": 0.41,
+        "2021": 0.49,
+        "2022": 0.45,
+        "2023": 0.53,
+        "2024": 0.43,
+        "2025": 0.46
+      }
+    },
+    "snpp_to_noaa20": {
+      "k_by_month": {
+        "1": 1.121,
+        "2": 1.116,
+        "3": 1.085,
+        "4": 1.178,
+        "5": 0.962,
+        "6": 0.954,
+        "7": 1.01,
+        "8": 1.025,
+        "9": 1.149,
+        "10": 1.046,
+        "11": 1.059,
+        "12": 1.104
+      },
+      "validation": {
+        "years": [
+          2019,
+          2025
+        ],
+        "annual_mape_pct": 4.5,
+        "bias_pct": 0.4
+      },
+      "ratio_by_year": {
+        "2019": 0.95,
+        "2020": 0.95,
+        "2021": 0.92,
+        "2022": 0.92,
+        "2023": 0.99,
+        "2024": 0.89,
+        "2025": 0.98
+      }
+    },
+    "noaa21_to_noaa20": {
+      "k_by_month": {
+        "1": 0.982,
+        "2": 1.11,
+        "3": 0.977,
+        "4": 1.154,
+        "5": 0.814,
+        "6": 1.214,
+        "7": 1.12,
+        "8": 1.024,
+        "9": 1.101,
+        "10": 0.827,
+        "11": 0.961,
+        "12": 1.187
+      },
+      "validation": {
+        "years": [
+          2024,
+          2025
+        ],
+        "annual_mape_pct": 14.0,
+        "bias_pct": 0.9
+      }
+    }
+  },
+  "validation": {
+    "A": {
+      "monthly_r2": 0.926,
+      "monthly_mae": 20.6,
+      "annual_mape_pct": 11.0,
+      "bias_pct": -0.3
+    },
+    "B": {
+      "monthly_r2": 0.967,
+      "monthly_mae": 15.8,
+      "annual_mape_pct": 6.4,
+      "bias_pct": -0.8
+    }
+  },
+  "break_test": {
+    "이어 붙이기": {
+      "sensor_break_p": 0.0003,
+      "sensor_break": true,
+      "jump": 2.8,
+      "jump_ci95": [
+        2.7,
+        2.9
+      ],
+      "ratio_before_2012": 0.35,
+      "ratio_before_ci95": [
+        0.31,
+        0.39
+      ],
+      "ratio_after_2012": 0.98,
+      "ratio_ci95": [
+        0.95,
+        1.02
+      ]
+    },
+    "H 하모니제이션": {
+      "sensor_break_p": 1.0,
+      "sensor_break": false,
+      "jump": 1.01,
+      "jump_ci95": [
+        0.98,
+        1.04
+      ],
+      "ratio_before_2012": 1.0,
+      "ratio_before_ci95": [
+        1.0,
+        1.0
+      ],
+      "ratio_after_2012": 1.01,
+      "ratio_ci95": [
+        0.98,
+        1.04
+      ]
+    }
+  },
+  "modis_only_change_point": {
+    "change_year": 2014,
+    "p_value": 0.237
+  },
+  "grid_sensitivity": [
+    {
+      "격자(도)": 0.1,
+      "월별 R²": 0.961,
+      "연간 오차 %": 4.3,
+      "2025년 3월 배수": 1.87,
+      "2022년 3월 배수": 1.18
+    },
+    {
+      "격자(도)": 0.05,
+      "월별 R²": 0.961,
+      "연간 오차 %": 4.2,
+      "2025년 3월 배수": 1.94,
+      "2022년 3월 배수": 1.23
+    },
+    {
+      "격자(도)": 0.02,
+      "월별 R²": 0.961,
+      "연간 오차 %": 5.4,
+      "2025년 3월 배수": 2.15,
+      "2022년 3월 배수": 1.32
+    },
+    {
+      "격자(도)": 0.01,
+      "월별 R²": 0.967,
+      "연간 오차 %": 6.4,
+      "2025년 3월 배수": 1.93,
+      "2022년 3월 배수": 1.19
+    }
+  ],
+  "frp": {
+    "source": "MODIS 단독",
+    "harmonized": false,
+    "validation": {
+      "monthly_r2": 0.917,
+      "monthly_mae": 3119.4,
+      "annual_mape_pct": 20.3,
+      "bias_pct": -1.2
+    },
+    "ratio_by_year": {
+      "2012": 0.82,
+      "2013": 0.71,
+      "2014": 0.71,
+      "2015": 0.82,
+      "2016": 0.79,
+      "2017": 0.59,
+      "2018": 0.53,
+      "2019": 0.72,
+      "2020": 0.65,
+      "2021": 0.42,
+      "2022": 0.68,
+      "2023": 0.45,
+      "2024": 0.38,
+      "2025": 0.36
+    },
+    "median_frp_per_detection_mw": {
+      "MODIS": 18.2,
+      "VIIRS": 4.8
+    }
+  },
+  "types": {
+    "threshold_pct": 0.9,
+    "labels": [
+      "많고 강함",
+      "작은 불이 많음",
+      "드물지만 강함",
+      "평년 수준"
+    ],
+    "counts": {
+      "상위 25% 기준": {
+        "많고 강함": 51,
+        "작은 불이 많음": 20,
+        "드물지만 강함": 21,
+        "평년 수준": 208
+      },
+      "상위 10% 기준": {
+        "많고 강함": 18,
+        "작은 불이 많음": 6,
+        "드물지만 강함": 6,
+        "평년 수준": 270
+      }
+    }
+  },
+  "quality": {
+    "rules": {
+      "높음": "NOAA-20 직접 관측, 또는 S-NPP→NOAA-20 변환 중 월별 오차 10% 이하",
+      "보통": "변환 오차 30% 이하, 또는 NOAA-20 NRT",
+      "낮음": "변환 오차 30% 초과"
+    },
+    "low_count": 5,
+    "month_error": {
+      "modis_snpp": {
+        "1": 0.267,
+        "2": 0.182,
+        "3": 0.116,
+        "4": 0.454,
+        "5": 0.423,
+        "6": 0.291,
+        "7": 0.144,
+        "8": 0.119,
+        "9": 0.144,
+        "10": 0.049,
+        "11": 0.162,
+        "12": 0.291
+      },
+      "snpp_noaa20": {
+        "1": 0.056,
+        "2": 0.066,
+        "3": 0.037,
+        "4": 0.155,
+        "5": 0.252,
+        "6": 0.282,
+        "7": 0.169,
+        "8": 0.112,
+        "9": 0.12,
+        "10": 0.128,
+        "11": 0.054,
+        "12": 0.133
+      },
+      "terra_modis": {
+        "1": 0.987,
+        "2": 0.347,
+        "3": 0.125,
+        "4": 0.172,
+        "5": 0.25,
+        "6": 0.208,
+        "7": 0.091,
+        "8": 0.114,
+        "9": 0.097,
+        "10": 0.114,
+        "11": 0.156,
+        "12": 0.529
+      }
+    }
+  },
+  "sources": [
+    "NASA FIRMS MODIS Collection 6.1 (MCD14)",
+    "NASA FIRMS VIIRS S-NPP 375 m (VNP14IMG)",
+    "NASA FIRMS VIIRS NOAA-20 375 m (VJ114IMG)",
+    "NASA FIRMS VIIRS NOAA-21 375 m (VJ214IMG)"
+  ],
+  "regions": {
+    "boundaries": "geoBoundaries KOR ADM2/ADM1 (CC BY 3.0)",
+    "n_regions": 325,
+    "err_max": 0.3,
+    "error": {
+      "national": 0.065,
+      "province": {
+        "Agion Oros": 0.471,
+        "Anatolikis Makedonias kai Thrakis": 0.085,
+        "Attikis": 0.196,
+        "Dytikis Elladas": 0.143,
+        "Dytikis Makedonias": 0.23,
+        "Ionion Nison": 0.331,
+        "Ipeiroy": 0.238,
+        "Kentrikis Makedonias": 0.091,
+        "Kritis": 0.215,
+        "Notioy Aigaioy": 0.331,
+        "Peloponnisoy": 0.193,
+        "Stereas Elladas": 0.228,
+        "Thessalias": 0.13,
+        "Voreioy Aigaioy": 0.257
+      },
+      "district_median": 0.64
+    },
+    "snpp_noaa20_district_error": {
+      "median": 0.444,
+      "by_size": {
+        "[0.0, 10.0)": 1.0,
+        "[10.0, 25.0)": 1.037,
+        "[25.0, 50.0)": 0.763,
+        "[50.0, 100.0)": 0.74,
+        "[100.0, 200.0)": 0.444,
+        "[200.0, inf)": 0.324
+      }
+    },
+    "district_error_by_size": [
+      {
+        "bin": "[0.0, 10.0)",
+        "n": 78,
+        "median": 1.738
+      },
+      {
+        "bin": "[10.0, 25.0)",
+        "n": 20,
+        "median": 1.383
+      },
+      {
+        "bin": "[25.0, 50.0)",
+        "n": 21,
+        "median": 1.258
+      },
+      {
+        "bin": "[50.0, 100.0)",
+        "n": 32,
+        "median": 0.926
+      },
+      {
+        "bin": "[100.0, 200.0)",
+        "n": 41,
+        "median": 0.695
+      },
+      {
+        "bin": "[200.0, inf)",
+        "n": 133,
+        "median": 0.489
+      }
+    ],
+    "province_basis": {
+      "Agion Oros": "VIIRS 2012~",
+      "Anatolikis Makedonias kai Thrakis": "보정 25년",
+      "Attikis": "보정 25년",
+      "Dytikis Elladas": "보정 25년",
+      "Dytikis Makedonias": "보정 25년",
+      "Ionion Nison": "VIIRS 2012~",
+      "Ipeiroy": "보정 25년",
+      "Kentrikis Makedonias": "보정 25년",
+      "Kritis": "보정 25년",
+      "Notioy Aigaioy": "VIIRS 2012~",
+      "Peloponnisoy": "보정 25년",
+      "Stereas Elladas": "보정 25년",
+      "Thessalias": "보정 25년",
+      "Voreioy Aigaioy": "보정 25년"
+    },
+    "district_basis": "VIIRS 2012~",
+    "longterm": {
+      "method": "시·군·구별 보정 계수 (시·도·1 쪽으로 당김)",
+      "shrink": [
+        10,
+        20
+      ],
+      "min_total": 25.0,
+      "error_by_size": {
+        "[0.0, 10.0)": {
+          "14년 합계": 1.0,
+          "7년 합계": 1.0,
+          "한 해 값": 1.0
+        },
+        "[10.0, 25.0)": {
+          "14년 합계": 0.665,
+          "7년 합계": 0.884,
+          "한 해 값": 1.29
+        },
+        "[25.0, 50.0)": {
+          "14년 합계": 0.27,
+          "7년 합계": 0.646,
+          "한 해 값": 1.256
+        },
+        "[50.0, 100.0)": {
+          "14년 합계": 0.139,
+          "7년 합계": 0.523,
+          "한 해 값": 0.928
+        },
+        "[100.0, 200.0)": {
+          "14년 합계": 0.077,
+          "7년 합계": 0.354,
+          "한 해 값": 0.75
+        },
+        "[200.0, inf)": {
+          "14년 합계": 0.023,
+          "7년 합계": 0.168,
+          "한 해 값": 0.481
+        }
+      },
+      "fire_year_recall": 0.67,
+      "quality_counts": {
+        "높음": 208,
+        "낮음": 97,
+        "보통": 20
+      },
+      "used": "25년 합계·연평균만",
+      "not_used": "7년(10년 단위) 비교, 불 난 해 수, 한 해·한 달 값 (오차 기준 미달)"
+    },
+    "sufficient_min_viirs_annual": 11.1,
+    "sufficiency_annual": "가장 많이 탄 한 해를 뺀 연평균",
+    "sufficiency_counts": {
+      "부족": 233,
+      "충분": 61,
+      "감지 없음": 31
+    },
+    "province_sufficiency": {
+      "Agion Oros": "부족",
+      "Anatolikis Makedonias kai Thrakis": "충분",
+      "Attikis": "충분",
+      "Dytikis Elladas": "충분",
+      "Dytikis Makedonias": "충분",
+      "Ionion Nison": "충분",
+      "Ipeiroy": "충분",
+      "Kentrikis Makedonias": "충분",
+      "Kritis": "충분",
+      "Notioy Aigaioy": "충분",
+      "Peloponnisoy": "충분",
+      "Stereas Elladas": "충분",
+      "Thessalias": "충분",
+      "Voreioy Aigaioy": "충분"
+    },
+    "risk_share": 0.5,
+    "national_risk": {
+      "months": [
+        8,
+        9,
+        10
+      ],
+      "share": 0.582,
+      "peak_month": 10,
+      "years": [
+        2001,
+        2025
+      ]
+    },
+    "adjacency_tol_deg": 0.002,
+    "alert_km": 50,
+    "alert_rules": {
+      "neighbor": "맞닿은 시·군·구에서 감지",
+      "distance": "지역 중심 50 km 안에서 감지",
+      "monthly": "맞닿은 '충분' 시·군·구의 이번 달 VIIRS 감지일이 같은 달 분포 상위 10% 초과"
+    },
+    "case_event": {
+      "window": [
+        "2023-08-19",
+        "2023-09-08"
+      ],
+      "regions": [
+        "Alexandroupolis",
+        "Soufliou",
+        "Didymoteichou",
+        "Orestiadas"
+      ],
+      "lead": [
+        {
+          "지역": "Anatolikis Makedonias kai Thrakis Soufliou",
+          "자기 지역 첫 감지": "08-21",
+          "맞닿은 지역 첫 감지": "08-19",
+          "앞선 일수(맞닿음)": 2.0,
+          "50 km 안 첫 감지": "08-19",
+          "앞선 일수(50 km)": 2.0
+        },
+        {
+          "지역": "Anatolikis Makedonias kai Thrakis Didymoteichou",
+          "자기 지역 첫 감지": null,
+          "맞닿은 지역 첫 감지": "08-21",
+          "앞선 일수(맞닿음)": NaN,
+          "50 km 안 첫 감지": "08-21",
+          "앞선 일수(50 km)": NaN
+        },
+        {
+          "지역": "Anatolikis Makedonias kai Thrakis Orestiadas",
+          "자기 지역 첫 감지": null,
+          "맞닿은 지역 첫 감지": null,
+          "앞선 일수(맞닿음)": NaN,
+          "50 km 안 첫 감지": "08-21",
+          "앞선 일수(50 km)": NaN
+        }
+      ]
+    }
+  },
+  "events": {
+    "sensor": "VIIRS NOAA-20",
+    "rule": {
+      "name": "B",
+      "distance_km": 3,
+      "gap_days": 2,
+      "big_event_cells": 10
+    },
+    "sensitivity": [
+      {
+        "규칙": "A 2 km·1일",
+        "묶음 수": 12588,
+        "1칸짜리 비율": 0.81,
+        "큰 묶음 (10칸+)": 131
+      },
+      {
+        "규칙": "B 3 km·2일",
+        "묶음 수": 11276,
+        "1칸짜리 비율": 0.78,
+        "큰 묶음 (10칸+)": 158
+      },
+      {
+        "규칙": "C 5 km·3일",
+        "묶음 수": 9572,
+        "1칸짜리 비율": 0.75,
+        "큰 묶음 (10칸+)": 187
+      }
+    ],
+    "known_fires": {
+      "A": [
+        {
+          "화재": "Evros 2023-08",
+          "근처 묶음 수": 12,
+          "주 묶음 비중": 0.93,
+          "기간": "08/19~09/02",
+          "화재 칸": 1112,
+          "가장 넓은 날 칸": 435
+        },
+        {
+          "화재": "Evia 2021-08",
+          "근처 묶음 수": 4,
+          "주 묶음 비중": 0.99,
+          "기간": "08/04~08/11",
+          "화재 칸": 798,
+          "가장 넓은 날 칸": 254
+        },
+        {
+          "화재": "Rhodes 2023-07",
+          "근처 묶음 수": 3,
+          "주 묶음 비중": 0.68,
+          "기간": "07/23~07/27",
+          "화재 칸": 126,
+          "가장 넓은 날 칸": 40
+        },
+        {
+          "화재": "Varnavas 2024-08",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 0.98,
+          "기간": "08/12~08/13",
+          "화재 칸": 108,
+          "가장 넓은 날 칸": 95
+        }
+      ],
+      "B": [
+        {
+          "화재": "Evros 2023-08",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 1.0,
+          "기간": "08/19~09/02",
+          "화재 칸": 1188,
+          "가장 넓은 날 칸": 435
+        },
+        {
+          "화재": "Evia 2021-08",
+          "근처 묶음 수": 3,
+          "주 묶음 비중": 0.99,
+          "기간": "08/04~08/11",
+          "화재 칸": 800,
+          "가장 넓은 날 칸": 254
+        },
+        {
+          "화재": "Rhodes 2023-07",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 0.99,
+          "기간": "07/23~07/27",
+          "화재 칸": 184,
+          "가장 넓은 날 칸": 67
+        },
+        {
+          "화재": "Varnavas 2024-08",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "08/12~08/13",
+          "화재 칸": 110,
+          "가장 넓은 날 칸": 97
+        }
+      ],
+      "C": [
+        {
+          "화재": "Evros 2023-08",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 1.0,
+          "기간": "08/19~09/02",
+          "화재 칸": 1188,
+          "가장 넓은 날 칸": 435
+        },
+        {
+          "화재": "Evia 2021-08",
+          "근처 묶음 수": 2,
+          "주 묶음 비중": 0.99,
+          "기간": "08/04~08/11",
+          "화재 칸": 801,
+          "가장 넓은 날 칸": 254
+        },
+        {
+          "화재": "Rhodes 2023-07",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "07/23~07/27",
+          "화재 칸": 185,
+          "가장 넓은 날 칸": 67
+        },
+        {
+          "화재": "Varnavas 2024-08",
+          "근처 묶음 수": 1,
+          "주 묶음 비중": 1.0,
+          "기간": "08/12~08/13",
+          "화재 칸": 110,
+          "가장 넓은 날 칸": 97
+        }
+      ]
+    },
+    "monthly_count_correlation": {
+      "A": {
+        "A": 1.0,
+        "B": 1.0,
+        "C": 0.98
+      },
+      "B": {
+        "A": 1.0,
+        "B": 1.0,
+        "C": 0.99
+      },
+      "C": {
+        "A": 0.98,
+        "B": 0.99,
+        "C": 1.0
+      }
+    },
+    "note": "묶음은 설명용. 보정·달력·순위에는 화재 칸 합계를 쓴다."
+  },
+  "external_validation": {
+    "source": "그리스 소방청 산림 화재 기록 (Hellenic Fire Service, 2000~2024)",
+    "records": 238090,
+    "period": [
+      "2001-01-01",
+      "2024-12-31"
+    ],
+    "district_match_rate": 1.0,
+    "rank_correlation": {
+      "annual_vs_count": 0.44,
+      "annual_vs_area": 0.53,
+      "monthly_vs_count": 0.6,
+      "monthly_vs_area": 0.57,
+      "years": [
+        2012,
+        2025
+      ]
+    },
+    "detection_source": null,
+    "detection_period": [
+      "2018-04-01",
+      "2024-12-31"
+    ],
+    "detection_by_size": {
+      "0.1 ha 미만": {
+        "n": 40012,
+        "detected": 0.12,
+        "chance": 0.06
+      },
+      "0.1~1": {
+        "n": 18416,
+        "detected": 0.18,
+        "chance": 0.08
+      },
+      "1~10": {
+        "n": 6009,
+        "detected": 0.29,
+        "chance": 0.1
+      },
+      "10~100": {
+        "n": 1032,
+        "detected": 0.49,
+        "chance": 0.1
+      },
+      "100 ha 이상": {
+        "n": 218,
+        "detected": 0.8,
+        "chance": 0.05
+      }
+    },
+    "big_fires_area_vs_cells_rho": 0.69,
+    "big_clusters_without_record": [
+      {
+        "start": "2026-07-29",
+        "end": "2026-07-31",
+        "cells": 35,
+        "regions": "Kritis Agios Vasileios"
+      },
+      {
+        "start": "2026-07-30",
+        "end": "2026-08-01",
+        "cells": 18,
+        "regions": "Kritis Agios Vasileios"
+      },
+      {
+        "start": "2020-08-12",
+        "end": "2020-08-14",
+        "cells": 14,
+        "regions": "Kritis Kantanos-Selino"
+      },
+      {
+        "start": "2023-07-23",
+        "end": "2023-07-27",
+        "cells": 184,
+        "regions": "Notioy Aigaioy Rhodes"
+      },
+      {
+        "start": "2025-07-26",
+        "end": "2025-07-27",
+        "cells": 22,
+        "regions": "Attikis Kythira"
+      },
+      {
+        "start": "2026-07-28",
+        "end": "2026-07-30",
+        "cells": 24,
+        "regions": "Notioy Aigaioy Paros"
+      },
+      {
+        "start": "2025-07-26",
+        "end": "2025-07-27",
+        "cells": 23,
+        "regions": "Peloponnisoy Trifylia"
+      },
+      {
+        "start": "2025-08-12",
+        "end": "2025-08-14",
+        "cells": 30,
+        "regions": "Ionion Nison Zakynthos"
+      },
+      {
+        "start": "2025-08-09",
+        "end": "2025-08-09",
+        "cells": 12,
+        "regions": "Dytikis Elladas Pyrgos"
+      },
+      {
+        "start": "2025-07-23",
+        "end": "2025-07-25",
+        "cells": 10,
+        "regions": "Peloponnisoy Sikyona"
+      },
+      {
+        "start": "2026-07-31",
+        "end": "2026-08-05",
+        "cells": 229,
+        "regions": "Attikis Mandra-Eidyllia, Attikis Megara, Stereas Elladas Thebes"
+      },
+      {
+        "start": "2026-08-02",
+        "end": "2026-08-03",
+        "cells": 12,
+        "regions": "Ionion Nison Cephalonia"
+      },
+      {
+        "start": "2025-08-12",
+        "end": "2025-08-13",
+        "cells": 42,
+        "regions": "Dytikis Elladas Patras, Dytikis Elladas West Achaea"
+      },
+      {
+        "start": "2026-07-31",
+        "end": "2026-08-01",
+        "cells": 36,
+        "regions": "Stereas Elladas Thebes"
+      },
+      {
+        "start": "2025-08-13",
+        "end": "2025-08-14",
+        "cells": 16,
+        "regions": "Dytikis Elladas Patras"
+      },
+      {
+        "start": "2026-08-01",
+        "end": "2026-08-02",
+        "cells": 19,
+        "regions": "Dytikis Elladas Aigialeia"
+      },
+      {
+        "start": "2025-06-22",
+        "end": "2025-06-25",
+        "cells": 81,
+        "regions": "Voreioy Aigaioy Chios"
+      },
+      {
+        "start": "2025-08-12",
+        "end": "2025-08-15",
+        "cells": 103,
+        "regions": "Voreioy Aigaioy Chios"
+      },
+      {
+        "start": "2025-07-26",
+        "end": "2025-07-27",
+        "cells": 21,
+        "regions": "Stereas Elladas Dirfys-Messapia, Stereas Elladas Chalcis"
+      },
+      {
+        "start": "2026-08-16",
+        "end": "2026-08-17",
+        "cells": 15,
+        "regions": "Stereas Elladas Skyros"
+      },
+      {
+        "start": "2026-03-15",
+        "end": "2026-03-15",
+        "cells": 12,
+        "regions": "Thessalias Farsala"
+      },
+      {
+        "start": "2026-10-04",
+        "end": "2026-10-04",
+        "cells": 13,
+        "regions": "Thessalias Farsala"
+      },
+      {
+        "start": "2026-10-04",
+        "end": "2026-10-04",
+        "cells": 11,
+        "regions": "Thessalias Almyros"
+      },
+      {
+        "start": "2025-08-11",
+        "end": "2025-08-14",
+        "cells": 76,
+        "regions": "Ipeiroy Ziros, Ipeiroy Arta"
+      },
+      {
+        "start": "2026-10-06",
+        "end": "2026-10-10",
+        "cells": 18,
+        "regions": "Thessalias Kileler"
+      },
+      {
+        "start": "2025-10-12",
+        "end": "2025-10-15",
+        "cells": 20,
+        "regions": "Thessalias Kileler"
+      },
+      {
+        "start": "2025-10-14",
+        "end": "2025-10-15",
+        "cells": 11,
+        "regions": "Thessalias Kileler"
+      },
+      {
+        "start": "2026-10-01",
+        "end": "2026-10-06",
+        "cells": 10,
+        "regions": "Thessalias Kileler"
+      },
+      {
+        "start": "2026-10-08",
+        "end": "2026-10-10",
+        "cells": 10,
+        "regions": "Thessalias Kileler"
+      },
+      {
+        "start": "2026-09-05",
+        "end": "2026-09-12",
+        "cells": 30,
+        "regions": "Ipeiroy Konitsa"
+      },
+      {
+        "start": "2026-08-13",
+        "end": "2026-08-14",
+        "cells": 10,
+        "regions": "Kentrikis Makedonias Kassandra"
+      },
+      {
+        "start": "2025-08-12",
+        "end": "2025-08-18",
+        "cells": 18,
+        "regions": "Ipeiroy Konitsa"
+      },
+      {
+        "start": "2025-07-26",
+        "end": "2025-07-28",
+        "cells": 22,
+        "regions": "Dytikis Makedonias Eordaia"
+      },
+      {
+        "start": "2025-03-04",
+        "end": "2025-03-10",
+        "cells": 88,
+        "regions": "Kentrikis Makedonias Delta, Kentrikis Makedonias Alexandria, Kentrikis Makedonias Chalkidona"
+      },
+      {
+        "start": "2026-03-10",
+        "end": "2026-03-16",
+        "cells": 38,
+        "regions": "Kentrikis Makedonias Delta, Kentrikis Makedonias Alexandria"
+      },
+      {
+        "start": "2026-03-10",
+        "end": "2026-03-15",
+        "cells": 22,
+        "regions": "Kentrikis Makedonias Delta, Kentrikis Makedonias Chalkidona"
+      },
+      {
+        "start": "2025-07-30",
+        "end": "2025-07-30",
+        "cells": 11,
+        "regions": "Kentrikis Makedonias Lagkadas"
+      },
+      {
+        "start": "2025-07-10",
+        "end": "2025-07-10",
+        "cells": 11,
+        "regions": "Kentrikis Makedonias Paionia"
+      },
+      {
+        "start": "2025-10-23",
+        "end": "2025-10-23",
+        "cells": 13,
+        "regions": "Anatolikis Makedonias kai Thrakis Alexandroupolis, Anatolikis Makedonias kai Thrakis Soufliou"
+      }
+    ],
+    "note": "위성은 농경지 소각 등 산불 통계 밖의 불도 잡고, 1 ha 미만 산불은 대부분 못 잡는다.",
+    "annual_records": {
+      "source": "그리스 소방청 산림 화재 기록 (Hellenic Fire Service, 2000~2024)",
+      "years": [
+        2001,
+        2024
+      ],
+      "season_start_month": 1,
+      "independent_break_test": {
+        "화재 칸 (보정) / 공식 건수": {
+          "ratio_before_2012": 0.4794,
+          "ratio_after_2012": 0.3417,
+          "after_over_before": 0.71,
+          "pettitt_p": 0.0544,
+          "change_year": 2016
+        },
+        "화재 칸 (보정) / 공식 면적 ha": {
+          "ratio_before_2012": 0.2376,
+          "ratio_after_2012": 0.107,
+          "after_over_before": 0.45,
+          "pettitt_p": 0.0155,
+          "change_year": 2007
+        },
+        "원값 이어 붙이기 / 공식 건수": {
+          "ratio_before_2012": 0.1679,
+          "ratio_after_2012": 0.3298,
+          "after_over_before": 1.96,
+          "pettitt_p": 0.0045,
+          "change_year": 2012
+        },
+        "원값 이어 붙이기 / 공식 면적 ha": {
+          "ratio_before_2012": 0.0814,
+          "ratio_after_2012": 0.1028,
+          "after_over_before": 1.26,
+          "pettitt_p": 0.6482,
+          "change_year": 2021
+        }
+      },
+      "rank_correlation": {
+        "2001~2011": {
+          "vs_count": 0.92,
+          "vs_area": 0.58
+        },
+        "2012~2024": {
+          "vs_count": 0.3,
+          "vs_area": 0.42
+        },
+        "2001~2024": {
+          "vs_count": 0.64,
+          "vs_area": 0.36
+        }
+      },
+      "note": "공식 건수 대비 단절이 보정 후 0.71배로 나오는 것은 보정 실패가 아니다. 위성끼리 단절은 1.01배이고, 보정이 없는 Aqua 단독 화재 칸도 공식 1,000건당 107(2003~11) → 69(2017~21)으로 같이 줄었다. 하락은 10월(−75%, 북부 마케도니아·트라키 평야의 수확 뒤 잔재 소각으로 보임)에 몰려 있고 공식 10월 건수는 거의 그대로다. 9~11월을 빼면 0.93배, 6~8월만 보면 0.94배다. 위성이 보는 가을 농업 소각이 소방청 기록과 따로 움직여 공식 건수 검정의 가정이 깨지므로 판단 보류로 둔다."
+    }
+  }
+}

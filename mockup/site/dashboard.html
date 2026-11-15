@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Burnline 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+/* Layout: 위 줄 = 숫자 카드 | 지도 | 카드 3개, 아래 = 월×년 히트맵 전체 폭. 지역을 바꿔도 같은 배치 */
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 16px 0 12px; }
+.bar select, .bar input { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 7px 10px; min-width: 0; }
+.bar input { width: 200px; }
+.crumb { font-size: 13px; color: var(--muted); margin-left: auto; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.crumb button { font: inherit; font-size: 13px; background: none; border: 0; color: var(--ember); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+.top { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 14px; }
+.left { display: grid; gap: 14px; align-content: start; }
+.listcard { display: grid; gap: 8px; padding: 14px 16px; }
+.listcard h2 { font-size: 15px; }
+.kpi { display: grid; gap: 10px; align-content: start; }
+.kpi .where { font-size: 13px; color: var(--muted); }
+.kpi h1 { font-size: 22px; margin: 0; line-height: 1.25; }
+.kpi .big { font-family: var(--f-num); font-size: 46px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+.kpi .big small { font-family: var(--f-ui); font-size: 15px; color: var(--muted); margin-left: 6px; letter-spacing: 0; }
+.kpi .unit { font-size: 12px; color: var(--muted); }
+.kpi dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; margin: 0; font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 10px; }
+.kpi dt { color: var(--muted); } .kpi dd { margin: 0; }
+.kpi .answer { margin: 0; font-size: 15px; }
+.kpi .why { font-size: 12.5px; color: var(--muted); background: var(--faint); border-radius: 8px; padding: 8px 10px; margin: 0; }
+.mapcard { padding: 0; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; background: var(--night); border-color: var(--night); color: var(--night-ink); }
+.mapcard .hd { display: flex; justify-content: space-between; gap: 10px; padding: 14px 16px 0; align-items: baseline; flex-wrap: wrap; }
+.mapcard h2 { color: var(--night-ink); }
+.mapcard .sub { font-size: 12px; color: var(--night-muted); }
+.mapcard svg { width: 100%; height: 100%; min-height: 520px; max-height: 720px; }
+.mapcard svg path { stroke: #0B1312; stroke-width: .6; vector-effect: non-scaling-stroke; cursor: pointer; }
+.mapcard svg path:hover { stroke: #FFFFFF; stroke-width: 1.2; }
+.mapcard svg path.sel { stroke: #FFFFFF; stroke-width: 2; }
+.mapcard svg circle { pointer-events: none; }
+.maplg { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--night-muted); padding: 0 16px 12px; align-items: center; }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px; margin-right: 4px; }
+.rank { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.rank li { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 14px; }
+.rank li b.n { background: var(--ink); color: var(--surface); font-family: var(--f-num); font-size: 12px; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 3px; font-weight: 500; }
+.rank li button { font: inherit; background: none; border: 0; padding: 0; text-align: left; color: var(--ink); cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank li button:hover { text-decoration: underline; }
+.rank li .r { text-align: right; font-size: 12px; color: var(--muted); line-height: 1.3; }
+.rank li .r b { font-family: var(--f-num); color: var(--ink); font-size: 14px; font-weight: 500; }
+.months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; align-items: end; height: 64px; }
+.months i { background: var(--band); border-radius: 2px 2px 0 0; display: block; }
+.months i.risk { background: var(--d2); } .months i.now { outline: 2px solid var(--ink); outline-offset: 1px; }
+.mlab { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 3px; font-size: 10.5px; color: var(--muted); text-align: center; font-family: var(--f-num); }
+.cum { display: grid; gap: 6px; font-size: 13px; }
+.cum .row { display: grid; grid-template-columns: 52px minmax(0, 1fr) 64px; gap: 8px; align-items: center; }
+.cum .track { height: 12px; background: var(--faint); border-radius: 2px; overflow: hidden; }
+.cum .track i { display: block; height: 100%; }
+.heat { margin-top: 14px; display: grid; gap: 10px; }
+.heat .hd { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.heat svg rect.c { cursor: pointer; }
+.heat svg rect.c:hover { stroke: var(--ink); stroke-width: 1; }
+.hlg { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); align-items: center; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 860px) { .top { grid-template-columns: minmax(0, 1fr); } .mapcard { grid-row: 1; } .mapcard svg { min-height: 340px; } }
+@media (max-width: 680px) { .bar input { width: 100%; } .crumb { margin-left: 0; } .mapcard svg { min-height: 300px; } }
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="index.html"><i></i>Burnline</a>
+  <nav class="nav"><a href="index.html">소개</a><a href="dashboard.html" aria-current="page">대시보드</a><a href="insight.html">월별 인사이트</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="bar">
+    <select id="sel-c" aria-label="지역"><option value="KOR">대한민국</option><option value="CAL">캘리포니아</option><option value="BC">브리티시컬럼비아</option></select>
+    <select id="sel-p" aria-label="시·도"></select>
+    <select id="sel-d" aria-label="시·군·구"></select>
+    <input id="q" list="places" placeholder="지역 검색" aria-label="지역 검색" autocomplete="off">
+    <datalist id="places"></datalist>
+    <select id="sel-m" aria-label="기준 달"></select>
+    <div class="crumb" id="crumb"></div>
+  </div>
+
+  <div class="top">
+    <div class="left">
+      <section class="card kpi" id="kpi" aria-live="polite"></section>
+      <section class="card listcard" id="c-list"></section>
+    </div>
+    <section class="card mapcard">
+      <div class="hd"><h2 id="map-t">지도</h2><span class="sub" id="map-s"></span></div>
+      <svg id="map" role="img" aria-label="시·군·구 지도와 감지 지점"></svg>
+      <div class="maplg" id="map-lg"></div>
+    </section>
+  </div>
+
+  <section class="card heat">
+    <div class="hd"><h2 id="heat-t">월 × 년 화재 달력</h2><div class="actions"><button class="btn ghost" id="csv" type="button">CSV 내려받기</button></div></div>
+    <svg id="heat" role="img" aria-label="연도별 월별 화재 칸 히트맵"></svg>
+    <div class="hlg" id="heat-lg"></div>
+  </section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div>화재 칸 = 약 1 km 칸에서 그날 불이 1번 이상 잡히면 1칸. 모든 값은 NOAA-20 기준이에요. 지도 점은 보정 전 위성 감지 지점이에요 (2012년 전 MODIS, 2012-02~2018-03 S-NPP, 그 뒤 NOAA-20).</div>
+  <div id="foot-src">자료: NASA FIRMS · 경계 geoBoundaries (CC BY 3.0) · 샘플 화면</div>
+</div></footer>
+
+<script>
+// 지역 선택: ?c=CAL / ?c=BC (기본 대한민국). 나라마다 데이터 파일이 따로 있음
+const CTRY = (new URLSearchParams(location.search).get("c") || "KOR").toUpperCase();
+document.write(`<script src="${["CAL", "BC"].includes(CTRY) ? "data_" + CTRY + ".js" : "data.js"}"><\/script>`);
+</script>
+<script>
+const D = window.BURN, M = D.months, NS = "http://www.w3.org/2000/svg";
+const L = D.labels || { country: "대한민국", short: "전국", lv1: "시·도", lv2: "시·군·구", single: false, bins: [3, 10, 30], boundary: "geoBoundaries (CC BY 3.0)", official: "산림청" };
+const nm = d => L.single ? d.ko : d.prov + " " + d.ko;          // 하위 구역 표시 이름
+const upName = p => L.single ? L.country : p;                        // 상위 구역 표시 이름
+document.getElementById("sel-c").value = ["CAL", "BC"].includes(CTRY) ? CTRY : "KOR";
+document.getElementById("sel-c").onchange = e => { location.href = "dashboard.html" + (e.target.value === "KOR" ? "" : "?c=" + e.target.value); };
+document.getElementById("foot-src").textContent = `자료: NASA FIRMS · 경계 ${L.boundary} · 샘플 화면, 데이터 ${D.dataEnd}까지`;
+document.getElementById("sel-d").setAttribute("aria-label", L.lv2);
+const fmt = x => x == null ? "–" : Number(x).toLocaleString("ko-KR", { maximumFractionDigits: 1 });
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const ST = { "충분": ["ok", "평소 불이 잦은 지역"], "부족": ["warn", "평소 불이 드문 지역"], "감지 없음": ["none", "위성 감지 기록 없음"] };
+const lastFull = (() => { for (let i = M.length - 1; i >= 0; i--) if (!D.nat.partial[i]) return i; return M.length - 1; })();
+let S = { lv: "nat", p: null, d: null, i: lastFull };
+
+// ---------- 지역 객체: 나라 / 시·도 / 시·군·구를 같은 모양으로
+function R() {
+  if (S.lv === "dist") { const d = D.dist[S.d]; return { ...d, name: nm(d), short: d.ko, lv: "dist" }; }
+  if (S.lv === "prov") { const p = D.prov[S.p]; return { ...p, name: S.p + " 전체", short: S.p, lv: "prov" }; }
+  return { ...D.nat, name: `${L.country} 전체`, short: L.short, lv: "nat" };
+}
+const kids = () => S.lv === "nat" ? D.dist.map((_, i) => i) : S.lv === "prov" ? D.prov[S.p].regions : [S.d, ...D.dist[S.d].nb];
+function status(r, i) {
+  const v = r.value[i], m = +M[i].slice(5) - 1;
+  if (v == null) return null;
+  if (r.suff && r.suff !== "충분") return null;
+  if (r.rank[i] === 1 && v > 0) return ["exc", "이례적으로 많음 · 최고 기록"];
+  if (v > r.hi[m]) return ["warn", "평년보다 많음"];
+  if (v < r.lo[m]) return ["ok", "평년보다 적음"];
+  return ["none", "평년 수준"];
+}
+const jw = w => { const c = w.charCodeAt(w.length - 1) - 0xAC00; return c >= 0 && c % 28 ? "과" : "와"; };
+const ym = i => `${M[i].slice(0, 4)}년 ${+M[i].slice(5)}월`;
+
+// ---------- 선택 UI
+const selP = document.getElementById("sel-p"), selD = document.getElementById("sel-d"), selM = document.getElementById("sel-m");
+selP.innerHTML = `<option value="">${L.country} 전체</option>` + Object.keys(D.prov).map(p => `<option>${p}</option>`).join("");
+if (L.single) selP.style.display = "none";   // 상위 구역이 하나뿐(주 하나)이면 시·도 선택은 숨김
+selM.innerHTML = M.map((m, i) => `<option value="${i}">${ym(i)}${D.nat.partial[i] ? " (집계 중)" : ""}</option>`).reverse().join("");
+const places = (L.single ? [] : Object.keys(D.prov).map(p => [p + " 전체", () => go("prov", p)])).concat(D.dist.map((d, i) => [nm(d), () => go("dist", d.prov, i)]));
+document.getElementById("places").innerHTML = places.map(([t]) => `<option value="${t}">`).join("");
+document.getElementById("q").onchange = e => { const q = e.target.value.trim(); const h = places.find(([t]) => t === q) || places.find(([t]) => t.endsWith(" " + q)) || places.find(([t]) => t.includes(q)); if (h) { h[1](); e.target.value = ""; } };
+selP.onchange = () => selP.value ? go("prov", selP.value) : go("nat");
+selD.onchange = () => selD.value === "" ? (L.single ? go("nat") : go("prov", selP.value)) : go("dist", D.dist[+selD.value].prov, +selD.value);
+selM.onchange = () => { S.i = +selM.value; render(); };
+function go(lv, p, d) { S.lv = lv; S.p = p || null; S.d = d ?? null; render(); }
+
+function syncUI() {
+  selP.value = S.p || "";
+  selD.disabled = !S.p && !L.single;
+  selD.innerHTML = `<option value="">${L.single ? L.lv2 + " 선택" : S.p ? S.p + " 전체" : L.lv2}</option>` + (L.single ? D.dist.map((_, i) => i).map(i => [i, D.dist[i].ko]).sort((a, b) => a[1].localeCompare(b[1])).map(([i, n]) => `<option value="${i}">${n}</option>`).join("") : S.p ? D.prov[S.p].regions.map(i => [i, D.dist[i].ko]).sort((a, b) => a[1].localeCompare(b[1], "ko")).map(([i, n]) => `<option value="${i}">${n}</option>`).join("") : "");
+  selD.value = S.d ?? "";
+  selM.value = S.i;
+  const c = [`<button data-lv="nat">${L.country}</button>`];
+  if (S.p && !L.single) c.push(S.lv === "prov" ? `<span>${S.p}</span>` : `<button data-lv="prov">${S.p}</button>`);
+  if (S.lv === "dist") c.push(`<span>${D.dist[S.d].ko}</span>`);
+  if (S.lv === "nat") c[0] = `<span>${L.country}</span>`;
+  const el = document.getElementById("crumb"); el.innerHTML = c.join(" › ");
+  el.querySelectorAll("button").forEach(b => b.onclick = () => b.dataset.lv === "nat" ? go("nat") : go("prov", S.p));
+  const h = S.lv === "dist" ? "d=" + S.d : S.lv === "prov" ? "p=" + encodeURIComponent(S.p) : "";
+  try { history.replaceState(null, "", "#" + [h, "m=" + M[S.i]].filter(Boolean).join("&")); } catch (e) {}
+}
+
+// ---------- 숫자 카드
+function kpi() {
+  const r = R(), i = S.i, m = +M[i].slice(5), v = r.value[i], st = status(r, i);
+  const ref = r.lv === "dist" && r.suff !== "충분" ? (r.ref || r.prov) : null, RP = ref ? D.prov[ref] : null;
+  const rst = RP ? status({ ...RP, suff: RP.suff }, i) : null;
+  const sample = r.lv === "dist" && D.samples[r.id], canInsight = sample && sample[1] === M[i];
+  const period = r.basis === "보정 25년" || r.lv === "nat" ? "2001~2025년" : "2012~2025년";
+  let h = `<div class="where">${ym(i)}${D.nat.partial[i] ? " · 집계 중" : ""}</div><h1>${r.name}</h1>`;
+  if (v == null) {
+    h += `<p class="why">이 단위는 2012년 2월부터 비교해요. 그 전 달은 위성마다 값이 크게 어긋나서 보여 주지 않아요.</p>`;
+  } else {
+    h += `<div class="big">${fmt(v)}<small>화재 칸</small></div>`;
+    let line = "", chips = "";
+    if (st) {
+      chips = `<span class="chip ${st[0]}">${st[1]}</span>`;
+      line = v === 0 ? "이번 달 감지 없음" : r.rank[i] ? `${period} ${m}월 중 <b class="num">${r.rank[i]}</b>위` : "";
+      if (v === 0) line += r.med[m - 1] > 0 ? `, 평년 ${fmt(Math.round(r.med[m - 1]))}칸` : "";
+      else if (r.med[m - 1] > 0) line += `${line ? ", " : ""}평년(${fmt(Math.round(r.med[m - 1]))}칸)의 <b class="num">${fmt(v / r.med[m - 1])}</b>배`;
+      else line += `${line ? ", " : ""}평년에는 거의 없던 달`;
+    } else if (r.suff === "부족") {
+      chips = `<span class="chip warn">평소 불이 드문 지역</span>`;
+      line = `${upName(ref)} 기준 ${rst ? `<span class="chip ${rst[0]}">${rst[1]}</span>` : "판단 없음"}`;
+    } else if (r.suff === "감지 없음") {
+      chips = `<span class="chip none">위성 감지 기록 없음</span>`;
+      line = "2012년 이후 위성에 잡힌 불이 없는 지역이에요. 맞닿은 지역을 함께 보세요.";
+    }
+    const q = r.lv === "nat" ? D.nat.quality[i] : M[i] < "2012-02" ? "낮음" : null;
+    if (q && q !== "높음") chips += ` <span class="chip base">추정값 · 품질 ${q}</span>`;
+    else if (r.lv !== "dist" && M[i] < "2018-04") chips += ` <span class="chip base">추정값</span>`;
+    h += `<div>${chips}</div>${line ? `<p class="answer">${line}</p>` : ""}`;
+    // 올해 누적 (같은 해 1월~이번 달)
+    let a = 0, ok = true; for (let k = 1; k <= m; k++) { const j = M.indexOf(`${M[i].slice(0, 4)}-${String(k).padStart(2, "0")}`); if (j < 0 || r.value[j] == null) ok = false; else a += r.value[j]; }
+    const bsum = r.med.slice(0, m).reduce((s2, x) => s2 + (x || 0), 0);
+    if (ok && m > 1) h += `<p class="note">1~${m}월 누적 <b class="num" style="color:var(--ink)">${fmt(a)}</b>칸${bsum > 0 ? ` · 평년의 ${fmt(a / bsum)}배` : ""}</p>`;
+  }
+  if (r.lv === "dist") {
+    if (canInsight) h += `<div class="actions"><a class="btn" href="insight.html#${sample[0]}">이 달 자세히 보기 →</a></div>`;
+    else if (!Object.keys(D.samples).length) h += `<p class="note">월별 인사이트 샘플은 아직 대한민국에만 있어요.</p>`;
+    else {
+      const ex = Object.entries(D.samples).map(([id, [, m2]]) => { const j = D.dist.findIndex(d => d.id === id); return `<button data-j="${j}" data-m="${m2}" style="font:inherit;background:none;border:0;padding:0;color:var(--ember);cursor:pointer;text-decoration:underline">${nm(D.dist[j])} ${m2.slice(0, 4)}년 ${+m2.slice(5)}월</button>`; }).join(", ");
+      h += `<p class="note">월별 인사이트 샘플은 세 곳만 있어요: ${ex}</p>`;
+    }
+  } else {
+    h += `<p class="note">지역을 고르면 그 지역의 월별 인사이트로 이어져요. 지도나 오른쪽 목록에서 고르세요.</p>`;
+  }
+  const el = document.getElementById("kpi"); el.innerHTML = h;
+  el.querySelectorAll("[data-j]").forEach(b2 => b2.onclick = () => { S.i = M.indexOf(b2.dataset.m); go("dist", D.dist[+b2.dataset.j].prov, +b2.dataset.j); });
+}
+
+// ---------- 지도
+const ALL = D.dist.map(d => d.geom);
+let bb0 = [1e9, 1e9, -1e9, -1e9];
+ALL.forEach(g => g.forEach(r => { for (let k = 0; k < r.length; k += 2) { bb0[0] = Math.min(bb0[0], r[k]); bb0[2] = Math.max(bb0[2], r[k]); bb0[1] = Math.min(bb0[1], r[k + 1]); bb0[3] = Math.max(bb0[3], r[k + 1]); } }));
+const KX = Math.cos(36.5 * Math.PI / 180);
+const pathOf = g => g.map(r => { let s = ""; for (let k = 0; k < r.length; k += 2) s += (k ? "L" : "M") + ((r[k] - bb0[0]) * KX).toFixed(0) + " " + (bb0[3] - r[k + 1]); return s + "Z"; }).join("");
+const PATHS = ALL.map(pathOf);
+const BN = L.bins;   // 지도 구역 색 경계 (한국 3·10·30 고정, 다른 지역은 하위 구역-달 사분위)
+function bins(v) { return v == null ? "--d0" : v <= 0 ? "--d0" : v < BN[0] ? "--d1" : v < BN[1] ? "--d2" : v < BN[2] ? "--d3" : "--d4"; }
+const binLabels = () => { const r = x => fmt(Math.round(x)); return [["--d0", "0"], ["--d1", BN[0] > 2 ? `1~${r(BN[0] - 1)}` : `${r(BN[0] - 1)}`], ["--d2", `${r(BN[0])}~${r(BN[1] - 1)}`], ["--d3", `${r(BN[1])}~${r(BN[2] - 1)}`], ["--d4", `${r(BN[2])}+`]]; };
+function map() {
+  const ids = kids(), set = new Set(ids), i = S.i;
+  let bb = [1e9, 1e9, -1e9, -1e9];
+  ids.forEach(j => D.dist[j].geom.forEach(r => { for (let k = 0; k < r.length; k += 2) { bb[0] = Math.min(bb[0], r[k]); bb[2] = Math.max(bb[2], r[k]); bb[1] = Math.min(bb[1], r[k + 1]); bb[3] = Math.max(bb[3], r[k + 1]); } }));
+  const pad = S.lv === "nat" ? 150 : 60;
+  const x = (bb[0] - bb0[0]) * KX - pad, y = bb0[3] - bb[3] - pad, w = (bb[2] - bb[0]) * KX + pad * 2, h = bb[3] - bb[1] + pad * 2;
+  const sv = document.getElementById("map"); sv.setAttribute("viewBox", `${x.toFixed(0)} ${y.toFixed(0)} ${w.toFixed(0)} ${h.toFixed(0)}`); sv.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  const scale = Math.max(w, h) / 600;
+  let s = "";
+  D.dist.forEach((d, j) => {
+    const on = set.has(j), v = d.value[i];
+    s += `<path d="${PATHS[j]}" data-j="${j}" class="${S.d === j ? "sel" : ""}" fill="${!on ? "#22302D" : v == null ? "#3A4744" : css(bins(v))}"><title>${nm(d)} · ${v == null ? "2012년부터" : fmt(v) + "칸"}</title></path>`;
+  });
+  const P = D.pts[M[i]] || [], first = {};
+  for (let k = 0; k < P.length; k += 4) { const r = P[k + 3]; if (set.has(r) || S.lv === "nat") first[r] = Math.min(first[r] ?? 99, P[k + 2]); }
+  let n = 0, firstDay = 99;
+  for (let k = 0; k < P.length; k += 4) {
+    const r = P[k + 3]; if (!(S.lv === "nat" || set.has(r))) continue;
+    n++; firstDay = Math.min(firstDay, P[k + 2]);
+  }
+  for (let k = 0; k < P.length; k += 4) {
+    const r = P[k + 3]; if (!(S.lv === "nat" || set.has(r))) continue;
+    const dd = P[k + 2] - firstDay, c = dd <= 0 ? "#FFFFFF" : dd === 1 ? "#FDE68A" : dd === 2 ? "#FB923C" : "#F87171";
+    s += `<circle cx="${((P[k] - bb0[0]) * KX).toFixed(0)}" cy="${bb0[3] - P[k + 1]}" r="${(S.lv === "nat" ? 3.2 : 2.2) * scale}" fill="${c}" fill-opacity=".9" stroke="#0B1312" stroke-width="${.6 * scale}"/>`;
+  }
+  sv.innerHTML = s;
+  sv.querySelectorAll("path").forEach(p => p.onclick = () => { const j = +p.dataset.j; go("dist", D.dist[j].prov, j); });
+  const sensor = M[i] < "2012-02" ? "MODIS" : M[i] < "2018-04" ? "S-NPP" : "NOAA-20";
+  document.getElementById("map-t").textContent = S.lv === "dist" ? `${D.dist[S.d].ko}${jw(D.dist[S.d].ko)} 맞닿은 지역` : S.lv === "prov" ? `${S.p} ${L.lv2}` : `${L.short} ${L.lv2}`;
+  const nAll = S.lv === "nat" && D.ptsN && D.ptsN[M[i]] > n ? D.ptsN[M[i]] : null;
+  document.getElementById("map-s").textContent = `${ym(i)} · 감지 지점 ${fmt(nAll || n)}개 (${sensor}, 보정 전)${nAll ? ` · 그중 ${fmt(n)}개 표시` : ""}`;
+  document.getElementById("map-lg").innerHTML = `<span>색 = 이번 달 화재 칸${M[i] < "2012-02" ? ` (${L.lv2} 값은 2012년 2월부터라 회색)` : ""}</span>` + binLabels().map(([c, t]) => `<span><i class="sw" style="background:${css(c)}"></i>${t}</span>`).join("") +
+    (n ? `<span style="margin-left:auto">점: <i class="sw" style="background:#fff;border-radius:50%"></i>첫 감지 날 <i class="sw" style="background:#FDE68A;border-radius:50%"></i>+1일 <i class="sw" style="background:#FB923C;border-radius:50%"></i>+2일 <i class="sw" style="background:#F87171;border-radius:50%"></i>+3일~</span>` : "");
+}
+
+// ---------- 오른쪽 카드
+function list() {
+  const i = S.i, el = document.getElementById("c-list");
+  if (S.lv === "dist") {
+    const me = D.dist[S.d], nb = me.nb.map(j => [j, D.dist[j]]).sort((x, y) => (y[1].value[i] ?? -1) - (x[1].value[i] ?? -1));
+    const row = ([j, d], self) => `<li><i class="sw" style="width:14px;height:14px;margin:0 auto;background:${css(d.value[i] == null ? "--d0" : bins(d.value[i]))};${self ? `outline:2px solid ${css("--ink")};outline-offset:1px` : ""}"></i><button data-j="${j}" style="${self ? "font-weight:600" : ""}">${d.ko}${d.prov !== me.prov ? ` <span class="note">${d.prov}</span>` : ""}</button><span class="r"><b>${fmt(d.value[i])}</b>칸${d.suff === "충분" && d.rank[i] ? `<br>${d.n[i]}년 중 ${d.rank[i]}위` : ""}</span></li>`;
+    el.innerHTML = `<h2>${me.ko}${jw(me.ko)} 맞닿은 지역</h2><ul class="rank">${row([S.d, me], true)}${nb.map(x => row(x, false)).join("")}</ul><p class="note">이번 달 화재 칸이 많은 순이에요. 색은 지도와 같아요.</p>`;
+  } else {
+    const pool = kids().map(j => [j, D.dist[j]]).filter(([, d]) => d.value[i] > 0);
+    pool.sort((a, b) => (a[1].rank[i] ?? 99) - (b[1].rank[i] ?? 99) || b[1].value[i] - a[1].value[i]);
+    const top = pool.slice(0, 3);
+    el.innerHTML = `<h2>${S.lv === "prov" ? S.p : L.short}에서 평년보다 두드러진 곳</h2>` + (top.length ? `<ul class="rank">${top.map(([j, d], k) => `<li><b class="n">${k + 1}</b><button data-j="${j}">${nm(d)}</button><span class="r"><b>${fmt(d.value[i])}</b>칸<br>${d.rank[i] ? `${d.n[i]}년 중 ${d.rank[i]}위` : ""}</span></li>`).join("")}</ul><p class="note">같은 달 순위가 높은 순이에요.</p>` : `<p class="note">${D.months[i] < "2012-02" ? "시·군·구 비교는 2012년 2월부터예요." : "이번 달 감지된 시·군·구가 없어요."}</p>`);
+  }
+  el.querySelectorAll("[data-j]").forEach(b => b.onclick = () => { const j = +b.dataset.j; go("dist", D.dist[j].prov, j); });
+}
+// ---------- 히트맵
+function heat() {
+  const r = R(), years = [...new Set(M.map(m => m.slice(0, 4)))].reverse().filter(y => M.some((m, j) => m.startsWith(y) && r.value[j] != null));
+  const cw = 46, ch = 16, pl = 44, pt = 24, W = pl + cw * 12, H = pt + ch * years.length + 4;
+  const vals = r.value.filter(v => v != null && v > 0).sort((a, b) => a - b);
+  const q = p => vals.length ? vals[Math.min(vals.length - 1, Math.floor(p * vals.length))] : 1;
+  const th = [q(.5), q(.75), q(.9)].map(x => x >= 10 ? Math.round(x) : Math.round(x * 10) / 10);
+  const col = v => v == null ? null : v <= 0 ? "--d0" : v <= th[0] ? "--d1" : v <= th[1] ? "--d2" : v <= th[2] ? "--d3" : "--d4";
+  let s = "";
+  const rk = (r.lv === "dist" && r.suff !== "충분" ? D.prov[r.ref || r.prov].risk : r.risk) || [];
+  for (let k = 0; k < 12; k++) {
+    const on = rk.includes(k + 1);
+    if (on) s += `<rect x="${pl + k * cw + 1}" y="1" width="${cw - 2}" height="17" rx="3" fill="${css("--ember-soft")}"/>`;
+    s += `<text x="${pl + k * cw + cw / 2}" y="14" text-anchor="middle" style="${on ? `fill:${css("--ember")};font-weight:600` : ""}">${k + 1}월</text>`;
+  }
+  years.forEach((y, row) => {
+    const yy = pt + row * ch;
+    s += `<text x="${pl - 8}" y="${yy + ch - 4}" text-anchor="end">${y}</text>`;
+    for (let k = 0; k < 12; k++) {
+      const j = M.indexOf(`${y}-${String(k + 1).padStart(2, "0")}`); if (j < 0) continue;
+      const v = r.value[j], c = col(v); if (!c) continue;
+      const partial = D.nat.partial[j];
+      s += `<rect class="c" data-j="${j}" x="${pl + k * cw + 1}" y="${yy + 1}" width="${cw - 2}" height="${ch - 2}" rx="2" fill="${css(c)}" ${partial ? `stroke="${css("--ink")}" stroke-dasharray="2 2"` : ""}><title>${y}년 ${k + 1}월 · ${fmt(v)}칸${r.rank[j] && v > 0 ? ` · ${r.n[j]}년 중 ${r.rank[j]}위` : v === 0 ? " · 감지 없음" : ""}</title></rect>`;
+      if (j === S.i) s += `<rect x="${pl + k * cw}" y="${yy}" width="${cw}" height="${ch}" rx="2" fill="none" stroke="${css("--ink")}" stroke-width="2.2" pointer-events="none"/>`;
+    }
+  });
+  [["2012", "VIIRS(S-NPP) 시작"], ["2018", "NOAA-20 (4월~)"]].forEach(([y, t]) => {
+    const row = years.indexOf(y); if (row < 0 || row === years.length - 1) return;
+    const yy = pt + (row + 1) * ch;
+    s += `<line x1="${pl - 40}" x2="${W}" y1="${yy}" y2="${yy}" stroke="${css("--ink")}" stroke-width="1.2" stroke-dasharray="4 3"/><text x="${W + 6}" y="${yy + 4}" style="fill:${css("--ink")};font-family:var(--f-ui)">↑ ${t}</text>`;
+  });
+  const el = document.getElementById("heat"); el.setAttribute("viewBox", `0 0 ${W + 130} ${H}`); el.innerHTML = s;
+  el.querySelectorAll("rect.c").forEach(c => c.onclick = () => { S.i = +c.dataset.j; render(); });
+  document.getElementById("heat-t").textContent = `${r.name} · 월 × 년 화재 달력 (${years[years.length - 1]}~${years[0]})`;
+  document.getElementById("heat-lg").innerHTML = `<span>칸을 누르면 그 달로 바뀌어요</span><span><i class="sw" style="background:${css("--ember-soft")};outline:1px solid ${css("--ember")}"></i>위험 시기: 한 해 감지의 절반이 몰리는 달${r.lv === "dist" && r.suff !== "충분" ? ` (${upName(r.ref || r.prov)} 기준)` : ""}</span>` + [["--d0", "0"], ["--d1", `~${fmt(th[0])}`], ["--d2", `~${fmt(th[1])}`], ["--d3", `~${fmt(th[2])}`], ["--d4", `${fmt(th[2])}+`]].map(([c, t]) => `<span><i class="sw" style="background:${css(c)}"></i>${t}</span>`).join("") + `<span>점선 테두리 = 집계 중</span>` + (r.lv !== "nat" && r.basis !== "보정 25년" ? `<span>이 단위는 2012년부터 보여 줘요</span>` : "");
+}
+
+// ---------- CSV
+document.getElementById("csv").onclick = () => {
+  const r = R(), rows = [["region", "year", "month", "fire_cells", "median", "band_low", "band_high", "rank", "years_compared"]];
+  M.forEach((m, j) => { if (r.value[j] == null) return; const k = +m.slice(5) - 1; rows.push([r.name, m.slice(0, 4), m.slice(5), r.value[j], r.med[k], r.lo[k], r.hi[k], r.rank[j] ?? "", r.n[j] ?? ""]); });
+  const blob = new Blob(["﻿" + rows.map(x => x.join(",")).join("\n")], { type: "text/csv" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `burnline_${r.short}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+
+function render() { syncUI(); kpi(); map(); list(); heat(); }
+// 주소에서 시작 상태 읽기: #d=12&m=2025-03, #p=경북
+(function () {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (h.get("m") && M.includes(h.get("m"))) S.i = M.indexOf(h.get("m"));
+  if (h.get("d") != null && D.dist[+h.get("d")]) { const j = +h.get("d"); S = { ...S, lv: "dist", p: D.dist[j].prov, d: j }; }
+  else if (h.get("p") && D.prov[h.get("p")]) S = { ...S, lv: "prov", p: h.get("p") };
+})();
+render();
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", render);
+</script>
+</body>
+</html>

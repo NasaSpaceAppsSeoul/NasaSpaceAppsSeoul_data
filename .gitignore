@@ -1,0 +1,17 @@
+# 원자료 (GitHub Release의 burnline_inputs.zip으로 받음)
+inputs/
+# 계산 결과 (python tools/run_all.py 로 다시 만듦)
+output/
+# 노트북은 tools/make_notebook.py가 만듦
+burnline_harmonization*.ipynb
+# 배포용 묶음·원본 zip
+배포/
+*.zip
+# 기타
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.claude/
+.venv/
+venv/
